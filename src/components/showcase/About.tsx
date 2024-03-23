@@ -12,13 +12,12 @@ const About: React.FC<AboutProps> = (props) => {
         <div className="site-page-content">
             {/* <img src={me} style={styles.topImage} alt="" /> */}
             <h1 style={{ marginLeft: -16 }}>Welcome</h1>
-            <h3>I'm Henry Heffernan</h3>
+            <h3>I'm Philopater Essam</h3>
             <br />
             <div className="text-block">
                 <p>
-                    I'm a software engineer currently working at Vercel! In May
-                    of 2022 I graduated from Rensselaer Polytechnic Institute
-                    with my BS in Computer Science.
+                    I'm a still a high school student. In 2025 I'll eventually graduate and
+                    hopefully I'll persue a carrier in a computer related degree.
                 </p>
                 <br />
                 <p>
@@ -27,8 +26,8 @@ const About: React.FC<AboutProps> = (props) => {
                     building it. If you have any questions or comments, feel
                     free to contact me using{' '}
                     <Link to="/contact">this form</Link> or shoot me an email at{' '}
-                    <a href="mailto:henryheffernan@gmail.com">
-                        henryheffernan@gmail.com
+                    <a href="mailto:lopa@programmer.net">
+                    lopa@programmer.net
                     </a>
                 </p>
             </div>
@@ -40,50 +39,38 @@ const About: React.FC<AboutProps> = (props) => {
                     From a young age, I have had a curiosity about how things
                     worked. This naturally led me to become absolutely obsessed
                     with Lego and I fell in love with building things. In
-                    elementary school, I joined the Lego Robotics team at my
-                    local middle school, which was my first real exposure to
-                    programming. In 2008, my family and I moved across the
-                    country from California to New York, where I attended middle
-                    school, high school, and college.
+                    pre-school, I joined the Lego Robotics team at my
+                    local church, which was my first real exposure to
+                    programming.
                 </p>
                 <br />
                 <div className="captioned-image">
                     <img src={me} style={styles.image} alt="" />
                     <p>
                         <sub>
-                            <b>Figure 1:</b> A real photo of me developing this
-                            website :)
+                            <b>Figure 1:</b> A real photo of me in pre-school
                         </sub>
                     </p>
                 </div>
 
                 <p>
-                    I started programming more seriously in high school,
+                    I started programming more seriously at the end of elementry school,
                     initially learning how to scrape and interact with websites.
-                    I went on to do a ton of passion projects, many of them with
-                    one of my closest friends,{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.linkedin.com/in/scott-bass-189a7919b/"
-                    >
-                        Scott Bass
-                    </a>
-                    . We worked on many projects together, including chat bots,
+                    I went on to do a ton of passion projects. 
+                    I worked on many projects together, including Robots, chat bots,
                     multiple game projects, apps, and more. One of these
                     projects is viewable on my{' '}
                     <Link to="/projects/software">Software Projects</Link> page.
                 </p>
                 <br />
                 <p>
-                    In 2017, I got accepted into Rennselear Polytechnic
-                    Institute to study Computer Science. It was my first choice
-                    and I was absolutely ecstatic to be going to such a great
-                    university. At the end of my sophomore year, I got an
-                    internship working for the startup Hover, primarily focusing
-                    on frontend work. I continued to work at Hover on and off
-                    for about a year and a half, until the start of my senior
-                    year when I decided to focus on other opportunities.
+                Back in 2015, My mother enrolled me into my very first programming course.
+                Initially, there was some hesitation from the institution due to my age;
+                I was four years younger than thier Acceptance. 
+                However, my father convinced and they agreed to take me in. 
+                It wasn't long before I became deeply engrossed in the world of computers and electronics, 
+                eventually finding myself drawn to the exciting realm of robotics and programming.
+                The course introduced me to my first ever programming lannguage which was C++
                 </p>
                 <br />
                 <br />
@@ -122,7 +109,7 @@ const About: React.FC<AboutProps> = (props) => {
                         <img src={meNow} style={styles.image} alt="" />
                         <p>
                             <sub>
-                                <b>Figure 2:</b> Me, April 2022
+                                <b>Figure 2:</b> Me, December 2023
                             </sub>
                         </p>
                     </div>
@@ -133,13 +120,13 @@ const About: React.FC<AboutProps> = (props) => {
                     Thanks for reading about me! I hope that you enjoy exploring
                     the rest of my portfolio website and everything it has to
                     offer. If you find the easter egg make sure to let me know
-                    on twitter{' '}
+                    on instagram{' '}
                     <a
                         rel="noreferrer"
                         target="_blank"
-                        href="https://twitter.com/henryheffernan"
+                        href="https://www.instagram.com/philopater.essam/"
                     >
-                        @henryheffernan
+                        @philopater.essam
                     </a>{' '}
                     Good luck and have fun!
                 </p>
@@ -149,8 +136,8 @@ const About: React.FC<AboutProps> = (props) => {
                     them. You can reach me through the{' '}
                     <Link to="/contact">contact page</Link> or shoot me an email
                     at{' '}
-                    <a href="mailto:henryheffernan@gmail.com">
-                        henryheffernan@gmail.com
+                    <a href="mailto:lopa@programmer.net">
+                    lopa@programmer.net
                     </a>
                 </p>
             </div>

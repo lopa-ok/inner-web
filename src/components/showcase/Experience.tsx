@@ -10,24 +10,25 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             <div style={styles.headerContainer}>
                 <div style={styles.header}>
                     <div style={styles.headerRow}>
-                        <h1>Hover</h1>
+                        <h1>Still working on it yall</h1>
                         <a
                             rel="noreferrer"
                             target="_blank"
                             href={'https://hover.gg/'}
                         >
-                            <h4>www.hover.gg</h4>
+                            <h4></h4>
                         </a>
+                         
                     </div>
-                    <div style={styles.headerRow}>
+                    {/* <div style={styles.headerRow}>
                         <h3>Frontend Engineer</h3>
                         <b>
                             <p>Summer 2020 - Fall 2021</p>
                         </b>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
-            <div className="text-block">
+            {/* <div className="text-block">
                 <p>
                     Targeted towards online content creators and streamers
                     looking to build a brand, Hover is the home of over 150K
@@ -236,8 +237,9 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </p>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </div>*/}
+        </div> 
+        
     );
 };
 
