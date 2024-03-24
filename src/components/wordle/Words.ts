@@ -3499,7 +3499,7 @@ const WORDS = [
     'boric',
     'twill',
     'sower',
-    'henry',
+    'essam',
     'awash',
     'libel',
     'spurn',
