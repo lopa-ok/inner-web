@@ -64,8 +64,8 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
                             />
                             <Link
                                 containerStyle={styles.insetLink}
-                                to="projects/music"
-                                text="MUSIC"
+                                to="projects/robotics"
+                                text="ROBOTICS"
                             />
                             <Link
                                 containerStyle={styles.insetLink}
@@ -83,7 +83,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
             </div>
             <div style={styles.spacer} />
             <div style={styles.forHireContainer} onMouseDown={goToContact}>
-                {/* <img src={forHire} style={styles.image} alt="" /> */}
+                <img src={forHire} style={styles.image} alt="" /> 
             </div>
         </div>
     ) : (

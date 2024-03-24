@@ -24,17 +24,17 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
             <ResumeDownload />
             <br />
             <div className="text-block">
-                <h2>henryheffernan.com</h2>
+                <h2>philopater.me</h2>
                 <br />
                 <p>
-                    henryheffernan.com is my portfolio website, and also the
+                    philopater.me is my portfolio website, and also the
                     website you are on right now. This project was an absolute
                     joy to make and challenged me both technically and
-                    creatively. Early in 2022, I knew I wanted to make an
+                    creatively. Early in 2024, I knew I wanted to make an
                     interactive portfolio to aid my job search. I eventually got
                     the idea for this site around early February and began
                     development early March. I've been developing it alongside
-                    my last semester at school and if you are reading this, it's
+                    my semester at school and if you are reading this, it's
                     pretty much done!
                 </p>
                 <br />
@@ -57,7 +57,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <a
                         rel="noreferrer"
                         target="_blank"
-                        href="https://henryheffernan.vercel.app/"
+                        href="https://philopater.vercel.app/"
                     >
                         here
                     </a>{' '}
@@ -73,10 +73,10 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://henryheffernan.com"
+                            href="https://philopater.me"
                         >
                             <p>
-                                <b>[3D Site]</b> - henryheffernan.com
+                                <b>[3D Site]</b> - philopater.me
                             </p>
                         </a>
                     </li>
@@ -84,61 +84,42 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://henryheffernan.vercel.app/"
+                            href="https://philopater.vercel.app/"
                         >
                             <p>
-                                <b>[OS Site]</b> - henryheffernan.vercel.app
+                                <b>[OS Site]</b> - philopater.vercel.app
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/portfolio-website"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - 3D Site Repository
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/portfolio-inner-site"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - OS Site Repository
-                            </p>
-                        </a>
-                    </li>
+   
+                       
+                    
                 </ul>
                 <p>
                     I'm skipping over a lot of details in exchange for brevity,
                     but I do plan on doing a more in depth breakdown for those
                     interested sometime in the future. To get updates with that
-                    project feel free to follow me on twitter{' '}
+                    project feel free to follow me on instagram{' '}
                     <a
                         rel="noreferrer"
                         target="_blank"
                         href="https://twitter.com/henryheffernan"
                     >
-                        @henryheffernan
+                        @philopater.essam
                     </a>
                 </p>
             </div>
             <div className="text-block">
-                <h2>Guntattchment Saga The Sequel</h2>
+                <h2>Reloaded Rampart</h2>
                 <br />
                 <p>
-                    Guntattchment Saga or GSTS is a game I made with my good
-                    friend Scott Bass back in 2019. The game is a wave based top
+                    Reloaded Rampart or RR is a game I made back in 2019. 
+                    The game is a wave based top
                     down shooter where you progress by building the most
                     outrageous of weapons through attaching as many attachments
                     on your weapon as you can. The game ceased development in
-                    2019 because we unfortunately both had packed school
-                    schedules and were unable to find the time to work on it.
+                    2019 because we unfortunately i had packed school
+                    schedules and was unable to find the time to work on it.
                 </p>
                 <br />
                 <div className="captioned-image">
@@ -146,7 +127,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b> Guntattchment Saga Gameplay
+                                <b>Figure 2: </b> Reloaded Rampart Gameplay
                                 demo, featuring the main character along with a
                                 few of our grunt and dasher enemies.
                             </sub>
@@ -154,7 +135,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     </div>
                 </div>
                 <p>
-                    Guntattchment Saga was a really fun project to work on and
+                    Reloaded Rampart was a really fun project to work on and
                     had a multitude of challenges. An interesting challenge that
                     you may not even notice was the rotation of objects such as
                     the players weapon. Rotating pixel art is a very difficult
@@ -170,33 +151,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     overall.
                 </p>
                 <br />
-                <h3>Links:</h3>
-                <ul>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/scottbass47/gsts"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - Guntattchment Saga The Sequel
-                                Unity Repository
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/gsts_assets"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - Guntattchment Saga The Sequel
-                                Assets Repository
-                            </p>
-                        </a>
-                    </li>
-                </ul>
+                
                 <p>
                     Unfortunately, the game currently is not in a releasable
                     state and so there is no demo available online. If this ever
@@ -204,10 +159,10 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </p>
             </div>
             <div className="text-block">
-                <h2>Skip the Scroll</h2>
+                <h2>Stop the Scroll</h2>
                 <br />
                 <p>
-                    While working at Hover, I spent a lot of time on GitHub
+                    While working I spend a lot of time on GitHub
                     issue pages looking for answers and solutions to problems I
                     had run into. I would always find myself sifting though the
                     comments trying to find the right answer, which usually had
@@ -244,32 +199,21 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://github.com/henryjeff/skip-the-scroll"
+                            href="https://github.com/lopa-ok/Stop-The-Scroll"
                         >
                             <p>
-                                <b>[GitHub]</b> - Skip the Scroll Repository
+                                <b>[GitHub]</b> - Stop the Scroll Repository
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://chrome.google.com/webstore/detail/skip-the-scroll/mfehannpjmgfagldoilpngeoecdfgmnd"
-                        >
-                            <p>
-                                <b>[Chrome Web Store]</b> - Skip the Scroll
-                            </p>
-                        </a>
-                    </li>
+                    
                 </ul>
                 <p>
                     If you are a developer and have also found yourself
                     scrolling through github comment after github comment saying
                     "i also have this problem...", then I highly recommend you
                     check out Skip the Scroll to save you some of your precious
-                    time. If you like it, feel free to star it on GitHub and
-                    rate it on the Chrome web store.
+                    time. If you like it, feel free to star it on GitHub
                 </p>
             </div>
             <ResumeDownload />

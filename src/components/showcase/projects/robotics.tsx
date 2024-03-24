@@ -18,10 +18,10 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
 
     return (
         <div className="site-page-content">
-            <h1>Music & Sound</h1>
-            <h3>Ventures</h3>
+            <h1>Robotics</h1>
+            <h3>soon</h3>
             <br />
-            <div className="text-block">
+      {/*      <div className="text-block">
                 <p>
                     Music has been a passion of mine for my whole life. When I
                     was 15 years old, I downloaded FL Studio and started to
@@ -214,7 +214,7 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
                 and I'm very excited to see what I can do for the future. Thanks
                 for listening I hope you enjoyed!
             </p>
-            <br />
+            <br />*/}
         </div>
     );
 };

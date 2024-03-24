@@ -16,8 +16,10 @@ const About: React.FC<AboutProps> = (props) => {
             <br />
             <div className="text-block">
                 <p>
-                    I'm a still a high school student. In 2025 I'll eventually graduate and
+                    I'm Philopater aka Lopa I am a high school student. In 2025 I'll eventually graduate and
                     hopefully I'll persue a carrier in a computer related degree.
+                    
+                    And in case you are wondering where the "lopa" came from its just the middle 4 letters of my name 
                 </p>
                 <br />
                 <p>
@@ -89,21 +91,21 @@ const About: React.FC<AboutProps> = (props) => {
                             Beyond software, I have a lot of hobbies that I
                             enjoy doing in my free time. The more tangible
                             hobbies I have are{' '}
-                            <Link to="/projects/music">Music Production</Link>{' '}
+                            <Link to="/projects/robotics">Rbobotics</Link>{' '}
                             and creating{' '}
                             <Link to="/projects/art">Digital Art</Link>. You can
                             read more about each of these on their respective
                             pages under my projects tab. Some other hobbies I
-                            enjoy are working out, cooking, and (unsurprisingly)
+                            enjoy are cooking, and (unsurprisingly)
                             playing video games.
                         </p>
                         <br />
-                        <p>
+                    {/* <p>
                             In college, I was an active member in the fraternity
                             Sigma Alpha Epsilon and held multiple positions in
                             the chapter. I met a lot of amazing people through
                             my fraternity and thoroughly enjoyed the community.
-                        </p>
+                        </p>*/}
                     </div>
                     <div style={styles.verticalImage}>
                         <img src={meNow} style={styles.image} alt="" />
