@@ -28,7 +28,7 @@ const ArtProjects: React.FC<ArtProjectsProps> = (props) => {
                 <h2>Pixel Art and Animation</h2>
                 <br />
                 <p>
-                    In high school, I started learning how to draw and animate
+                    I started learning how to draw and animate
                     pixel art after becoming interested in video game
                     development. As I worked on making games over the years, I
                     learned so much about pixel art and fell in love with
@@ -46,53 +46,8 @@ const ArtProjects: React.FC<ArtProjectsProps> = (props) => {
                 </div>
                 <p>
                     I really started enjoying the work I was doing, and felt I
-                    was improving a lot. Around 2017, I started to upload videos
-                    of my work flow and animation process to YouTube just for
-                    fun. I was really surprised however when my first video took
-                    off and got a few thousand views! Below are the video links
-                    to the work I uploaded to youtube.
+                    was improving a lot.
                 </p>
-                <br />
-                <h3>Video Links:</h3>
-                <br />
-                <ul>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://www.youtube.com/watch?v=pDtUX3ZVHJ0"
-                        >
-                            <p>
-                                <b>VIDEO</b> - Pixel Art Walk Cycle Time-lapse
-                                and Tutorial
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://www.youtube.com/watch?v=xXEDKQ3wSfM"
-                        >
-                            <p>
-                                <b>VIDEO</b> - Pixel Art "Bag Up" Animation
-                                Time-lapse
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://www.youtube.com/watch?v=leZzb-Y0SKQ"
-                        >
-                            <p>
-                                <b>VIDEO</b> - Pixel Art Bipedal Creature Run
-                                Cycle Time-lapse
-                            </p>
-                        </a>
-                    </li>
-                </ul>
                 <br />
                 <div className="captioned-image">
                     <img src={gsts} alt="" />
