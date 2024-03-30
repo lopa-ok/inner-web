@@ -48,52 +48,57 @@ const Contact: React.FC<ContactProps> = (props) => {
         }
     }, [email, name, message]);
 
-    const handleSubmit = useCallback(() => {
-        if (isFormValid) {
-            setIsLoading(true);
-            fetch('https://henryheffernan.com/api/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    company,
-                    email,
-                    name,
-                    message,
-                }),
-            })
-                .then((res) => {
-                    if (res.status === 200) {
-                        setFormMessage(
-                            `Message successfully sent. Thank you ${name}!`
-                        );
-                        setCompany('');
-                        setEmail('');
-                        setName('');
-                        setMessage('');
-                        setFormMessageColor(colors.blue);
-                        setIsLoading(false);
-                    } else {
-                        setFormMessage(
-                            'There was an error sending your message. Please try again.'
-                        );
-                        setFormMessageColor(colors.red);
-                        setIsLoading(false);
-                    }
-                })
-                .catch((err) => {
+// ... other code ...
+
+const handleSubmit = useCallback((event) => {
+    event.preventDefault();
+    if (isFormValid) {
+        setIsLoading(true);
+        fetch('https://formspree.io/f/xwkgrndr', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                company,
+                email,
+                name,
+                message,
+            }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    setFormMessage(
+                        `Message successfully sent. Thank you ${name}!`
+                    );
+                    setCompany('');
+                    setEmail('');
+                    setName('');
+                    setMessage('');
+                    setFormMessageColor(colors.blue);
+                    setIsLoading(false);
+                } else {
                     setFormMessage(
                         'There was an error sending your message. Please try again.'
                     );
                     setFormMessageColor(colors.red);
                     setIsLoading(false);
-                });
-        } else {
-            setFormMessage('Form unable to validate, please try again.');
-            setFormMessageColor('red');
-        }
-    }, [company, email, name, message, isFormValid]);
+                }
+            })
+            .catch((err) => {
+                setFormMessage(
+                    'There was an error sending your message. Please try again.'
+                );
+                setFormMessageColor(colors.red);
+                setIsLoading(false);
+            });
+    } else {
+        setFormMessage('Form unable to validate, please try again.');
+        setFormMessageColor('red');
+    }
+}, [company, email, name, message, isFormValid]);
+
+// ... other code ...
 
     useEffect(() => {
         if (formMessage.length > 0) {
@@ -115,11 +120,11 @@ const Contact: React.FC<ContactProps> = (props) => {
                     />
                     <SocialBox
                         icon={inIcon}
-                        link={'https://www.linkedin.com/in/henryheffernan/'}
+                        link={'https://pastebin.com/raw/2Zmv7K5E'}
                     />
                     <SocialBox
                         icon={twitterIcon}
-                        link={'https://twitter.com/henryheffernan'}
+                        link={'https://www.instagram.com/philopater.essam/'}
                     />
                 </div>
             </div>
@@ -196,19 +201,19 @@ const Contact: React.FC<ContactProps> = (props) => {
                         onChange={(e) => setMessage(e.target.value)}
                     />
                     <div style={styles.buttons}>
-                        <button
-                            className="site-button"
-                            style={styles.button}
-                            type="submit"
-                            disabled={!isFormValid || isLoading}
-                            onMouseDown={handleSubmit}
-                        >
-                            {!isLoading ? (
-                                'Send Message'
-                            ) : (
-                                <p className="loading">Sending</p>
-                            )}
-                        </button>
+                    <button
+                        className="site-button"
+                         style={styles.button}
+                        type="submit"
+                        disabled={!isFormValid || isLoading}
+                        onClick={handleSubmit}
+                    >
+                    {!isLoading ? (
+                        'Send Message'
+                    ) : (
+                        <p className="loading">Sending</p>
+                    )}
+                    </button>
                         <div style={styles.formInfo}>
                             <p
                                 style={Object.assign(
