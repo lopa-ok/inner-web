@@ -10,27 +10,28 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             <div style={styles.headerContainer}>
                 <div style={styles.header}>
                     <div style={styles.headerRow}>
-                        <h1>Still working on it yall</h1>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href={'https://hover.gg/'}
-                        >
+                        <h1>COMPETETIONS</h1>
+                        
                             <h4></h4>
                         </a>
                          
                     </div>
-                    {/* <div style={styles.headerRow}>
-                        <h3>Frontend Engineer</h3>
+                     <div style={styles.headerRow}>
+                        <h3>EBHAR MISR</h3>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href={'https://ebharmisr.com/en/home/'}
+                        ></a>
                         <b>
-                            <p>Summer 2020 - Fall 2021</p>
+                            <p>Summer 2022</p>
                         </b>
-                    </div>*/}
+                    </div>
                 </div>
             </div>
-            {/* <div className="text-block">
+            <div className="text-block">
                 <p>
-                    Targeted towards online content creators and streamers
+                    Its a competition targeted towards teens creators and streamers
                     looking to build a brand, Hover is the home of over 150K
                     users. Written in Typescript using React, React-Native,
                     Framer, Express, and Redux.

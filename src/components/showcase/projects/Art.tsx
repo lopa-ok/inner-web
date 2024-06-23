@@ -54,7 +54,7 @@ const ArtProjects: React.FC<ArtProjectsProps> = (props) => {
                     <p>
                         <sub>
                             <b>Figure 2:</b> More pixel art: Enemy Lineup from a
-                            game I worked on called Guntattchment Saga
+                            game I worked on
                         </sub>
                     </p>
                 </div>
