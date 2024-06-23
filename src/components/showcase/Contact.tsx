@@ -118,10 +118,7 @@ const handleSubmit = useCallback((event) => {
                         icon={ghIcon}
                         link={'https://github.com/lopa-ok'}
                     />
-                    <SocialBox
-                        icon={inIcon}
-                        link={'https://pastebin.com/raw/2Zmv7K5E'}
-                    />
+                    
                     <SocialBox
                         icon={twitterIcon}
                         link={'https://www.instagram.com/philopater.essam/'}

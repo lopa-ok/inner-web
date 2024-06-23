@@ -16,10 +16,15 @@ const About: React.FC<AboutProps> = (props) => {
             <br />
             <div className="text-block">
                 <p>
-                    I'm Philopater aka Lopa I am a high school student. In 2025 I'll eventually graduate and
-                    hopefully I'll persue a carrier in a computer related degree.
-                    
-                    And in case you are wondering where the "lopa" came from its just the middle 4 letters of my name 
+                I'm Philopater, also known as Lopa. I am currently a high school student.
+                <br />
+                I'll be graduating in 2025, and I aspire to pursue a career in a computer-related field.
+
+
+                <br/>
+                </p>
+                <p>
+                If you're curious about my nickname, "Lopa" comes from the middle four letters of my name.
                 </p>
                 <br />
                 <p>
@@ -50,7 +55,7 @@ const About: React.FC<AboutProps> = (props) => {
                     <img src={me} style={styles.image} alt="" />
                     <p>
                         <sub>
-                            <b>Figure 1:</b> A real photo of me in pre-school
+                            <b>Figure 1:</b> kiddo lopa
                         </sub>
                     </p>
                 </div>
@@ -59,7 +64,7 @@ const About: React.FC<AboutProps> = (props) => {
                     I started programming more seriously at the end of elementry school,
                     initially learning how to scrape and interact with websites.
                     I went on to do a ton of passion projects. 
-                    I worked on many projects together, including Robots, chat bots,
+                    I worked on many projects including Robots, chatbots,
                     multiple game projects, apps, and more. One of these
                     projects is viewable on my{' '}
                     <Link to="/projects/software">Software Projects</Link> page.
@@ -85,27 +90,32 @@ const About: React.FC<AboutProps> = (props) => {
                             flexDirection: 'column',
                         }}
                     >
+
+                        <h3>My Studies</h3>
+                        <p>
+                        I am an IGCSE student at Alkarma International School. 
+                        Throughout my time here, I have actively participated in numerous {' '}
+                            <Link to="/competitions">Competitions</Link>{' '} showcasing my skills and dedication.
+                        I have completed five O-levels in English, Mathematics, Computer Science, ICT, and Chemistry.
+                        In the upcoming November session, I will be taking AS Mathematics to further enhance my academic portfolio.
+                        </p>
+                        
+                        <br />
                         <h3>My Hobbies</h3>
                         <br />
                         <p>
-                            Beyond software, I have a lot of hobbies that I
-                            enjoy doing in my free time. The more tangible
-                            hobbies I have are{' '}
-                            <Link to="/projects/robotics">Rbobotics</Link>{' '}
+                            I have a lot of hobbies that I enjoy doing in my free time.
+                            The more tangible hobbies I have are{' '}
+                            <Link to="/projects/robotics">Robotics</Link>{' '}
                             and creating{' '}
                             <Link to="/projects/art">Digital Art</Link>. You can
                             read more about each of these on their respective
                             pages under my projects tab. Some other hobbies I
-                            enjoy are cooking, and (unsurprisingly)
+                            enjoy are Modelling, and (unsurprisingly)
                             playing video games.
                         </p>
                         <br />
-                    {/* <p>
-                            In college, I was an active member in the fraternity
-                            Sigma Alpha Epsilon and held multiple positions in
-                            the chapter. I met a lot of amazing people through
-                            my fraternity and thoroughly enjoyed the community.
-                        </p>*/}
+                        
                     </div>
                     <div style={styles.verticalImage}>
                         <img src={meNow} style={styles.image} alt="" />
@@ -121,7 +131,7 @@ const About: React.FC<AboutProps> = (props) => {
                 <p>
                     Thanks for reading about me! I hope that you enjoy exploring
                     the rest of my portfolio website and everything it has to
-                    offer. If you find the easter egg make sure to let me know
+                    offer. If you find an easter egg make sure to let me know
                     on instagram{' '}
                     <a
                         rel="noreferrer"
