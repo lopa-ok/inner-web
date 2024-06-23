@@ -238,7 +238,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </p>
                     </li>
                 </ul>
-            </div>*/}
+            </div>
         </div> 
         
     );
