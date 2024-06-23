@@ -11,7 +11,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 <div style={styles.header}>
                     <div style={styles.headerRow}>
                         <h1>COMPETETIONS</h1>
-                        
+                        </div>
                             <h4></h4>
                         </a>
                          
