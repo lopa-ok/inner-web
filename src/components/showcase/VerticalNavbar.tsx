@@ -75,7 +75,11 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
                         </div>
                     )
                 }
-                
+                <Link
+                    containerStyle={styles.link}
+                    to="Hack"
+                    text="TECH CLUB"
+                />
                 <Link
                     containerStyle={styles.link}
                     to="contact"

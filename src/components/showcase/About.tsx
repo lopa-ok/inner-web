@@ -16,9 +16,9 @@ const About: React.FC<AboutProps> = (props) => {
             <br />
             <div className="text-block">
                 <p>
-                I'm Philopater, also known as Lopa. I am currently a high school student.
+                I'm Philopater, also known as Lopa I am currently a high school student.
                 <br />
-                I'll be graduating in 2025, and I aspire to pursue a career in a computer-related field.
+                I'll be graduating in 2026, and I aspire to pursue a career in a computer-related field.
 
 
                 <br/>
@@ -65,9 +65,9 @@ const About: React.FC<AboutProps> = (props) => {
                     initially learning how to scrape and interact with websites.
                     I went on to do a ton of passion projects. 
                     I worked on many projects including Robots, chatbots,
-                    multiple game projects, apps, and more. One of these
-                    projects is viewable on my{' '}
-                    <Link to="/projects/software">Software Projects</Link> page.
+                    multiple game projects, apps, and more. Some of these
+                    projects are viewable on my{' '}
+                    <Link to="/projects/software">Software Projects</Link> and <Link to="/projects/robotics">Robotics Projects</Link>   page.
                 </p>
                 <br />
                 <p>
@@ -95,9 +95,11 @@ const About: React.FC<AboutProps> = (props) => {
                         <p>
                         I am an IGCSE student at Alkarma International School. 
                         Throughout my time here, I have actively participated in numerous {' '}
-                            <Link to="/competitions">Competitions</Link>{' '} showcasing my skills and dedication.
+                            <Link to="/Experience">Competitions</Link>{' '} showcasing my skills and dedication.
                         I have completed five O-levels in English, Mathematics, Computer Science, ICT, and Chemistry.
                         In the upcoming November session, I will be taking AS Mathematics to further enhance my academic portfolio.
+                        <br/>
+                        Edit : Im done with AS Mathematics Now, and Currently Taking A2 Mathmatics and physics (and one more subject that i still yet to figure out)
                         </p>
                         
                         <br />

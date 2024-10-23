@@ -31,12 +31,18 @@ const Home: React.FC<HomeProps> = (props) => {
                     to="projects"
                     text="PROJECTS"
                 />
-                
+                <Link
+                    containerStyle={styles.link}
+                    to="Hack"
+                    text="TECH CLUB"
+                />
+
                 <Link
                     containerStyle={styles.link}
                     to="contact"
                     text="CONTACT"
                 />
+                
             </div>
             <div style={styles.forHireContainer} onMouseDown={goToContact}>
                 <img src={forhire} alt="" />

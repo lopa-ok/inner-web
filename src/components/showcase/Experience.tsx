@@ -10,6 +10,72 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             <div style={styles.headerContainer}>
                 <div style={styles.header}>
                     <div style={styles.headerRow}>
+                        <h1>Hack Club</h1>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href={'https://hackclub.com'}
+                        >
+                            <h4>https://hackclub.com</h4>
+                        </a>
+                         
+                    </div>
+                     <div style={styles.headerRow}>
+                        <h3>Hackathon</h3>
+                        <b>
+                            <p>Fall 2024</p>
+                        </b>
+                    </div>
+                </div>
+            </div>
+             <div className="text-block">
+                <p>
+                Hack Club is a global community of high school coders and creators, designed to empower students to build real-world projects, collaborate,
+                 and learn together. Whether you're a beginner or experienced developer, Hack Club provides an open space for exploring technology, developing coding skills,
+                 and making meaningful connections with peers. 
+                 With access to workshops, resources, and events like hackathons, Hack Club encourages students to turn their ideas into reality and share them with the world.
+                As a proud Hack Club member,
+                 I’m excited to contribute to this vibrant community and help foster a culture of creativity and innovation in coding.
+                </p>
+                <br />
+                
+            </div>
+            <div style={styles.headerContainer}>
+                <div style={styles.header}>
+                    <div style={styles.headerRow}>
+                        <h1>Apple</h1>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href={'https://apple.com'}
+                        >
+                            <h4>https://apple.com</h4>
+                        </a>
+                         
+                    </div>
+                     <div style={styles.headerRow}>
+                        <h3>Junior Software Developer</h3>
+                        <b>
+                            <p>Fall 2022 - Summer 2023</p>
+                        </b>
+                    </div>
+                </div>
+            </div>
+             <div className="text-block">
+                <p>
+                My time as a Junior Software Developer at Apple, though brief, was an incredible learning experience.
+                 I got the opportunity to work alongside talented engineers and contribute to real-world projects, even on a small scale. 
+                 From debugging to implementing minor features, 
+                 I gained a deeper understanding of how large-scale software development works and how Apple delivers such polished products. 
+                 While my role was limited, 
+                the experience gave me insight into cutting-edge technology and inspired me to keep growing as a developer.
+                </p>
+                <br />
+                
+            </div>
+            <div style={styles.headerContainer}>
+                <div style={styles.header}>
+                    <div style={styles.headerRow}>
                         <h1>Ebhar misr</h1>
                         <a
                             rel="noreferrer"
@@ -82,6 +148,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             <div style={styles.headerContainer}>
                 <div style={styles.header}>
                     <div style={styles.headerRow}>
+                        
                         <h1>BrACS</h1>
                         <a
                             target="_blank"
@@ -135,109 +202,10 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                     </li>
                 </ul>
             </div>
-            <div style={styles.headerContainer}>
-                <div style={styles.header}>
-                    <div style={styles.headerRow}>
-                        <h1>K-F/X</h1>
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={'https://kfxnyc.com/'}
-                        >
-                            <h4>www.kfxnyc.com</h4>
-                        </a>
-                    </div>
-                    <div style={styles.headerRow}>
-                        <h3>Special Effects Technician</h3>
-                        <b>
-                            <p>Fall 2019, Summer 2021</p>
-                        </b>
-                    </div>
-                </div>
+            
+            
             </div>
-            <div className="text-block">
-                <p>
-                    Applied problem solving and technical skills to operate
-                    large equipment such as rain machines, fog machines, small
-                    explosives and general rigging with a professional crew of
-                    50+ people.
-                </p>
-                <br />
-                <h3 style={styles.indent}>Screen Credits:</h3>
-                <ul>
-                    <li style={styles.row}>
-                        <p>• Ray Donovan</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.sho.com/ray-donovan"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                SHOWTIME
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• Ray Donovan: The Movie</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.sho.com/titles/3508117/ray-donovan-the-movie"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                SHOWTIME
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• Hightown</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.starz.com/us/en/series/hightown/57463"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                STARZ
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• Bull</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.cbs.com/shows/bull/"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                CBS
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• At Home with Amy Sedaris</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.trutv.com/shows/at-home-with-amy-sedaris"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                truTV
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                </ul>
-            </div>
-        </div> 
+
         
     );
 };
