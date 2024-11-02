@@ -4,9 +4,9 @@ import colors from '../../constants/colors';
 
 export interface ContactProps {}
 
-// function to validate phone number
+
 const validatePhoneNumber = (phone: string) => {
-    const re = /^\d{11}$/; // Simple regex for 10 digit phone number
+    const re = /^\+20\s?\d+(\s?\d+)*$/;
     return re.test(String(phone));
 };
 
