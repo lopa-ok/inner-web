@@ -77,7 +77,7 @@ const About: React.FC<AboutProps> = (props) => {
                 However, my father convinced and they agreed to take me in. 
                 It wasn't long before I became deeply engrossed in the world of computers and electronics, 
                 eventually finding myself drawn to the exciting realm of robotics and programming.
-                The course introduced me to my first ever programming lannguage which was C++
+                The course introduced me to my first ever programming Language which was C++
                 </p>
                 <br />
                 <br />
@@ -100,6 +100,8 @@ const About: React.FC<AboutProps> = (props) => {
                         In the upcoming November session, I will be taking AS Mathematics to further enhance my academic portfolio.
                         <br/>
                         Edit : Im done with AS Mathematics Now, and Currently Taking A2 Mathmatics and physics (and one more subject that i still yet to figure out)
+                        <br/>
+                        Edit 2 : Change in plans im taking Physics, Accounting and Enviromental Mangement
                         </p>
                         
                         <br />
