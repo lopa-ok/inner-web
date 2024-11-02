@@ -281,6 +281,7 @@ const styles: StyleSheetCSS = {
         border: '1px solid #ccc',
         borderRadius: 4,
         backgroundColor: '#f9f9f9',
+        fontFamily: 'inherit',
     },
     socialImage: {
         width: 36,
