@@ -31,6 +31,9 @@ const Contact: React.FC<ContactProps> = (props) => {
     const [grade, setGrade] = useState('');
     const [phone, setPhone] = useState('');
     const [name, setName] = useState('');
+    const [mathGroup, setMathGroup] = useState('');
+    const [ictGroup, setIctGroup] = useState('');
+    const [arabicGroup, setArabicGroup] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [formMessage, setFormMessage] = useState('');
@@ -57,6 +60,9 @@ const Contact: React.FC<ContactProps> = (props) => {
                     grade,
                     phone,
                     name,
+                    mathGroup,
+                    ictGroup,
+                    arabicGroup,
                 }),
             })
                 .then((res) => {
@@ -67,6 +73,9 @@ const Contact: React.FC<ContactProps> = (props) => {
                         setGrade('');
                         setPhone('');
                         setName('');
+                        setMathGroup('');
+                        setIctGroup('');
+                        setArabicGroup('');
                         setFormMessageColor(colors.blue);
                         setIsLoading(false);
                     } else {
@@ -88,7 +97,7 @@ const Contact: React.FC<ContactProps> = (props) => {
             setFormMessage('Form unable to validate, please try again.');
             setFormMessageColor('red');
         }
-    }, [grade, phone, name, isFormValid]);
+    }, [grade, phone, name, mathGroup, ictGroup, arabicGroup, isFormValid]);
 
     useEffect(() => {
         if (formMessage.length > 0) {
@@ -104,7 +113,9 @@ const Contact: React.FC<ContactProps> = (props) => {
             <div style={styles.header}>
                 <h1>Tech Club Registration</h1>
                 <div style={styles.socials}>
-
+                    <SocialBox link="https://twitter.com" icon={twitterIcon} />
+                    <SocialBox link="https://github.com" icon={ghIcon} />
+                    <SocialBox link="https://linkedin.com" icon={inIcon} />
                 </div>
             </div>
             <div className="text-block">
@@ -160,6 +171,51 @@ const Contact: React.FC<ContactProps> = (props) => {
                         value={grade}
                         onChange={(e) => setGrade(e.target.value)}
                     />
+                    <label>
+                        <p>
+                            <b>Math Group:</b>
+                        </p>
+                    </label>
+                    <select
+                        style={styles.formItem}
+                        value={mathGroup}
+                        onChange={(e) => setMathGroup(e.target.value)}
+                    >
+                        <option value="">Select Group</option>
+                        <option value="Group 1">Group 1</option>
+                        <option value="Group 2">Group 2</option>
+                        <option value="None">Don't take this subject</option>
+                    </select>
+                    <label>
+                        <p>
+                            <b>ICT Group:</b>
+                        </p>
+                    </label>
+                    <select
+                        style={styles.formItem}
+                        value={ictGroup}
+                        onChange={(e) => setIctGroup(e.target.value)}
+                    >
+                        <option value="">Select Group</option>
+                        <option value="Group 1">Group 1</option>
+                        <option value="Group 2">Group 2</option>
+                        <option value="None">Don't take this subject</option>
+                    </select>
+                    <label>
+                        <p>
+                            <b>Arabic Group:</b>
+                        </p>
+                    </label>
+                    <select
+                        style={styles.formItem}
+                        value={arabicGroup}
+                        onChange={(e) => setArabicGroup(e.target.value)}
+                    >
+                        <option value="">Select Group</option>
+                        <option value="Group 1">Group 1</option>
+                        <option value="Group 2">Group 2</option>
+                        <option value="None">Don't take this subject</option>
+                    </select>
                     <div style={styles.buttons}>
                         <button
                             className="site-button"
