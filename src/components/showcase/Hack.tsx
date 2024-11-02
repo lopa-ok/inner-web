@@ -177,7 +177,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         </p>
                     </label>
                     <select
-                        style={styles.formItem}
+                        style={{ ...styles.formItem, ...styles.retroSelect }}
                         value={mathGroup}
                         onChange={(e) => setMathGroup(e.target.value)}
                     >
@@ -192,7 +192,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         </p>
                     </label>
                     <select
-                        style={styles.formItem}
+                        style={{ ...styles.formItem, ...styles.retroSelect }}
                         value={ictGroup}
                         onChange={(e) => setIctGroup(e.target.value)}
                     >
@@ -207,7 +207,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         </p>
                     </label>
                     <select
-                        style={styles.formItem}
+                        style={{ ...styles.formItem, ...styles.retroSelect }}
                         value={arabicGroup}
                         onChange={(e) => setArabicGroup(e.target.value)}
                     >
@@ -273,6 +273,18 @@ const styles: StyleSheetCSS = {
     formItem: {
         marginTop: 4,
         marginBottom: 16,
+    },
+    retroSelect: {
+        backgroundColor: '#f0e68c',
+        border: '2px solid #000',
+        borderRadius: '4px',
+        fontFamily: 'Courier New, Courier, monospace',
+        fontSize: '16px',
+        color: '#000',
+        padding: '8px',
+        appearance: 'none',
+        WebkitAppearance: 'none',
+        MozAppearance: 'none',
     },
     socialImage: {
         width: 36,
