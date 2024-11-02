@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import colors from '../../constants/colors';
-import twitterIcon from '../../assets/pictures/contact-twitter.png';
-import ghIcon from '../../assets/pictures/contact-gh.png';
-import inIcon from '../../assets/pictures/contact-in.png';
+
 
 export interface ContactProps {}
 
@@ -12,20 +10,6 @@ const validatePhoneNumber = (phone: string) => {
     return re.test(String(phone));
 };
 
-interface SocialBoxProps {
-    icon: string;
-    link: string;
-}
-
-const SocialBox: React.FC<SocialBoxProps> = ({ link, icon }) => {
-    return (
-        <a rel="noreferrer" target="_blank" href={link}>
-            <div className="big-button-container" style={styles.social}>
-                <img src={icon} alt="" style={styles.socialImage} />
-            </div>
-        </a>
-    );
-};
 
 const Contact: React.FC<ContactProps> = (props) => {
     const [grade, setGrade] = useState('');
@@ -112,11 +96,7 @@ const Contact: React.FC<ContactProps> = (props) => {
         <div className="site-page-content">
             <div style={styles.header}>
                 <h1>Tech Club Registration</h1>
-                <div style={styles.socials}>
-                    <SocialBox link="https://twitter.com" icon={twitterIcon} />
-                    <SocialBox link="https://github.com" icon={ghIcon} />
-                    <SocialBox link="https://linkedin.com" icon={inIcon} />
-                </div>
+                
             </div>
             <div className="text-block">
                 <p>
