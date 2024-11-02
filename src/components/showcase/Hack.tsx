@@ -184,7 +184,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         <option value="">Select Group</option>
                         <option value="Group 1">Group 1</option>
                         <option value="Group 2">Group 2</option>
-                        <option value="None">Don't take this subject</option>
+                        <option value="None">None</option>
                     </select>
                     <label>
                         <p>
@@ -199,7 +199,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         <option value="">Select Group</option>
                         <option value="Group 1">Group 1</option>
                         <option value="Group 2">Group 2</option>
-                        <option value="None">Don't take this subject</option>
+                        <option value="None">None</option>
                     </select>
                     <label>
                         <p>
@@ -214,7 +214,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         <option value="">Select Group</option>
                         <option value="Group 1">Group 1</option>
                         <option value="Group 2">Group 2</option>
-                        <option value="None">Don't take this subject</option>
+                        <option value="None">None</option>
                     </select>
                     <div style={styles.buttons}>
                         <button
