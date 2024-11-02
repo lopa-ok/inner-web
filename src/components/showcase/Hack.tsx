@@ -177,45 +177,45 @@ const Contact: React.FC<ContactProps> = (props) => {
                         </p>
                     </label>
                     <select
-                        style={{ ...styles.formItem, ...styles.retroSelect }}
-                        value={mathGroup}
-                        onChange={(e) => setMathGroup(e.target.value)}
-                    >
-                        <option value="">Select Group</option>
-                        <option value="Group 1">Group 1</option>
-                        <option value="Group 2">Group 2</option>
-                        <option value="None">Don't take this subject</option>
-                    </select>
+    style={styles.select}
+    value={mathGroup}
+    onChange={(e) => setMathGroup(e.target.value)}
+>
+    <option value="">Select Group</option>
+    <option value="Group 1">Group 1</option>
+    <option value="Group 2">Group 2</option>
+    <option value="None">Don't take this subject</option>
+</select>
                     <label>
                         <p>
                             <b>ICT Group:</b>
                         </p>
                     </label>
                     <select
-                        style={{ ...styles.formItem, ...styles.retroSelect }}
-                        value={ictGroup}
-                        onChange={(e) => setIctGroup(e.target.value)}
-                    >
-                        <option value="">Select Group</option>
-                        <option value="Group 1">Group 1</option>
-                        <option value="Group 2">Group 2</option>
-                        <option value="None">Don't take this subject</option>
-                    </select>
+    style={styles.select}
+    value={ictGroup}
+    onChange={(e) => setIctGroup(e.target.value)}
+>
+    <option value="">Select Group</option>
+    <option value="Group 1">Group 1</option>
+    <option value="Group 2">Group 2</option>
+    <option value="None">Don't take this subject</option>
+</select>
                     <label>
                         <p>
                             <b>Arabic Group:</b>
                         </p>
                     </label>
                     <select
-                        style={{ ...styles.formItem, ...styles.retroSelect }}
-                        value={arabicGroup}
-                        onChange={(e) => setArabicGroup(e.target.value)}
-                    >
-                        <option value="">Select Group</option>
-                        <option value="Group 1">Group 1</option>
-                        <option value="Group 2">Group 2</option>
-                        <option value="None">Don't take this subject</option>
-                    </select>
+    style={styles.select}
+    value={arabicGroup}
+    onChange={(e) => setArabicGroup(e.target.value)}
+>
+    <option value="">Select Group</option>
+    <option value="Group 1">Group 1</option>
+    <option value="Group 2">Group 2</option>
+    <option value="None">Don't take this subject</option>
+</select>
                     <div style={styles.buttons}>
                         <button
                             className="site-button"
@@ -273,18 +273,12 @@ const styles: StyleSheetCSS = {
     formItem: {
         marginTop: 4,
         marginBottom: 16,
-    },
-    retroSelect: {
-        backgroundColor: '#f0e68c',
+        padding: '4px',
         border: '2px solid #000',
-        borderRadius: '4px',
-        fontFamily: 'Courier New, Courier, monospace',
-        fontSize: '16px',
+        backgroundColor: '#c0c0c0',
+        fontFamily: 'Tahoma, sans-serif',
+        fontSize: '14px',
         color: '#000',
-        padding: '8px',
-        appearance: 'none',
-        WebkitAppearance: 'none',
-        MozAppearance: 'none',
     },
     socialImage: {
         width: 36,
@@ -307,6 +301,11 @@ const styles: StyleSheetCSS = {
     button: {
         minWidth: 184,
         height: 32,
+        border: '2px solid #000',
+        backgroundColor: '#c0c0c0',
+        fontFamily: 'Tahoma, sans-serif',
+        fontSize: '14px',
+        color: '#000',
     },
     header: {
         alignItems: 'flex-end',
@@ -322,6 +321,16 @@ const styles: StyleSheetCSS = {
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 8,
+    },
+    select: {
+        marginTop: 4,
+        marginBottom: 16,
+        padding: '4px',
+        border: '2px solid #000',
+        backgroundColor: '#c0c0c0',
+        fontFamily: 'Tahoma, sans-serif',
+        fontSize: '14px',
+        color: '#000',
     },
 };
 
