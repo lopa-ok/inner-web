@@ -6,7 +6,7 @@ export interface ContactProps {}
 
 
 const validatePhoneNumber = (phone: string) => {
-    const re = /^(\+20|012)\s?\d+(\s?\d+)*$/;
+    const re = /^(\+20|01)\s?\d+(\s?\d+)*$/;
     return re.test(String(phone));
 };
 
