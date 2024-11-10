@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import saga from '../../../assets/pictures/projects/software/saga.mp4';
+import saga from '../../../assets/pictures/projects/software/old.mp4';
 // @ts-ignore
 import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
@@ -17,7 +17,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
             <h3>Projects</h3>
             <br />
             <p>
-                Below are some of my favorite software projects I have worked on
+                Below are some of my favorite Web development projects I have worked on
                 over the last few years.
             </p>
             <br />
@@ -103,23 +103,20 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <a
                         rel="noreferrer"
                         target="_blank"
-                        href="https://twitter.com/henryheffernan"
+                        href="https://www.instagram.com/philopater.essam/"
                     >
                         @philopater.essam
                     </a>
                 </p>
             </div>
             <div className="text-block">
-                <h2>Reloaded Rampart</h2>
+                <h2>Old portfolio</h2>
                 <br />
                 <p>
-                    Reloaded Rampart or RR is a game I made back in 2019. 
-                    The game is a wave based top
-                    down shooter where you progress by building the most
-                    outrageous of weapons through attaching as many attachments
-                    on your weapon as you can. The game ceased development in
-                    2019 because we unfortunately i had packed school
-                    schedules and was unable to find the time to work on it.
+                This is my previous portfolio, 
+                It was built using React and JS , with a focus on showcasing interactive and visually intensive content. 
+                One lesson I learned from creating it was balancing performance with design complexity—this version is quite resource-intensive, 
+                making it hard to run smoothly on most computers. It's been a great learning experience that has helped me refine my approach in my current portfolio
                 </p>
                 <br />
                 <div className="captioned-image">
@@ -127,9 +124,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b> Reloaded Rampart Gameplay
-                                demo, featuring the main character along with a
-                                few of our grunt and dasher enemies.
+                                <b>Figure 2: </b> The Old Portfolio
                             </sub>
                         </p>
                     </div>
