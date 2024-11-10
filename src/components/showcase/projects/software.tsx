@@ -216,6 +216,56 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     check out Skip the Scroll to save you some of your precious
                     time. If you like it, feel free to star it on GitHub
                 </p>
+                <div className="text-block">
+                <h2>Old portfolio</h2>
+                <br />
+                <p>
+                was my first attempt at creating an interactive, visually engaging portfolio. This project pushed my skills in design and development, challenging me to explore complex animations and media integrations.I aimed to deliver a unique experience that stood out. However, one major lesson I learned was the importance of balancing aesthetics with functionality—this website ended up being quite resource-intensive, which unfortunately makes it hard for many computers to handle smoothly. It’s a reminder of how critical optimization is in web design, especially for interactive content.
+                </p>
+                <br />
+                <div className="captioned-image">
+                    <VideoAsset src={saga} />
+                    <div style={styles.caption}>
+                        <p>
+                            <sub>
+                                <b>Figure 2: </b>  A preview of the old portfolio’s main interface.
+                            </sub>
+                        </p>
+                    </div>
+                </div>
+                <p>
+                To break down the technical side: this portfolio relied on React and Threejs, giving it a dynamic and engaging feel. Unfortunately, the use of these intensive features, without enough optimization, made the website difficult to load on systems without high processing power. This project taught me invaluable lessons about prioritizing usability and performance alongside creative design, and these insights have guided my approach in building my current portfolio. Now, my goal is to deliver an equally engaging experience while ensuring it runs efficiently across devices.
+                </p>
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-old-portfolio.vercel.app/"
+                        >
+                            <p>
+                                <b>[Old Portfolio]</b> - lopa-old-portfolio.vercel.app
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+                <p>
+                    I'm skipping over a lot of details in exchange for brevity,
+                    but I do plan on doing a more in depth breakdown for those
+                    interested sometime in the future. To get updates with that
+                    project feel free to follow me on instagram{' '}
+                    <a
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://www.instagram.com/philopater.essam/"
+                    >
+                        @philopater.essam
+                    </a>
+                </p>
+            </div>
             </div>
             <ResumeDownload />
         </div>
