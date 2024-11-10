@@ -7,7 +7,7 @@ import Experience from '../showcase/Experience';
 import Projects from '../showcase/Projects';
 import Contact from '../showcase/Contact';
 import Hack from '../showcase/Hack';
-import SoftwareProjects from '../showcase/projects/Software';
+import SoftwareProjects from '../showcase/projects/webdev';
 import MusicProjects from '../showcase/projects/robotics';
 import ArtProjects from '../showcase/projects/Art';
 import VerticalNavbar from '../showcase/VerticalNavbar';
