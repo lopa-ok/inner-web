@@ -1,4 +1,6 @@
 import React from 'react';
+import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
+
 // @ts-ignore
 import saga from '../../../assets/pictures/projects/software/old.mp4';
 // @ts-ignore
@@ -6,7 +8,6 @@ import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
 
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
-import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
 
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
@@ -237,11 +238,11 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     </p>
                 </div>
                 <h3>How to play</h3>
-<ul>
-    <li>Players take turns to place their mark (X or O) in the mini-grids.</li>
-    <li>Each move determines the mini-grid for the opponent's next move.</li>
-    <li>The first player to win the majority of the mini-grids or get three mini-grids in a row wins the game.</li>
-</ul>
+                    <ul>
+                        <li>Players take turns to place their mark (X or O) in the mini-grids.</li>
+                        <li>Each move determines the mini-grid for the opponent's next move.</li>
+                        <li>The first player to win the majority of the mini-grids or get three mini-grids in a row wins the game.</li>
+                    </ul>
                 <br />
                 <h3>Links:</h3>
                 <ul>
