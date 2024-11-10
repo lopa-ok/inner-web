@@ -157,6 +157,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     >
                         @philopater.essam
                     </a>
+                </p>
             </div>
             <div className="text-block">
                 <h2>Stop the Scroll</h2>
