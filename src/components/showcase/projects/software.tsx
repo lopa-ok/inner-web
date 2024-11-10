@@ -4,10 +4,7 @@ import saga from '../../../assets/pictures/projects/software/old.mp4';
 // @ts-ignore
 import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
-
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
-import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
-
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
 
@@ -94,9 +91,9 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             </p>
                         </a>
                     </li>
-   
-                       
-                    
+
+
+
                 </ul>
                 <p>
                     I'm skipping over a lot of details in exchange for brevity,
@@ -146,7 +143,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             </p>
                         </a>
                     </li>
-                    
+
                 </ul>
                 <p>
                     I'm skipping over a lot of details in exchange for brevity,
@@ -210,7 +207,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             </p>
                         </a>
                     </li>
-                    
+
                 </ul>
                 <p>
                     If you are a developer and have also found yourself
@@ -220,7 +217,6 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     time. If you like it, feel free to star it on GitHub
                 </p>
             </div>
-            
             <ResumeDownload />
         </div>
     );
