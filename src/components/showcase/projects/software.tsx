@@ -4,7 +4,10 @@ import saga from '../../../assets/pictures/projects/software/old.mp4';
 // @ts-ignore
 import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
+
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
+import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
+
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
 
@@ -215,6 +218,49 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     "i also have this problem...", then I highly recommend you
                     check out Skip the Scroll to save you some of your precious
                     time. If you like it, feel free to star it on GitHub
+                </p>
+            </div>
+            <div className="text-block">
+                <h2>Tic Tac Toe Ultimate</h2>
+                <br />
+                <p>
+                Tic Tac Toe Ultimate is an advanced version of the classic Tic Tac Toe game, built using JavaScript. This project includes features that go beyond the traditional 3x3 grid, making it more challenging and fun to play.
+                </p>
+                <br />
+                <div className="captioned-image">
+                    <VideoAsset src={tictactoe} />
+                    <p style={styles.caption}>
+                        <sub>
+                            <b>Figure 4:</b> A preview of Ultimate tic-tac-toe in
+                            action.
+                        </sub>
+                    </p>
+                </div>
+                <h3>How to play</h3>
+<ul>
+    <li>Players take turns to place their mark (X or O) in the mini-grids.</li>
+    <li>Each move determines the mini-grid for the opponent's next move.</li>
+    <li>The first player to win the majority of the mini-grids or get three mini-grids in a row wins the game.</li>
+</ul>
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://github.com/lopa-ok/new-project"
+                        >
+                            <p>
+                                <b>[GitHub]</b> - New Project Repository
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+                <p>
+                    If you are interested in this project, feel free to check
+                    out the repository on GitHub and contribute or provide
+                    feedback.
                 </p>
             </div>
             <ResumeDownload />
