@@ -113,10 +113,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 <h2>Old portfolio</h2>
                 <br />
                 <p>
-                This is my previous portfolio, 
-                It was built using React and JS , with a focus on showcasing interactive and visually intensive content. 
-                One lesson I learned from creating it was balancing performance with design complexity—this version is quite resource-intensive, 
-                making it hard to run smoothly on most computers. It's been a great learning experience that has helped me refine my approach in my current portfolio
+                was my first attempt at creating an interactive, visually engaging portfolio. This project pushed my skills in design and development, challenging me to explore complex animations and media integrations.I aimed to deliver a unique experience that stood out. However, one major lesson I learned was the importance of balancing aesthetics with functionality—this website ended up being quite resource-intensive, which unfortunately makes it hard for many computers to handle smoothly. It’s a reminder of how critical optimization is in web design, especially for interactive content.
                 </p>
                 <br />
                 <div className="captioned-image">
@@ -124,7 +121,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b> The Old Portfolio
+                                <b>Figure 2: </b>  A preview of the old portfolio’s main interface.
                             </sub>
                         </p>
                     </div>
