@@ -60,12 +60,7 @@ const APPLICATIONS: {
         shortcutIcon: 'henordleIcon',
         component: esordle,
     },
-    credits: {
-        key: 'credits',
-        name: 'Credits',
-        shortcutIcon: 'credits',
-        component: Credits,
-    },
+    
 };
 
 const Desktop: React.FC<DesktopProps> = (props) => {
