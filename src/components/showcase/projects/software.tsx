@@ -145,6 +145,18 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     </li>
                     
                 </ul>
+                <p>
+                    I'm skipping over a lot of details in exchange for brevity,
+                    but I do plan on doing a more in depth breakdown for those
+                    interested sometime in the future. To get updates with that
+                    project feel free to follow me on instagram{' '}
+                    <a
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://www.instagram.com/philopater.essam/"
+                    >
+                        @philopater.essam
+                    </a>
             </div>
             <div className="text-block">
                 <h2>Stop the Scroll</h2>
