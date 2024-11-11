@@ -304,9 +304,8 @@ const styles: StyleSheetCSS = {
         padding: 12,
     },
     caption: {
-        width: '80%',
-        textAlign: 'center',
-        margin: '0 auto',
+        marginBottom: 16,
+        fontSize: 48,
     },
 };
 
