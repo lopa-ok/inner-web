@@ -5,6 +5,7 @@ import saga from '../../../assets/pictures/projects/software/old.mp4';
 import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
+import tictactoe from '../../../assets/pictures/projects/software/tictactoes.mp4';
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
 
@@ -217,18 +218,18 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     time. If you like it, feel free to star it on GitHub
                 </p>
                 <div className="text-block">
-                <h2>Old portfolio</h2>
+                <h2>Tic-Tac-Toe Ultimate</h2>
                 <br />
                 <p>
-                was my first attempt at creating an interactive, visually engaging portfolio. This project pushed my skills in design and development, challenging me to explore complex animations and media integrations.I aimed to deliver a unique experience that stood out. However, one major lesson I learned was the importance of balancing aesthetics with functionality—this website ended up being quite resource-intensive, which unfortunately makes it hard for many computers to handle smoothly. It’s a reminder of how critical optimization is in web design, especially for interactive content.
+                Tic Tac Toe Ultimate is an advanced version of the classic Tic Tac Toe game, built using JavaScript. This project includes features that go beyond the traditional 3x3 grid, making it more challenging and fun to play.
                 </p>
                 <br />
                 <div className="captioned-image">
-                    <VideoAsset src={saga} />
+                    <VideoAsset src={tictactoe} />
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b>  A preview of the old portfolio’s main interface.
+                                <b>Figure 2: </b>  A preview of Tic-Tac-toe Ultimate in action.
                             </sub>
                         </p>
                     </div>
