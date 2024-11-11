@@ -276,6 +276,18 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             </p>
                         </a>
                     </li>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://github.com/lopa-ok/tic-tac-toe-ultimate"
+                        >
+                            <p>
+                                <b>[Github Repo]</b> - github.com/lopa-ok/tic-tac-toe-ultimate
+                            </p>
+                        </a>
+                    </li>
+
 
                 </ul>
                 
