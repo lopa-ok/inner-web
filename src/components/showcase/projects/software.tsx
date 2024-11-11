@@ -235,9 +235,19 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         </p>
                     </div>
                 </div>
-                <p>
-                To break down the technical side: this portfolio relied on React and Threejs, giving it a dynamic and engaging feel. Unfortunately, the use of these intensive features, without enough optimization, made the website difficult to load on systems without high processing power. This project taught me invaluable lessons about prioritizing usability and performance alongside creative design, and these insights have guided my approach in building my current portfolio. Now, my goal is to deliver an equally engaging experience while ensuring it runs efficiently across devices.
-                </p>
+                <h3>How to play</h3>
+                <ul>
+                    <li>
+                    Players take turns to place their mark (X or O) in the mini-grids.
+                    </li>
+                    <li>
+                    Each move determines the mini-grid for the opponent's next move.
+                    </li>
+                    <li>
+                    The first player to win the majority of the mini-grids or get Three mini-grids in a row wins the game.
+                    </li>
+
+                </ul>
                 <br />
                 <h3>Links:</h3>
                 <ul>
@@ -245,10 +255,10 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://lopa-old-portfolio.vercel.app/"
+                            href="https://lopa-ok.github.io/tic-tac-toe-ultimate/"
                         >
                             <p>
-                                <b>[Old Portfolio]</b> - lopa-old-portfolio.vercel.app
+                                <b>[Demo]</b> - lopa-ok.github.io/tic-tac-toe-ultimate/
                             </p>
                         </a>
                     </li>
