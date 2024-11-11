@@ -305,7 +305,7 @@ const styles: StyleSheetCSS = {
     },
     caption: {
         marginBottom: 16,
-        fontSize: 48,
+        
     },
 };
 
