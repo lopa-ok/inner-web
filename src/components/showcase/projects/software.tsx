@@ -230,12 +230,12 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b>  A preview of Tic-Tac-toe Ultimate in action.
+                                <b>Figure 4: </b>  A preview of Tic-Tac-toe Ultimate in action.
                             </sub>
                         </p>
                     </div>
                 </div>
-                <h3>How to play</h3>
+                <h3>How to play:</h3>
                 <ul>
                     <li>
                         
@@ -305,6 +305,8 @@ const styles: StyleSheetCSS = {
     },
     caption: {
         width: '80%',
+        textAlign: 'center',
+        margin: '0 auto',
     },
 };
 
