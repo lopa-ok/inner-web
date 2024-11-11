@@ -238,14 +238,28 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 <h3>How to play</h3>
                 <ul>
                     <li>
-                    Players take turns to place their mark (X or O) in the mini-grids.
+                        
+                            <p>
+                            Players take turns to place their mark (X or O) in the mini-grids.
+                            </p>
+                        
                     </li>
                     <li>
-                    Each move determines the mini-grid for the opponent's next move.
+                        
+                            <p>
+                            Each move determines the mini-grid for the opponent's next move.
+                            </p>
+                        
                     </li>
                     <li>
-                    The first player to win the majority of the mini-grids or get Three mini-grids in a row wins the game.
+                        
+                            <p>
+                            The first player to win the majority of the mini-grids or get Three mini-grids in a row wins the game.
+                            </p>
+                        
                     </li>
+
+
 
                 </ul>
                 <br />
@@ -264,19 +278,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     </li>
 
                 </ul>
-                <p>
-                    I'm skipping over a lot of details in exchange for brevity,
-                    but I do plan on doing a more in depth breakdown for those
-                    interested sometime in the future. To get updates with that
-                    project feel free to follow me on instagram{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.instagram.com/philopater.essam/"
-                    >
-                        @philopater.essam
-                    </a>
-                </p>
+                
             </div>
             </div>
             <ResumeDownload />
