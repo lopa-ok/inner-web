@@ -63,7 +63,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             <br />
             <div style={styles.projectLinksContainer}>
                 <ProjectBox
-                    title="Software Development"
+                    title="Software"
                     subtitle="PROJECTS"
                     route="software"
                 />
