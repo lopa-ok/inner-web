@@ -10,7 +10,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             <h3>Software Development, Hackathons, and Competitions</h3>
             <br />
             <p>
-                Below are some of my work experiences, participation in hackathons, and achievements in competitions.
+                Below are some of my work experiences, hackathons, and achievements in competitions.
             </p>
             <br />
             <ResumeDownload />
