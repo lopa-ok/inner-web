@@ -6,12 +6,11 @@ export interface ExperienceProps {}
 const Experience: React.FC<ExperienceProps> = (props) => {
     return (
         <div className="site-page-content">
-            <h1>Software Development</h1>
-            <h3>Projects</h3>
+            <h1>Experience</h1>
+            <h3>Software Development, Hackathons, and Competitions</h3>
             <br />
             <p>
-                Below are some of my favorite web development projects I have worked on
-                over the last few years.
+                Below are some of my work experiences, participation in hackathons, and achievements in competitions.
             </p>
             <br />
             <ResumeDownload />
