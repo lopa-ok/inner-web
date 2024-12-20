@@ -103,7 +103,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                     Additionally, you'll have the opportunity to tour prestigious Egyptian universities.
                 </p>
                 <br />
-                <ul>
+                <ul style={styles.experienceList}>
                     <li>
                         Architected and engineered the vertical scrolling
                         discover player which, at its daily peak, was
@@ -165,7 +165,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                     deployed using AWS Elastic Beanstalk.
                 </p>
                 <br />
-                <ul>
+                <ul style={styles.experienceList}>
                     <li>
                         Managed the project and team members by conducting
                         bi-weekly stand-ups.
@@ -235,6 +235,12 @@ const styles: StyleSheetCSS = {
     row: {
         display: 'flex',
         justifyContent: 'space-between',
+    },
+    experienceList: {
+        fontFamily: 'inherit', 
+        fontSize: 'inherit',  
+        lineHeight: 'inherit',
+        color: 'inherit',
     },
 };
 
