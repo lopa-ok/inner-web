@@ -71,7 +71,7 @@ const About: React.FC<AboutProps> = (props) => {
                 </p>
                 <br />
                 <p>
-                Back in 2015, My mother enrolled me into my very first programming course.
+                Back in 2015, My parents enrolled me into my very first programming course.
                 Initially, there was some hesitation from the institution due to my age;
                 I was four years younger than thier Acceptance. 
                 However, my father convinced and they agreed to take me in. 
@@ -99,9 +99,9 @@ const About: React.FC<AboutProps> = (props) => {
                         I have completed five O-levels in English, Mathematics, Computer Science, ICT, and Chemistry.
                         In the upcoming November session, I will be taking AS Mathematics to further enhance my academic portfolio.
                         <br/>
-                        Edit : Im done with AS Mathematics Now, and Currently Taking A2 Mathmatics and physics (and one more subject that i still yet to figure out)
+                        <b>Edit:</b> Im done with AS Mathematics Now, and Currently Taking A2 Mathmatics and physics (and one more subject that i still yet to figure out)
                         <br/>
-                        Edit 2 : Change in plans im taking Physics, Accounting and Enviromental Mangement
+                        <b>Edit 2:</b> Change in plans im taking Physics, Accounting and Enviromental Mangement
                         </p>
                         
                         <br />
