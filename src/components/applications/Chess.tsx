@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import DosPlayer from '../dos/DosPlayer';
 import Window from '../os/Window';
+import Minesweeper from '../Minesweeper/Minesweeper'; // Import the Minesweeper component
 
-export interface ChessAppProps extends WindowAppProps {}
+export interface MinesweeperAppProps extends WindowAppProps {}
 
-const ChessApp: React.FC<ChessAppProps> = (props) => {
-    const [width, setWidth] = useState(920);
-    const [height, setHeight] = useState(750);
+const MinesweeperApp: React.FC<MinesweeperAppProps> = (props) => {
+    const [width, setWidth] = useState(400);
+    const [height, setHeight] = useState(400);
 
     return (
         <Window
@@ -14,23 +14,19 @@ const ChessApp: React.FC<ChessAppProps> = (props) => {
             left={10}
             width={width}
             height={height}
-            windowTitle="Chess"
+            windowTitle="Minesweeper"
             windowBarIcon="windowGameIcon"
             windowBarColor="#000000"
-            bottomLeftText={'Powered by JSDOS & DOSBox'}
+            bottomLeftText={'Minesweeper Game'}
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             onWidthChange={setWidth}
             onHeightChange={setHeight}
             minimizeWindow={props.onMinimize}
         >
-            <DosPlayer
-                width={width}
-                height={height}
-                bundleUrl="chess.jsdos"
-            />
+            <Minesweeper width={width} height={height} />
         </Window>
     );
 };
 
-export default ChessApp;
+export default MinesweeperApp;
