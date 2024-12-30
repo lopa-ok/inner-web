@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import DosPlayer from '../dos/DosPlayer';
 import Window from '../os/Window';
 
-export interface ScrabbleAppProps extends WindowAppProps {}
+export interface ChessAppProps extends WindowAppProps {}
 
-const ScrabbleApp: React.FC<ScrabbleAppProps> = (props) => {
+const ChessApp: React.FC<ChessAppProps> = (props) => {
     const [width, setWidth] = useState(920);
     const [height, setHeight] = useState(750);
 
@@ -14,9 +14,9 @@ const ScrabbleApp: React.FC<ScrabbleAppProps> = (props) => {
             left={10}
             width={width}
             height={height}
-            windowTitle="Scrabble"
+            windowTitle="Chess"
             windowBarIcon="windowGameIcon"
-            windowBarColor="#941d13"
+            windowBarColor="#000000"
             bottomLeftText={'Powered by JSDOS & DOSBox'}
             closeWindow={props.onClose}
             onInteract={props.onInteract}
@@ -27,10 +27,10 @@ const ScrabbleApp: React.FC<ScrabbleAppProps> = (props) => {
             <DosPlayer
                 width={width}
                 height={height}
-                bundleUrl="scrabble.jsdos"
+                bundleUrl="chess.jsdos"
             />
         </Window>
     );
 };
 
-export default ScrabbleApp;
+export default ChessApp;
