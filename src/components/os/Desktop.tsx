@@ -9,6 +9,7 @@ import esordle from '../applications/esordle';
 import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
+import Chess from '../applications/Chess'; // Import the ChessApp component
 import { IconName } from '../../assets/icons';
 import Credits from '../applications/Credits';
 
@@ -54,13 +55,18 @@ const APPLICATIONS: {
         shortcutIcon: 'scrabbleIcon',
         component: Scrabble,
     },
+    chess: {
+        key: 'chess',
+        name: 'Chess',
+        shortcutIcon: 'chessIcon', // Make sure you have an appropriate icon for Chess
+        component: Chess,
+    },
     esordle: {
         key: 'esordle',
         name: 'esordle',
         shortcutIcon: 'henordleIcon',
         component: esordle,
     },
-    
 };
 
 const Desktop: React.FC<DesktopProps> = (props) => {
