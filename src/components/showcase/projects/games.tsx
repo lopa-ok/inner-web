@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import saga from '../../../assets/pictures/projects/software/old.mp4';
 // @ts-ignore
-import computer from '../../../assets/pictures/projects/software/computer.mp4';
+import hypixel from '../../../assets/pictures/projects/games/hypixel.mp4';
 // @ts-ignore
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
 // @ts-ignore
@@ -15,7 +15,7 @@ export interface SoftwareProjectsProps {}
 const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
-            <h1>Software</h1>
+            <h1>Game</h1>
             <h3>Projects</h3>
             <br />
             <p>
@@ -26,48 +26,21 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
             <ResumeDownload />
             <br />
             <div className="text-block">
-                <h2>philopater.me</h2>
+                <h2>Hypixel AH snipper</h2>
                 <br />
                 <p>
-                                        philopater.me is my portfolio website, and also the
-                                        website you are on right now. This project was an absolute
-                                        joy to make and challenged me both technically and
-                                        creatively. Early in 2024, I knew I wanted to make an
-                                        interactive portfolio to aid my job search. I eventually got
-                                        the idea for this site around early February and began
-                                        development early March. I've been developing it alongside
-                                        my semester at school and if you are reading this, it's
-                                        pretty much done! just a PSA This website is heavily inspired by the work of Henry Heffernan.
+                The Hypixel AH Snipper is a Python application designed to fetch and display auction data from the Hypixel Skyblock API. It features a user-friendly GUI that allows users to filter auctions, copy auction commands, and view detailed auction information, including profit percentages and end times.
                 </p>
                 <br />
                 <div className="captioned-image">
-                    <VideoAsset src={computer} />
+                    <VideoAsset src={hypixel} />
                     <p style={styles.caption}>
                         <sub>
-                            <b>Figure 1:</b> Blender Scene of the 3D website.
-                            The scene from Blender was baked and exported in a
-                            GLTF format.
+                            <b>Figure 1:</b> Showcase of the Hypixel AH Snipper
                         </sub>
                     </p>
                 </div>
-                <p>
-                    Now, a quick technical breakdown of the site. The website is
-                    split into two parts, the 3D site, and the 2D OS site. The
-                    3D site uses Three.js to render the scene and renders the 2D
-                    site inside of it using an iframe. The 2D OS site is a
-                    simple react site that is hosted{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://philopater.vercel.app/"
-                    >
-                        here
-                    </a>{' '}
-                    and works as a standalone web app. The actual rendering of
-                    the 2D site is accomplished using a CSS renderer provided by
-                    Three.js that transforms the html of the 2D site with 3D CSS
-                    transforms to give the illusion of three dimensionality.
-                </p>
+               
                 <br />
                 <h3>Links:</h3>
                 <ul>
