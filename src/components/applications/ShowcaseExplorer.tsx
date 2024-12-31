@@ -9,7 +9,7 @@ import Contact from '../showcase/Contact';
 import Hack from '../showcase/Hack';
 import SoftwareProjects from '../showcase/projects/software';
 import MusicProjects from '../showcase/projects/robotics';
-import ArtProjects from '../showcase/projects/Art';
+import ArtProjects from '../showcase/projects/art';
 import VerticalNavbar from '../showcase/VerticalNavbar';
 import useInitialWindowSize from '../../hooks/useInitialWindowSize';
 
