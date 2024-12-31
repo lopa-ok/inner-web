@@ -18,6 +18,11 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
             <h1>Game</h1>
             <h3>Projects</h3>
             <br />
+            <p>
+                Below are some of my favorite game development related projects I have worked on over the last few years.
+            </p>
+            <br />
+            <ResumeDownload />
             <div className="text-block">
                 <h2>Tic-Tac-Toe Ultimate</h2>
                 <br />
@@ -81,11 +86,8 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </ul>
             </div>
             <br />
-            <p>
-                Below are some of my favorite game development related projects I have worked on over the last few years.
-            </p>
-            <br />
-            <ResumeDownload />
+            
+            
             <br />
             <div className="text-block">
                 <h2>Hypixel AH Snipper</h2>
