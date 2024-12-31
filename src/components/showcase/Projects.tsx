@@ -75,7 +75,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
                 <ProjectBox
                     title="Games"
                     subtitle=""
-                    route="games"
+                    route="art"
                 />
             </div>
         </div>
