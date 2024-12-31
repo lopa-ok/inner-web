@@ -1,200 +1,312 @@
-import React, { useState } from 'react';
+import React from 'react';
 // @ts-ignore
-import house from '../../../assets/audio/house_master.mp3';
+import saga from '../../../assets/pictures/projects/software/old.mp4';
 // @ts-ignore
-import edge from '../../../assets/audio/edge_unmastered.mp3';
+import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
-import dnb from '../../../assets/audio/break.mp3';
+import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
 // @ts-ignore
-import dnbDrums from '../../../assets/audio/dnb_drop_drums.mp3';
-import houseProject from '../../../assets/pictures/projects/audio/houseProject.png';
-import dnbDrumsProject from '../../../assets/pictures/projects/audio/dnbDrumsProject.png';
-import { MusicPlayer } from '../../general';
+import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
+import ResumeDownload from '../ResumeDownload';
+import VideoAsset from '../../general/VideoAsset';
 
-export interface MusicProjectsProps {}
+export interface SoftwareProjectsProps {}
 
-const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
-    const [currentSong, setCurrentSong] = useState<string>('');
-
+const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
-            <h1>Games</h1>
-            <h3>soon</h3>
+            <h1>Software</h1>
+            <h3>Projects</h3>
             <br />
-      {/*      <div className="text-block">
-                <p>
-                    Music has been a passion of mine for my whole life. When I
-                    was 15 years old, I downloaded FL Studio and started to
-                    produce my own music. I found a wonderful community on
-                    reddit called r/edmproduction and in 2016 created the now
-                    popular discord server EDM Production with over 14k members.
-                </p>
+            <p>
+                Below are some of my favorite web development projects I have worked on
+                over the last few years.
+            </p>
+            <br />
+            <ResumeDownload />
+            <br />
+            <div className="text-block">
+                <h2>philopater.me</h2>
                 <br />
                 <p>
-                    I don't release the music that I make publicly as I not only
-                    find it difficult to finish songs, but also it's not a
-                    priority of mine since I produce mostly because I enjoy the
-                    process of learning and creating. However if I am going to
-                    dedicate a whole page of my portfolio to my music, you bet
-                    I'll have some examples to showoff.
+                                        philopater.me is my portfolio website, and also the
+                                        website you are on right now. This project was an absolute
+                                        joy to make and challenged me both technically and
+                                        creatively. Early in 2024, I knew I wanted to make an
+                                        interactive portfolio to aid my job search. I eventually got
+                                        the idea for this site around early February and began
+                                        development early March. I've been developing it alongside
+                                        my semester at school and if you are reading this, it's
+                                        pretty much done! just a PSA This website is heavily inspired by the work of Henry Heffernan.
                 </p>
                 <br />
+                <div className="captioned-image">
+                    <VideoAsset src={computer} />
+                    <p style={styles.caption}>
+                        <sub>
+                            <b>Figure 1:</b> Blender Scene of the 3D website.
+                            The scene from Blender was baked and exported in a
+                            GLTF format.
+                        </sub>
+                    </p>
+                </div>
                 <p>
-                    Below are some more recent Musical Endeavors I've been
-                    working on. I hope you enjoy the music and enjoy the stories
-                    behind each of the tracks.
+                    Now, a quick technical breakdown of the site. The website is
+                    split into two parts, the 3D site, and the 2D OS site. The
+                    3D site uses Three.js to render the scene and renders the 2D
+                    site inside of it using an iframe. The 2D OS site is a
+                    simple react site that is hosted{' '}
+                    <a
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://philopater.vercel.app/"
+                    >
+                        here
+                    </a>{' '}
+                    and works as a standalone web app. The actual rendering of
+                    the 2D site is accomplished using a CSS renderer provided by
+                    Three.js that transforms the html of the 2D site with 3D CSS
+                    transforms to give the illusion of three dimensionality.
                 </p>
-            </div>
-            <h2>Exploring house</h2>
-            <br />
-            <p>
-                In 2020 I went through a phase of really enjoying house. Some of
-                my favorite artists at the time were Malaa, Chirs Lake, Kyle
-                Walker and many more. Inspired, I decided to take a stab at
-                making some house tracks.
-            </p>
-            <br />
-            <p>
-                I failed a few times as I wasn't really able to nail the style
-                and groove I was going for but ultimately ended up creating the
-                piece below.
-            </p>
-            <br />
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://philopater.me"
+                        >
+                            <p>
+                                <b>[3D Site]</b> - philopater.me
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://philopater.vercel.app/"
+                        >
+                            <p>
+                                <b>[OS Site]</b> - philopater.vercel.app
+                            </p>
+                        </a>
+                    </li>
 
-            
 
-            <br />
-            <br />
-            <div className="captioned-image">
-                <img src={houseProject} alt="" />
+
+                </ul>
                 <p>
-                    <sub>
-                        <b>Figure 1:</b> A screenshot of the project file of
-                        Timeless. 64 tracks in total.
-                    </sub>
+                    I'm skipping over a lot of details in exchange for brevity,
+                    but I do plan on doing a more in depth breakdown for those
+                    interested sometime in the future. To get updates with that
+                    project feel free to follow me on instagram{' '}
+                    <a
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://www.instagram.com/philopater.essam/"
+                    >
+                        @philopater.essam
+                    </a>
                 </p>
             </div>
-            <p>
-                I love so much about this track. I'm particularly very proud of
-                the composition and the trichotomy of the happy upbeat energy in
-                the intro and first drop, into the rich and euphoric bridge,
-                before delving into the darkness of the final build and drop. I
-                had an absolute blast making this back in the fall of 2020, and
-                every time I revisit it to tweak it just a little more, I have
-                so much fun.
-            </p>
-            <br />
-            <p>
-                After making this track around fall 2020, my interest for house
-                overall was tapering off. Around this time I was starting to go
-                to the gym more consistently and ended up listening to a lot
-                more hard bass music, specifically drum & bass, mid tempo and of
-                course dubstep.
-            </p>
-            <br />
-            <h2>Mid-Tempo?</h2>
-            <br />
-            <p>
-                Only about a month after taking a step away from house I started
-                working on a mid-tempo track which I called edge. I did a lot of
-                experimenting with this track, and to this day I'm very proud
-                with how it turned out. I never got around to finishing it up
-                and giving it a proper outro, but I'm still very happy with it's
-                current state.
-            </p>
-            <br />
-            
-            <br />
-            <p>
-                This track is so dark and I love it! The bass and percussion are
-                the obvious stars of the piece, and I had a blast designing each
-                of them. The bass in this song is layered with a lot of textures
-                and they really give it a lot of the character it needs to be
-                the driving force of the track. The percussion on the other hand
-                gives the track a lot of depth in the high end so when
-                juxtaposed with the bass it radiates this dark and mysterious
-                vibe.
-            </p>
-            <br />
-            <h2>My love for Drum & Bass</h2>
-            <br />
-            <p>
-                I've always loved drum & bass, and over the years I feel like I
-                always come back to it. My first song I ever made was a DnB
-                track and as I've continued to make music over these last few
-                years the way I produce DnB really reflects my specific taste at
-                that time. It's very fun looking back at the various DnB styles
-                I've taken stabs at over time and how my taste has evolved.
-            </p>
-            <br />
-            <p>
-                The track below is a snip-it from a DnB track I started work on
-                back in 2019. I recently decided to pick it up again and work on
-                it more because I loved the idea, bassline and especially the
-                drums. Below is a short demo of the track including a small
-                buildup and drop.
-            </p>
-            <br />
-            
-            <br />
-            <p>
-                Like I said, I decided to come back to this track because I
-                absolutely loved so much about it. When I picked up work on it
-                again I decided to totally remix the drums and I'm super proud
-                with how they turned out. So proud in fact, I wanted to show
-                them off some more on their own! Below are the drums in the
-                above track, but isolated. I have also included the sub bass
-                because it is drum and bass after all!
-            </p>
-            <br />
-            
-            <br />
-            <div className="captioned-image">
-                <img src={dnbDrumsProject} alt="" />
+            <div className="text-block">
+                <h2>Old portfolio</h2>
+                <br />
                 <p>
-                    <sub>
-                        <b>Figure 2:</b> Drums and sub for the track Break. See
-                        if you can follow along in the image as the audio above
-                        plays!
-                    </sub>
+                was my first attempt at creating an interactive, visually engaging portfolio. This project pushed my skills in design and development, challenging me to explore complex animations and media integrations.I aimed to deliver a unique experience that stood out. However, one major lesson I learned was the importance of balancing aesthetics with functionality—this website ended up being quite resource-intensive, which unfortunately makes it hard for many computers to handle smoothly. It’s a reminder of how critical optimization is in web design, especially for interactive content.
+                </p>
+                <br />
+                <div className="captioned-image">
+                    <VideoAsset src={saga} />
+                    <div style={styles.caption}>
+                        <p>
+                            <sub>
+                                <b>Figure 2: </b>  A preview of the old portfolio’s main interface.
+                            </sub>
+                        </p>
+                    </div>
+                </div>
+                <p>
+                To break down the technical side: this portfolio relied on React and Threejs, giving it a dynamic and engaging feel. Unfortunately, the use of these intensive features, without enough optimization, made the website difficult to load on systems without high processing power. This project taught me invaluable lessons about prioritizing usability and performance alongside creative design, and these insights have guided my approach in building my current portfolio. Now, my goal is to deliver an equally engaging experience while ensuring it runs efficiently across devices.
+                </p>
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-old-portfolio.vercel.app/"
+                        >
+                            <p>
+                                <b>[Old Portfolio]</b> - lopa-old-portfolio.vercel.app
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+                <p>
+                    I'm skipping over a lot of details in exchange for brevity,
+                    but I do plan on doing a more in depth breakdown for those
+                    interested sometime in the future. To get updates with that
+                    project feel free to follow me on instagram{' '}
+                    <a
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://www.instagram.com/philopater.essam/"
+                    >
+                        @philopater.essam
+                    </a>
                 </p>
             </div>
-            <br />
-            <p>
-                There are a lot of layers to DnB drums, and I honestly find them
-                the hardest to mix and get right since the sound design of DnB
-                so often wants to fight in the same frequency range as the
-                drums. Because of this I use very aggressive sidechain to keep
-                the drums clear while giving me the freedom to not have to
-                overly eq the bass and general sound design. I also find that
-                parallel compression on drums in DnB can be an absolute life
-                saver to keep the drums controlled but still hard hitting.
-            </p>
-            <br />
-            <h2>The Future of my music</h2>
-            <br />
-            <p>
-                I love to make music and will continue to make music as long as
-                I can. I think soon enough I will be releasing music publicly
-                since I feel like my personal style has slowly developed into
-                something I am proud of over these last few years. I also want
-                to one day make an album, but that is a long ways away.
-            </p>
-            <br />
-            <p>
-                I am aware this section of my portfolio is rather short, but
-                it's because I am very selective with what I want to show off to
-                the world. I've been producing for over 6 years and have made
-                hundreds maybe even a thousand tracks/loops in that time. I only
-                recently have been feeling very content with the stuff I've made
-                and I'm very excited to see what I can do for the future. Thanks
-                for listening I hope you enjoyed!
-            </p>
-            <br />*/}
+            <div className="text-block">
+                <h2>Stop the Scroll</h2>
+                <br />
+                <p>
+                    While working I spend a lot of time on GitHub
+                    issue pages looking for answers and solutions to problems I
+                    had run into. I would always find myself sifting though the
+                    comments trying to find the right answer, which usually had
+                    the most upvotes and positive reactions. With that
+                    information, I decided to create a very simple chrome
+                    extension that would sift through all the comments on the
+                    page, sort them by positive reactions, and then allow you to
+                    traverse them from most positive reactions to least positive
+                    reactions.
+                </p>
+                <br />
+                <div className="captioned-image">
+                    <VideoAsset src={scroll} />
+                    <p style={styles.caption}>
+                        <sub>
+                            <b>Figure 3:</b> Skip the Scroll in action, finding
+                            the highest rated comments and scrolling right to
+                            them
+                        </sub>
+                    </p>
+                </div>
+                <p>
+                    The extension is open source and currently released on the
+                    Chrome web store. Skip the Scroll is obviously not a project
+                    with massive scope, but was fun to make and dive into the
+                    world of browser extensions. I wanted to showcase since it's
+                    a developer tool and I wanna give it some visibility for
+                    those who might find it useful.
+                </p>
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://github.com/lopa-ok/Stop-The-Scroll"
+                        >
+                            <p>
+                                <b>[GitHub]</b> - Stop the Scroll Repository
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+                <p>
+                    If you are a developer and have also found yourself
+                    scrolling through github comment after github comment saying
+                    "i also have this problem...", then I highly recommend you
+                    check out Skip the Scroll to save you some of your precious
+                    time. If you like it, feel free to star it on GitHub
+                </p>
+                <div className="text-block">
+                <h2>Tic-Tac-Toe Ultimate</h2>
+                <br />
+                <p>
+                Tic Tac Toe Ultimate is an advanced version of the classic Tic Tac Toe game, built using JavaScript. This project includes features that go beyond the traditional 3x3 grid, making it more challenging and fun to play.
+                </p>
+                <br />
+                <div className="captioned-image">
+                    <VideoAsset src={tictactoe} />
+                    <div style={styles.caption}>
+                        <p>
+                            <sub>
+                                <b>Figure 4: </b>  A preview of Tic-Tac-toe Ultimate in action.
+                            </sub>
+                        </p>
+                    </div>
+                </div>
+                <h3>How to play:</h3>
+                <ul>
+                    <li>
+                        
+                            <p>
+                            Players take turns to place their mark (X or O) in the mini-grids.
+                            </p>
+                        
+                    </li>
+                    <li>
+                        
+                            <p>
+                            Each move determines the mini-grid for the opponent's next move.
+                            </p>
+                        
+                    </li>
+                    <li>
+                        
+                            <p>
+                            The first player to win the majority of the mini-grids or get Three mini-grids in a row wins the game.
+                            </p>
+                        
+                    </li>
+
+
+
+                </ul>
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-ok.github.io/tic-tac-toe-ultimate/"
+                        >
+                            <p>
+                                <b>[Demo]</b> - lopa-ok.github.io/tic-tac-toe-ultimate/
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://github.com/lopa-ok/tic-tac-toe-ultimate"
+                        >
+                            <p>
+                                <b>[Github Repo]</b> - github.com/lopa-ok/tic-tac-toe-ultimate
+                            </p>
+                        </a>
+                    </li>
+
+
+                </ul>
+                
+            </div>
+            </div>
+            <ResumeDownload />
         </div>
     );
 };
 
-// const styles: StyleSheetCSS = {};
+const styles: StyleSheetCSS = {
+    video: {
+        width: '100%',
+        padding: 12,
+    },
+    caption: {
+        marginBottom: 16,
+        
+    },
+};
 
-export default MusicProjects;
+export default SoftwareProjects;
