@@ -18,7 +18,7 @@ const Games: React.FC<GamesProps> = (props) => {
                 <h2>Pixel Art and Animation</h2>
                 <br />
                 <div className="captioned-image">
-                    <img src={girlRun} alt="Girl running animation" />
+                    
                     <p>
                         <sub>
                             <b>Figure 1:</b> Eight Frame Run cycle animated by myself, original sprite by kevink
@@ -27,7 +27,7 @@ const Games: React.FC<GamesProps> = (props) => {
                 </div>
                 <br />
                 <div className="captioned-image">
-                    <img src={gsts} alt="Enemy lineup" />
+                    
                     <p>
                         <sub>
                             <b>Figure 2:</b> More pixel art: Enemy Lineup from a game I worked on
