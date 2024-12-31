@@ -55,12 +55,12 @@ const APPLICATIONS: {
         shortcutIcon: 'scrabbleIcon',
         component: Scrabble,
     },
-    chess: {
-        key: 'chess',
-        name: 'Chess',
-        shortcutIcon: 'chessIcon', // Make sure you have an appropriate icon for Chess
-        component: Chess,
-    },
+    // chess: {
+    //     key: 'chess',
+    //     name: 'Chess',
+    //     shortcutIcon: 'chessIcon',
+    //     component: Chess,
+    // },
     esordle: {
         key: 'esordle',
         name: 'esordle',

@@ -137,54 +137,6 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                     </li>
                 </ul>
             </div>
-            <div style={styles.headerContainer}>
-                <div style={styles.header}>
-                    <div style={styles.headerRow}>
-                        <h1>BrACS</h1>
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={'https://bracs.co/'}
-                        >
-                            <h4>www.bracs.co</h4>
-                        </a>
-                    </div>
-                    <div style={styles.headerRow}>
-                        <h3>Team Lead & Engineer</h3>
-                        <b>
-                            <p>Fall 2021 - Spring 2022</p>
-                        </b>
-                    </div>
-                </div>
-            </div>
-            <div className="text-block">
-                <p>
-                    Supervised and developed the front end of bracs.co, a
-                    beautifully simple and effective bracket creation and
-                    management engine. Written in Typescript using React and
-                    deployed using AWS Elastic Beanstalk.
-                </p>
-                <br />
-                <ul style={styles.experienceList}>
-                    <li>
-                        Managed the project and team members by conducting
-                        bi-weekly stand-ups.
-                    </li>
-                    <li>
-                        Architected bracket view UI using React Flow and
-                        custom bracket data types built from binary trees.
-                    </li>
-                    <li>
-                        Created conversion algorithms to serialize bracket
-                        tree data to allow for saving in the cloud.
-                    </li>
-                    <li>
-                        Implemented bracket generation utilities which
-                        employ gray code for proper team seeding and
-                        placement.
-                    </li>
-                </ul>
-            </div>
         </div>
     );
 };
