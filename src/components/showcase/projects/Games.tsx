@@ -1,7 +1,5 @@
 import React from 'react';
 
-import girlRun from '../../../assets/pictures/projects/games/girl-run.gif';
-import gsts from '../../../assets/pictures/projects/games/gsts.png';
 
 export interface GamesProps {}
 
