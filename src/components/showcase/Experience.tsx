@@ -58,7 +58,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </a>
                     </div>
                     <div style={styles.headerRow}>
-                        <h3>Junior Software Developer (intern)</h3>
+                        <h3>Software Developer (intern)</h3>
                         <b>
                             <p>Fall 2022 - Summer 2023</p>
                         </b>
@@ -67,7 +67,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             </div>
             <div className="text-block">
                 <p>
-                    My time as a Junior Software Developer at Apple, though brief, was an incredible learning experience.
+                    My time as a Software Developer at Apple, though brief, was an incredible learning experience.
                     I got the opportunity to work alongside talented engineers and contribute to real-world projects, even on a small scale. 
                     From debugging to implementing minor features, 
                     I gained a deeper understanding of how large-scale software development works and how Apple delivers such polished products. 
