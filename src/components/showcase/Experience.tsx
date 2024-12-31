@@ -58,7 +58,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </a>
                     </div>
                     <div style={styles.headerRow}>
-                        <h3>Junior Software Developer</h3>
+                        <h3>Junior Software Developer (intern)</h3>
                         <b>
                             <p>Fall 2022 - Summer 2023</p>
                         </b>

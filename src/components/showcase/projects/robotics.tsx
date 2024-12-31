@@ -61,13 +61,7 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
             </p>
             <br />
 
-            <MusicPlayer
-                src={house}
-                title="Timeless"
-                subtitle="Henry Heffernan - 2022"
-                currentSong={currentSong}
-                setCurrentSong={setCurrentSong}
-            />
+            
 
             <br />
             <br />
@@ -109,13 +103,7 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
                 current state.
             </p>
             <br />
-            <MusicPlayer
-                src={edge}
-                title="Edge [W.I.P.]"
-                subtitle="Henry Heffernan - 2021"
-                currentSong={currentSong}
-                setCurrentSong={setCurrentSong}
-            />
+            
             <br />
             <p>
                 This track is so dark and I love it! The bass and percussion are
@@ -147,13 +135,7 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
                 buildup and drop.
             </p>
             <br />
-            <MusicPlayer
-                src={dnb}
-                title="Break [Demo]"
-                subtitle="Henry Heffernan - 2019/2022"
-                currentSong={currentSong}
-                setCurrentSong={setCurrentSong}
-            />
+            
             <br />
             <p>
                 Like I said, I decided to come back to this track because I
@@ -165,13 +147,7 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
                 because it is drum and bass after all!
             </p>
             <br />
-            <MusicPlayer
-                src={dnbDrums}
-                title="Break [Drums and Sub]"
-                subtitle="Henry Heffernan - 2019/2022"
-                currentSong={currentSong}
-                setCurrentSong={setCurrentSong}
-            />
+            
             <br />
             <div className="captioned-image">
                 <img src={dnbDrumsProject} alt="" />
