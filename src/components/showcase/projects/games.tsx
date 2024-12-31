@@ -48,41 +48,19 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://philopater.me"
+                            href="https://github.com/lopa-ok/Hypixel-AH-Snipper"
                         >
                             <p>
-                                <b>[3D Site]</b> - philopater.me
+                                <b>[Repo]</b> - github.com/lopa-ok/Hypixel-AH-Snipper
                             </p>
                         </a>
                     </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://philopater.vercel.app/"
-                        >
-                            <p>
-                                <b>[OS Site]</b> - philopater.vercel.app
-                            </p>
-                        </a>
-                    </li>
+                    
 
 
 
                 </ul>
-                <p>
-                    I'm skipping over a lot of details in exchange for brevity,
-                    but I do plan on doing a more in depth breakdown for those
-                    interested sometime in the future. To get updates with that
-                    project feel free to follow me on instagram{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.instagram.com/philopater.essam/"
-                    >
-                        @philopater.essam
-                    </a>
-                </p>
+                
             </div>
             <div className="text-block">
                 <h2>Old portfolio</h2>
