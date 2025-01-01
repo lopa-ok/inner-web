@@ -179,7 +179,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <VideoAsset src={scroll} />
                     <p style={styles.caption}>
                         <sub>
-                            <b>Figure 4:</b>a preview of 2048 game
+                            <b>Figure 4:</b> A preview of 2048 game
                         </sub>
                     </p>
                 </div>
