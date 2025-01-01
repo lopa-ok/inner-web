@@ -1,12 +1,12 @@
 import React from 'react';
 // @ts-ignore
-import saga from '../../../assets/pictures/projects/software/old.mp4';
+import mine from '../../../assets/pictures/projects/games/mine.mp4';
 // @ts-ignore
 import hypixel from '../../../assets/pictures/projects/games/hypixel.mp4';
 // @ts-ignore
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
 // @ts-ignore
-import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
+import tictactoe from '../../../assets/pictures/projects/games/tictactoe.mp4';
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
 
@@ -15,7 +15,7 @@ export interface SoftwareProjectsProps {}
 const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
-            <h1>Game</h1>
+            <h1>Game Devolpment</h1>
             <h3>Projects</h3>
             <br />
             <p>
@@ -121,50 +121,52 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </ul>
             </div>
             <div className="text-block">
-                <h2>Old portfolio</h2>
+                <h2>Minesweeper</h2>
                 <br />
                 <p>
-                    was my first attempt at creating an interactive, visually engaging portfolio. This project pushed my skills in design and development, challenging me to explore complex animations and media integrations.I aimed to deliver a unique experience that stood out. However, one major lesson I learned was the importance of balancing aesthetics with functionality—this website ended up being quite resource-intensive, which unfortunately makes it hard for many computers to handle smoothly. It’s a reminder of how critical optimization is in web design, especially for interactive content.
+                Minesweeper is a classic puzzle game where the objective is to clear a rectangular board containing hidden "mines" without detonating any of them. This project was built using React and showcases my ability to create interactive and engaging user interfaces. The game includes adjustable difficulty levels, a timer, and high score tracking.
                 </p>
                 <br />
                 <div className="captioned-image">
-                    <VideoAsset src={saga} />
+                    <VideoAsset src={mine} />
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b>  A preview of the old portfolio’s main interface.
+                                <b>Figure 2: </b>  A preview of Minesweeper game
                             </sub>
                         </p>
                     </div>
                 </div>
                 <p>
-                    To break down the technical side: this portfolio relied on React and Threejs, giving it a dynamic and engaging feel. Unfortunately, the use of these intensive features, without enough optimization, made the website difficult to load on systems without high processing power. This project taught me invaluable lessons about prioritizing usability and performance alongside creative design, and these insights have guided my approach in building my current portfolio. Now, my goal is to deliver an equally engaging experience while ensuring it runs efficiently across devices.
+                    the game features adjustable difficulty levels, a timer, and high score tracking. It was a fun project to work on and I learned a lot about game development in the process.
                 </p>
                 <br />
                 <h3>Links:</h3>
                 <ul>
+                <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-ok.github.io/minesweeper/"
+                        >
+                            <p>
+                                <b>[Demo]</b> - lopa-ok.github.io/minesweeper/
+                            </p>
+                        </a>
+                    </li>
                     <li>
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://lopa-old-portfolio.vercel.app/"
+                            href="https://github.com/lopa-ok/minesweeper"
                         >
                             <p>
-                                <b>[Old Portfolio]</b> - lopa-old-portfolio.vercel.app
+                                <b>[Github Repo]</b> - github.com/lopa-ok/minesweeper
                             </p>
                         </a>
                     </li>
                 </ul>
-                <p>
-                    I'm skipping over a lot of details in exchange for brevity, but I do plan on doing a more in depth breakdown for those interested sometime in the future. To get updates with that project feel free to follow me on instagram{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.instagram.com/philopater.essam/"
-                    >
-                        @philopater.essam
-                    </a>
-                </p>
+                
             </div>
             <div className="text-block">
                 <h2>Stop the Scroll</h2>
