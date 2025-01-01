@@ -217,7 +217,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     "i also have this problem...", then I highly recommend you
                     check out Skip the Scroll to save you some of your precious
                     time. If you like it, feel free to star it on GitHub
-                </p> */}
+                </p> 
                 <div className="text-block">
                 <h2>Tic-Tac-Toe Ultimate</h2>
                 <br />
@@ -291,7 +291,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
 
                 </ul>
                 
-            </div>
+            </div>*/}
             </div>
             
         </div>
