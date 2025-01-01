@@ -4,7 +4,7 @@ import mine from '../../../assets/pictures/projects/games/mine.mp4';
 // @ts-ignore
 import hypixel from '../../../assets/pictures/projects/games/hypixel.mp4';
 // @ts-ignore
-import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
+import two from '../../../assets/pictures/projects/game/2048.mp4';
 // @ts-ignore
 import tictactoe from '../../../assets/pictures/projects/games/tictactoe.mp4';
 import ResumeDownload from '../ResumeDownload';
@@ -176,16 +176,14 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </p>
                 <br />
                 <div className="captioned-image">
-                    <VideoAsset src={scroll} />
+                    <VideoAsset src={two} />
                     <p style={styles.caption}>
                         <sub>
                             <b>Figure 4:</b> A preview of 2048 game
                         </sub>
                     </p>
                 </div>
-                <p>
-                    The extension is open source and currently released on the Chrome web store. Skip the Scroll is obviously not a project with massive scope, but was fun to make and dive into the world of browser extensions. I wanted to showcase since it's a developer tool and I wanna give it some visibility for those who might find it useful.
-                </p>
+                
                 <br />
                 <h3>Links:</h3>
                 <ul>
@@ -193,17 +191,26 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://github.com/lopa-ok/Stop-The-Scroll"
+                            href="https://github.com/lopa-ok/2048"
                         >
                             <p>
-                                <b>[GitHub]</b> - Stop the Scroll Repository
+                                <b>[GitHub]</b> - 2048 Repository
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-ok.github.io/2048/"
+                        >
+                            <p>
+                            <b>[Demo]</b> - lopa-ok.github.io/2048/
                             </p>
                         </a>
                     </li>
                 </ul>
-                <p>
-                    If you are a developer and have also found yourself scrolling through github comment after github comment saying "i also have this problem...", then I highly recommend you check out Skip the Scroll to save you some of your precious time. If you like it, feel free to star it on GitHub
-                </p>
+                
             </div>
         </div>
     );
