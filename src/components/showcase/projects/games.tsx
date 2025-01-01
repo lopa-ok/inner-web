@@ -35,7 +35,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 4: </b>  A preview of Tic-Tac-toe Ultimate in action.
+                                <b>Figure 1: </b>  A preview of Tic-Tac-toe Ultimate in action.
                             </sub>
                         </p>
                     </div>
@@ -100,7 +100,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <VideoAsset src={hypixel} />
                     <p style={styles.caption}>
                         <sub>
-                            <b>Figure 1:</b> Showcase of the Hypixel AH Snipper
+                            <b>Figure 2:</b> Showcase of the Hypixel AH Snipper
                         </sub>
                     </p>
                 </div>
@@ -132,7 +132,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                     <div style={styles.caption}>
                         <p>
                             <sub>
-                                <b>Figure 2: </b>  A preview of Minesweeper game
+                                <b>Figure 3: </b>  A preview of Minesweeper game
                             </sub>
                         </p>
                     </div>
@@ -169,17 +169,17 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 
             </div>
             <div className="text-block">
-                <h2>Stop the Scroll</h2>
+                <h2>2048</h2>
                 <br />
                 <p>
-                    While working I spend a lot of time on GitHub issue pages looking for answers and solutions to problems I had run into. I would always find myself sifting though the comments trying to find the right answer, which usually had the most upvotes and positive reactions. With that information, I decided to create a very simple chrome extension that would sift through all the comments on the page, sort them by positive reactions, and then allow you to traverse them from most positive reactions to least positive reactions.
+                2048 is a popular sliding block puzzle game where the objective is to combine tiles with the same number to create a tile with the number 2048. This project was built using JavaScript and showcases my ability to implement game logic and create an engaging user experience. The game features smooth animations and a responsive design, making it enjoyable to play.
                 </p>
                 <br />
                 <div className="captioned-image">
                     <VideoAsset src={scroll} />
                     <p style={styles.caption}>
                         <sub>
-                            <b>Figure 3:</b> Skip the Scroll in action, finding the highest rated comments and scrolling right to them
+                            <b>Figure 4:</b>a preview of 2048 game
                         </sub>
                     </p>
                 </div>
