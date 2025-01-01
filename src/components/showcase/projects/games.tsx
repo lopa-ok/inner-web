@@ -4,7 +4,7 @@ import mine from '../../../assets/pictures/projects/games/mine.mp4';
 // @ts-ignore
 import hypixel from '../../../assets/pictures/projects/games/hypixel.mp4';
 // @ts-ignore
-import two from '../../../assets/pictures/projects/game/2048.mp4';
+import two from '../../../assets/pictures/projects/games/two.mp4';
 // @ts-ignore
 import tictactoe from '../../../assets/pictures/projects/games/tictactoe.mp4';
 import ResumeDownload from '../ResumeDownload';
