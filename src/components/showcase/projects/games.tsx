@@ -19,7 +19,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
             <h3>Projects</h3>
             <br />
             <p>
-                Below are some of my favorite game development related projects I have worked on over the last few years.
+                Below are some random boring games that I have worked on over the last few years.
             </p>
             <br />
             <ResumeDownload />
@@ -114,7 +114,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             href="https://github.com/lopa-ok/Hypixel-AH-Snipper"
                         >
                             <p>
-                                <b>[Repo]</b> - github.com/lopa-ok/Hypixel-AH-Snipper
+                                <b>[Github Repo]</b> - github.com/lopa-ok/Hypixel-AH-Snipper
                             </p>
                         </a>
                     </li>
@@ -147,17 +147,6 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                         <a
                             rel="noreferrer"
                             target="_blank"
-                            href="https://lopa-ok.github.io/minesweeper/"
-                        >
-                            <p>
-                                <b>[Demo]</b> - lopa-ok.github.io/minesweeper/
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
                             href="https://github.com/lopa-ok/minesweeper"
                         >
                             <p>
@@ -165,6 +154,18 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             </p>
                         </a>
                     </li>
+                <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-ok.github.io/minesweeper/"
+                        >
+                            <p>
+                                <b>[Demo]</b> - lopa-ok.github.io/minesweeper/
+                            </p>
+                        </a>
+                    </li>
+                    
                 </ul>
                 
             </div>
@@ -194,7 +195,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                             href="https://github.com/lopa-ok/2048"
                         >
                             <p>
-                                <b>[GitHub]</b> - 2048 Repository
+                                <b>[GitHub Repo]</b> - github.com/lopa-ok/2048
                             </p>
                         </a>
                     </li>
