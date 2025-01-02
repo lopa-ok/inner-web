@@ -1,5 +1,5 @@
 import React from 'react';
-import me from '../../assets/pictures/workingAtComputer.jpg';
+import me from '../../assets/pictures/oldme.jpg';
 import meNow from '../../assets/pictures/currentme.jpg';
 import { Link } from 'react-router-dom';
 import ResumeDownload from './ResumeDownload';
@@ -8,7 +8,7 @@ export interface AboutProps {}
 
 const About: React.FC<AboutProps> = (props) => {
     return (
-        // add on resize listener
+
         <div className="site-page-content">
             {/* <img src={me} style={styles.topImage} alt="" /> */}
             <h1 style={{ marginLeft: -16 }}>Welcome</h1>

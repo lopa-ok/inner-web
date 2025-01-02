@@ -63,7 +63,7 @@ const APPLICATIONS: {
     // },
     esordle: {
         key: 'esordle',
-        name: 'esordle',
+        name: 'wordle',
         shortcutIcon: 'henordleIcon',
         component: esordle,
     },
