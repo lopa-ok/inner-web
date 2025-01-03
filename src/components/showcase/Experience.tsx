@@ -10,10 +10,40 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             <h3>Software Development, Hackathons, and Competitions</h3>
             <br />
             <p>
-                Below are some of my work experiences, hackathons, and achievements in competitions.
+                Below are some of my work experiences, hackathons, and achievements in competitions. I have had the opportunity to work with leading companies like Brilliant and Apple, participate in global communities like Hack Club, and compete in prestigious competitions such as Ebhar Misr.
             </p>
             <br />
             <ResumeDownload />
+            <div style={styles.headerContainer}>
+                <div style={styles.header}>
+                    <div style={styles.headerRow}>
+                        <h1>Brilliant</h1>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href={'https://brilliant.org/home/'}
+                        >
+                            <h4>https://brilliant.org</h4>
+                        </a>
+                    </div>
+                    <div style={styles.headerRow}>
+                        <h3>Software Engineering Intern</h3>
+                        <b>
+                            <p>Summer 2024 - Present</p>
+                        </b>
+                    </div>
+                </div>
+            </div>
+            <div className="text-block">
+                <p>
+                    During my internship at Brilliant, I have had the opportunity to work on innovative educational technologies and collaborate with a talented team. I have contributed to various projects, including developing new features for Brilliant's learning platform and optimizing existing systems for better performance.
+                </p>
+                <br />
+                <ul style={styles.experienceList}>
+                    
+                </ul>
+                <br />
+            </div>
             <div style={styles.headerContainer}>
                 <div style={styles.header}>
                     <div style={styles.headerRow}>
@@ -27,7 +57,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </a>
                     </div>
                     <div style={styles.headerRow}>
-                        <h3>Hackathon</h3>
+                        <h3>Member</h3>
                         <b>
                             <p>Summer 2024</p>
                         </b>
@@ -58,7 +88,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </a>
                     </div>
                     <div style={styles.headerRow}>
-                        <h3>Software Developer (intern)</h3>
+                        <h3>Software Developer Intern</h3>
                         <b>
                             <p>Fall 2022 - Summer 2023</p>
                         </b>

@@ -214,11 +214,15 @@ const ROWS = [TOP_ROW, MIDDLE_ROW, BOTTOM_ROW];
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const Wordle: React.FC<WordleProps> = () => {
-    const word = 'ESSAM';
+    const [word, setWord] = useState('');
     const [guesses, setGuesses] = useState<string[]>([]);
     const [gameOver, setGameOver] = useState(false);
     const [won, setWon] = useState(false);
     const [currentGuess, setCurrentGuess] = useState('');
+
+    useEffect(() => {
+        setWord(WORDS[Math.floor(Math.random() * WORDS.length)].toUpperCase());
+    }, []);
 
     const restart = () => {
         setGuesses([]);
@@ -227,6 +231,7 @@ const Wordle: React.FC<WordleProps> = () => {
             setWon(false);
         }, 500);
         setCurrentGuess('');
+        setWord(WORDS[Math.floor(Math.random() * WORDS.length)].toUpperCase());
     };
 
     // listen to keyboard events
@@ -256,7 +261,7 @@ const Wordle: React.FC<WordleProps> = () => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [guesses, currentGuess]);
+    }, [guesses, currentGuess, word]);
 
     useEffect(() => {
         if (guesses.length === 6) {
@@ -268,13 +273,13 @@ const Wordle: React.FC<WordleProps> = () => {
                 setWon(true);
             }
         });
-    }, [guesses]);
+    }, [guesses, word]);
 
     return (
         <div style={styles.container}>
             <div style={styles.header}>
-                <h2>esordle</h2>
-                <p>Wordle but with an ESSAM based twist.</p>
+                <h2>Wordle</h2>
+                <p>Guess the hidden word in 6 tries.</p>
             </div>
             <motion.div
                 variants={gameOverAnimations}
@@ -287,7 +292,7 @@ const Wordle: React.FC<WordleProps> = () => {
                 )}
             >
                 <h2>{won ? 'You win!' : 'Game Over'}</h2>
-                <p>Thanks for playing! Remember: the word is always "ESSAM"!</p>
+                <p>The word was "{word}".</p>
                 <br />
                 <GuessWord
                     key={'winning-guess'}
@@ -408,7 +413,6 @@ const styles: StyleSheetCSS = {
     },
     keyboardContainer: {
         flexShrink: 1,
-
         paddingBottom: 24,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -417,7 +421,6 @@ const styles: StyleSheetCSS = {
     playArea: {
         flex: 1,
         flexDirection: 'column',
-
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 16,
@@ -427,7 +430,6 @@ const styles: StyleSheetCSS = {
         padding: 12,
         paddingTop: 16,
         minWidth: 42,
-
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 16,
@@ -439,7 +441,6 @@ const styles: StyleSheetCSS = {
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
-
         margin: 4,
     },
     guessWordRow: {},
