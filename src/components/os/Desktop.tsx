@@ -37,6 +37,12 @@ const APPLICATIONS: {
         shortcutIcon: 'showcaseIcon',
         component: ShowcaseExplorer,
     },
+    esordle: {
+        key: 'esordle',
+        name: 'wordle',
+        shortcutIcon: 'wordleIcon',
+        component: esordle,
+    },
     trail: {
         key: 'trail',
         name: 'The Oregon Trail',
@@ -61,12 +67,7 @@ const APPLICATIONS: {
     //     shortcutIcon: 'chessIcon',
     //     component: Chess,
     // },
-    esordle: {
-        key: 'esordle',
-        name: 'wordle',
-        shortcutIcon: 'wordleIcon',
-        component: esordle,
-    },
+    
 };
 
 const Desktop: React.FC<DesktopProps> = (props) => {
