@@ -77,9 +77,8 @@ const APPLICATIONS: {
 
 const Desktop: React.FC<DesktopProps> = (props) => {
     const [windows, setWindows] = useState<DesktopWindows>({});
-
     const [shortcuts, setShortcuts] = useState<DesktopShortcutProps[]>([]);
-
+    const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
     const [shutdown, setShutdown] = useState(false);
     const [numShutdowns, setNumShutdowns] = useState(1);
 
@@ -208,8 +207,27 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         [getHighestZIndex]
     );
 
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>, key: string) => {
+        e.dataTransfer.setData('text/plain', key);
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        const key = e.dataTransfer.getData('text/plain');
+        const rect = e.currentTarget.getBoundingClientRect();
+        const top = e.clientY - rect.top;
+        const left = e.clientX - rect.left;
+        setPositions((prevPositions) => ({
+            ...prevPositions,
+            [key]: { top, left },
+        }));
+    };
+
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    };
+
     return !shutdown ? (
-        <div style={styles.desktop}>
+        <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver}>
             {/* For each window in windows, loop over and render  */}
             {Object.keys(windows).map((key) => {
                 const element = windows[key].component;
@@ -233,12 +251,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             })}
             <div style={styles.shortcuts}>
                 {shortcuts.map((shortcut, i) => {
+                    const position = positions[shortcut.shortcutName] || { top: i * 104, left: 6 };
                     return (
                         <div
-                            style={Object.assign({}, styles.shortcutContainer, {
-                                top: i * 104,
-                            })}
+                            style={Object.assign({}, styles.shortcutContainer, position)}
                             key={shortcut.shortcutName}
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, shortcut.shortcutName)}
                         >
                             <DesktopShortcut
                                 icon={shortcut.icon}
@@ -268,6 +287,7 @@ const styles: StyleSheetCSS = {
         minHeight: '100%',
         flex: 1,
         backgroundColor: Colors.turquoise,
+        position: 'relative',
     },
     shutdown: {
         minHeight: '100%',
@@ -276,6 +296,7 @@ const styles: StyleSheetCSS = {
     },
     shortcutContainer: {
         position: 'absolute',
+        cursor: 'move',
     },
     shortcuts: {
         position: 'absolute',
