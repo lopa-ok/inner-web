@@ -18,7 +18,7 @@ const MusicProjects: React.FC<MusicProjectsProps> = (props) => {
 
     return (
         <div className="site-page-content">
-            <h1>Robotics</h1>
+            <h1>AI and ML</h1>
             <h3>soon</h3>
             <br />
       {/*      <div className="text-block">
