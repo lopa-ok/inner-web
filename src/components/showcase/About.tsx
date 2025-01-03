@@ -67,7 +67,7 @@ const About: React.FC<AboutProps> = (props) => {
                     I worked on many projects including Robots, chatbots,
                     multiple game projects, apps, and more. Some of these
                     projects are viewable on my{' '}
-                    <Link to="/projects/software">Software Projects</Link> and <Link to="/projects/robotics">Robotics Projects</Link>   page.
+                    <Link to="/projects/software">Software</Link> <Link to="/projects/ai">, AI and Ml</Link>and <Link to="/projects/games">Games Projects</Link>   page.
                 </p>
                 <br />
                 <p>
@@ -110,9 +110,8 @@ const About: React.FC<AboutProps> = (props) => {
                         <p>
                             I have a lot of hobbies that I enjoy doing in my free time.
                             The more tangible hobbies I have are{' '}
-                            <Link to="/projects/robotics">Robotics</Link>{' '}
-                            and creating{' '}
-                            <Link to="/projects/art">Digital Art</Link>. You can
+                            <Link to="/projects/">Programming</Link>{' '}
+                            and creating Digital Art. You can
                             read more about each of these on their respective
                             pages under my projects tab. Some other hobbies I
                             enjoy are Modelling, and (unsurprisingly)
