@@ -8,7 +8,7 @@ import Projects from '../showcase/Projects';
 import Contact from '../showcase/Contact';
 import Hack from '../showcase/Hack';
 import SoftwareProjects from '../showcase/projects/software';
-import MusicProjects from '../showcase/projects/robotics';
+import AIProjects from '../showcase/projects/ai';
 import GamesProjects from '../showcase/projects/games';
 import VerticalNavbar from '../showcase/VerticalNavbar';
 import useInitialWindowSize from '../../hooks/useInitialWindowSize';
@@ -46,8 +46,8 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
                             element={<SoftwareProjects />}
                         />
                         <Route
-                            path="/projects/robotics"
-                            element={<MusicProjects />}
+                            path="/projects/AI"
+                            element={<AIProjects />}
                         />
                         <Route path="/projects/games" element={<GamesProjects />} />
                     </Routes>

@@ -18,7 +18,7 @@ const About: React.FC<AboutProps> = (props) => {
                 <p>
                 I'm Philopater, also known as Lopa I am currently a high school student.
                 <br />
-                I'll be graduating in 2026, and I aspire to pursue a career in a computer-related field.
+                I'll be graduating from school in 2026, and I aspire to pursue a career in a computer-related field.
 
 
                 <br/>

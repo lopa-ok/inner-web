@@ -12,7 +12,7 @@ import VideoAsset from '../../general/VideoAsset';
 
 export interface SoftwareProjectsProps {}
 
-const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
+const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
             <h1>Game Devolpment</h1>
@@ -225,4 +225,4 @@ const styles: StyleSheetCSS = {
     },
 };
 
-export default SoftwareProjects;
+export default gamesProjects;

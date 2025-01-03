@@ -1,11 +1,12 @@
 import React from 'react';
+import sudokuSolverImage from '../../../assets/pictures/projects/AI/sudoku-solver.png';
 
 export interface RoboticsProjectsProps {}
 
 const RoboticsProjects: React.FC<RoboticsProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
-            <h1>Robotics Projects</h1>
+            <h1>AI and ML Projects</h1>
             <h3>Sudoku Solver</h3>
             <br />
             <div className="text-block">
@@ -16,6 +17,15 @@ const RoboticsProjects: React.FC<RoboticsProjectsProps> = (props) => {
                 <p>
                     The solver is implemented in Python and can solve any valid Sudoku puzzle. It uses a backtracking algorithm to fill in the empty cells with the correct numbers, ensuring that the solution adheres to the rules of Sudoku.
                 </p>
+                <br />
+                <div className="captioned-image">
+                    <img src={sudokuSolverImage} alt="Sudoku Solver" style={styles.image} />
+                    <p style={styles.caption}>
+                        <sub>
+                            <b>Figure 1:</b> Screenshot of the Sudoku Solver in action.
+                        </sub>
+                    </p>
+                </div>
                 <br />
                 <h3>Features:</h3>
                 <ul>
@@ -41,6 +51,18 @@ const RoboticsProjects: React.FC<RoboticsProjectsProps> = (props) => {
             </div>
         </div>
     );
+};
+
+const styles: StyleSheetCSS = {
+    image: {
+        width: '100%',
+        height: 'auto',
+    },
+    caption: {
+        textAlign: 'center',
+        fontSize: '0.9em',
+        color: '#555',
+    },
 };
 
 export default RoboticsProjects;
