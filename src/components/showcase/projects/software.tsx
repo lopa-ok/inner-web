@@ -5,8 +5,6 @@ import saga from '../../../assets/pictures/projects/software/old.mp4';
 import computer from '../../../assets/pictures/projects/software/computer.mp4';
 // @ts-ignore
 import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
-// @ts-ignore
-import tictactoe from '../../../assets/pictures/projects/software/tictactoe.mp4';
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
 

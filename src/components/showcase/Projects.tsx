@@ -68,16 +68,16 @@ const Projects: React.FC<ProjectsProps> = (props) => {
                     route="software"
                 />
                 <ProjectBox
-                    title="Robotics"
-                    subtitle=""
-                    route="robotics"
+                    title="AI and Machine learning"
+                    subtitle="PROJECTS"
+                    route="AI"
                 />
                 <ProjectBox
                     title="Games"
-                    subtitle=""
+                    subtitle="DEVELOPMENT"
                     route="games"
                 />
-            </div>
+            </div>  
         </div>
     );
 };
