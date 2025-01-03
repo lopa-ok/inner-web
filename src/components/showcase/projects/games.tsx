@@ -231,7 +231,7 @@ const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
     <VideoAsset src={sudoku} />
     <p style={styles.caption}>
         <sub>
-            <b>Figure 1:</b> The Sudoku game's interface, featuring dynamically generated puzzles, a timer, and a hint system for players.
+            <b>Figure 5:</b> The Sudoku game's interface, featuring dynamically generated puzzles, a timer, and a hint system for players.
         </sub>
     </p>
 </div>

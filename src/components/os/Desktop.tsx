@@ -5,7 +5,7 @@ import Doom from '../applications/Doom';
 import OregonTrail from '../applications/OregonTrail';
 import ShutdownSequence from './ShutdownSequence';
 // import ThisComputer from '../applications/ThisComputer';
-import esordle from '../applications/esordle';
+import wordle from '../applications/wordle';
 import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
@@ -37,11 +37,11 @@ const APPLICATIONS: {
         shortcutIcon: 'showcaseIcon',
         component: ShowcaseExplorer,
     },
-    esordle: {
-        key: 'esordle',
+    wordle: {
+        key: 'wordle',
         name: 'wordle',
         shortcutIcon: 'wordleIcon',
-        component: esordle,
+        component: wordle,
     },
     trail: {
         key: 'trail',
