@@ -38,6 +38,7 @@ const ThisComputerApp: React.FC<ThisComputerProps> = (props) => {
                 {showFileExplorer && (
                     <FileExplorer
                         onClose={() => setShowFileExplorer(false)}
+                        onMinimize={props.onMinimize}
                         onInteract={props.onInteract}
                         minimizeWindow={props.onMinimize}
                     />
