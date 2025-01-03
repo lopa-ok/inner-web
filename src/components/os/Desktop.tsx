@@ -288,6 +288,9 @@ const styles: StyleSheetCSS = {
         flex: 1,
         backgroundColor: Colors.turquoise,
         position: 'relative',
+        margin: 0,
+        padding: 0,
+        border: 'none',
     },
     shutdown: {
         minHeight: '100%',
