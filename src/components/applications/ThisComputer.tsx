@@ -1,10 +1,13 @@
 import React from 'react';
-// import DesktopShortcut from '../os/DesktopShortcut';
+import DesktopShortcut from '../os/DesktopShortcut';
 import Window from '../os/Window';
+import FileExplorer from './FileExplorer';
 
 export interface ThisComputerProps extends WindowAppProps {}
 
 const ThisComputerApp: React.FC<ThisComputerProps> = (props) => {
+    const [showFileExplorer, setShowFileExplorer] = React.useState(false);
+
     return (
         <Window
             top={20}
@@ -24,14 +27,21 @@ const ThisComputerApp: React.FC<ThisComputerProps> = (props) => {
                     width="100%"
                     height="100%"
                 />
-                {/* <div style={}>
+                <div style={{ marginTop: 20 }}>
                     <DesktopShortcut
                         icon="computerBig"
                         invertText
                         shortcutName={'Computer Details'}
-                        onOpen={() => {}}
+                        onOpen={() => setShowFileExplorer(true)}
                     />
-                </div> */}
+                </div>
+                {showFileExplorer && (
+                    <FileExplorer
+                        onClose={() => setShowFileExplorer(false)}
+                        onInteract={props.onInteract}
+                        minimizeWindow={props.onMinimize}
+                    />
+                )}
             </div>
         </Window>
     );
