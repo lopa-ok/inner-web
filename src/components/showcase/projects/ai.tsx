@@ -7,7 +7,7 @@ const RoboticsProjects: React.FC<RoboticsProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
             <h1>AI and ML Projects</h1>
-            
+            <h3>Projects</h3>
             <br />
             <p>
                 Below are some random boring AI projects that I have worked on over the last few years.
