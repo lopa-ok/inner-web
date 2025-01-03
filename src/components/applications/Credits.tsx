@@ -7,13 +7,14 @@ export interface CreditsProps extends WindowAppProps {}
 
 const CREDITS = [
     {
-        title: 'Original Work',
-        rows: [['Henry Hefferman', 'All']],
-    },
-    {
         title: 'Editing & Customization',
         rows: [['Philopater Essam', 'Adaptation for Portfolio']],
     },
+    {
+        title: 'Original Work',
+        rows: [['Henry Hefferman', 'All']],
+    },
+    
 ];
 
 const Credits: React.FC<CreditsProps> = (props) => {
