@@ -21,12 +21,6 @@ const ThisComputerApp: React.FC<ThisComputerProps> = (props) => {
             minimizeWindow={props.onMinimize}
         >
             <div className="site-page">
-                <iframe
-                    src="https://oldgoogle.neocities.org/1998/"
-                    title="google"
-                    width="100%"
-                    height="100%"
-                />
                 <div style={{ marginTop: 20 }}>
                     <DesktopShortcut
                         icon="computerBig"
