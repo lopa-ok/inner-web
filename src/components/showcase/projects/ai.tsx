@@ -14,8 +14,10 @@ const RoboticsProjects: React.FC<RoboticsProjectsProps> = (props) => {
             </p>
             <br />
             <ResumeDownload />
+            <br />
             <div className="text-block">
             <h2>Sudoku Solver</h2>
+            <br />
                 <p>
                     The Sudoku Solver is a project that I developed to solve Sudoku puzzles using a backtracking algorithm. This project showcases my ability to implement complex algorithms and create efficient solutions for challenging problems.
                 </p>
