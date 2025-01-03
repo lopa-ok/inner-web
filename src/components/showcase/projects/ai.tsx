@@ -1,15 +1,21 @@
 import React from 'react';
 import sudokuSolverImage from '../../../assets/pictures/projects/AI/sudoku-solver.png';
-
+import ResumeDownload from '../ResumeDownload';
 export interface RoboticsProjectsProps {}
 
 const RoboticsProjects: React.FC<RoboticsProjectsProps> = (props) => {
     return (
         <div className="site-page-content">
             <h1>AI and ML Projects</h1>
-            <h3>Sudoku Solver</h3>
+            
             <br />
+            <p>
+                Below are some random boring AI projects that I have worked on over the last few years.
+            </p>
+            <br />
+            <ResumeDownload />
             <div className="text-block">
+            <h2>Sudoku Solver</h2>
                 <p>
                     The Sudoku Solver is a project that I developed to solve Sudoku puzzles using a backtracking algorithm. This project showcases my ability to implement complex algorithms and create efficient solutions for challenging problems.
                 </p>
