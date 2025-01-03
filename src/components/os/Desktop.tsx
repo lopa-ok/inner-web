@@ -232,4 +232,60 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 );
             })}
             <div style={styles.shortcuts}>
-                {shortcuts.map((shortcut,
+                {shortcuts.map((shortcut, i) => {
+                    return (
+                        <div
+                            style={Object.assign({}, styles.shortcutContainer, {
+                                top: i * 104,
+                            })}
+                            key={shortcut.shortcutName}
+                        >
+                            <DesktopShortcut
+                                icon={shortcut.icon}
+                                shortcutName={shortcut.shortcutName}
+                                onOpen={shortcut.onOpen}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
+            <Toolbar
+                windows={windows}
+                toggleMinimize={toggleMinimize}
+                shutdown={startShutdown}
+            />
+        </div>
+    ) : (
+        <ShutdownSequence
+            setShutdown={setShutdown}
+            numShutdowns={numShutdowns}
+        />
+    );
+};
+
+const styles: StyleSheetCSS = {
+    desktop: {
+        minHeight: '100%',
+        flex: 1,
+        backgroundColor: Colors.turquoise,
+    },
+    shutdown: {
+        minHeight: '100%',
+        flex: 1,
+        backgroundColor: '#1d2e2f',
+    },
+    shortcutContainer: {
+        position: 'absolute',
+    },
+    shortcuts: {
+        position: 'absolute',
+        top: 16,
+        left: 6,
+    },
+    minimized: {
+        pointerEvents: 'none',
+        opacity: 0,
+    },
+};
+
+export default Desktop;
