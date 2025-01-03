@@ -23,6 +23,7 @@ const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
             </p>
             <br />
             <ResumeDownload />
+            <br />
             <div className="text-block">
                 <h2>Tic-Tac-Toe Ultimate</h2>
                 <br />

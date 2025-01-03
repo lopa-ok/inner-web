@@ -7,33 +7,12 @@ export interface CreditsProps extends WindowAppProps {}
 
 const CREDITS = [
     {
-        title: 'Engineering & Design',
-        rows: [['Me', 'All']],
+        title: 'Original Work',
+        rows: [['Henry Hefferman', 'All']],
     },
     {
-        title: 'Modeling & Texturing',
-        rows: [
-            ['Me', 'Texturing, Composition, & UV'],
-            ['Me', 'Computer Model'],
-            ['Me', 'Environment Models'],
-        ],
-    },
-    {
-        title: 'Sound Design',
-        rows: [
-            ['Me', 'Mixing, Composition, & Foley'],
-            ['Sound Cassette', 'Office Ambience'],
-            ['Windows 95 Startup Sound', 'Microsoft'],
-        ],
-    },
-    
-    
-    {
-        title: 'Inspiration',
-        rows: [
-            ['Bruno Simon', 'Jesse Zhou'],
-            ['Pink Yellow', 'Vivek Patel'],
-        ],
+        title: 'Editing & Customization',
+        rows: [['Philopater Essam', 'Adaptation for Portfolio']],
     },
 ];
 
@@ -44,7 +23,6 @@ const Credits: React.FC<CreditsProps> = (props) => {
     // every 5 seconds, move to the next slide
     useInterval(() => {
         setTime(time + 1);
-        // setCurrentSlide((currentSlide + 1) % CREDITS.length);
     }, 1000);
 
     useEffect(() => {
@@ -61,7 +39,6 @@ const Credits: React.FC<CreditsProps> = (props) => {
     };
 
     return (
-        // add on resize listener
         <Window
             top={48}
             left={48}
@@ -109,8 +86,7 @@ const Credits: React.FC<CreditsProps> = (props) => {
                 <p>Click to continue...</p>
                 <br />
                 <div style={styles.nextSlideTimer}>
-                    {/* make a time number of dots */}
-                    {Array.from(Array(time)).map((i) => {
+                    {Array.from(Array(time)).map((_, i) => {
                         return (
                             <div key={i}>
                                 <p>.</p>
