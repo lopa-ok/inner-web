@@ -75,6 +75,8 @@ const APPLICATIONS: {
     },
 };
 
+const GRID_SIZE = 100;
+
 const Desktop: React.FC<DesktopProps> = (props) => {
     const [windows, setWindows] = useState<DesktopWindows>({});
     const [shortcuts, setShortcuts] = useState<DesktopShortcutProps[]>([]);
@@ -214,8 +216,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         const key = e.dataTransfer.getData('text/plain');
         const rect = e.currentTarget.getBoundingClientRect();
-        const top = e.clientY - rect.top;
-        const left = e.clientX - rect.left;
+        let top = e.clientY - rect.top;
+        let left = e.clientX - rect.left;
+
+        // Snap to grid
+        top = Math.round(top / GRID_SIZE) * GRID_SIZE;
+        left = Math.round(left / GRID_SIZE) * GRID_SIZE;
+
         setPositions((prevPositions) => ({
             ...prevPositions,
             [key]: { top, left },
