@@ -9,7 +9,7 @@ import esordle from '../applications/esordle';
 import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
-import Chess from '../applications/Chess'; // Import the ChessApp component
+import Chess from '../applications/Chess'; 
 import { IconName } from '../../assets/icons';
 
 
@@ -64,7 +64,7 @@ const APPLICATIONS: {
     esordle: {
         key: 'esordle',
         name: 'wordle',
-        shortcutIcon: 'henordleIcon',
+        shortcutIcon: 'wordleIcon',
         component: esordle,
     },
 };
