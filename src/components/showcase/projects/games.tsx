@@ -7,6 +7,8 @@ import hypixel from '../../../assets/pictures/projects/games/hypixel.mp4';
 import two from '../../../assets/pictures/projects/games/two.mp4';
 // @ts-ignore
 import tictactoe from '../../../assets/pictures/projects/games/tictactoe.mp4';
+// @ts-ignore
+import sudoku from '../../../assets/pictures/projects/games/sudoku.mp4';
 import ResumeDownload from '../ResumeDownload';
 import VideoAsset from '../../general/VideoAsset';
 
@@ -125,7 +127,7 @@ const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 <h2>Minesweeper</h2>
                 <br />
                 <p>
-                Minesweeper is a classic puzzle game where the objective is to clear a rectangular board containing hidden "mines" without detonating any of them. This project was built using React and showcases my ability to create interactive and engaging user interfaces. The game includes adjustable difficulty levels, a timer, and high score tracking.
+                is a project where I recreated the classic Minesweeper game, combining logic-based gameplay with a sleek and interactive user interface. This project challenged me to balance efficient game mechanics with responsive design, delivering an engaging experience for players of all skill levels.
                 </p>
                 <br />
                 <div className="captioned-image">
@@ -140,6 +142,9 @@ const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </div>
                 <p>
                     the game features adjustable difficulty levels, a timer, and high score tracking. It was a fun project to work on and I learned a lot about game development in the process.
+                </p>
+                <p>
+                From a technical standpoint, the game grid is dynamically generated using JavaScript and relies on algorithms to distribute mines randomly across the board while calculating adjacent mine counts for each cell. The game features intuitive controls: left-click to reveal cells and right-click to flag potential mines. The implementation includes real-time feedback to players, such as highlighting flagged cells, revealing safe paths, and showing a game-over screen when a mine is clicked.
                 </p>
                 <br />
                 <h3>Links:</h3>
@@ -174,7 +179,7 @@ const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 <h2>2048</h2>
                 <br />
                 <p>
-                2048 is a popular sliding block puzzle game where the objective is to combine tiles with the same number to create a tile with the number 2048. This project was built using JavaScript and showcases my ability to implement game logic and create an engaging user experience. The game features smooth animations and a responsive design, making it enjoyable to play.
+                This implementation of the classic 2048 game creates a 4x4 grid where tiles merge to reach the goal of forming a tile with the value 2048. The game initializes with two randomly placed tiles (either 2 or 4) and supports movement in four directions: up, down, left, and right. Each move shifts tiles, merges matching values, and updates the score dynamically. If no moves remain, a game-over modal appears displaying the final score. The design emphasizes smooth tile updates, intuitive keyboard controls, and interactive UI elements, creating an engaging experience while maintaining the logic for merging and generating new tiles.
                 </p>
                 <br />
                 <div className="captioned-image">
@@ -214,7 +219,60 @@ const gamesProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </ul>
                 
             </div>
-        </div>
+            <div className="text-block">
+                <h2>Sudoku</h2>
+                <br />
+                <p>
+    
+    is a project where I developed an interactive Sudoku game, blending logic-based problem-solving with a clean and user-friendly interface. The game dynamically generates puzzles, validates solutions, tracks time, and even provides a hint system to assist users. It’s a showcase of combining core programming skills with a focus on user engagement.
+</p>
+<br />
+<div className="captioned-image">
+    <VideoAsset src={sudoku} />
+    <p style={styles.caption}>
+        <sub>
+            <b>Figure 1:</b> The Sudoku game's interface, featuring dynamically generated puzzles, a timer, and a hint system for players.
+        </sub>
+    </p>
+</div>
+<p>
+    From a technical perspective, this project leverages JavaScript and DOM manipulation to create and manage the game grid. The puzzle generation relies on a backtracking algorithm to ensure unique, solvable puzzles. Additionally, the grid is populated using a randomized masking method that removes numbers while maintaining puzzle integrity through solution validation. The hint system scans the grid to intelligently suggest valid numbers for empty cells, while the timer keeps track of user progress in real time.
+</p>
+
+        
+    
+
+                </div>
+                
+                <br />
+                <h3>Links:</h3>
+                <ul>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://github.com/lopa-ok/sudoku"
+                        >
+                            <p>
+                                <b>[GitHub Repo]</b> - github.com/lopa-ok/sudoku
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://lopa-ok.github.io/sudoku/"
+                        >
+                            <p>
+                            <b>[Demo]</b> - lopa-ok.github.io/sudoku/
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
+        
     );
 };
 
