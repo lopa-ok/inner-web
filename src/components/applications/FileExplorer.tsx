@@ -44,7 +44,7 @@ const FileExplorer: React.FC<FileExplorerProps> = (props) => {
                             <img src={folderIcon} alt="Folder" className="content-item-icon" style={styles.contentItemIcon} />
                             <span className="content-item-name" style={styles.contentItemName}>My Pictures</span>
                         </div>
-                        {/* Add more items as needed */}
+                        
                     </div>
                 </div>
             </div>

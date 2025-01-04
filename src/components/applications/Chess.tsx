@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Window from '../os/Window';
-import Minesweeper from '../Minesweeper/Minesweeper'; // Import the Minesweeper component
+import Minesweeper from '../Minesweeper/Minesweeper';
 
 export interface MinesweeperAppProps extends WindowAppProps {}
 

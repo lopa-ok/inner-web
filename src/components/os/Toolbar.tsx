@@ -114,6 +114,19 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                     Sh<u>u</u>t down...
                                 </p>
                             </div>
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={() => alert('Settings clicked')}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="settingsIcon"
+                                />
+                                <p style={styles.startMenuText}>
+                                    Se<u>t</u>tings
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
