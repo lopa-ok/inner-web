@@ -100,6 +100,19 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         </div>
                         <div style={styles.startWindowContent}>
                             <div style={styles.startMenuSpace} />
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={() => alert('Settings clicked')}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="settingsIcon"
+                                />
+                                <p style={styles.startMenuText}>
+                                    Se<u>t</u>tings
+                                </p>
+                            </div>
                             <div style={styles.startMenuLine} />
                             <div
                                 className="start-menu-option"
@@ -112,19 +125,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                 />
                                 <p style={styles.startMenuText}>
                                     Sh<u>u</u>t down...
-                                </p>
-                            </div>
-                            <div
-                                className="start-menu-option"
-                                style={styles.startMenuOption}
-                                onMouseDown={() => alert('Settings clicked')}
-                            >
-                                <Icon
-                                    style={styles.startMenuIcon}
-                                    icon="settingsIcon"
-                                />
-                                <p style={styles.startMenuText}>
-                                    Se<u>t</u>tings
                                 </p>
                             </div>
                         </div>
