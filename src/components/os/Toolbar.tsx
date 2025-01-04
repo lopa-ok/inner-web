@@ -103,7 +103,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div
                                 className="start-menu-option"
                                 style={styles.startMenuOption}
-                                onMouseDown={() => alert('Settings clicked')}
+                                onMouseDown={() => alert('still a wip')}
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
