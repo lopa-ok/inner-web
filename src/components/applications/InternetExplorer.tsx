@@ -25,6 +25,7 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
                 </div>
                 <div className="content" style={styles.content}>
                     <p>Welcome to Internet Explorer!</p>
+                    <p>still a wip</p>
                 </div>
             </div>
         </Window>
