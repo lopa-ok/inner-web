@@ -11,6 +11,7 @@ import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
 import Chess from '../applications/Chess'; 
 import Credits from '../applications/Credits';
+import InternetExplorer from '../applications/InternetExplorer';
 import { IconName } from '../../assets/icons';
 
 export interface DesktopProps {}
@@ -25,12 +26,12 @@ const APPLICATIONS: {
         component: React.FC<ExtendedWindowAppProps<any>>;
     };
 } = {
-    computer: {
-        key: 'computer',
-        name: 'This Computer',
-        shortcutIcon: 'computerBig',
-        component: ThisComputer,
-    },
+    // computer: {
+    //     key: 'computer',
+    //     name: 'This Computer',
+    //     shortcutIcon: 'computerBig',
+    //     component: ThisComputer,
+    // },
     showcase: {
         key: 'showcase',
         name: 'My Showcase',
@@ -73,6 +74,12 @@ const APPLICATIONS: {
         shortcutIcon: 'credits',
         component: Credits,
     },
+    // internetExplorer: {
+    //     key: 'internetExplorer',
+    //     name: 'Internet Explorer',
+    //     shortcutIcon: 'internetExplorerIcon',
+    //     component: InternetExplorer,
+    // },
 };
 
 const GRID_SIZE = 100;
@@ -223,9 +230,19 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         top = Math.round(top / GRID_SIZE) * GRID_SIZE;
         left = Math.round(left / GRID_SIZE) * GRID_SIZE;
 
+        // Check for collisions and adjust position if necessary
+        const newPosition = { top, left };
+        const collision = Object.values(positions).some(
+            (pos) => pos.top === newPosition.top && pos.left === newPosition.left
+        );
+
+        if (collision) {
+            newPosition.top += GRID_SIZE;
+        }
+
         setPositions((prevPositions) => ({
             ...prevPositions,
-            [key]: { top, left },
+            [key]: newPosition,
         }));
     };
 
