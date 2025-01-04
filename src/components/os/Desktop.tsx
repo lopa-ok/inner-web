@@ -98,6 +98,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [shutdown, setShutdown] = useState(false);
     const [numShutdowns, setNumShutdowns] = useState(1);
     const [folders, setFolders] = useState<DesktopShortcutProps[]>([]);
+    const [contextMenu, setContextMenu] = useState<{ visible: boolean; x: number; y: number }>({ visible: false, x: 0, y: 0 });
 
     useEffect(() => {
         if (shutdown === true) {
@@ -275,10 +276,22 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             },
         };
         setFolders([...folders, newFolder]);
+        setContextMenu({ visible: false, x: 0, y: 0 });
+    };
+
+    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setContextMenu({ visible: true, x: e.clientX, y: e.clientY });
+    };
+
+    const handleClick = () => {
+        if (contextMenu.visible) {
+            setContextMenu({ visible: false, x: 0, y: 0 });
+        }
     };
 
     return !shutdown ? (
-        <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver} onClick={createNewFolder}>
+        <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver} onContextMenu={handleContextMenu} onClick={handleClick}>
             {/* For each window in windows, loop over and render  */}
             {Object.keys(windows).map((key) => {
                 const element = windows[key].component;
@@ -341,6 +354,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
             />
+            {contextMenu.visible && (
+                <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
+                    <div style={styles.contextMenuItem} onClick={createNewFolder}>
+                        New Folder
+                    </div>
+                </div>
+            )}
         </div>
     ) : (
         <ShutdownSequence
@@ -374,6 +394,17 @@ const styles: StyleSheetCSS = {
     minimized: {
         pointerEvents: 'none',
         opacity: 0,
+    },
+    contextMenu: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        border: '1px solid #ccc',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+        zIndex: 1000,
+    },
+    contextMenuItem: {
+        padding: '8px 12px',
+        cursor: 'pointer',
     },
 };
 
