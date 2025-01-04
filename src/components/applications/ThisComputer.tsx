@@ -21,6 +21,12 @@ const ThisComputerApp: React.FC<ThisComputerProps> = (props) => {
             minimizeWindow={props.onMinimize}
         >
             <div className="site-page">
+                <div className="toolbar">
+                    <p>File<span style={{ left: '-23px' }}>_</span></p>
+                    <p>Edit<span style={{ left: '-24px' }}>_</span></p>
+                    <p>View<span style={{ left: '-32px' }}>_</span></p>
+                    <p>Help<span style={{ left: '-30px' }}>_</span></p>
+                </div>
                 <div style={{ marginTop: 20 }}>
                     <DesktopShortcut
                         icon="computerBig"
