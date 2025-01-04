@@ -25,6 +25,7 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize }) => {
     >
       <div style={{ padding: '10px' }}>
         <p>This is a folder.</p>
+        <p>and its still a wip</p>
       </div>
     </Window>
   );
