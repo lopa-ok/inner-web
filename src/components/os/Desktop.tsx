@@ -12,6 +12,7 @@ import Scrabble from '../applications/Scrabble';
 import Chess from '../applications/Chess'; 
 import Credits from '../applications/Credits';
 import InternetExplorer from '../applications/InternetExplorer';
+import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
 
 export interface DesktopProps {}
@@ -80,6 +81,12 @@ const APPLICATIONS: {
     //     shortcutIcon: 'internetExplorerIcon',
     //     component: InternetExplorer,
     // },
+    folder: {
+        key: 'folder',
+        name: 'Folder',
+        shortcutIcon: 'folderIcon',
+        component: Folder,
+    },
 };
 
 const GRID_SIZE = 100;
