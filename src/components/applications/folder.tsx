@@ -1,6 +1,5 @@
 import React from 'react';
 import Window from '../os/Window';
-import folderIcon from '../../assets/icons/folder.png';
 
 interface FolderProps {
   onClose: () => void;
@@ -16,7 +15,7 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize }) => {
       width={400}
       height={300}
       windowTitle="Folder"
-      windowBarIcon={folderIcon}
+      windowBarIcon="folderIcon"
       windowBarColor="#757579"
       closeWindow={onClose}
       onInteract={onInteract}
