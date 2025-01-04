@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
-import Settings from '../applications/Settings';
 // import { } from '../general';
 // import Home from '../site/Home';
 // import Window from './Window';
@@ -33,7 +32,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
     const lastClickInside = useRef(false);
 
     const [lastActive, setLastActive] = useState('');
-    const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
         let max = 0;
@@ -105,7 +103,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div
                                 className="start-menu-option"
                                 style={styles.startMenuOption}
-                                onMouseDown={() => setShowSettings(true)}
+                                onMouseDown={() => alert('still a wip')}
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
@@ -132,13 +130,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         </div>
                     </div>
                 </div>
-            )}
-            {showSettings && (
-                <Settings
-                    onClose={() => setShowSettings(false)}
-                    onInteract={() => {}}
-                    onMinimize={() => setShowSettings(false)}
-                />
             )}
             <div style={styles.toolbarInner}>
                 <div style={styles.toolbar}>
