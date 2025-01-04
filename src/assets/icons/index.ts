@@ -20,6 +20,7 @@ import scrabbleIcon from './scrabbleIcon.png';
 import close from './close.png';
 import chessIcon from './chessIcon.png';
 import settingsIcon from './setting.png';
+import folderIcon from './folder.png';
 
 const icons = {
     windowResize: windowResize,
@@ -42,6 +43,7 @@ const icons = {
     trailIcon: trailIcon,
     chessIcon: chessIcon,
     settingsIcon: settingsIcon,
+    folderIcon: folderIcon,
 };
 
 export type IconName = keyof typeof icons;
