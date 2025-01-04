@@ -359,13 +359,14 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
             />
-            {contextMenu.visible && (
+            
+            {/* {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
                     <div style={styles.contextMenuItem} onClick={createNewFolder}>
                         New Folder
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     ) : (
         <ShutdownSequence
