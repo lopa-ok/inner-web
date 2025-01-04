@@ -260,22 +260,27 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const createNewFolder = () => {
+        const newFolderKey = `folder-${folders.length + 1}`;
         const newFolder: DesktopShortcutProps = {
             shortcutName: `Folder ${folders.length + 1}`,
             icon: 'folderIcon',
             onOpen: () => {
                 addWindow(
-                    `folder-${folders.length + 1}`,
+                    newFolderKey,
                     <Folder
-                        onInteract={() => onWindowInteract(`folder-${folders.length + 1}`)}
-                        onMinimize={() => minimizeWindow(`folder-${folders.length + 1}`)}
-                        onClose={() => removeWindow(`folder-${folders.length + 1}`)}
-                        key={`folder-${folders.length + 1}`}
+                        onInteract={() => onWindowInteract(newFolderKey)}
+                        onMinimize={() => minimizeWindow(newFolderKey)}
+                        onClose={() => removeWindow(newFolderKey)}
+                        key={newFolderKey}
                     />
                 );
             },
         };
         setFolders([...folders, newFolder]);
+        setPositions((prevPositions) => ({
+            ...prevPositions,
+            [newFolder.shortcutName]: { top: (shortcuts.length + folders.length) * 104, left: 6 },
+        }));
         setContextMenu({ visible: false, x: 0, y: 0 });
     };
 
