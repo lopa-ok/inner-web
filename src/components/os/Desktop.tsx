@@ -75,12 +75,12 @@ const APPLICATIONS: {
         shortcutIcon: 'credits',
         component: Credits,
     },
-    // internetExplorer: {
-    //     key: 'internetExplorer',
-    //     name: 'Internet Explorer',
-    //     shortcutIcon: 'internetExplorerIcon',
-    //     component: InternetExplorer,
-    // },
+    internetExplorer: {
+        key: 'internetExplorer',
+        name: 'Internet Explorer',
+        shortcutIcon: 'folderIcon',
+        component: InternetExplorer,
+     },
     folder: {
         key: 'folder',
         name: 'Folder',
@@ -97,6 +97,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
     const [shutdown, setShutdown] = useState(false);
     const [numShutdowns, setNumShutdowns] = useState(1);
+    const [folders, setFolders] = useState<DesktopShortcutProps[]>([]);
 
     useEffect(() => {
         if (shutdown === true) {
@@ -257,8 +258,27 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         e.preventDefault();
     };
 
+    const createNewFolder = () => {
+        const newFolder: DesktopShortcutProps = {
+            shortcutName: `Folder ${folders.length + 1}`,
+            icon: 'folderIcon',
+            onOpen: () => {
+                addWindow(
+                    `folder-${folders.length + 1}`,
+                    <Folder
+                        onInteract={() => onWindowInteract(`folder-${folders.length + 1}`)}
+                        onMinimize={() => minimizeWindow(`folder-${folders.length + 1}`)}
+                        onClose={() => removeWindow(`folder-${folders.length + 1}`)}
+                        key={`folder-${folders.length + 1}`}
+                    />
+                );
+            },
+        };
+        setFolders([...folders, newFolder]);
+    };
+
     return !shutdown ? (
-        <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver}>
+        <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver} onClick={createNewFolder}>
             {/* For each window in windows, loop over and render  */}
             {Object.keys(windows).map((key) => {
                 const element = windows[key].component;
@@ -294,6 +314,23 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 icon={shortcut.icon}
                                 shortcutName={shortcut.shortcutName}
                                 onOpen={shortcut.onOpen}
+                            />
+                        </div>
+                    );
+                })}
+                {folders.map((folder, i) => {
+                    const position = positions[folder.shortcutName] || { top: (shortcuts.length + i) * 104, left: 6 };
+                    return (
+                        <div
+                            style={Object.assign({}, styles.shortcutContainer, position)}
+                            key={folder.shortcutName}
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, folder.shortcutName)}
+                        >
+                            <DesktopShortcut
+                                icon={folder.icon}
+                                shortcutName={folder.shortcutName}
+                                onOpen={folder.onOpen}
                             />
                         </div>
                     );
