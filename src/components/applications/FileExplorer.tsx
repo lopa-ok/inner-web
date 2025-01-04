@@ -1,6 +1,6 @@
 import React from 'react';
 import Window from '../os/Window';
-import folderIcon from '../../assets/icons/scrabbleIcon.png';
+import folderIcon from '../../assets/icons/Folder.png';
 
 export interface FileExplorerProps extends WindowAppProps {
     minimizeWindow: () => void;
