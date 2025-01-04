@@ -84,7 +84,7 @@ const APPLICATIONS: {
     folder: {
         key: 'folder',
         name: 'Folder',
-        shortcutIcon: 'folderIcon',
+        shortcutIcon: 'scrabbleIcon',
         component: Folder,
     },
 };
