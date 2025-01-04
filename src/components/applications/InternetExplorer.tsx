@@ -16,14 +16,14 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
         >
-            <div className="internet-explorer">
-                <div className="toolbar">
+            <div className="internet-explorer" style={styles.internetExplorer}>
+                <div className="toolbar" style={styles.toolbar}>
                     <p>File<span style={{ left: '-23px' }}>_</span></p>
                     <p>Edit<span style={{ left: '-24px' }}>_</span></p>
                     <p>View<span style={{ left: '-32px' }}>_</span></p>
                     <p>Help<span style={{ left: '-30px' }}>_</span></p>
                 </div>
-                <div className="content">
+                <div className="content" style={styles.content}>
                     <p>Welcome to Internet Explorer!</p>
                 </div>
             </div>
