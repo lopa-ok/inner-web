@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Window from '../os/Window';
 import settingIcon from '../../assets/icons/setting.png';
-import '../css/BgSetting.css';
 
 interface SettingsProps {
   onClose: () => void;
