@@ -83,7 +83,7 @@ const APPLICATIONS: {
      },
     folder: {
         key: 'folder',
-        name: 'Folder',
+        name: 'its a folder !!',
         shortcutIcon: 'folderIcon',
         component: Folder,
     },
