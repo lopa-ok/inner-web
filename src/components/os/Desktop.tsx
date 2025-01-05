@@ -19,76 +19,6 @@ export interface DesktopProps {}
 
 type ExtendedWindowAppProps<T> = T & WindowAppProps;
 
-const APPLICATIONS: {
-    [key in string]: {
-        key: string;
-        name: string;
-        shortcutIcon: IconName;
-        component: React.FC<ExtendedWindowAppProps<any>>;
-    };
-} = {
-    // computer: {
-    //     key: 'computer',
-    //     name: 'This Computer',
-    //     shortcutIcon: 'computerBig',
-    //     component: ThisComputer,
-    // },
-    showcase: {
-        key: 'showcase',
-        name: 'My Showcase',
-        shortcutIcon: 'showcaseIcon',
-        component: ShowcaseExplorer,
-    },
-    wordle: {
-        key: 'wordle',
-        name: 'wordle',
-        shortcutIcon: 'wordleIcon',
-        component: wordle,
-    },
-    trail: {
-        key: 'trail',
-        name: 'The Oregon Trail',
-        shortcutIcon: 'trailIcon',
-        component: OregonTrail,
-    },
-    doom: {
-        key: 'doom',
-        name: 'Doom',
-        shortcutIcon: 'doomIcon',
-        component: Doom,
-    },
-    scrabble: {
-        key: 'scrabble',
-        name: 'Scrabble',
-        shortcutIcon: 'scrabbleIcon',
-        component: Scrabble,
-    },
-    // chess: {
-    //     key: 'chess',
-    //     name: 'Chess',
-    //     shortcutIcon: 'chessIcon',
-    //     component: Chess,
-    // },
-    credits: {
-        key: 'credits',
-        name: 'Credits',
-        shortcutIcon: 'credits',
-        component: Credits,
-    },
-    internetExplorer: {
-        key: 'internetExplorer',
-        name: 'Internet Explorer',
-        shortcutIcon: 'InternetExplorerIcon',
-        component: InternetExplorer,
-     },
-    folder: {
-        key: 'folder',
-        name: 'its a folder !!',
-        shortcutIcon: 'folderIcon',
-        component: (props) => <Folder {...props} openCreditsApp={openCreditsApp} />,
-    },
-};
-
 const GRID_SIZE = 100;
 
 const Desktop: React.FC<DesktopProps> = (props) => {
@@ -99,6 +29,88 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [numShutdowns, setNumShutdowns] = useState(1);
     const [folders, setFolders] = useState<DesktopShortcutProps[]>([]);
     const [contextMenu, setContextMenu] = useState<{ visible: boolean; x: number; y: number }>({ visible: false, x: 0, y: 0 });
+
+    const openCreditsApp = () => {
+        addWindow(
+            'credits',
+            <Credits
+                onInteract={() => onWindowInteract('credits')}
+                onMinimize={() => minimizeWindow('credits')}
+                onClose={() => removeWindow('credits')}
+                key="credits"
+            />
+        );
+    };
+
+    const APPLICATIONS: {
+        [key in string]: {
+            key: string;
+            name: string;
+            shortcutIcon: IconName;
+            component: React.FC<ExtendedWindowAppProps<any>>;
+        };
+    } = {
+        // computer: {
+        //     key: 'computer',
+        //     name: 'This Computer',
+        //     shortcutIcon: 'computerBig',
+        //     component: ThisComputer,
+        // },
+        showcase: {
+            key: 'showcase',
+            name: 'My Showcase',
+            shortcutIcon: 'showcaseIcon',
+            component: ShowcaseExplorer,
+        },
+        wordle: {
+            key: 'wordle',
+            name: 'wordle',
+            shortcutIcon: 'wordleIcon',
+            component: wordle,
+        },
+        trail: {
+            key: 'trail',
+            name: 'The Oregon Trail',
+            shortcutIcon: 'trailIcon',
+            component: OregonTrail,
+        },
+        doom: {
+            key: 'doom',
+            name: 'Doom',
+            shortcutIcon: 'doomIcon',
+            component: Doom,
+        },
+        scrabble: {
+            key: 'scrabble',
+            name: 'Scrabble',
+            shortcutIcon: 'scrabbleIcon',
+            component: Scrabble,
+        },
+        // chess: {
+        //     key: 'chess',
+        //     name: 'Chess',
+        //     shortcutIcon: 'chessIcon',
+        //     component: Chess,
+        // },
+        credits: {
+            key: 'credits',
+            name: 'Credits',
+            shortcutIcon: 'credits',
+            component: Credits,
+        },
+        internetExplorer: {
+            key: 'internetExplorer',
+            name: 'Internet Explorer',
+            shortcutIcon: 'InternetExplorerIcon',
+            component: InternetExplorer,
+        },
+        folder: {
+            key: 'folder',
+            name: 'its a folder !!',
+            shortcutIcon: 'folderIcon',
+            component: (props) => <Folder {...props} openCreditsApp={openCreditsApp} />,
+        },
+    };
 
     useEffect(() => {
         if (shutdown === true) {
@@ -271,7 +283,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         onInteract={() => onWindowInteract(newFolderKey)}
                         onMinimize={() => minimizeWindow(newFolderKey)}
                         onClose={() => removeWindow(newFolderKey)}
-                        openCreditsApp={openCreditsApp}
+                        openCreditsApp={openCreditsApp} // Pass the function to open Credits app
                         key={newFolderKey}
                     />
                 );
@@ -294,18 +306,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         if (contextMenu.visible) {
             setContextMenu({ visible: false, x: 0, y: 0 });
         }
-    };
-
-    const openCreditsApp = () => {
-        addWindow(
-            'credits',
-            <Credits
-                onInteract={() => onWindowInteract('credits')}
-                onMinimize={() => minimizeWindow('credits')}
-                onClose={() => removeWindow('credits')}
-                key="credits"
-            />
-        );
     };
 
     return !shutdown ? (
