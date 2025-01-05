@@ -85,7 +85,7 @@ const APPLICATIONS: {
         key: 'folder',
         name: 'its a folder !!',
         shortcutIcon: 'folderIcon',
-        component: Folder,
+        component: (props) => <Folder {...props} openCreditsApp={openCreditsApp} />,
     },
 };
 
@@ -271,6 +271,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         onInteract={() => onWindowInteract(newFolderKey)}
                         onMinimize={() => minimizeWindow(newFolderKey)}
                         onClose={() => removeWindow(newFolderKey)}
+                        openCreditsApp={openCreditsApp}
                         key={newFolderKey}
                     />
                 );
@@ -293,6 +294,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         if (contextMenu.visible) {
             setContextMenu({ visible: false, x: 0, y: 0 });
         }
+    };
+
+    const openCreditsApp = () => {
+        addWindow(
+            'credits',
+            <Credits
+                onInteract={() => onWindowInteract('credits')}
+                onMinimize={() => minimizeWindow('credits')}
+                onClose={() => removeWindow('credits')}
+                key="credits"
+            />
+        );
     };
 
     return !shutdown ? (
@@ -359,14 +372,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
             />
-            
-            {/* {contextMenu.visible && (
+            {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
                     <div style={styles.contextMenuItem} onClick={createNewFolder}>
                         New Folder
                     </div>
                 </div>
-            )} */}
+            )}
         </div>
     ) : (
         <ShutdownSequence
