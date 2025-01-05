@@ -106,12 +106,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         //     shortcutIcon: 'chessIcon',
         //     component: Chess,
         // },
-        // credits: {
-        //     key: 'credits',
-        //     name: 'Credits',
-        //     shortcutIcon: 'credits',
-        //     component: Credits,
-        // },
+        credits: {
+            key: 'credits',
+            name: 'Credits',
+            shortcutIcon: 'credits',
+            component: Credits,
+        },
         internetExplorer: {
             key: 'internetExplorer',
             name: 'Internet Explorer',
