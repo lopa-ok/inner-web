@@ -4,20 +4,21 @@ import DesktopShortcut from '../os/DesktopShortcut';
 import { IconName } from '../../assets/icons';
 
 interface FolderProps {
+  folderId: string;
   onClose: () => void;
   onInteract: () => void;
   onMinimize: () => void;
   openCreditsApp: () => void; // New prop for opening the Credits app
 }
 
-const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize, openCreditsApp }) => {
+const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimize, openCreditsApp }) => {
   return (
     <Window
       top={10}
       left={10}
-      width={500}
-      height={400}
-      windowTitle="Folder"
+      width={600}
+      height={500}
+      windowTitle="Documents"
       windowBarIcon="folderIcon"
       windowBarColor="#757579"
       closeWindow={onClose}
@@ -26,7 +27,7 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize, openCr
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div style={{ padding: '10px', marginTop: '20px' }}> 
+      <div style={{ padding: '10px', marginTop: '20px' }}>
         <div style={{ marginTop: '20px' }}>
           <DesktopShortcut
             icon="credits"

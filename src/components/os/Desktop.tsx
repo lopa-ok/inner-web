@@ -28,6 +28,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [shutdown, setShutdown] = useState(false);
     const [numShutdowns, setNumShutdowns] = useState(1);
     const [folders, setFolders] = useState<DesktopShortcutProps[]>([]);
+    const [folderContents, setFolderContents] = useState<{ [key: string]: DesktopShortcutProps[] }>({});
     const [contextMenu, setContextMenu] = useState<{ visible: boolean; x: number; y: number }>({ visible: false, x: 0, y: 0 });
 
     const getHighestZIndex = useCallback((): number => {
@@ -114,7 +115,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         },
         folder: {
             key: 'folder',
-            name: 'its a folder !!',
+            name: 'Documents',
             shortcutIcon: 'folderIcon',
             component: (props) => <Folder {...props} openCreditsApp={openCreditsApp} />,
         },
@@ -276,7 +277,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const createNewFolder = () => {
-        const newFolderKey = `folder-${folders.length + 1}`;
+        const newFolderKey = `folder-${Date.now()}`;
         const newFolder: DesktopShortcutProps = {
             shortcutName: `Folder ${folders.length + 1}`,
             icon: 'folderIcon',
@@ -284,6 +285,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 addWindow(
                     newFolderKey,
                     <Folder
+                        folderId={newFolderKey}
                         onInteract={() => onWindowInteract(newFolderKey)}
                         onMinimize={() => minimizeWindow(newFolderKey)}
                         onClose={() => removeWindow(newFolderKey)}
@@ -294,6 +296,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             },
         };
         setFolders([...folders, newFolder]);
+        setFolderContents((prevContents) => ({
+            ...prevContents,
+            [newFolderKey]: [], // Initialize the folder contents
+        }));
         setPositions((prevPositions) => ({
             ...prevPositions,
             [newFolder.shortcutName]: { top: (shortcuts.length + folders.length) * 104, left: 6 },
