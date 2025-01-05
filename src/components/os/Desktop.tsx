@@ -106,12 +106,14 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         //     shortcutIcon: 'chessIcon',
         //     component: Chess,
         // },
-        credits: {
-            key: 'credits',
-            name: 'Credits',
-            shortcutIcon: 'credits',
-            component: Credits,
-        },
+
+        // credits: {
+        //     key: 'credits',
+        //     name: 'Credits',
+        //     shortcutIcon: 'credits',
+        //     component: Credits,
+        // },
+
         internetExplorer: {
             key: 'internetExplorer',
             name: 'Internet Explorer',
@@ -137,21 +139,23 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            newShortcuts.push({
-                shortcutName: app.name,
-                icon: app.shortcutIcon,
-                onOpen: () => {
-                    addWindow(
-                        app.key,
-                        <app.component
-                            onInteract={() => onWindowInteract(app.key)}
-                            onMinimize={() => minimizeWindow(app.key)}
-                            onClose={() => removeWindow(app.key)}
-                            key={app.key}
-                        />
-                    );
-                },
-            });
+            if (key !== 'credits') {
+                newShortcuts.push({
+                    shortcutName: app.name,
+                    icon: app.shortcutIcon,
+                    onOpen: () => {
+                        addWindow(
+                            app.key,
+                            <app.component
+                                onInteract={() => onWindowInteract(app.key)}
+                                onMinimize={() => minimizeWindow(app.key)}
+                                onClose={() => removeWindow(app.key)}
+                                key={app.key}
+                            />
+                        );
+                    },
+                });
+            }
         });
 
         newShortcuts.forEach((shortcut) => {
