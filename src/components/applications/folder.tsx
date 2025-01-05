@@ -26,13 +26,13 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize, openCr
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
+      <div style={styles.toolbar}>
+        <div style={styles.toolbarItem}>File</div>
+        <div style={styles.toolbarItem}>Edit</div>
+        <div style={styles.toolbarItem}>View</div>
+        <div style={styles.toolbarItem}>Help</div>
+      </div>
       <div style={{ padding: '10px' }}>
-        <div style={styles.toolbar}>
-          <button style={styles.toolbarButton}>File</button>
-          <button style={styles.toolbarButton}>Edit</button>
-          <button style={styles.toolbarButton}>View</button>
-          <button style={styles.toolbarButton}>Help</button>
-        </div>
         <DesktopShortcut
           icon="credits"
           shortcutName="Credits"
@@ -48,16 +48,18 @@ const styles = {
     display: 'flex',
     backgroundColor: '#c0c0c0',
     padding: '2px 4px',
-    borderBottom: '1px solid #808080',
-    marginBottom: '10px',
+    borderBottom: '2px solid #808080',
   },
-  toolbarButton: {
-    backgroundColor: '#c0c0c0',
-    border: 'none',
-    padding: '2px 8px',
-    marginRight: '4px',
+  toolbarItem: {
+    marginRight: '10px',
     cursor: 'pointer',
+    fontFamily: "'MS Sans Serif', sans-serif",
     fontSize: '12px',
+    color: '#000',
+  },
+  toolbarItemHover: {
+    backgroundColor: '#000080',
+    color: '#fff',
   },
 };
 
