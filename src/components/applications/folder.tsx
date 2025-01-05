@@ -18,7 +18,7 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       left={10}
       width={600}
       height={500}
-      windowTitle="Documents"
+      windowTitle={`Folder ${folderId}`}
       windowBarIcon="folderIcon"
       windowBarColor="#757579"
       closeWindow={onClose}
@@ -27,20 +27,12 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '10px', marginTop: '40px' }}> 
         <div style={{ marginTop: '20px' }}>
           <DesktopShortcut
             icon="credits"
             shortcutName="Credits"
             onOpen={openCreditsApp}
-          />
-        </div>
-        {/* please work :P */}
-        <div style={{ marginTop: '20px' }}>
-          <DesktopShortcut
-            icon="folderIcon"
-            shortcutName="Subfolder"
-            onOpen={() => alert('Subfolder opened')}
           />
         </div>
       </div>
