@@ -78,7 +78,7 @@ const APPLICATIONS: {
     internetExplorer: {
         key: 'internetExplorer',
         name: 'Internet Explorer',
-        shortcutIcon: 'folderIcon',
+        shortcutIcon: 'windowExplorerIcon',
         component: InternetExplorer,
      },
     folder: {
