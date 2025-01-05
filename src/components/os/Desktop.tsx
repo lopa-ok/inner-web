@@ -106,14 +106,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         //     shortcutIcon: 'chessIcon',
         //     component: Chess,
         // },
-
-        // credits: {
-        //     key: 'credits',
-        //     name: 'Credits',
-        //     shortcutIcon: 'credits',
-        //     component: Credits,
-        // },
-
         internetExplorer: {
             key: 'internetExplorer',
             name: 'Internet Explorer',
@@ -125,6 +117,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'its a folder !!',
             shortcutIcon: 'folderIcon',
             component: (props) => <Folder {...props} openCreditsApp={openCreditsApp} />,
+        },
+        credits: {
+            key: 'credits',
+            name: 'Credits',
+            shortcutIcon: 'credits',
+            component: Credits,
         },
     };
 
