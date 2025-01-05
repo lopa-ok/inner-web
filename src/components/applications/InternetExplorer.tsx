@@ -16,11 +16,6 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
         >
-            <div style={styles.addressBar}>
-                <span style={styles.addressLabel}>Address:</span>
-                <input type="text" value="https://oldgoogle.neocities.org/1998/" readOnly style={styles.addressInput} />
-                <button style={styles.goButton}>Go</button>
-            </div>
             <iframe
                 src="https://oldgoogle.neocities.org/1998/"
                 style={styles.iframe}
@@ -31,35 +26,9 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
 };
 
 const styles = {
-    addressBar: {
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        padding: '4px',
-        borderBottom: '1px solid #808080',
-    },
-    addressLabel: {
-        marginRight: '8px',
-        fontFamily: "'MS Sans Serif', sans-serif",
-        fontSize: '12px',
-    },
-    addressInput: {
-        flex: 1,
-        padding: '2px',
-        fontFamily: "'MS Sans Serif', sans-serif",
-        fontSize: '12px',
-        border: '1px solid #808080',
-    },
-    goButton: {
-        marginLeft: '8px',
-        padding: '2px 8px',
-        fontFamily: "'MS Sans Serif', sans-serif",
-        fontSize: '12px',
-        cursor: 'pointer',
-    },
     iframe: {
         width: '100%',
-        height: 'calc(100% - 40px)',
+        height: '100%',
         border: 'none',
     },
 };
