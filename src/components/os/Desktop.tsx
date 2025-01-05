@@ -384,10 +384,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             />
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
-                    
-                    {/* <div style={styles.contextMenuItem} onClick={createNewFolder}>
+                    <div style={styles.contextMenuItem} onClick={createNewFolder}>
                         New Folder
-                    </div> */}
+                    </div>
                 </div>
             )}
         </div>
