@@ -1,5 +1,8 @@
 import React from 'react';
 import Window from '../os/Window';
+import DesktopShortcut from '../os/DesktopShortcut';
+import Credits from '../applications/Credits';
+import { IconName } from '../../assets/icons';
 
 interface FolderProps {
   onClose: () => void;
@@ -8,6 +11,16 @@ interface FolderProps {
 }
 
 const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize }) => {
+  const [showCredits, setShowCredits] = React.useState(false);
+
+  const openCredits = () => {
+    setShowCredits(true);
+  };
+
+  const closeCredits = () => {
+    setShowCredits(false);
+  };
+
   return (
     <Window
       top={10}
@@ -24,8 +37,20 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize }) => {
       minimizeWindow={onMinimize}
     >
       <div style={{ padding: '10px' }}>
-        <p>This is a folder.</p>
-        <p>and its still a wip</p>
+        {/* <p>This is a folder.</p>
+        <p>and its still a wip</p> */}
+        <DesktopShortcut
+          icon="credits"
+          shortcutName="Credits"
+          onOpen={openCredits}
+        />
+        {showCredits && (
+          <Credits
+            onInteract={onInteract}
+            onMinimize={onMinimize}
+            onClose={closeCredits}
+          />
+        )}
       </div>
     </Window>
   );
