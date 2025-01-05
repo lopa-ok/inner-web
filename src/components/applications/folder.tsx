@@ -1,7 +1,7 @@
 import React from 'react';
 import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
-import { IconName } from '../../assets/icons';
+
 
 interface FolderProps {
   folderId: string;
@@ -27,7 +27,7 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div style={{ padding: '10px', marginTop: '-20px' }}>
+      <div style={{ padding: '10px', marginTop: '-40px' }}>
         <div style={{ marginTop: '20px' }}>
           <DesktopShortcut
             icon="credits"
