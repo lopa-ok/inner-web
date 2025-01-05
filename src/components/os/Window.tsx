@@ -258,6 +258,13 @@ const Window: React.FC<WindowProps> = (props) => {
                                 </div>
                             </div>
                         </div>
+                        {/* Toolbar */}
+                        <div style={styles.toolbar}>
+                            <div style={styles.toolbarItem}>File</div>
+                            <div style={styles.toolbarItem}>Edit</div>
+                            <div style={styles.toolbarItem}>View</div>
+                            <div style={styles.toolbarItem}>Help</div>
+                        </div>
                         <div
                             style={Object.assign({}, styles.contentOuter, {
                                 // zIndex: isDragging || isResizing ? 0 : 100,
@@ -415,6 +422,19 @@ const styles: StyleSheetCSS = {
         alignItems: 'center',
         paddingRight: 2,
         boxSizing: 'border-box',
+    },
+    toolbar: {
+        display: 'flex',
+        backgroundColor: '#c0c0c0',
+        padding: '2px 4px',
+        borderBottom: '2px solid #808080',
+    },
+    toolbarItem: {
+        marginRight: '10px',
+        cursor: 'pointer',
+        fontFamily: "'MS Sans Serif', sans-serif",
+        fontSize: '12px',
+        color: '#000',
     },
     contentOuter: {
         border: `1px solid ${Colors.white}`,
