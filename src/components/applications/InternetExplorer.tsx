@@ -16,37 +16,52 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
         >
-            <div className="internet-explorer" style={styles.internetExplorer}>
-                <div className="toolbar" style={styles.toolbar}>
-                    <p>File<span style={{ left: '-23px' }}>_</span></p>
-                    <p>Edit<span style={{ left: '-24px' }}>_</span></p>
-                    <p>View<span style={{ left: '-32px' }}>_</span></p>
-                    <p>Help<span style={{ left: '-30px' }}>_</span></p>
-                </div>
-                <div className="content" style={styles.content}>
-                    <p>Welcome to Internet Explorer!</p>
-                    <p>still a wip</p>
-                </div>
+            <div style={styles.addressBar}>
+                <span style={styles.addressLabel}>Address:</span>
+                <input type="text" value="https://oldgoogle.neocities.org/1998/" readOnly style={styles.addressInput} />
+                <button style={styles.goButton}>Go</button>
             </div>
+            <iframe
+                src="https://oldgoogle.neocities.org/1998/"
+                style={styles.iframe}
+                title="Internet Explorer"
+            ></iframe>
         </Window>
     );
 };
 
-export default InternetExplorer;
-
-const styles: StyleSheetCSS = {
-    internetExplorer: {
+const styles = {
+    addressBar: {
         display: 'flex',
-        height: '100%',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        padding: '4px',
+        borderBottom: '1px solid #808080',
     },
-    toolbar: {
-        display: 'flex',
-        height: '30px',
-        backgroundColor: 'lightgrey',
-        borderBottom: '1px solid grey',
+    addressLabel: {
+        marginRight: '8px',
+        fontFamily: "'MS Sans Serif', sans-serif",
+        fontSize: '12px',
     },
-    content: {
-        padding: '20px',
+    addressInput: {
+        flex: 1,
+        padding: '2px',
+        fontFamily: "'MS Sans Serif', sans-serif",
+        fontSize: '12px',
+        border: '1px solid #808080',
+    },
+    goButton: {
+        marginLeft: '8px',
+        padding: '2px 8px',
+        fontFamily: "'MS Sans Serif', sans-serif",
+        fontSize: '12px',
+        cursor: 'pointer',
+    },
+    iframe: {
+        width: '100%',
+        height: 'calc(100% - 40px)',
+        border: 'none',
     },
 };
 
+export default InternetExplorer;
