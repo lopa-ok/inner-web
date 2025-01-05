@@ -15,8 +15,8 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize, openCr
     <Window
       top={10}
       left={10}
-      width={400}
-      height={300}
+      width={500}
+      height={400}
       windowTitle="Folder"
       windowBarIcon="folderIcon"
       windowBarColor="#757579"
@@ -26,7 +26,7 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize, openCr
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '10px', marginTop: '20px' }}> 
         <div style={{ marginTop: '20px' }}>
           <DesktopShortcut
             icon="credits"
