@@ -26,7 +26,7 @@ const Folder: React.FC<FolderProps> = ({ onClose, onInteract, onMinimize, openCr
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div style={{ padding: '10px', marginTop: '20px' }}>
+      <div style={{ padding: '10px', marginTop: '40px' }}>
         <DesktopShortcut
           icon="credits"
           shortcutName="Credits"
