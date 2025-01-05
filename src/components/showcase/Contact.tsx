@@ -126,11 +126,15 @@ const handleSubmit = useCallback((event) => {
                 </div>
             </div>
             <div className="text-block">
-                <p>
+                {/* <p>
                     I am currently employed, however if you have any
                     opportunities, feel free to reach out - I would love to
                     chat! You can reach me via my personal email, or fill out
                     the form below!
+                </p> */}
+                <p>
+                    If you have any opportunities, feel free to reach out - I would love to
+                    chat! You can reach me via my personal email, or fill out the form below!
                 </p>
                 <br />
                 <p>

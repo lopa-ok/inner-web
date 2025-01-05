@@ -30,7 +30,20 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [folders, setFolders] = useState<DesktopShortcutProps[]>([]);
     const [contextMenu, setContextMenu] = useState<{ visible: boolean; x: number; y: number }>({ visible: false, x: 0, y: 0 });
 
+    const getHighestZIndex = useCallback((): number => {
+        let highestZIndex = 0;
+        Object.keys(windows).forEach((key) => {
+            const window = windows[key];
+            if (window) {
+                if (window.zIndex > highestZIndex)
+                    highestZIndex = window.zIndex;
+            }
+        });
+        return highestZIndex;
+    }, [windows]);
+
     const openCreditsApp = () => {
+        const highestZIndex = getHighestZIndex();
         addWindow(
             'credits',
             <Credits
@@ -38,7 +51,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 onMinimize={() => minimizeWindow('credits')}
                 onClose={() => removeWindow('credits')}
                 key="credits"
-            />
+            />,
+            highestZIndex + 1
         );
     };
 
@@ -173,18 +187,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         });
     }, []);
 
-    const getHighestZIndex = useCallback((): number => {
-        let highestZIndex = 0;
-        Object.keys(windows).forEach((key) => {
-            const window = windows[key];
-            if (window) {
-                if (window.zIndex > highestZIndex)
-                    highestZIndex = window.zIndex;
-            }
-        });
-        return highestZIndex;
-    }, [windows]);
-
     const toggleMinimize = useCallback(
         (key: string) => {
             const newWindows = { ...windows };
@@ -222,11 +224,11 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     }, [numShutdowns]);
 
     const addWindow = useCallback(
-        (key: string, element: JSX.Element) => {
+        (key: string, element: JSX.Element, zIndex?: number) => {
             setWindows((prevState) => ({
                 ...prevState,
                 [key]: {
-                    zIndex: getHighestZIndex() + 1,
+                    zIndex: zIndex || getHighestZIndex() + 1,
                     minimized: false,
                     component: element,
                     name: APPLICATIONS[key].name,
