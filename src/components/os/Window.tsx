@@ -22,6 +22,7 @@ export interface WindowProps {
     windowBarIcon?: IconName;
     onWidthChange?: (width: number) => void;
     onHeightChange?: (height: number) => void;
+    zIndex?: number; // Add zIndex prop
 }
 
 const Window: React.FC<WindowProps> = (props) => {
@@ -190,13 +191,14 @@ const Window: React.FC<WindowProps> = (props) => {
     };
 
     return (
-        <div onMouseDown={onWindowInteract} style={styles.container}>
+        <div onMouseDown={onWindowInteract} style={{ ...styles.container, zIndex: props.zIndex }}>
             <div
                 style={Object.assign({}, styles.window, {
                     width,
                     height,
                     top,
                     left,
+                    zIndex: props.zIndex,
                 })}
                 ref={windowRef}
             >

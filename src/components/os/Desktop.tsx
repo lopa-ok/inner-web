@@ -123,7 +123,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             key: 'credits',
             name: 'Credits',
             shortcutIcon: 'credits',
-            component: Credits,
+            component: (props) => <Credits {...props} zIndex={getHighestZIndex() + 1} />, // Pass zIndex prop
         },
     };
 

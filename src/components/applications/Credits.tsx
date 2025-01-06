@@ -3,7 +3,9 @@ import Window from '../os/Window';
 import { useInterval } from 'usehooks-ts';
 import { motion } from 'framer-motion';
 
-export interface CreditsProps extends WindowAppProps {}
+export interface CreditsProps extends WindowAppProps {
+    zIndex?: number;
+}
 
 const CREDITS = [
     {
@@ -51,6 +53,7 @@ const Credits: React.FC<CreditsProps> = (props) => {
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
             bottomLeftText={'© Copyright 2025 Philopater Essam'}
+            zIndex={props.zIndex} // Pass zIndex prop
         >
             <div
                 onMouseDown={nextSlide}
