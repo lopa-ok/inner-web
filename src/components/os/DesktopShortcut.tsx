@@ -8,6 +8,7 @@ export interface DesktopShortcutProps {
     shortcutName: string;
     invertText?: boolean;
     onOpen: () => void;
+    textColor?: string;
 }
 
 const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
@@ -15,6 +16,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
     shortcutName,
     invertText,
     onOpen,
+    textColor,
 }) => {
     const [isSelected, setIsSelected] = useState(false);
     const [shortcutId, setShortcutId] = useState('');
@@ -126,7 +128,8 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
                     style={Object.assign(
                         {},
                         styles.shortcutText,
-                        invertText && !isSelected && { color: 'black' }
+                        invertText && !isSelected && { color: 'black' },
+                        { color: textColor || 'white' } // Apply text color
                     )}
                 >
                     {shortcutName}

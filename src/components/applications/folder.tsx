@@ -35,6 +35,7 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
             icon="credits"
             shortcutName="Credits"
             onOpen={openCreditsApp}
+            textColor="black"
           />
         </div>
       </div>
