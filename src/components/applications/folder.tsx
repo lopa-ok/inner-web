@@ -12,6 +12,8 @@ interface FolderProps {
 }
 
 const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimize, openCreditsApp }) => {
+  if (!folderId) return null;
+
   return (
     <Window
       top={10}
