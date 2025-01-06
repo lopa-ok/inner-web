@@ -11,8 +11,19 @@ interface FolderProps {
   openCreditsApp: () => void; // New prop for opening the Credits app
 }
 
+const GRID_SIZE = 100;
+
 const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimize, openCreditsApp }) => {
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const snapToGrid = (position: { top: number; left: number }) => {
+    return {
+      top: Math.round(position.top / GRID_SIZE) * GRID_SIZE,
+      left: Math.round(position.left / GRID_SIZE) * GRID_SIZE,
+    };
+  };
+
+  const iconPosition = snapToGrid({ top: 20, left: 20 });
 
   return (
     <Window
@@ -29,8 +40,8 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div ref={contentRef} style={{ padding: '10px', paddingTop: '60px' }}>
-        <div style={{ marginTop: '20px' }}>
+      <div ref={contentRef} style={{ padding: '10px', paddingTop: '60px', position: 'relative' }}>
+        <div style={{ ...iconPosition, position: 'absolute' }}>
           <DesktopShortcut
             icon="credits"
             shortcutName="Credits"
