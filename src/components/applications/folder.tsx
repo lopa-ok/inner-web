@@ -29,7 +29,7 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div ref={contentRef} style={{ padding: '10px', marginTop: '40px' }}> 
+      <div ref={contentRef} style={{ padding: '10px', marginTop: '60px' }}> 
         <div style={{ marginBottom: '20px' }}></div>
         <div style={{ marginTop: '20px' }}>
           <DesktopShortcut
