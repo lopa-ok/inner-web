@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
 import { IconName } from '../../assets/icons';
@@ -12,6 +12,8 @@ interface FolderProps {
 }
 
 const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimize, openCreditsApp }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
   return (
     <Window
       top={10}
@@ -27,7 +29,7 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       onHeightChange={() => {}}
       minimizeWindow={onMinimize}
     >
-      <div style={{ padding: '10px', marginTop: '40px' }}> 
+      <div ref={contentRef} style={{ padding: '10px', marginTop: '40px' }}> 
         <div style={{ marginTop: '20px' }}>
           <DesktopShortcut
             icon="credits"

@@ -208,15 +208,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
     const onWindowInteract = useCallback(
         (key: string) => {
-            setWindows((prevWindows) => ({
-                ...prevWindows,
-                [key]: {
-                    ...prevWindows[key],
-                    zIndex: 1 + getHighestZIndex(),
-                },
-            }));
+            setWindows((prevWindows) => {
+                const newWindows = { ...prevWindows };
+                Object.keys(newWindows).forEach((k) => {
+                    if (k !== key) {
+                        newWindows[k].zIndex -= 1;
+                    }
+                });
+                newWindows[key].zIndex = getHighestZIndex() + 1;
+                return newWindows;
+            });
         },
-        [setWindows, getHighestZIndex]
+        [getHighestZIndex]
     );
 
     const startShutdown = useCallback(() => {
@@ -228,16 +231,20 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
     const addWindow = useCallback(
         (key: string, element: JSX.Element, zIndex?: number) => {
-            setWindows((prevState) => ({
-                ...prevState,
-                [key]: {
+            setWindows((prevState) => {
+                const newWindows = { ...prevState };
+                Object.keys(newWindows).forEach((k) => {
+                    newWindows[k].zIndex -= 1;
+                });
+                newWindows[key] = {
                     zIndex: zIndex || getHighestZIndex() + 1,
                     minimized: false,
                     component: element,
                     name: APPLICATIONS[key].name,
                     icon: APPLICATIONS[key].shortcutIcon,
-                },
-            }));
+                };
+                return newWindows;
+            });
         },
         [getHighestZIndex]
     );
