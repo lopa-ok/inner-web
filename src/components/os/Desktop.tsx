@@ -163,34 +163,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             }
         });
 
-        // Add the folder with ID "1" that shows the Credits app
-        const creditsFolder: DesktopShortcutProps = {
-            shortcutName: 'Folder 1',
-            icon: 'folderIcon',
-            onOpen: () => {
-                addWindow(
-                    'folder-1',
-                    <Folder
-                        folderId="1"
-                        onInteract={() => onWindowInteract('folder-1')}
-                        onMinimize={() => minimizeWindow('folder-1')}
-                        onClose={() => removeWindow('folder-1')}
-                        openCreditsApp={openCreditsApp}
-                        key="folder-1"
-                    />
-                );
-            },
-        };
-        setFolders([creditsFolder]);
-        setFolderContents((prevContents) => ({
-            ...prevContents,
-            'folder-1': [], // Initialize the folder contents
-        }));
-        setPositions((prevPositions) => ({
-            ...prevPositions,
-            'Folder 1': { top: (shortcuts.length) * 104, left: 6 },
-        }));
-
         setShortcuts(newShortcuts);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -305,20 +277,20 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const createNewFolder = () => {
-        const newFolderId = `folder-${folders.length + 1}`;
+        const newFolderKey = `folder-${Date.now()}`;
         const newFolder: DesktopShortcutProps = {
             shortcutName: `Folder ${folders.length + 1}`,
             icon: 'folderIcon',
             onOpen: () => {
                 addWindow(
-                    newFolderId,
+                    newFolderKey,
                     <Folder
-                        folderId={newFolderId}
-                        onInteract={() => onWindowInteract(newFolderId)}
-                        onMinimize={() => minimizeWindow(newFolderId)}
-                        onClose={() => removeWindow(newFolderId)}
+                        folderId={newFolderKey}
+                        onInteract={() => onWindowInteract(newFolderKey)}
+                        onMinimize={() => minimizeWindow(newFolderKey)}
+                        onClose={() => removeWindow(newFolderKey)}
                         openCreditsApp={openCreditsApp}
-                        key={newFolderId}
+                        key={newFolderKey}
                     />
                 );
             },
@@ -326,7 +298,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         setFolders([...folders, newFolder]);
         setFolderContents((prevContents) => ({
             ...prevContents,
-            [newFolderId]: [], // Initialize the folder contents
+            [newFolderKey]: [], // Initialize the folder contents
         }));
         setPositions((prevPositions) => ({
             ...prevPositions,
