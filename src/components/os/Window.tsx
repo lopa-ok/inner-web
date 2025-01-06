@@ -104,7 +104,6 @@ const Window: React.FC<WindowProps> = (props) => {
 
     const stopDrag = ({ clientX, clientY }: any) => {
         setIsDragging(false);
-        // dragRef.current.style.opacity = 0;
         const { x, y } = getXYFromDragProps(clientX, clientY);
         setTop(y);
         setLeft(x);
@@ -259,9 +258,7 @@ const Window: React.FC<WindowProps> = (props) => {
                             </div>
                         </div>
                         <div
-                            style={Object.assign({}, styles.contentOuter, {
-                                // zIndex: isDragging || isResizing ? 0 : 100,
-                            })}
+                            style={Object.assign({}, styles.contentOuter)}
                         >
                             <div style={styles.contentInner}>
                                 <div style={styles.content} ref={contentRef}>
@@ -437,7 +434,6 @@ const styles: StyleSheetCSS = {
         flex: 1,
 
         position: 'relative',
-        // overflow: 'scroll',
         overflowX: 'hidden',
         backgroundColor: Colors.white,
     },
@@ -464,14 +460,10 @@ const styles: StyleSheetCSS = {
         marginLeft: 2,
     },
     windowTopButtons: {
-        // zIndex: 10000,
-
         alignItems: 'center',
     },
     windowHeader: {
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     windowBarIcon: {
         paddingLeft: 4,

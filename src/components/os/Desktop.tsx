@@ -52,8 +52,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 onMinimize={() => minimizeWindow('credits')}
                 onClose={() => removeWindow('credits')}
                 key="credits"
-            />,
-            highestZIndex + 1
+            />
         );
     };
 
@@ -123,7 +122,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             key: 'credits',
             name: 'Credits',
             shortcutIcon: 'credits',
-            component: (props) => <Credits {...props} zIndex={getHighestZIndex() + 1} />, // Pass zIndex prop
+            component: Credits,
         },
     };
 
@@ -208,18 +207,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
     const onWindowInteract = useCallback(
         (key: string) => {
-            setWindows((prevWindows) => {
-                const newWindows = { ...prevWindows };
-                Object.keys(newWindows).forEach((k) => {
-                    if (k !== key) {
-                        newWindows[k].zIndex -= 1;
-                    }
-                });
-                newWindows[key].zIndex = getHighestZIndex() + 1;
-                return newWindows;
-            });
+            setWindows((prevWindows) => ({
+                ...prevWindows,
+                [key]: {
+                    ...prevWindows[key],
+                    zIndex: 1 + getHighestZIndex(),
+                },
+            }));
         },
-        [getHighestZIndex]
+        [setWindows, getHighestZIndex]
     );
 
     const startShutdown = useCallback(() => {
@@ -231,20 +227,16 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
     const addWindow = useCallback(
         (key: string, element: JSX.Element, zIndex?: number) => {
-            setWindows((prevState) => {
-                const newWindows = { ...prevState };
-                Object.keys(newWindows).forEach((k) => {
-                    newWindows[k].zIndex -= 1;
-                });
-                newWindows[key] = {
+            setWindows((prevState) => ({
+                ...prevState,
+                [key]: {
                     zIndex: zIndex || getHighestZIndex() + 1,
                     minimized: false,
                     component: element,
                     name: APPLICATIONS[key].name,
                     icon: APPLICATIONS[key].shortcutIcon,
-                };
-                return newWindows;
-            });
+                },
+            }));
         },
         [getHighestZIndex]
     );
@@ -391,9 +383,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             />
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
-                    <div style={styles.contextMenuItem} onClick={createNewFolder}>
+                    
+                    {/* <div style={styles.contextMenuItem} onClick={createNewFolder}>
                         New Folder
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>
