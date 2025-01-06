@@ -9,11 +9,12 @@ interface FolderProps {
   onInteract: () => void;
   onMinimize: () => void;
   openCreditsApp: () => void; // New prop for opening the Credits app
+  onDragStart: (e: React.DragEvent<HTMLDivElement>, key: string) => void;
 }
 
 const GRID_SIZE = 100;
 
-const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimize, openCreditsApp }) => {
+const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimize, openCreditsApp, onDragStart }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const snapToGrid = (position: { top: number; left: number }) => {
@@ -41,7 +42,11 @@ const Folder: React.FC<FolderProps> = ({ folderId, onClose, onInteract, onMinimi
       minimizeWindow={onMinimize}
     >
       <div ref={contentRef} style={{ padding: '10px', paddingTop: '60px', position: 'relative' }}>
-        <div style={{ ...iconPosition, position: 'absolute' }}>
+        <div
+          style={{ ...iconPosition, position: 'absolute' }}
+          draggable
+          onDragStart={(e) => onDragStart(e, 'credits')}
+        >
           <DesktopShortcut
             icon="credits"
             shortcutName="Credits"

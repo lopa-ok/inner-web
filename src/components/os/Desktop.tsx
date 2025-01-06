@@ -289,6 +289,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         onMinimize={() => minimizeWindow(newFolderKey)}
                         onClose={() => removeWindow(newFolderKey)}
                         openCreditsApp={openCreditsApp}
+                        onDragStart={handleDragStart}
                         key={newFolderKey}
                     />
                 );
