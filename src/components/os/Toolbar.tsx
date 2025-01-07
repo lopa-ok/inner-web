@@ -1,22 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
-// import { } from '../general';
-// import Home from '../site/Home';
-// import Window from './Window';
+import Settings from '../applications/Settings'; // Import the Settings component
 
 export interface ToolbarProps {
     windows: DesktopWindows;
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
-    openSettingsApp: () => void; 
+    addWindow: (key: string, element: JSX.Element, zIndex?: number) => void; // Add addWindow prop
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
     windows,
     toggleMinimize,
     shutdown,
-    openSettingsApp,
+    addWindow, // Add addWindow prop
 }) => {
     const getTime = () => {
         const date = new Date();
@@ -89,6 +87,19 @@ const Toolbar: React.FC<ToolbarProps> = ({
         }
     };
 
+    const openSettingsApp = () => {
+        const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
+        addWindow(
+            'settings',
+            <Settings
+                onInteract={() => toggleMinimize('settings')}
+                onMinimize={() => toggleMinimize('settings')}
+                onClose={() => toggleMinimize('settings')}
+            />,
+            highestZIndex + 1
+        );
+    };
+
     return (
         <div style={styles.toolbarOuter}>
             {startWindowOpen && (
@@ -105,10 +116,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div
                                 className="start-menu-option"
                                 style={styles.startMenuOption}
-                                onMouseDown={() => {
-                                    console.log('Settings button clicked');
-                                    openSettingsApp();
-                                }}
+                                onMouseDown={openSettingsApp} 
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
