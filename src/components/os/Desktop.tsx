@@ -12,7 +12,7 @@ import Scrabble from '../applications/Scrabble';
 import Chess from '../applications/Chess'; 
 import Credits from '../applications/Credits';
 import InternetExplorer from '../applications/InternetExplorer';
-import Folder from '../applications/Folder';
+import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
 
