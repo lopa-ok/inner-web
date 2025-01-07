@@ -14,7 +14,6 @@ import Credits from '../applications/Credits';
 import InternetExplorer from '../applications/InternetExplorer';
 import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
-import Settings from '../applications/Settings';
 
 export interface DesktopProps {}
 
@@ -53,19 +52,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 onMinimize={() => minimizeWindow('credits')}
                 onClose={() => removeWindow('credits')}
                 key="credits"
-            />
-        );
-    };
-
-    const openSettingsApp = () => {
-        const highestZIndex = getHighestZIndex();
-        addWindow(
-            'settings',
-            <Settings
-                onInteract={() => onWindowInteract('settings')}
-                onMinimize={() => minimizeWindow('settings')}
-                onClose={() => removeWindow('settings')}
-                key="settings"
             />
         );
     };
@@ -137,12 +123,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'Credits',
             shortcutIcon: 'credits',
             component: Credits,
-        },
-        settings: {
-            key: 'settings',
-            name: 'Settings',
-            shortcutIcon: 'settingsIcon',
-            component: Settings,
         },
     };
 
@@ -401,7 +381,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 windows={windows}
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
-                openSettingsApp={openSettingsApp}
             />
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
