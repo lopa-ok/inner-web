@@ -105,7 +105,10 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div
                                 className="start-menu-option"
                                 style={styles.startMenuOption}
-                                onMouseDown={openSettingsApp}
+                                onMouseDown={() => {
+                                    console.log('Settings button clicked');
+                                    openSettingsApp();
+                                }}
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
