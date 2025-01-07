@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
-import Settings from '../applications/Settings'; // Import the Settings component
+import Settings from '../applications/Settings'; // Ensure this import is correct
 
 export interface ToolbarProps {
     windows: DesktopWindows;
@@ -94,7 +94,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             <Settings
                 onInteract={() => toggleMinimize('settings')}
                 onMinimize={() => toggleMinimize('settings')}
-                onClose={() => toggleMinimize('settings')}
+                onClose={() => removeWindow('settings')}
             />,
             highestZIndex + 1
         );
@@ -405,3 +405,7 @@ const styles: StyleSheetCSS = {
 };
 
 export default Toolbar;
+
+function removeWindow(arg0: string): void {
+    throw new Error('Function not implemented.');
+}
