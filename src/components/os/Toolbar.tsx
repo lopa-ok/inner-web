@@ -9,12 +9,14 @@ export interface ToolbarProps {
     windows: DesktopWindows;
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
+    openSettingsApp: () => void; 
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
     windows,
     toggleMinimize,
     shutdown,
+    openSettingsApp,
 }) => {
     const getTime = () => {
         const date = new Date();
@@ -103,7 +105,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div
                                 className="start-menu-option"
                                 style={styles.startMenuOption}
-                                onMouseDown={() => alert('still a wip')}
+                                onMouseDown={openSettingsApp}
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
