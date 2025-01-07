@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
-import Settings from '../applications/Settings'; // Ensure this import is correct
+import Settings from '../applications/Settings'; 
 
 export interface ToolbarProps {
     windows: DesktopWindows;
