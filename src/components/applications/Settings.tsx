@@ -69,6 +69,8 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
   function applyBG() {
     if (ImgBgPreview) {
       updateBackground(ImgBgPreview, themeColor || '');
+      setLocalBg(ImgBgPreview);
+      setLocalTheme(themeColor);
     }
   }
 
@@ -209,7 +211,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
               style={styles.bgSettingBtn as React.CSSProperties}
             ><span>Cancel</span>
             </div>
-            <div className="bgsetting_btn_cancel" onClick={applyBG} style={styles.bgSettingBtn as React.CSSProperties}><span>Apply</span></div>
+            <div className="bgsetting_btn_cancel" onClick={() => applyBG()} style={styles.bgSettingBtn as React.CSSProperties}><span>Apply</span></div>
           </div>
         </div>
       </motion.div>
