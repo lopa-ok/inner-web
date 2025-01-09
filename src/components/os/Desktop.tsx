@@ -34,6 +34,14 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [background, setBackground] = useState<string | null>(null);
     const [theme, setTheme] = useState<string | null>(null);
 
+    const updateBackground = (background: string, theme: string) => {
+        setBackground(background);
+        setTheme(theme);
+        const bodyBG = document.getElementsByTagName('body')[0];
+        bodyBG.style.backgroundColor = theme;
+        bodyBG.style.backgroundImage = `url(${background})`;
+    };
+
     const getHighestZIndex = useCallback((): number => {
         let highestZIndex = 0;
         Object.keys(windows).forEach((key) => {
@@ -249,14 +257,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         },
         [getHighestZIndex, updateBackground]
     );
-
-    const updateBackground = (background: string, theme: string) => {
-        setBackground(background);
-        setTheme(theme);
-        const bodyBG = document.getElementsByTagName('body')[0];
-        bodyBG.style.backgroundColor = theme;
-        bodyBG.style.backgroundImage = `url(${background})`;
-    };
 
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>, key: string) => {
         e.dataTransfer.setData('text/plain', key);
