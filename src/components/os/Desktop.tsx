@@ -399,6 +399,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
                 addWindow={addWindow}
+                updateBackground={updateBackground}
             />
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>

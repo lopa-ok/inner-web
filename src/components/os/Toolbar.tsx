@@ -8,6 +8,7 @@ export interface ToolbarProps {
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
     addWindow: (key: string, element: JSX.Element, zIndex?: number) => void; // Add addWindow prop
+    updateBackground: (color: string) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -15,6 +16,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
     toggleMinimize,
     shutdown,
     addWindow, // Add addWindow prop
+    updateBackground,
 }) => {
     const getTime = () => {
         const date = new Date();
@@ -95,6 +97,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                 onInteract={() => toggleMinimize('settings')}
                 onMinimize={() => toggleMinimize('settings')}
                 onClose={() => removeWindow('settings')}
+                updateBackground={updateBackground} 
             />,
             highestZIndex + 1
         );
