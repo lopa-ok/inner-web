@@ -19,7 +19,7 @@ import windowsStartIcon from './windowsStartIcon.png';
 import scrabbleIcon from './scrabbleIcon.png';
 import close from './close.png';
 import chessIcon from './chessIcon.png';
-import settingsIcon from './setting.png';
+import setting from './setting.png';
 import folderIcon from './folder.png';
 import InternetExplorerIcon from './InternetExplorerIcon.png';
 
@@ -43,7 +43,7 @@ const icons = {
     windowsStartIcon: windowsStartIcon,
     trailIcon: trailIcon,
     chessIcon: chessIcon,
-    settingsIcon: settingsIcon,
+    setting: setting,
     folderIcon: folderIcon,
     InternetExplorerIcon: InternetExplorerIcon,
 };
