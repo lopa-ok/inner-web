@@ -8,7 +8,7 @@ export interface ToolbarProps {
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
     addWindow: (key: string, element: JSX.Element, zIndex?: number) => void; // Add addWindow prop
-    updateBackground: (color: string) => void;
+    updateBackground: (background: string, theme: string) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
