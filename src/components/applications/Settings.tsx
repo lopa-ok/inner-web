@@ -138,10 +138,12 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
                 onClick={!isTouchDevice ? () => {
                   cancelBg();
                   deleteTap('Settings');
+                  onClose();
                 } : undefined}
                 onTouchEnd={() => {
                   cancelBg();
                   deleteTap('Settings');
+                  onClose();
                 }}
                 style={styles.closeBtn}
               >×</p>
@@ -182,10 +184,12 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
               onClick={!isTouchDevice ? () => {
                 deleteTap('Settings');
                 okBg();
+                onClose();
               } : undefined}
               onTouchEnd={() => {
                 deleteTap('Settings');
                 okBg();
+                onClose();
               }}
               style={styles.bgSettingBtn as React.CSSProperties}
             >
@@ -195,10 +199,12 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
               onClick={!isTouchDevice ? () => {
                 deleteTap('Settings');
                 cancelBg();
+                onClose();
               } : undefined}
               onTouchEnd={() => {
                 deleteTap('Settings');
                 cancelBg();
+                onClose();
               }}
               style={styles.bgSettingBtn as React.CSSProperties}
             ><span>Cancel</span>
