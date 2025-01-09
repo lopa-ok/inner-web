@@ -34,13 +34,26 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [background, setBackground] = useState<string | null>(null);
     const [theme, setTheme] = useState<string | null>(null);
 
-    const updateBackground = (background: string, theme: string) => {
+    // Initialize background from localStorage on component mount
+    useEffect(() => {
+        const savedBg = localStorage.getItem('background');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedBg && savedTheme) {
+            updateBackground(savedBg, savedTheme);
+        }
+    }, []);
+
+    const updateBackground = useCallback((background: string, theme: string) => {
+        console.log('Updating background:', { background, theme }); // Add debug logging
         setBackground(background);
         setTheme(theme);
         const bodyBG = document.getElementsByTagName('body')[0];
         bodyBG.style.backgroundColor = theme;
         bodyBG.style.backgroundImage = `url(${background})`;
-    };
+        bodyBG.style.backgroundSize = 'cover';
+        bodyBG.style.backgroundRepeat = 'no-repeat';
+        bodyBG.style.backgroundPosition = 'center';
+    }, []);
 
     const getHighestZIndex = useCallback((): number => {
         let highestZIndex = 0;

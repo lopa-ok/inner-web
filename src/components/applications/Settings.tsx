@@ -51,10 +51,17 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
   function setbgColorFunction2(index: number): void {
     const selectedOption = colorOptions.find(option => option.value === index);
     if (selectedOption) {
+      console.log('Setting background:', selectedOption);
       setSelectedBg2(index);
       setImgBgPreview(selectedOption.image);
       setThemeColor(selectedOption.color);
       setBarcolor(selectedOption.barColor);
+      
+      const bodyBG = document.getElementsByTagName('body')[0];
+      bodyBG.style.backgroundColor = selectedOption.color;
+      bodyBG.style.backgroundImage = `url(${selectedOption.image})`;
+      bodyBG.style.backgroundSize = 'cover';
+      bodyBG.style.backgroundRepeat = 'no-repeat';
     }
   }
 
@@ -66,9 +73,13 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
     }
   }, [localBg, localTheme]);
 
-  function applyBG() {
-    if (ImgBgPreview) {
-      updateBackground(ImgBgPreview, themeColor || '');
+  function handleApplyClick() {
+    if (ImgBgPreview && themeColor) {
+      console.log('Applying background:', { ImgBgPreview, themeColor });
+      updateBackground(ImgBgPreview, themeColor);
+      localStorage.setItem('theme', themeColor);
+      localStorage.setItem('background', ImgBgPreview);
+      localStorage.setItem('barcolor', barcolor || '');
       setLocalBg(ImgBgPreview);
       setLocalTheme(themeColor);
     }
@@ -90,12 +101,6 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
       setLocalTheme(themeColor);
     }
   }
-
-  const handleApplyClick = () => {
-    if (ImgBgPreview && themeColor) {
-      updateBackground(ImgBgPreview, themeColor);
-    }
-  };
 
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
