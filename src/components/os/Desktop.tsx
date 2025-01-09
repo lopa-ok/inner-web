@@ -14,6 +14,7 @@ import Credits from '../applications/Credits';
 import InternetExplorer from '../applications/InternetExplorer';
 import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
+import Settings from '../applications/Settings';
 
 export interface DesktopProps {}
 
@@ -123,6 +124,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'Credits',
             shortcutIcon: 'credits',
             component: Credits,
+        },
+        settings: {
+            key: 'settings',
+            name: 'Settings',
+            shortcutIcon: 'settingsIcon',
+            component: Settings,
         },
     };
 
