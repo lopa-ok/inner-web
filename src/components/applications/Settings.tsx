@@ -17,9 +17,10 @@ interface SettingsProps {
   onClose: () => void;
   onInteract: () => void;
   onMinimize: () => void;
+  updateBackground: (background: string, theme: string) => void; // Add updateBackground prop
 }
 
-const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) => {
+const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, updateBackground }) => {
   const [barcolor, setBarcolor] = useState<string | null>(null);
   const [ImgBgPreview, setImgBgPreview] = useState<string | null>(null);
   const [localBg, setLocalBg] = useState(() => {
@@ -66,30 +67,20 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
   }, [localBg, localTheme]);
 
   function applyBG() {
-    const bodyBG = document.getElementsByTagName('body')[0];
     if (ImgBgPreview) {
-      bodyBG.style.backgroundColor = themeColor || '';
-      bodyBG.style.backgroundImage = `url(${ImgBgPreview})`;
-    } else {
-      bodyBG.style.backgroundImage = 'none';
+      updateBackground(ImgBgPreview, themeColor || '');
     }
   }
 
   function cancelBg() {
-    const bodyBG = document.getElementsByTagName('body')[0];
     if (localBg) {
-      bodyBG.style.backgroundColor = localTheme || '';
-      bodyBG.style.backgroundImage = `url(${localBg})`;
-    } else {
-      bodyBG.style.backgroundImage = 'none';
+      updateBackground(localBg, localTheme || '');
     }
   }
 
   function okBg() {
-    const bodyBG = document.getElementsByTagName('body')[0];
     if (ImgBgPreview) {
-      bodyBG.style.backgroundColor = themeColor || '';
-      bodyBG.style.backgroundImage = `url(${ImgBgPreview})`;
+      updateBackground(ImgBgPreview, themeColor || '');
       localStorage.setItem('theme', themeColor || '');
       localStorage.setItem('background', ImgBgPreview);
       localStorage.setItem('barcolor', barcolor || '');

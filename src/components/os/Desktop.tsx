@@ -31,6 +31,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [folders, setFolders] = useState<DesktopShortcutProps[]>([]);
     const [folderContents, setFolderContents] = useState<{ [key: string]: DesktopShortcutProps[] }>({});
     const [contextMenu, setContextMenu] = useState<{ visible: boolean; x: number; y: number }>({ visible: false, x: 0, y: 0 });
+    const [background, setBackground] = useState<string | null>(null);
+    const [theme, setTheme] = useState<string | null>(null);
 
     const getHighestZIndex = useCallback((): number => {
         let highestZIndex = 0;
@@ -239,14 +241,22 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 [key]: {
                     zIndex: zIndex || getHighestZIndex() + 1,
                     minimized: false,
-                    component: element,
+                    component: React.cloneElement(element, { updateBackground }), // Pass updateBackground to Settings
                     name: APPLICATIONS[key].name,
                     icon: APPLICATIONS[key].shortcutIcon,
                 },
             }));
         },
-        [getHighestZIndex]
+        [getHighestZIndex, updateBackground]
     );
+
+    const updateBackground = (background: string, theme: string) => {
+        setBackground(background);
+        setTheme(theme);
+        const bodyBG = document.getElementsByTagName('body')[0];
+        bodyBG.style.backgroundColor = theme;
+        bodyBG.style.backgroundImage = `url(${background})`;
+    };
 
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>, key: string) => {
         e.dataTransfer.setData('text/plain', key);
