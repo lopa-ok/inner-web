@@ -120,7 +120,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
-                                    icon="settingsIcon"
+                                    icon="setting"
                                 />
                                 <p style={styles.startMenuText}>
                                     Se<u>t</u>tings
