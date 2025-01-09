@@ -65,7 +65,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
     }
   }, [localBg, localTheme]);
 
-  function appleBG() {
+  function applyBG() {
     const bodyBG = document.getElementsByTagName('body')[0];
     if (ImgBgPreview) {
       bodyBG.style.backgroundColor = themeColor || '';
@@ -125,13 +125,14 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
         onClick={(e) => {
           e.stopPropagation();
         }}
+        style={styles.bgSettingFolder}
       >
-        <div className="folder_dragbar_bgsetting" style={{ background: barcolor || '#757579' }}>
-          <div className="bgsetting_barname">
-            <img src={settingIcon} alt="" />
+        <div className="folder_dragbar_bgsetting" style={{ ...styles.folderDragbarBgSetting, background: barcolor || '#757579' }}>
+          <div className="bgsetting_barname" style={styles.bgSettingBarName}>
+            <img src={settingIcon} alt="" style={styles.settingIcon} />
             <span>Settings</span>
           </div>
-          <div className="bgsetting_barbtn">
+          <div className="bgsetting_barbtn" style={styles.bgSettingBarBtn}>
             <div onClick={!isTouchDevice ? (e) => {
               e.stopPropagation();
             } : undefined}
@@ -139,7 +140,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
                 e.stopPropagation();
               }}
             >
-              <p className='dash'></p>
+              <p className='dash' style={styles.dash}></p>
             </div>
             <div>
               <p className='x'
@@ -151,31 +152,32 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
                   cancelBg();
                   deleteTap('Settings');
                 }}
+                style={styles.closeBtn}
               >×</p>
             </div>
           </div>
         </div>
-        <div className="file_tap_container-bgsetting">
+        <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting}>
           <p>Background</p>
         </div>
-        <div className="folder_content">
-          <div className="folder_content-bgsetting">
-            <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} />
-            <div className="preview_bg">
+        <div className="folder_content" style={styles.folderContent}>
+          <div className="folder_content-bgsetting" style={styles.folderContentBgSetting}>
+            <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} style={styles.bgSettingImg} />
+            <div className="preview_bg" style={styles.previewBg}>
               {ImgBgPreview && (
-                <img src={ImgBgPreview} alt='' />
+                <img src={ImgBgPreview} alt='' style={styles.previewImg} />
               )}
             </div>
-            <div className="bgsettingtext_container">
-              <div className="wallpaper">
+            <div className="bgsettingtext_container" style={styles.bgSettingTextContainer}>
+              <div className="wallpaper" style={styles.wallpaper}>
                 <p>Wallpaper</p>
                 <p>Select an HTML Element or Picture</p>
-                <div className="wallpaper_container">
+                <div className="wallpaper_container" style={styles.wallpaperContainer}>
                   {colorOptions.map((option) => (
                     <ul
                       key={option.value}
                       onClick={() => setbgColorFunction2(option.value)}
-                      style={selectedBg2 === option.value ? { background: '#040482', color: 'white' } : {}}
+                      style={selectedBg2 === option.value ? { ...styles.wallpaperOption, background: '#040482', color: 'white' } : styles.wallpaperOption}
                     >
                       {option.label}
                     </ul>
@@ -184,7 +186,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
               </div>
             </div>
           </div>
-          <div className="bgsetting_btn_container">
+          <div className="bgsetting_btn_container" style={styles.bgSettingBtnContainer}>
             <div className="bgsetting_btn_ok"
               onClick={!isTouchDevice ? () => {
                 deleteTap('Settings');
@@ -194,6 +196,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
                 deleteTap('Settings');
                 okBg();
               }}
+              style={styles.bgSettingBtn}
             >
               <span>OK</span>
             </div>
@@ -206,14 +209,109 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
                 deleteTap('Settings');
                 cancelBg();
               }}
+              style={styles.bgSettingBtn}
             ><span>Cancel</span>
             </div>
-            <div className="bgsetting_btn_cancel" onClick={appleBG}><span>Apply</span></div>
+            <div className="bgsetting_btn_cancel" onClick={applyBG} style={styles.bgSettingBtn}><span>Apply</span></div>
           </div>
         </div>
       </motion.div>
     </Window>
   );
+};
+
+const styles = {
+  bgSettingFolder: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+  },
+  folderDragbarBgSetting: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0 10px',
+    height: '30px',
+  },
+  bgSettingBarName: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  settingIcon: {
+    marginRight: '8px',
+  },
+  bgSettingBarBtn: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  dash: {
+    margin: 0,
+    padding: '0 8px',
+    cursor: 'pointer',
+  },
+  closeBtn: {
+    margin: 0,
+    padding: '0 8px',
+    cursor: 'pointer',
+  },
+  fileTapContainerBgSetting: {
+    padding: '10px',
+    borderBottom: '1px solid #ccc',
+  },
+  folderContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    padding: '10px',
+  },
+  folderContentBgSetting: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+  },
+  bgSettingImg: {
+    width: '150px',
+    height: 'auto',
+    marginRight: '20px',
+  },
+  previewBg: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: '1px solid #ccc',
+    marginRight: '20px',
+  },
+  previewImg: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  bgSettingTextContainer: {
+    flex: 1,
+  },
+  wallpaper: {
+    marginBottom: '20px',
+  },
+  wallpaperContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  wallpaperOption: {
+    padding: '5px',
+    cursor: 'pointer',
+  },
+  bgSettingBtnContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: '20px',
+  },
+  bgSettingBtn: {
+    marginLeft: '10px',
+    padding: '5px 10px',
+    cursor: 'pointer',
+    border: '1px solid #ccc',
+    borderRadius: '3px',
+  },
 };
 
 export default Settings;
