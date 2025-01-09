@@ -91,6 +91,12 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
     }
   }
 
+  const handleApplyClick = () => {
+    if (ImgBgPreview && themeColor) {
+      updateBackground(ImgBgPreview, themeColor);
+    }
+  };
+
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   function deleteTap(appName: string) {
@@ -211,7 +217,13 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
               style={styles.bgSettingBtn as React.CSSProperties}
             ><span>Cancel</span>
             </div>
-            <div className="bgsetting_btn_cancel" onClick={() => applyBG()} style={styles.bgSettingBtn as React.CSSProperties}><span>Apply</span></div>
+            <div 
+              className="bgsetting_btn_apply" 
+              onClick={handleApplyClick} 
+              style={styles.bgSettingBtn as React.CSSProperties}
+            >
+              <span>Apply</span>
+            </div>
           </div>
         </div>
       </motion.div>
