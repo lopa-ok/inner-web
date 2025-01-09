@@ -438,7 +438,6 @@ const styles: StyleSheetCSS = {
     desktop: {
         minHeight: '100%',
         flex: 1,
-        backgroundColor: Colors.turquoise,
         position: 'relative',
     },
     shutdown: {
