@@ -157,27 +157,27 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
             </div>
           </div>
         </div>
-        <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting}>
+        <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting as React.CSSProperties}>
           <p>Background</p>
         </div>
-        <div className="folder_content" style={styles.folderContent}>
-          <div className="folder_content-bgsetting" style={styles.folderContentBgSetting}>
-            <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} style={styles.bgSettingImg} />
-            <div className="preview_bg" style={styles.previewBg}>
+        <div className="folder_content" style={styles.folderContent as React.CSSProperties}>
+          <div className="folder_content-bgsetting" style={styles.folderContentBgSetting as React.CSSProperties}>
+            <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} style={styles.bgSettingImg as React.CSSProperties} />
+            <div className="preview_bg" style={styles.previewBg as React.CSSProperties}>
               {ImgBgPreview && (
-                <img src={ImgBgPreview} alt='' style={styles.previewImg} />
+                <img src={ImgBgPreview} alt='' style={styles.previewImg as React.CSSProperties} />
               )}
             </div>
-            <div className="bgsettingtext_container" style={styles.bgSettingTextContainer}>
-              <div className="wallpaper" style={styles.wallpaper}>
+            <div className="bgsettingtext_container" style={styles.bgSettingTextContainer as React.CSSProperties}>
+              <div className="wallpaper" style={styles.wallpaper as React.CSSProperties}>
                 <p>Wallpaper</p>
                 <p>Select an HTML Element or Picture</p>
-                <div className="wallpaper_container" style={styles.wallpaperContainer}>
+                <div className="wallpaper_container" style={styles.wallpaperContainer as React.CSSProperties}>
                   {colorOptions.map((option) => (
                     <ul
                       key={option.value}
                       onClick={() => setbgColorFunction2(option.value)}
-                      style={selectedBg2 === option.value ? { ...styles.wallpaperOption, background: '#040482', color: 'white' } : styles.wallpaperOption}
+                      style={selectedBg2 === option.value ? { ...styles.wallpaperOption, background: '#040482', color: 'white' } : styles.wallpaperOption as React.CSSProperties}
                     >
                       {option.label}
                     </ul>
@@ -186,7 +186,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
               </div>
             </div>
           </div>
-          <div className="bgsetting_btn_container" style={styles.bgSettingBtnContainer}>
+          <div className="bgsetting_btn_container" style={styles.bgSettingBtnContainer as React.CSSProperties}>
             <div className="bgsetting_btn_ok"
               onClick={!isTouchDevice ? () => {
                 deleteTap('Settings');
@@ -196,7 +196,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
                 deleteTap('Settings');
                 okBg();
               }}
-              style={styles.bgSettingBtn}
+              style={styles.bgSettingBtn as React.CSSProperties}
             >
               <span>OK</span>
             </div>
@@ -209,10 +209,10 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
                 deleteTap('Settings');
                 cancelBg();
               }}
-              style={styles.bgSettingBtn}
+              style={styles.bgSettingBtn as React.CSSProperties}
             ><span>Cancel</span>
             </div>
-            <div className="bgsetting_btn_cancel" onClick={applyBG} style={styles.bgSettingBtn}><span>Apply</span></div>
+            <div className="bgsetting_btn_cancel" onClick={applyBG} style={styles.bgSettingBtn as React.CSSProperties}><span>Apply</span></div>
           </div>
         </div>
       </motion.div>
