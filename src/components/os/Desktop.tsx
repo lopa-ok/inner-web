@@ -101,12 +101,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'scrabbleIcon',
             component: Scrabble,
         },
-        // chess: {
-        //     key: 'chess',
-        //     name: 'Chess',
-        //     shortcutIcon: 'chessIcon',
-        //     component: Chess,
-        // },
+        chess: {
+            key: 'chess',
+            name: 'Chess',
+            shortcutIcon: 'chessIcon',
+            component: Settings,
+        },
         internetExplorer: {
             key: 'internetExplorer',
             name: 'Internet Explorer',
@@ -125,12 +125,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'credits',
             component: Credits,
         },
-        settings: {
-            key: 'settings',
-            name: 'Settings',
-            shortcutIcon: 'settingsIcon',
-            component: Settings,
-        },
+        
     };
 
     useEffect(() => {
