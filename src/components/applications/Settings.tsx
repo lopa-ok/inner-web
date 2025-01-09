@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, MotionStyle } from 'framer-motion';
 import Window from '../os/Window';
 import settingIcon from '../../assets/icons/setting.png';
 import bgPic from '../../assets/bg/bgpc.png';
@@ -125,7 +125,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize }) 
         onClick={(e) => {
           e.stopPropagation();
         }}
-        style={styles.bgSettingFolder}
+        style={styles.bgSettingFolder as MotionStyle}
       >
         <div className="folder_dragbar_bgsetting" style={{ ...styles.folderDragbarBgSetting, background: barcolor || '#757579' }}>
           <div className="bgsetting_barname" style={styles.bgSettingBarName}>
