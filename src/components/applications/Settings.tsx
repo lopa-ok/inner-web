@@ -57,11 +57,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
       setThemeColor(selectedOption.color);
       setBarcolor(selectedOption.barColor);
       
-      const bodyBG = document.getElementsByTagName('body')[0];
-      bodyBG.style.backgroundColor = selectedOption.color;
-      bodyBG.style.backgroundImage = `url(${selectedOption.image})`;
-      bodyBG.style.backgroundSize = 'cover';
-      bodyBG.style.backgroundRepeat = 'no-repeat';
+      updateBackground(selectedOption.image, selectedOption.color);
     }
   }
 
@@ -86,19 +82,22 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
   }
 
   function cancelBg() {
-    if (localBg) {
-      updateBackground(localBg, localTheme || '');
+    if (localBg && localTheme) {
+      console.log('Canceling, reverting to:', { localBg, localTheme });
+      updateBackground(localBg, localTheme);
     }
   }
 
   function okBg() {
-    if (ImgBgPreview) {
-      updateBackground(ImgBgPreview, themeColor || '');
-      localStorage.setItem('theme', themeColor || '');
+    if (ImgBgPreview && themeColor) {
+      console.log('Applying and saving:', { ImgBgPreview, themeColor });
+      updateBackground(ImgBgPreview, themeColor);
+      localStorage.setItem('theme', themeColor);
       localStorage.setItem('background', ImgBgPreview);
       localStorage.setItem('barcolor', barcolor || '');
       setLocalBg(ImgBgPreview);
       setLocalTheme(themeColor);
+      onClose();
     }
   }
 

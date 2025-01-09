@@ -48,11 +48,14 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         setBackground(background);
         setTheme(theme);
         const bodyBG = document.getElementsByTagName('body')[0];
+        bodyBG.style.transition = 'background-color 0.3s, background-image 0.3s';
         bodyBG.style.backgroundColor = theme;
         bodyBG.style.backgroundImage = `url(${background})`;
         bodyBG.style.backgroundSize = 'cover';
-        bodyBG.style.backgroundRepeat = 'no-repeat';
         bodyBG.style.backgroundPosition = 'center';
+        bodyBG.style.backgroundRepeat = 'no-repeat';
+        bodyBG.style.height = '100vh';
+        bodyBG.style.margin = '0';
     }, []);
 
     const getHighestZIndex = useCallback((): number => {
