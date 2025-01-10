@@ -308,7 +308,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   wallpaperContainer: {
     position: 'relative',
     height: 'auto',
-    width: '90%',
+    width: '80%',
     border: '2px solid rgb(241, 241, 241)',
     borderTopColor: 'black',
     borderLeftColor: 'black',
@@ -321,10 +321,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   wallpaperOption: {
-    fontSize: '14px',
+    fontSize: '12px',
     cursor: 'default',
-    marginBottom: '0',
-    width: '80%',
+    marginBottom: '0px',
+    width: '100%',
     textAlign: 'center',
   },
   wallpaperOptionHover: {
