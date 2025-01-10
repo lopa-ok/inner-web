@@ -131,10 +131,6 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         style={styles.bgSettingFolder as MotionStyle}
       >
         <div className="folder_dragbar_bgsetting" style={{ ...styles.folderDragbarBgSetting, background: barcolor || '#757579' }}>
-          <div className="bgsetting_barname" style={styles.bgSettingBarName}>
-            <img src={settingIcon} alt="" style={styles.settingIcon} />
-            <span>Settings</span>
-          </div>
           <div className="bgsetting_barbtn" style={styles.bgSettingBarBtn}>
             <div 
               style={styles.bgSettingBarBtnDiv}
@@ -333,21 +329,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderLeftColor: 'black',
     borderBottomColor: '#f0efef',
     borderRightColor: '#f0efef',
-  },
-  bgSettingBarName: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  bgSettingBarNameImg: {
-    width: '16px',
-    marginLeft: '5px',
-    position: 'relative',
-    top: '3px',
-  },
-  bgSettingBarNameSpan: {
-    fontSize: '15px',
-    color: 'white',
-    marginLeft: '5px',
   },
   fileTapContainerBgSetting: {
     display: 'flex',
