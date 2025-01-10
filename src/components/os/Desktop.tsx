@@ -62,7 +62,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     }, []);
 
     const updateBackground = useCallback((background: string, theme: string) => {
-        console.log('Updating background:', { background, theme }); // Add debug logging
+        console.log('Updating background:', { background, theme });
         setBackground(background);
         setTheme(theme);
         const bodyBG = document.getElementsByTagName('body')[0];

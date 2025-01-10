@@ -101,6 +101,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             />,
             highestZIndex + 1
         );
+        setStartWindowOpen(false);
     };
 
     return (
