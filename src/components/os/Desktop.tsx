@@ -170,7 +170,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits') {
+            if (key !== 'credits' && key !== 'settings') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
