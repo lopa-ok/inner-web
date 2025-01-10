@@ -297,7 +297,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   wallpaperContainer: {
     position: 'relative',
-    height: '80px',
+    height: 'auto',
     width: '90%',
     border: '2px solid rgb(241, 241, 241)',
     borderTopColor: 'black',
@@ -306,11 +306,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: '0 auto',
     bottom: '5px',
     overflowY: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
   },
   wallpaperOption: {
     fontSize: '12px',
     paddingLeft: '4px',
     cursor: 'default',
+    marginBottom: '4px',
   },
   wallpaperOptionHover: {
     backgroundColor: '#000080',
