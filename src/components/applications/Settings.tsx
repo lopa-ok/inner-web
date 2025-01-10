@@ -136,7 +136,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         <div className="folder_content" style={{ ...styles.folderContent, overflow: 'hidden' } as React.CSSProperties}>
           <div className="folder_content-bgsetting" style={styles.folderContentBgSetting as React.CSSProperties}>
             <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} style={styles.bgSettingImg as React.CSSProperties} />
-            <div className="preview_bg" style={{ ...styles.previewBg, position: 'absolute', top: '20%', left: '20%' } as React.CSSProperties}>
+            <div className="preview_bg" style={styles.previewBg as React.CSSProperties}>
               {ImgBgPreview && (
                 <img src={ImgBgPreview} alt='' style={styles.previewImg as React.CSSProperties} />
               )}
@@ -161,7 +161,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
               </div>
             </div>
           </div>
-          <div className="bgsetting_btn_container" style={styles.bgSettingBtnContainer as React.CSSProperties}>
+          <div className="bgsetting_btn_container" style={{ ...styles.bgSettingBtnContainer, flexDirection: 'row', bottom: '10px', right: '10px' } as React.CSSProperties}>
             <div className="bgsetting_btn_ok"
               onClick={!isTouchDevice ? () => {
                 deleteTap('Settings');
@@ -273,10 +273,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   bgSettingBtnContainer: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     position: 'absolute',
     gap: '6px',
-    right: '5px',
+    bottom: '10px',
+    right: '10px',
   },
   bgSettingImg: {
     width: '150px',
