@@ -309,7 +309,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   wallpaperContainer: {
     position: 'absolute',
-    bottom: '10px',
+    bottom: '50px',
     left: '50%',
     transform: 'translateX(-50%)',
     height: '20%',
