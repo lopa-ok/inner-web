@@ -7,16 +7,18 @@ export interface ToolbarProps {
     windows: DesktopWindows;
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
-    addWindow: (key: string, element: JSX.Element, zIndex?: number) => void; // Add addWindow prop
+    addWindow: (key: string, element: JSX.Element, zIndex?: number) => void;
     updateBackground: (background: string, theme: string) => void;
+    removeWindow: (key: string) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
     windows,
     toggleMinimize,
     shutdown,
-    addWindow, // Add addWindow prop
+    addWindow,
     updateBackground,
+    removeWindow,
 }) => {
     const getTime = () => {
         const date = new Date();
@@ -409,7 +411,3 @@ const styles: StyleSheetCSS = {
 };
 
 export default Toolbar;
-
-function removeWindow(arg0: string): void {
-    throw new Error('Function not implemented.');
-}
