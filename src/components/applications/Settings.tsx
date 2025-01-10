@@ -211,7 +211,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   bgSettingFolder: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
     background: '#c5c4c4',
     border: '2px solid white',
     borderRight: '1px solid black',
@@ -221,6 +220,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   fileTapContainerBgSetting: {
     display: 'flex',
+    flexDirection: 'column',
     position: 'relative',
     marginTop: '12px',
     marginLeft: '9px',
@@ -245,6 +245,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 2,
   },
   folderContentBgSetting: {
+    display: 'flex',
+    flexDirection: 'column',
     position: 'relative',
     width: 'calc(100% - 10px)',
     height: 'calc(100% - 95px)',
@@ -271,6 +273,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   bgSettingBtnContainer: {
     display: 'flex',
+    flexDirection: 'column',
     position: 'absolute',
     gap: '6px',
     right: '5px',
@@ -278,7 +281,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   bgSettingImg: {
     width: '150px',
     height: 'auto',
-    marginRight: '20px',
+    marginBottom: '20px',
   },
   previewImg: {
     maxWidth: '100%',
