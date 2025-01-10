@@ -324,7 +324,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   wallpaperOption: {
     fontSize: '14px',
     cursor: 'default',
-    marginBottom: '0',
+    margin: '0',
     width: '80%',
     textAlign: 'center',
   },
