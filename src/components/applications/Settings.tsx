@@ -313,8 +313,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   wallpaperOption: {
-    fontSize: '10px',
-    padding: '2px 4px',
+    fontSize: '14px',
     cursor: 'default',
     marginBottom: '0',
     width: '80%',
