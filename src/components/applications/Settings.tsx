@@ -125,6 +125,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
       closeWindow={onClose}
       onInteract={onInteract}
       minimizeWindow={onMinimize}
+      resizable={false}
     >
       <motion.div
         className='bgsetting_folder'

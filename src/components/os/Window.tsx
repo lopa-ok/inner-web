@@ -22,6 +22,7 @@ export interface WindowProps {
     windowBarIcon?: IconName;
     onWidthChange?: (width: number) => void;
     onHeightChange?: (height: number) => void;
+    resizable?: boolean;
 }
 
 const Window: React.FC<WindowProps> = (props) => {
@@ -61,6 +62,7 @@ const Window: React.FC<WindowProps> = (props) => {
     const [isResizing, setIsResizing] = useState(false);
 
     const startResize = (event: any) => {
+        if (!props.resizable) return;
         event.preventDefault();
         setIsResizing(true);
         window.addEventListener('mousemove', onResize, false);
@@ -248,7 +250,9 @@ const Window: React.FC<WindowProps> = (props) => {
                                     icon="minimize"
                                     onClick={props.minimizeWindow}
                                 />
-                                <Button icon="maximize" onClick={maximize} />
+                                {props.resizable && (
+                                    <Button icon="maximize" onClick={maximize} />
+                                )}
                                 <div style={{ paddingLeft: 2 }}>
                                     <Button
                                         icon="close"
@@ -266,10 +270,12 @@ const Window: React.FC<WindowProps> = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div
-                            onMouseDown={startResize}
-                            style={styles.resizeHitbox}
-                        ></div>
+                        {props.resizable && (
+                            <div
+                                onMouseDown={startResize}
+                                style={styles.resizeHitbox}
+                            ></div>
+                        )}
                         <div style={styles.bottomBar}>
                             <div
                                 style={Object.assign({}, styles.insetBorder, {
