@@ -220,6 +220,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderBottom: '1px solid black',
     outline: '1px solid white',
     overflow: 'hidden',
+    height: '100%',
+    width: '100%',
   },
   fileTapContainerBgSetting: {
     display: 'flex',
