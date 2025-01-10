@@ -259,6 +259,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     background: '#c5c4c4',
     overflow: 'hidden',
     wordBreak: 'break-word',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   previewBg: {
     position: 'relative',
