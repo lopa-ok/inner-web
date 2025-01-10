@@ -308,12 +308,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     overflowY: 'hidden',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   wallpaperOption: {
     fontSize: '12px',
     paddingLeft: '4px',
     cursor: 'default',
-    marginBottom: '1px',
+    marginBottom: '0',
   },
   wallpaperOptionHover: {
     backgroundColor: '#000080',
