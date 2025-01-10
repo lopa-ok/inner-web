@@ -133,7 +133,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting as React.CSSProperties}>
           <p>Background</p>
         </div>
-        <div className="folder_content" style={styles.folderContent as React.CSSProperties}>
+        <div className="folder_content" style={{ ...styles.folderContent, overflow: 'hidden' } as React.CSSProperties}>
           <div className="folder_content-bgsetting" style={styles.folderContentBgSetting as React.CSSProperties}>
             <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} style={styles.bgSettingImg as React.CSSProperties} />
             <div className="preview_bg" style={styles.previewBg as React.CSSProperties}>
