@@ -119,8 +119,6 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
       windowBarColor={barcolor || '#757579'}
       closeWindow={onClose}
       onInteract={onInteract}
-      onWidthChange={setWidth}
-      onHeightChange={setHeight}
       minimizeWindow={onMinimize}
     >
       <motion.div
@@ -283,7 +281,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     right: '10px',
   },
   bgSettingImg: {
-    width: '150px',
+    width: '75%',
     height: 'auto',
     marginBottom: '20px',
   },
@@ -342,9 +340,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderLeftColor: 'black',
     borderBottomColor: '#f0efef',
     borderRightColor: '#f0efef',
-  },
-  closeBtn: {
-    display: 'none',
   },
 };
 
