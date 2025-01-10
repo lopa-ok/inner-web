@@ -262,11 +262,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   previewBg: {
     position: 'absolute',
-    top: '50%', 
+    top: '40%', // Move up a bit
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '147px',
-    height: '108px',
+    width: '45%', // Set width to 45%
+    height: 'auto',
     border: '2px solid black',
     borderTopColor: '#000',
     borderLeftColor: '#000',
@@ -284,9 +284,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     right: '10px',
   },
   bgSettingImg: {
-    width: '75%',
+    width: '50%',
     height: 'auto',
     marginBottom: '20px',
+    marginTop: '20px',
     position: 'relative',
   },
   previewImg: {
