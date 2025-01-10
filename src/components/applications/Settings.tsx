@@ -315,7 +315,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     background: 'white',
     margin: '0 auto',
     bottom: '0px',
-    overflowY: 'hidden',
+    overflowY: 'auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
