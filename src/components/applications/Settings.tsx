@@ -313,10 +313,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   wallpaperOption: {
-    fontSize: '12px',
-    paddingLeft: '4px',
+    fontSize: '10px',
+    padding: '2px 4px',
     cursor: 'default',
     marginBottom: '0',
+    width: '80%',
+    textAlign: 'center',
   },
   wallpaperOptionHover: {
     backgroundColor: '#000080',
