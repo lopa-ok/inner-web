@@ -325,6 +325,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: 'pointer',
     fontSize: '13px',
     padding: '4px 0',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bgSettingBtnActive: {
     borderTopColor: 'black',
@@ -333,7 +336,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRightColor: '#f0efef',
   },
   closeBtn: {
-    display: 'none', // Hide the close button
+    display: 'none',
   },
 };
 
