@@ -265,8 +265,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     top: '40%', // Move up a bit
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '45%', // Set width to 45%
-    height: 'auto',
+    width: '30%', // Set width to 45%
+    height: '30%',
     border: '2px solid black',
     borderTopColor: '#000',
     borderLeftColor: '#000',
