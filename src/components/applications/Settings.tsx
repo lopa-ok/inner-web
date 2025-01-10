@@ -262,7 +262,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   previewBg: {
     position: 'absolute',
-    top: '15%',
+    top: '25%',
     left: 'calc(50% - 4px)',
     transform: 'translate(-50%, -50%)',
     width: '33%',
