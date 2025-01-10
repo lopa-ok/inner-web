@@ -320,12 +320,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '0',
   },
   wallpaperOption: {
     fontSize: '14px',
     cursor: 'default',
     margin: '0',
-    width: '80%',
+    width: '100%',
     textAlign: 'center',
   },
   wallpaperOptionHover: {
