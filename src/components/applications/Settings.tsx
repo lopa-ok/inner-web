@@ -156,7 +156,11 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
                       onClick={() => setbgColorFunction2(option.value)}
                       style={selectedBg2 === option.value ? { ...styles.wallpaperOption, background: '#040482', color: 'white' } : styles.wallpaperOption as React.CSSProperties}
                       onMouseOver={(e) => Object.assign(e.currentTarget.style, styles.wallpaperOptionHover)}
-                      onMouseOut={(e) => Object.assign(e.currentTarget.style, styles.wallpaperOption)}
+                      onMouseOut={(e) => {
+                        if (selectedBg2 !== option.value) {
+                          Object.assign(e.currentTarget.style, styles.wallpaperOption);
+                        }
+                      }}
                     >
                       {option.label}
                     </ul>
