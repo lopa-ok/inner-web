@@ -15,7 +15,7 @@ import InternetExplorer from '../applications/InternetExplorer';
 import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
-import bg0 from '../assets/bg/bg0.png';
+import bg0 from '../../assets/bg/bg0.png';
 
 export interface DesktopProps {}
 
