@@ -130,36 +130,6 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         }}
         style={styles.bgSettingFolder as MotionStyle}
       >
-        <div className="folder_dragbar_bgsetting" style={{ ...styles.folderDragbarBgSetting, background: barcolor || '#757579' }}>
-          <div className="bgsetting_barbtn" style={styles.bgSettingBarBtn}>
-            <div 
-              style={styles.bgSettingBarBtnDiv}
-              onClick={!isTouchDevice ? (e) => {
-                e.stopPropagation();
-              } : undefined}
-              onTouchEnd={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <p className='dash' style={styles.dash}></p>
-            </div>
-            <div>
-              <p className='x'
-                onClick={!isTouchDevice ? () => {
-                  cancelBg();
-                  deleteTap('Settings');
-                  onClose();
-                } : undefined}
-                onTouchEnd={() => {
-                  cancelBg();
-                  deleteTap('Settings');
-                  onClose();
-                }}
-                style={styles.closeBtn}
-              >×</p>
-            </div>
-          </div>
-        </div>
         <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting as React.CSSProperties}>
           <p>Background</p>
         </div>
@@ -249,87 +219,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     outline: '1px solid white',
     overflow: 'hidden',
   },
-  folderDragbarBgSetting: {
-    display: 'flex',
-    position: 'relative',
-    height: '24px',
-    width: '100%',
-    marginBottom: '1px',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    userSelect: 'none',
-  },
-  bgSettingBarBtn: {
-    display: 'flex',
-    position: 'relative',
-    marginRight: '4px',
-    gap: '2px',
-  },
-  bgSettingBarBtnDiv: {
-    width: '17px',
-    height: '17px',
-    background: '#c9c9c9',
-    fontWeight: 'bold',
-    border: '1px solid black',
-    borderTopColor: '#c6c6c6',
-    borderLeftColor: '#c6c6c6',
-    boxShadow: 'inset 1px 1px #ffffff, 1px 1px #000000dd',
-    cursor: 'default',
-  },
-  closeBtn: {
-    position: 'relative',
-    textAlign: 'center',
-    fontSize: '18px',
-    bottom: '5px',
-    margin: 0,
-    padding: '0 8px',
-    cursor: 'pointer',
-  },
-  dash: {
-    position: 'relative',
-    width: '8px',
-    top: '11px',
-    margin: '0 auto',
-    borderBottom: '2px solid black',
-  },
-  wallpaperContainer: {
-    position: 'relative',
-    height: '80px',
-    width: '90%',
-    border: '2px solid rgb(241, 241, 241)',
-    borderTopColor: 'black',
-    borderLeftColor: 'black',
-    background: 'white',
-    margin: '0 auto',
-    bottom: '5px',
-    overflowY: 'scroll',
-  },
-  wallpaperOption: {
-    fontSize: '12px',
-    paddingLeft: '4px',
-    cursor: 'default',
-  },
-  wallpaperOptionHover: {
-    backgroundColor: '#000080',
-    color: '#fff',
-  },
-  bgSettingBtn: {
-    position: 'relative',
-    width: '70px',
-    textAlign: 'center',
-    border: '2px solid black',
-    borderTopColor: '#f0efef',
-    borderLeftColor: '#f0efef',
-    cursor: 'pointer',
-    fontSize: '13px',
-    padding: '4px 0',
-  },
-  bgSettingBtnActive: {
-    borderTopColor: 'black',
-    borderLeftColor: 'black',
-    borderBottomColor: '#f0efef',
-    borderRightColor: '#f0efef',
-  },
   fileTapContainerBgSetting: {
     display: 'flex',
     position: 'relative',
@@ -400,6 +289,47 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   wallpaper: {
     marginBottom: '20px',
+  },
+  wallpaperContainer: {
+    position: 'relative',
+    height: '80px',
+    width: '90%',
+    border: '2px solid rgb(241, 241, 241)',
+    borderTopColor: 'black',
+    borderLeftColor: 'black',
+    background: 'white',
+    margin: '0 auto',
+    bottom: '5px',
+    overflowY: 'scroll',
+  },
+  wallpaperOption: {
+    fontSize: '12px',
+    paddingLeft: '4px',
+    cursor: 'default',
+  },
+  wallpaperOptionHover: {
+    backgroundColor: '#000080',
+    color: '#fff',
+  },
+  bgSettingBtn: {
+    position: 'relative',
+    width: '70px',
+    textAlign: 'center',
+    border: '2px solid black',
+    borderTopColor: '#f0efef',
+    borderLeftColor: '#f0efef',
+    cursor: 'pointer',
+    fontSize: '13px',
+    padding: '4px 0',
+  },
+  bgSettingBtnActive: {
+    borderTopColor: 'black',
+    borderLeftColor: 'black',
+    borderBottomColor: '#f0efef',
+    borderRightColor: '#f0efef',
+  },
+  closeBtn: {
+    display: 'none', // Hide the close button
   },
 };
 
