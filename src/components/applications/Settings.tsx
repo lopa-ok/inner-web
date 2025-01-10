@@ -327,6 +327,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '0',
+    maxHeight: '150px',
   },
   wallpaperOption: {
     fontSize: '16px',
