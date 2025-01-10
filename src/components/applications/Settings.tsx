@@ -266,6 +266,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     wordBreak: 'break-word',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '100%',
   },
   previewBg: {
     position: 'absolute',
