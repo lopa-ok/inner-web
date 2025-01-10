@@ -15,6 +15,7 @@ import InternetExplorer from '../applications/InternetExplorer';
 import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
+import bg0 from '../assets/bg/bg0.png';
 
 export interface DesktopProps {}
 
@@ -40,7 +41,24 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const savedTheme = localStorage.getItem('theme');
         if (savedBg && savedTheme) {
             updateBackground(savedBg, savedTheme);
+        } else {
+            const defaultBg = bg0;
+            const defaultTheme = '#098684';
+            updateBackground(defaultBg, defaultTheme);
+            localStorage.setItem('background', defaultBg);
+            localStorage.setItem('theme', defaultTheme);
         }
+    }, []);
+
+    useEffect(() => {
+        const bodyBG = document.getElementsByTagName('body')[0];
+        bodyBG.style.transition = 'background-color 0.3s, background-image 0.3s';
+        bodyBG.style.backgroundColor = '#c5c4c4';
+        bodyBG.style.backgroundSize = 'cover';
+        bodyBG.style.backgroundPosition = 'center';
+        bodyBG.style.backgroundRepeat = 'no-repeat';
+        bodyBG.style.height = '100vh';
+        bodyBG.style.margin = '0';
     }, []);
 
     const updateBackground = useCallback((background: string, theme: string) => {
