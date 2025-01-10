@@ -136,7 +136,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         <div className="folder_content" style={{ ...styles.folderContent, overflow: 'hidden' } as React.CSSProperties}>
           <div className="folder_content-bgsetting" style={styles.folderContentBgSetting as React.CSSProperties}>
             <img alt="bgsettingPC" className='bgsetting_img' src={bgPic} style={styles.bgSettingImg as React.CSSProperties} />
-            <div className="preview_bg" style={styles.previewBg as React.CSSProperties}>
+            <div className="preview_bg" style={{ ...styles.previewBg, position: 'absolute', top: '20%', left: '20%' } as React.CSSProperties}>
               {ImgBgPreview && (
                 <img src={ImgBgPreview} alt='' style={styles.previewImg as React.CSSProperties} />
               )}
