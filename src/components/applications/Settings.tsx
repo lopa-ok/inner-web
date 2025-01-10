@@ -307,7 +307,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   wallpaperContainer: {
     position: 'relative',
-    height: 'auto',
+    height: '40%',
     width: '40%',
     border: '0px solid rgb(241, 241, 241)',
     borderTopColor: 'black',
