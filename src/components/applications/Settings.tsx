@@ -136,9 +136,11 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
             <span>Settings</span>
           </div>
           <div className="bgsetting_barbtn" style={styles.bgSettingBarBtn}>
-            <div onClick={!isTouchDevice ? (e) => {
-              e.stopPropagation();
-            } : undefined}
+            <div 
+              style={styles.bgSettingBarBtnDiv}
+              onClick={!isTouchDevice ? (e) => {
+                e.stopPropagation();
+              } : undefined}
               onTouchEnd={(e) => {
                 e.stopPropagation();
               }}
@@ -183,6 +185,8 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
                       key={option.value}
                       onClick={() => setbgColorFunction2(option.value)}
                       style={selectedBg2 === option.value ? { ...styles.wallpaperOption, background: '#040482', color: 'white' } : styles.wallpaperOption as React.CSSProperties}
+                      onMouseOver={(e) => Object.assign(e.currentTarget.style, styles.wallpaperOptionHover)}
+                      onMouseOut={(e) => Object.assign(e.currentTarget.style, styles.wallpaperOption)}
                     >
                       {option.label}
                     </ul>
@@ -204,6 +208,8 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
                 onClose();
               }}
               style={styles.bgSettingBtn as React.CSSProperties}
+              onMouseDown={e => Object.assign(e.currentTarget.style, styles.bgSettingBtnActive)}
+              onMouseUp={e => Object.assign(e.currentTarget.style, styles.bgSettingBtn)}
             >
               <span>OK</span>
             </div>
@@ -235,66 +241,157 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
   );
 };
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   bgSettingFolder: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
+    background: '#c5c4c4',
+    border: '2px solid white',
+    borderRight: '1px solid black',
+    borderBottom: '1px solid black',
+    outline: '1px solid white',
+    overflow: 'hidden',
   },
   folderDragbarBgSetting: {
     display: 'flex',
-    justifyContent: 'space-between',
+    position: 'relative',
+    height: '24px',
+    width: '100%',
+    marginBottom: '1px',
     alignItems: 'center',
-    padding: '0 10px',
-    height: '30px',
+    justifyContent: 'space-between',
+    userSelect: 'none',
+    background: '#000080',
   },
   bgSettingBarName: {
     display: 'flex',
     alignItems: 'center',
   },
-  settingIcon: {
-    marginRight: '8px',
+  bgSettingBarNameImg: {
+    width: '16px',
+    marginLeft: '5px',
+    position: 'relative',
+    top: '3px',
+  },
+  bgSettingBarNameSpan: {
+    fontSize: '15px',
+    color: 'white',
+    marginLeft: '5px',
   },
   bgSettingBarBtn: {
     display: 'flex',
-    alignItems: 'center',
+    position: 'relative',
+    marginRight: '4px',
+    gap: '2px',
   },
-  dash: {
-    margin: 0,
-    padding: '0 8px',
-    cursor: 'pointer',
-  },
-  closeBtn: {
-    margin: 0,
-    padding: '0 8px',
-    cursor: 'pointer',
+  bgSettingBarBtnDiv: {
+    width: '17px',
+    height: '17px',
+    background: '#c9c9c9',
+    fontWeight: 'bold',
+    border: '1px solid black',
+    borderTopColor: '#c6c6c6',
+    borderLeftColor: '#c6c6c6',
+    boxShadow: 'inset 1px 1px #ffffff, 1px 1px #000000dd',
+    cursor: 'default',
   },
   fileTapContainerBgSetting: {
-    padding: '10px',
-    borderBottom: '1px solid #ccc',
+    display: 'flex',
+    position: 'relative',
+    marginTop: '12px',
+    marginLeft: '9px',
+    cursor: 'default',
+    fontSize: '12px',
+    background: '#c5c4c4',
+    border: '2px solid black',
+    borderTopColor: '#f0efef',
+    borderLeftColor: '#f0efef',
+    borderBottomColor: 'transparent',
+    borderRightColor: '#353434',
+    zIndex: 999999,
+    padding: '1px 8px',
   },
   folderContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    padding: '10px',
+    position: 'relative',
+    margin: '0 auto',
+    width: 'calc(100% - 8px)',
+    height: 'calc(100% - 4px)',
+    overflow: 'hidden',
+    touchAction: 'none',
+    zIndex: 2,
   },
   folderContentBgSetting: {
+    position: 'relative',
+    width: 'calc(100% - 10px)',
+    height: 'calc(100% - 95px)',
+    padding: '1rem 1.5rem',
+    border: '2px solid #353434',
+    borderTopColor: '#f0efef',
+    borderLeftColor: '#f0efef',
+    margin: '0 auto',
+    background: '#c5c4c4',
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+  },
+  previewBg: {
+    position: 'relative',
+    width: '147px',
+    height: '108px',
+    border: '2px solid black',
+    borderTopColor: '#000',
+    borderLeftColor: '#000',
+    borderBottomColor: '#fff',
+    borderRightColor: '#fff',
+    overflow: 'hidden',
+    background: '#fff',
+  },
+  wallpaperContainer: {
+    position: 'relative',
+    height: '80px',
+    width: '90%',
+    border: '2px solid #f1f1f1',
+    borderTopColor: '#000',
+    borderLeftColor: '#000',
+    background: '#fff',
+    margin: '0 auto',
+  },
+  wallpaperOption: {
+    fontSize: '12px',
+    paddingLeft: '4px',
+    cursor: 'default',
+  },
+  wallpaperOptionHover: {
+    backgroundColor: '#000080',
+    color: '#fff',
+  },
+  bgSettingBtnContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
+    position: 'absolute',
+    gap: '6px',
+    right: '5px',
+  },
+  bgSettingBtn: {
+    position: 'relative',
+    width: '70px',
+    textAlign: 'center',
+    border: '2px solid black',
+    borderTopColor: '#f0efef',
+    borderLeftColor: '#f0efef',
+    fontSize: '13px',
+    cursor: 'pointer',
+    background: '#c5c4c4',
+    padding: '4px 0',
+  },
+  bgSettingBtnActive: {
+    borderTopColor: '#000',
+    borderLeftColor: '#000',
+    borderBottomColor: '#f0efef',
+    borderRightColor: '#f0efef',
   },
   bgSettingImg: {
     width: '150px',
     height: 'auto',
-    marginRight: '20px',
-  },
-  previewBg: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: '1px solid #ccc',
     marginRight: '20px',
   },
   previewImg: {
@@ -306,26 +403,6 @@ const styles = {
   },
   wallpaper: {
     marginBottom: '20px',
-  },
-  wallpaperContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  wallpaperOption: {
-    padding: '5px',
-    cursor: 'pointer',
-  },
-  bgSettingBtnContainer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: '20px',
-  },
-  bgSettingBtn: {
-    marginLeft: '10px',
-    padding: '5px 10px',
-    cursor: 'pointer',
-    border: '1px solid #ccc',
-    borderRadius: '3px',
   },
 };
 
