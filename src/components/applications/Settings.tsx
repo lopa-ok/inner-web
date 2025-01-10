@@ -234,6 +234,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRightColor: '#353434',
     zIndex: 999999,
     padding: '1px 8px',
+    width: 'fit-content',
   },
   folderContent: {
     position: 'relative',
