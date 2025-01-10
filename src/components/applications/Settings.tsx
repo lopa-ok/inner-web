@@ -48,6 +48,19 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
     { value: 10, label: 'Purple Blue', color: '#354092', image: bg9, barColor: '#354092' },
   ];
 
+  useEffect(() => {
+    const bodyBG = document.getElementsByTagName('body')[0];
+    if (localBg) {
+      bodyBG.style.backgroundColor = localTheme || '';
+      bodyBG.style.backgroundImage = `url(${localBg})`;
+    }
+
+    if (localBg && localTheme) {
+      setImgBgPreview(localBg);
+      setThemeColor(localTheme);
+    }
+  }, [localBg, localTheme]);
+
   function setbgColorFunction2(index: number): void {
     const selectedOption = colorOptions.find(option => option.value === index);
     if (selectedOption) {
@@ -60,14 +73,6 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
       updateBackground(selectedOption.image, selectedOption.color);
     }
   }
-
-  useEffect(() => {
-    const bodyBG = document.getElementsByTagName('body')[0];
-    if (localBg) {
-      bodyBG.style.backgroundColor = localTheme || '';
-      bodyBG.style.backgroundImage = `url(${localBg})`;
-    }
-  }, [localBg, localTheme]);
 
   function handleApplyClick() {
     if (ImgBgPreview && themeColor) {
