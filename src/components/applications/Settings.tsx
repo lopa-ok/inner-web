@@ -261,7 +261,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'center',
   },
   previewBg: {
-    position: 'relative',
+    position: 'absolute',
+    top: '50%', 
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     width: '147px',
     height: '108px',
     border: '2px solid black',
@@ -284,6 +287,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '75%',
     height: 'auto',
     marginBottom: '20px',
+    position: 'relative',
   },
   previewImg: {
     maxWidth: '100%',
