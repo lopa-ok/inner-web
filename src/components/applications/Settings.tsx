@@ -313,7 +313,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '12px',
     paddingLeft: '4px',
     cursor: 'default',
-    marginBottom: '4px',
+    marginBottom: '1px',
   },
   wallpaperOptionHover: {
     backgroundColor: '#000080',
