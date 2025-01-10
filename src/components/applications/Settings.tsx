@@ -17,7 +17,7 @@ interface SettingsProps {
   onClose: () => void;
   onInteract: () => void;
   onMinimize: () => void;
-  updateBackground: (background: string, theme: string) => void; // Add updateBackground prop
+  updateBackground: (background: string, theme: string) => void;
 }
 
 const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, updateBackground }) => {
@@ -131,7 +131,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         onClick={(e) => {
           e.stopPropagation();
         }}
-        style={{ ...styles.bgSettingFolder, overflow: 'hidden' } as MotionStyle} // Add overflow: 'hidden'
+        style={{ ...styles.bgSettingFolder, overflow: 'hidden' } as MotionStyle}
       >
         <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting as React.CSSProperties}>
           <p>Background</p>
@@ -215,13 +215,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     flexDirection: 'column',
     background: '#c5c4c4',
-    border: '2px solid white',
+    border: '0px solid white',
     borderRight: '1px solid black',
     borderBottom: '1px solid black',
     outline: '1px solid white',
     overflow: 'hidden',
     height: '100%',
     width: '100%',
+    position: 'relative',
   },
   fileTapContainerBgSetting: {
     display: 'flex',
@@ -269,11 +270,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   previewBg: {
     position: 'absolute',
-    top: '23%',
+    top: '24.5%',
     left: 'calc(50% - 4px)',
     transform: 'translate(-50%, -50%)',
     width: '34%',
-    height: '26%',
+    height: '28%',
     border: '2px solid black',
     borderTopColor: '#000',
     borderLeftColor: '#000',
@@ -312,8 +313,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     bottom: '50px',
     left: '50%',
     transform: 'translateX(-50%)',
-    height: '30%',
-    width: '50%',
+    height: '20%',
+    width: '40%',
     border: '0px solid rgb(241, 241, 241)',
     borderTopColor: 'black',
     borderLeftColor: 'black',
@@ -326,9 +327,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '0',
+    maxHeight: '150px',
   },
   wallpaperOption: {
-    fontSize: '18px',
+    fontSize: '14px',
     cursor: 'default',
     margin: '0',
     width: '100%',
