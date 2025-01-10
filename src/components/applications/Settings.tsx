@@ -33,8 +33,8 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
     return prevTheme ? prevTheme : null;
   });
   const [selectedBg2, setSelectedBg2] = useState<number | null>(null);
-  const [width, setWidth] = useState(400);
-  const [height, setHeight] = useState(300);
+  const [width, setWidth] = useState(600);
+  const [height, setHeight] = useState(900);
 
   const colorOptions = [
     { value: 1, label: '(None)', color: '#098684', image: bg0, barColor: '#14045c' },
