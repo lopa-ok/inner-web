@@ -35,6 +35,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
   const [selectedBg2, setSelectedBg2] = useState<number | null>(null);
   const [width, setWidth] = useState(600);
   const [height, setHeight] = useState(800);
+  const [isHovered, setIsHovered] = useState(false);
 
   const colorOptions = [
     { value: 1, label: '(None)', color: '#098684', image: bg0, barColor: '#14045c' },
@@ -149,7 +150,15 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
               <div className="wallpaper" style={styles.wallpaper as React.CSSProperties}>
                 <p>Wallpaper</p>
                 <p>Select an HTML Element or Picture</p>
-                <div className="wallpaper_container" style={styles.wallpaperContainer as React.CSSProperties}>
+                <div
+                  className="wallpaper_container"
+                  style={{
+                    ...styles.wallpaperContainer,
+                    ...(isHovered ? styles.wallpaperContainerHover : {}),
+                  } as React.CSSProperties}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
                   {colorOptions.map((option) => (
                     <ul
                       key={option.value}
@@ -329,6 +338,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'center',
     padding: '0',
     maxHeight: '150px',
+    transition: 'background-color 0.3s',
+  },
+  wallpaperContainerHover: {
+    background: 'blue',
   },
   wallpaperOption: {
     fontSize: '16px',
