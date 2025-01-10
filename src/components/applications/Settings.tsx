@@ -128,7 +128,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
         onClick={(e) => {
           e.stopPropagation();
         }}
-        style={styles.bgSettingFolder as MotionStyle}
+        style={{ ...styles.bgSettingFolder, overflow: 'hidden' } as MotionStyle} // Add overflow: 'hidden'
       >
         <div className="file_tap_container-bgsetting" style={styles.fileTapContainerBgSetting as React.CSSProperties}>
           <p>Background</p>
