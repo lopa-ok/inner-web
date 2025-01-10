@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, MotionStyle } from 'framer-motion';
 import Window from '../os/Window';
+import settingIcon from '../../assets/icons/setting.png';
 import bgPic from '../../assets/bg/bgpc.png';
 import bg0 from '../../assets/bg/bg0.png';
 import bg1 from '../../assets/bg/bg1.png';
@@ -299,7 +300,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     background: 'white',
     margin: '0 auto',
     bottom: '5px',
-    overflowY: 'scroll',
+    overflowY: 'hidden',
   },
   wallpaperOption: {
     fontSize: '12px',
@@ -326,6 +327,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderLeftColor: 'black',
     borderBottomColor: '#f0efef',
     borderRightColor: '#f0efef',
+  },
+  closeBtn: {
+    display: 'none', // Hide the close button
   },
 };
 
