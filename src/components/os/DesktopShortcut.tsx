@@ -9,6 +9,9 @@ export interface DesktopShortcutProps {
     invertText?: boolean;
     onOpen: () => void;
     textColor?: string;
+    onContextMenu?: (e: React.MouseEvent) => void;
+    onRename?: (newName: string) => void;
+    isRenaming?: boolean;
 }
 
 const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
@@ -17,6 +20,9 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
     invertText,
     onOpen,
     textColor,
+    onContextMenu,
+    onRename,
+    isRenaming,
 }) => {
     const [isSelected, setIsSelected] = useState(false);
     const [shortcutId, setShortcutId] = useState('');
@@ -24,6 +30,8 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
     const containerRef = useRef<any>();
 
     const [scaledStyle, setScaledStyle] = useState({});
+    const [editingName, setEditingName] = useState(shortcutName);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const requiredIcon = require(`../../assets/icons/${icon}.png`);
     const [doubleClickTimerActive, setDoubleClickTimerActive] = useState(false);
@@ -52,6 +60,13 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
             });
         }
     }, [scaledStyle]);
+
+    useEffect(() => {
+        if (isRenaming && inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, [isRenaming]);
 
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
@@ -83,6 +98,21 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
         }, 300);
     }, [doubleClickTimerActive, setIsSelected, onOpen]);
 
+    const handleRenameSubmit = () => {
+        if (editingName.trim() && onRename) {
+            onRename(editingName.trim());
+        }
+    };
+
+    const handleRenameKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            handleRenameSubmit();
+        } else if (e.key === 'Escape') {
+            setEditingName(shortcutName);
+            onRename?.(shortcutName);
+        }
+    };
+
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -95,6 +125,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
             id={`${shortcutId}`}
             style={Object.assign({}, styles.appShortcut, scaledStyle)}
             onMouseDown={handleClickShortcut}
+            onContextMenu={onContextMenu}
             ref={containerRef}
         >
             <div id={`${shortcutId}`} style={styles.iconContainer}>
@@ -123,17 +154,28 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
                 id={`${shortcutId}`}
                 style={isSelected ? { backgroundColor: colors.blue } : {}}
             >
-                <p
-                    id={`${shortcutId}`}
-                    style={Object.assign(
-                        {},
-                        styles.shortcutText,
-                        invertText && !isSelected && { color: 'black' },
-                        { color: textColor || 'white' } // Apply text color
-                    )}
-                >
-                    {shortcutName}
-                </p>
+                {isRenaming ? (
+                    <input
+                        ref={inputRef}
+                        value={editingName}
+                        onChange={(e) => setEditingName(e.target.value)}
+                        onBlur={handleRenameSubmit}
+                        onKeyDown={handleRenameKeyDown}
+                        style={styles.renameInput}
+                    />
+                ) : (
+                    <p
+                        id={`${shortcutId}`}
+                        style={Object.assign(
+                            {},
+                            styles.shortcutText,
+                            invertText && !isSelected && { color: 'black' },
+                            { color: textColor || 'white' } // Apply text color
+                        )}
+                    >
+                        {shortcutName}
+                    </p>
+                )}
             </div>
         </div>
     );
@@ -176,6 +218,17 @@ const styles: StyleSheetCSS = {
         backgroundSize: `2px 2px`,
         backgroundPosition: `0 0, 0 1px, 1px -1px, -1px 0px`,
         pointerEvents: 'none',
+    },
+    renameInput: {
+        background: 'transparent',
+        border: 'none',
+        color: 'white',
+        fontFamily: 'MSSerif',
+        fontSize: 8,
+        textAlign: 'center',
+        width: '100%',
+        padding: '0 2px',
+        outline: 'none',
     },
 };
 

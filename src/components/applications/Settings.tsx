@@ -147,7 +147,6 @@ const Settings: React.FC<SettingsProps> = ({ onClose, onInteract, onMinimize, up
             </div>
             <div className="bgsettingtext_container" style={styles.bgSettingTextContainer as React.CSSProperties}>
               <div className="wallpaper" style={styles.wallpaper as React.CSSProperties}>
-                <p>Wallpaper</p>
                 <p>Select an HTML Element or Picture</p>
                 <div className="wallpaper_container" style={styles.wallpaperContainer as React.CSSProperties}>
                   {colorOptions.map((option) => (
@@ -320,9 +319,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     transform: 'translateX(-50%)',
     height: '30%',
     width: '50%',
-    border: '0px solid rgb(241, 241, 241)',
-    borderTopColor: 'black',
-    borderLeftColor: 'black',
+    border: '2px solid #353434',
+    borderTopColor: '#f0efef',
+    borderLeftColor: '#f0efef',
     background: 'white',
     margin: '0 auto',
     overflowY: 'auto',
@@ -335,11 +334,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxHeight: '150px',
   },
   wallpaperOption: {
-    fontSize: '16px',
+    fontSize: '20px',
     cursor: 'default',
     margin: '0',
     width: '100%',
     textAlign: 'center',
+    padding: '1px 0',
+    fontFamily: 'MSSerif',
   },
   wallpaperOptionHover: {
     backgroundColor: '#000080',

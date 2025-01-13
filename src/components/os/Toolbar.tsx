@@ -106,6 +106,11 @@ const Toolbar: React.FC<ToolbarProps> = ({
         setStartWindowOpen(false);
     };
 
+    const handleShutdown = () => {
+        shutdown();
+        setStartWindowOpen(false);
+    };
+
     return (
         <div style={styles.toolbarOuter}>
             {startWindowOpen && (
@@ -136,7 +141,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div
                                 className="start-menu-option"
                                 style={styles.startMenuOption}
-                                onMouseDown={shutdown}
+                                onMouseDown={handleShutdown}
                             >
                                 <Icon
                                     style={styles.startMenuIcon}

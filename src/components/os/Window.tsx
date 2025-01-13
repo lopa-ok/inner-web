@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, ReactNode } from 'react';
 import { IconName } from '../../assets/icons';
 import colors from '../../constants/colors';
 import Colors from '../../constants/colors';
@@ -15,7 +15,7 @@ export interface WindowProps {
     height: number;
     top: number;
     left: number;
-    windowTitle?: string;
+    windowTitle?: ReactNode;
     bottomLeftText?: string;
     rainbow?: boolean;
     windowBarColor?: string;
@@ -62,7 +62,7 @@ const Window: React.FC<WindowProps> = (props) => {
     const [isResizing, setIsResizing] = useState(false);
 
     const startResize = (event: any) => {
-        if (!props.resizable) return;
+        if (!props.resizable || props.windowTitle === "Settings") return;
         event.preventDefault();
         setIsResizing(true);
         window.addEventListener('mousemove', onResize, false);
