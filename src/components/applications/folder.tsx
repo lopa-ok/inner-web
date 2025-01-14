@@ -28,10 +28,11 @@ const Folder: React.FC<FolderProps> = ({
     onRename
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
-    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
     const [isRenaming, setIsRenaming] = useState(false);
     const [newName, setNewName] = useState(folderName);
     const renameInputRef = useRef<HTMLInputElement>(null);
+    const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
 
     useEffect(() => {
         if (isRenaming && renameInputRef.current) {
@@ -50,18 +51,23 @@ const Folder: React.FC<FolderProps> = ({
 
     const handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault();
-        setContextMenu({ visible: true, x: e.clientX, y: e.clientY });
+        setContextMenu({ visible: true, x: e.clientX, y: e.clientY, targetId: '' });
+    };
+
+    const handleItemContextMenu = (e: React.MouseEvent, itemName: string) => {
+        e.preventDefault();
+        setContextMenu({ visible: true, x: e.clientX, y: e.clientY, targetId: itemName });
     };
 
     const handleClick = () => {
         if (contextMenu.visible) {
-            setContextMenu({ visible: false, x: 0, y: 0 });
+            setContextMenu({ visible: false, x: 0, y: 0, targetId: '' });
         }
     };
 
     const handleRename = () => {
         setIsRenaming(true);
-        setContextMenu({ visible: false, x: 0, y: 0 });
+        setContextMenu({ visible: false, x: 0, y: 0, targetId: '' });
     };
 
     const handleRenameSubmit = () => {
@@ -82,6 +88,49 @@ const Folder: React.FC<FolderProps> = ({
             setIsRenaming(false);
             setNewName(folderName);
         }
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        const key = e.dataTransfer.getData('text/plain');
+        const item = JSON.parse(sessionStorage.getItem(key) || '{}');
+        if (item.shortcutName) {
+            onAddItem(folderId, item);
+            sessionStorage.removeItem(key);
+        }
+    };
+
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    };
+
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>, key: string) => {
+        e.dataTransfer.setData('text/plain', key);
+    };
+
+    const handleDropInsideFolder = (e: React.DragEvent<HTMLDivElement>, key: string) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        let top = e.clientY - rect.top;
+        let left = e.clientX - rect.left;
+
+        // Snap to grid
+        top = Math.round(top / GRID_SIZE) * GRID_SIZE;
+        left = Math.round(left / GRID_SIZE) * GRID_SIZE;
+
+        // Check for collisions and adjust position if necessary
+        const newPosition = { top, left };
+        const collision = Object.values(positions).some(
+            (pos) => pos.top === newPosition.top && pos.left === newPosition.left
+        );
+
+        if (collision) {
+            newPosition.top += GRID_SIZE;
+        }
+
+        setPositions((prevPositions) => ({
+            ...prevPositions,
+            [key]: newPosition,
+        }));
     };
 
     return (
@@ -112,24 +161,34 @@ const Folder: React.FC<FolderProps> = ({
                 style={styles.container}
                 onContextMenu={handleContextMenu}
                 onClick={handleClick}
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
             >
-                {Array.isArray(contents) && contents.map((item, index) => (
-                    <div
-                        key={`${item.shortcutName}-${index}`}
-                        style={{
-                            position: 'absolute',
-                            top: Math.floor(index / 3) * GRID_SIZE + 20,
-                            left: (index % 3) * GRID_SIZE + 20
-                        }}
-                    >
-                        <DesktopShortcut
-                            icon={item.icon}
-                            shortcutName={item.shortcutName}
-                            onOpen={item.onOpen}
-                            textColor="black"
-                        />
-                    </div>
-                ))}
+                {Array.isArray(contents) && contents.map((item, index) => {
+                    const position = positions[item.shortcutName] || {
+                        top: Math.floor(index / 3) * GRID_SIZE + 20,
+                        left: (index % 3) * GRID_SIZE + 20
+                    };
+
+                    return (
+                        <div
+                            key={`${item.shortcutName}-${index}`}
+                            style={Object.assign({}, styles.shortcutContainer, position)}
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, item.shortcutName)}
+                            onDrop={(e) => handleDropInsideFolder(e, item.shortcutName)}
+                            onDragOver={handleDragOver}
+                            onContextMenu={(e) => handleItemContextMenu(e, item.shortcutName)}
+                        >
+                            <DesktopShortcut
+                                icon={item.icon}
+                                shortcutName={item.shortcutName}
+                                onOpen={item.onOpen}
+                                textColor="black"
+                            />
+                        </div>
+                    );
+                })}
                 {contextMenu.visible && (
                     <div style={{
                         ...styles.contextMenu,
@@ -139,11 +198,8 @@ const Folder: React.FC<FolderProps> = ({
                         <div style={styles.contextMenuItem} onClick={handleRename}>
                             Rename
                         </div>
-                        <div style={styles.contextMenuItem}>
-                            Paste
-                        </div>
-                        <div style={styles.contextMenuItem}>
-                            New Folder
+                        <div style={styles.contextMenuItem} onClick={() => onRemoveItem(folderId, contextMenu.targetId!)}>
+                            Delete
                         </div>
                     </div>
                 )}
@@ -159,6 +215,10 @@ const styles: StyleSheetCSS = {
         width: '100%',
         height: '100%',
         backgroundColor: 'white',
+    },
+    shortcutContainer: {
+        position: 'absolute',
+        cursor: 'move',
     },
     contextMenu: {
         position: 'absolute',

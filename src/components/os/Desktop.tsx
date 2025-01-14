@@ -16,13 +16,13 @@ import Folder from '../applications/folder';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
 import bg0 from '../../assets/bg/bg0.png';
+import TextEditor from '../applications/TextEditor';
 
 export interface DesktopProps {}
 
 type ExtendedWindowAppProps<T> = T & WindowAppProps;
 
 const GRID_SIZE = 100;
-const COLUMNS = 6;
 const VERTICAL_SPACING = 104;
 const HORIZONTAL_SPACING = 100;
 const INITIAL_OFFSET = { top: 16, left: 6 };
@@ -31,7 +31,7 @@ interface ContextMenuState {
     visible: boolean;
     x: number;
     y: number;
-    type: 'desktop' | 'folder';
+    type: 'desktop' | 'folder' | 'file';
     targetId?: string;
 }
 
@@ -43,6 +43,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [numShutdowns, setNumShutdowns] = useState(1);
     const [folders, setFolders] = useState<{[key: string]: DesktopShortcutProps[]}>({});
     const [nextFolderId, setNextFolderId] = useState(1);
+    const [nextFileId, setNextFileId] = useState(1);
     const [folderContents, setFolderContents] = useState<{ [key: string]: DesktopShortcutProps[] }>({});
     const [contextMenu, setContextMenu] = useState<ContextMenuState>({ 
         visible: false, 
@@ -241,12 +242,16 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 [documentsFolder]: "Documents"
             }));
             setNextFolderId(1);
+        }
 
-            const documentsShortcut: DesktopShortcutProps = {
-                shortcutName: "Documents",
-                icon: "folderIcon",
-                onOpen: () => openFolder(documentsFolder, "Documents")
-            };
+        const documentsShortcut: DesktopShortcutProps = {
+            shortcutName: "Documents",
+            icon: "folderIcon",
+            onOpen: () => openFolder(documentsFolder, "Documents")
+        };
+
+        const existingDocumentsShortcut = newShortcuts.find(shortcut => shortcut.shortcutName === "Documents");
+        if (!existingDocumentsShortcut) {
             newShortcuts.push(documentsShortcut);
         }
 
@@ -259,6 +264,67 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         setShortcuts(newShortcuts);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+
+        const savedShortcuts = sessionStorage.getItem('shortcuts');
+        const savedFolders = sessionStorage.getItem('folders');
+        const savedPositions = sessionStorage.getItem('positions');
+        const savedFolderNames = sessionStorage.getItem('folderNames');
+        const savedNextFolderId = sessionStorage.getItem('nextFolderId');
+        const savedNextFileId = sessionStorage.getItem('nextFileId');
+        const savedWindows = sessionStorage.getItem('windows');
+    
+        if (savedShortcuts) {
+            const parsedShortcuts = JSON.parse(savedShortcuts);
+            parsedShortcuts.forEach((shortcut: DesktopShortcutProps) => {
+                shortcut.onOpen = () => {
+                    const app = APPLICATIONS[shortcut.shortcutName.toLowerCase()];
+                    if (app) {
+                        addWindow(
+                            app.key,
+                            <app.component
+                                onInteract={() => onWindowInteract(app.key)}
+                                onMinimize={() => minimizeWindow(app.key)}
+                                onClose={() => removeWindow(app.key)}
+                                key={app.key}
+                            />
+                        );
+                    }
+                };
+            });
+            setShortcuts(parsedShortcuts);
+        }
+        if (savedFolders) {
+            setFolders(JSON.parse(savedFolders));
+        }
+        if (savedPositions) {
+            setPositions(JSON.parse(savedPositions));
+        }
+        if (savedFolderNames) {
+            setFolderNames(JSON.parse(savedFolderNames));
+        }
+        if (savedNextFolderId) {
+            setNextFolderId(JSON.parse(savedNextFolderId));
+        }
+        if (savedNextFileId) {
+            setNextFileId(JSON.parse(savedNextFileId));
+        }
+        if (savedWindows) {
+            setWindows(JSON.parse(savedWindows));
+        }
+    }, []);
+    
+    useEffect(() => {
+
+        sessionStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+        sessionStorage.setItem('folders', JSON.stringify(folders));
+        sessionStorage.setItem('positions', JSON.stringify(positions));
+        sessionStorage.setItem('folderNames', JSON.stringify(folderNames));
+        sessionStorage.setItem('nextFolderId', JSON.stringify(nextFolderId));
+        sessionStorage.setItem('nextFileId', JSON.stringify(nextFileId));
+        sessionStorage.setItem('windows', JSON.stringify(windows));
+    }, [shortcuts, folders, positions, folderNames, nextFolderId, nextFileId, windows]);
 
     const rebootDesktop = useCallback(() => {
         setWindows({});
@@ -365,6 +431,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         }));
     };
 
+    const handleDropOnFolder = (e: React.DragEvent<HTMLDivElement>, folderId: string) => {
+        const key = e.dataTransfer.getData('text/plain');
+        const item = shortcuts.find(shortcut => shortcut.shortcutName === key);
+        if (item) {
+            setShortcuts(prev => prev.filter(shortcut => shortcut.shortcutName !== key));
+            addItemToFolder(folderId, item);
+        }
+    };
+
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     };
@@ -382,9 +457,24 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             ...prev,
             [newFolderId]: defaultName
         }));
+
+        // Set initial position for the new folder
+        const totalItems = shortcuts.length + Object.keys(folders).length;
+        const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+        const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+
+        const position = {
+            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+        };
+
+        setPositions(prev => ({
+            ...prev,
+            [newFolderId]: position
+        }));
         
         setNextFolderId(prev => prev + 1);
-        setContextMenu({ visible: false, x: 0, y: 0, type: 'desktop' }); // Add type property
+        setContextMenu({ visible: false, x: 0, y: 0, type: 'desktop' });
     };
 
     const openFolder = (folderId: string, folderName: string) => {
@@ -447,6 +537,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         });
     };
 
+    const handleFileContextMenu = (e: React.MouseEvent<HTMLDivElement>, fileName: string) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setContextMenu({ 
+            visible: true, 
+            x: e.clientX, 
+            y: e.clientY, 
+            type: 'file',
+            targetId: fileName 
+        });
+    };
+
     const handleClick = () => {
         if (contextMenu.visible) {
             setContextMenu({ visible: false, x: 0, y: 0, type: 'desktop' });
@@ -465,6 +567,91 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             setRenamingFolder(contextMenu.targetId);
             setContextMenu(prev => ({ ...prev, visible: false }));
         }
+    };
+
+    const createNewTextFile = () => {
+        const newFileId = `textfile-${nextFileId}`;
+        const defaultName = `New Text File ${nextFileId}.txt`;
+
+        const newTextFileShortcut: DesktopShortcutProps = {
+            shortcutName: defaultName,
+            icon: 'textFileIcon',
+            onOpen: () => openTextFile(newFileId, defaultName)
+        };
+
+        setShortcuts(prev => [...prev, newTextFileShortcut]);
+
+        // Set initial position for the new text file
+        const totalItems = shortcuts.length + Object.keys(folders).length;
+        const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+        const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+
+        const position = {
+            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+        };
+
+        setPositions(prev => ({
+            ...prev,
+            [newFileId]: position
+        }));
+
+        setNextFileId(prev => prev + 1);
+        setContextMenu({ visible: false, x: 0, y: 0, type: 'desktop' });
+    };
+
+    const openTextFile = (fileId: string, fileName: string) => {
+        const highestZIndex = getHighestZIndex();
+
+        const textEditorWindow = (
+            <TextEditor
+                key={fileId}
+                fileName={fileName}
+                onInteract={() => onWindowInteract(fileId)}
+                onMinimize={() => minimizeWindow(fileId)}
+                onClose={() => removeWindow(fileId)}
+            />
+        );
+
+        setWindows(prev => ({
+            ...prev,
+            [fileId]: {
+                zIndex: highestZIndex + 1,
+                minimized: false,
+                component: textEditorWindow,
+                name: fileName,
+                icon: 'textFileIcon'
+            }
+        }));
+    };
+
+    const deleteFolder = (folderId: string) => {
+        setFolders(prev => {
+            const newFolders = { ...prev };
+            delete newFolders[folderId];
+            return newFolders;
+        });
+        setFolderNames(prev => {
+            const newFolderNames = { ...prev };
+            delete newFolderNames[folderId];
+            return newFolderNames;
+        });
+        setWindows(prev => {
+            const newWindows = { ...prev };
+            delete newWindows[folderId];
+            return newWindows;
+        });
+        sessionStorage.removeItem(folderId);
+    };
+
+    const deleteFile = (fileName: string) => {
+        setShortcuts(prev => prev.filter(shortcut => shortcut.shortcutName !== fileName));
+        setWindows(prev => {
+            const newWindows = { ...prev };
+            delete newWindows[fileName];
+            return newWindows;
+        });
+        sessionStorage.removeItem(fileName); // Remove from session storage
     };
 
     return !shutdown ? (
@@ -492,12 +679,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             })}
             <div style={styles.shortcuts}>
                 {shortcuts.map((shortcut, i) => {
-                    const column = Math.floor(i / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
-                    const row = i % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
-                    
                     const position = positions[shortcut.shortcutName] || {
-                        top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
-                        left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+                        top: INITIAL_OFFSET.top + (i % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
+                        left: INITIAL_OFFSET.left + Math.floor(i / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
                     };
                     
                     return (
@@ -506,6 +690,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             key={shortcut.shortcutName}
                             draggable
                             onDragStart={(e) => handleDragStart(e, shortcut.shortcutName)}
+                            onContextMenu={(e) => handleFileContextMenu(e, shortcut.shortcutName)}
                         >
                             <DesktopShortcut
                                 icon={shortcut.icon}
@@ -518,15 +703,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 {Object.keys(folders).map((folderId) => {
                     const folder = folders[folderId];
                     const folderName = folderNames[folderId] || `New Folder ${folderId.split('-')[1]}`;
-                    const totalItems = shortcuts.length;
-                    const index = parseInt(folderId.split('-')[1]) - 1;
-                    const itemsPerColumn = Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
-                    const column = Math.floor((totalItems + index) / itemsPerColumn);
-                    const row = (totalItems + index) % itemsPerColumn;
-                    
                     const position = positions[folderId] || {
-                        top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
-                        left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+                        top: INITIAL_OFFSET.top + ((shortcuts.length + parseInt(folderId.split('-')[1]) - 1) % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
+                        left: INITIAL_OFFSET.left + Math.floor((shortcuts.length + parseInt(folderId.split('-')[1]) - 1) / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
                     };
                     
                     return (
@@ -536,6 +715,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             draggable
                             onDragStart={(e) => handleDragStart(e, folderId)}
                             onContextMenu={(e) => handleFolderContextMenu(e, folderId)}
+                            onDrop={(e) => handleDropOnFolder(e, folderId)}
+                            onDragOver={handleDragOver}
                         >
                             <DesktopShortcut
                                 icon="folderIcon"
@@ -562,15 +743,26 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
                     {contextMenu.type === 'desktop' ? (
-                        <div style={styles.contextMenuItem} onClick={createNewFolder}>
-                            New Folder
-                        </div>
-                    ) : (
+                        <>
+                            <div style={styles.contextMenuItem} onClick={createNewFolder}>
+                                New Folder
+                            </div>
+                            <div style={styles.contextMenuItem} onClick={createNewTextFile}>
+                                New Text File
+                            </div>
+                        </>
+                    ) : contextMenu.type === 'folder' ? (
                         <>
                             <div style={styles.contextMenuItem} onClick={handleRename}>
                                 Rename
                             </div>
-                            <div style={styles.contextMenuItem}>
+                            <div style={styles.contextMenuItem} onClick={() => deleteFolder(contextMenu.targetId!)}>
+                                Delete
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
                                 Delete
                             </div>
                         </>

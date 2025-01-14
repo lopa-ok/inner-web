@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
 import Settings from '../applications/Settings'; 
+import textFileIcon from '../../assets/icons/textFileIcon.png';
 
 export interface ToolbarProps {
     windows: DesktopWindows;
     toggleMinimize: (key: string) => void;
-    shutdown: () => void;
     addWindow: (key: string, element: JSX.Element, zIndex?: number) => void;
     updateBackground: (background: string, theme: string) => void;
     removeWindow: (key: string) => void;
+    shutdown: () => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({

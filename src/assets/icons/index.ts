@@ -22,6 +22,7 @@ import chessIcon from './chessIcon.png';
 import setting from './setting.png';
 import folderIcon from './folder.png';
 import InternetExplorerIcon from './InternetExplorerIcon.png';
+import textFileIcon from './textFileIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -46,6 +47,7 @@ const icons = {
     setting: setting,
     folderIcon: folderIcon,
     InternetExplorerIcon: InternetExplorerIcon,
+    textFileIcon: textFileIcon,
 };
 
 export type IconName = keyof typeof icons;
