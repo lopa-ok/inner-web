@@ -12,6 +12,8 @@ interface FolderProps {
     onAddItem: (folderId: string, item: DesktopShortcutProps) => void;
     onRemoveItem: (folderId: string, itemName: string) => void;
     onRename: (folderId: string, newName: string) => void;
+    addWindow: (key: string, element: JSX.Element, zIndex?: number) => void;
+    getHighestZIndex: () => number;
 }
 
 const GRID_SIZE = 100;
@@ -25,7 +27,9 @@ const Folder: React.FC<FolderProps> = ({
     onMinimize,
     onAddItem,
     onRemoveItem,
-    onRename
+    onRename,
+    addWindow,
+    getHighestZIndex
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
@@ -113,11 +117,10 @@ const Folder: React.FC<FolderProps> = ({
         let top = e.clientY - rect.top;
         let left = e.clientX - rect.left;
 
-        // Snap to grid
         top = Math.round(top / GRID_SIZE) * GRID_SIZE;
         left = Math.round(left / GRID_SIZE) * GRID_SIZE;
 
-        // Check for collisions and adjust position if necessary
+        
         const newPosition = { top, left };
         const collision = Object.values(positions).some(
             (pos) => pos.top === newPosition.top && pos.left === newPosition.left
@@ -131,6 +134,11 @@ const Folder: React.FC<FolderProps> = ({
             ...prevPositions,
             [key]: newPosition,
         }));
+    };
+
+    const handleOpenApp = (appKey: string, appComponent: JSX.Element) => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(appKey, appComponent, highestZIndex + 1);
     };
 
     return (
@@ -183,7 +191,7 @@ const Folder: React.FC<FolderProps> = ({
                             <DesktopShortcut
                                 icon={item.icon}
                                 shortcutName={item.shortcutName}
-                                onOpen={item.onOpen}
+                                onOpen={() => item.onOpen()}
                                 textColor="black"
                             />
                         </div>

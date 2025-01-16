@@ -130,16 +130,16 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             component: React.FC<ExtendedWindowAppProps<any>>;
         };
     } = {
-        // Remove the folder entry from apps since i made it seperate
+        // Removed the folder entry from apps since i made it seperate
         showcase: {
             key: 'showcase',
-            name: 'My Showcase',
+            name: 'Showcase',
             shortcutIcon: 'showcaseIcon',
             component: ShowcaseExplorer,
         },
         wordle: {
             key: 'wordle',
-            name: 'wordle',
+            name: 'Wordle',
             shortcutIcon: 'wordleIcon',
             component: wordle,
         },
@@ -217,51 +217,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             }
         });
 
-        const documentsFolder = `folder-0`;
-        if (!folders[documentsFolder]) {
-            setFolders(prev => ({
-                ...prev,
-                [documentsFolder]: [{
-                    shortcutName: "Credits",
-                    icon: "credits",
-                    onOpen: () => {
-                        addWindow(
-                            'credits',
-                            <Credits
-                                onInteract={() => onWindowInteract('credits')}
-                                onMinimize={() => minimizeWindow('credits')}
-                                onClose={() => removeWindow('credits')}
-                                key="credits"
-                            />
-                        );
-                    }
-                }]
-            }));
-            setFolderNames(prev => ({
-                ...prev,
-                [documentsFolder]: "Documents"
-            }));
-            setNextFolderId(1);
-        }
-
-        const documentsShortcut: DesktopShortcutProps = {
-            shortcutName: "Documents",
-            icon: "folderIcon",
-            onOpen: () => openFolder(documentsFolder, "Documents")
-        };
-
-        const existingDocumentsShortcut = newShortcuts.find(shortcut => shortcut.shortcutName === "Documents");
-        if (!existingDocumentsShortcut) {
-            newShortcuts.push(documentsShortcut);
-        }
+        initializeDocumentsFolder();
 
         newShortcuts.forEach((shortcut) => {
-            if (shortcut.shortcutName === 'My Showcase') {
+            if (shortcut.shortcutName === 'Showcase') {
                 shortcut.onOpen();
             }
         });
 
-        setShortcuts(newShortcuts);
+        setShortcuts(prevShortcuts => [...prevShortcuts, ...newShortcuts]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -492,6 +456,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 onAddItem={addItemToFolder}
                 onRemoveItem={removeItemFromFolder}
                 onRename={handleFolderRename}
+                addWindow={addWindow}
+                getHighestZIndex={getHighestZIndex}
             />
         );
 
@@ -610,6 +576,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 onInteract={() => onWindowInteract(fileId)}
                 onMinimize={() => minimizeWindow(fileId)}
                 onClose={() => removeWindow(fileId)}
+                onRename={(newName) => handleTextFileRename(fileId, newName)}
+                isRenaming={renamingFolder === fileId}
             />
         );
 
@@ -623,6 +591,23 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 icon: 'textFileIcon'
             }
         }));
+    };
+
+    const handleTextFileRename = (fileId: string, newName: string) => {
+        setShortcuts(prevShortcuts => prevShortcuts.map(shortcut => {
+            if (shortcut.shortcutName === fileId) {
+                return { ...shortcut, shortcutName: newName };
+            }
+            return shortcut;
+        }));
+        setWindows(prevWindows => {
+            const newWindows = { ...prevWindows };
+            if (newWindows[fileId]) {
+                newWindows[fileId].name = newName;
+            }
+            return newWindows;
+        });
+        setRenamingFolder(null);
     };
 
     const deleteFolder = (folderId: string) => {
@@ -652,6 +637,63 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             return newWindows;
         });
         sessionStorage.removeItem(fileName); // Remove from session storage
+    };
+
+    const initializeDocumentsFolder = () => {
+        const documentsFolder = `folder-0`;
+        if (!folders[documentsFolder]) {
+            setFolders(prev => ({
+                ...prev,
+                [documentsFolder]: [{
+                    shortcutName: "Credits",
+                    icon: "credits",
+                    onOpen: () => {
+                        addWindow(
+                            'credits',
+                            <Credits
+                                onInteract={() => onWindowInteract('credits')}
+                                onMinimize={() => minimizeWindow('credits')}
+                                onClose={() => removeWindow('credits')}
+                                key="credits"
+                            />
+                        );
+                    }
+                }]
+            }));
+            setFolderNames(prev => ({
+                ...prev,
+                [documentsFolder]: "Documents"
+            }));
+            setNextFolderId(1);
+
+            const documentsShortcut: DesktopShortcutProps = {
+                shortcutName: "Documents",
+                icon: "folderIcon",
+                onOpen: () => openFolder(documentsFolder, "Documents")
+            };
+
+            setShortcuts(prevShortcuts => {
+                const existingDocumentsShortcut = prevShortcuts.find(shortcut => shortcut.shortcutName === "Documents");
+                if (!existingDocumentsShortcut) {
+                    return [...prevShortcuts, documentsShortcut];
+                }
+                return prevShortcuts;
+            });
+            
+            const totalItems = shortcuts.length + Object.keys(folders).length;
+            const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+            const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+
+            const position = {
+                top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+                left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+            };
+
+            setPositions(prev => ({
+                ...prev,
+                [documentsFolder]: position
+            }));
+        }
     };
 
     return !shutdown ? (
@@ -696,6 +738,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 icon={shortcut.icon}
                                 shortcutName={shortcut.shortcutName}
                                 onOpen={shortcut.onOpen}
+                                isRenaming={renamingFolder === shortcut.shortcutName}
+                                onRename={(newName) => handleTextFileRename(shortcut.shortcutName, newName)}
                             />
                         </div>
                     );
@@ -762,6 +806,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         </>
                     ) : (
                         <>
+                            <div style={styles.contextMenuItem} onClick={handleRename}>
+                                Rename
+                            </div>
                             <div style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
                                 Delete
                             </div>
