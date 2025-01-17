@@ -155,6 +155,10 @@ const RecycleBin: React.FC<RecycleBinProps> = ({
         onRemoveItem(itemName);
     };
 
+    const emptyRecycleBin = () => {
+        contents.forEach(item => onRemoveItem(item.shortcutName));
+    };
+
     return (
         <Window
             top={10}
@@ -162,7 +166,7 @@ const RecycleBin: React.FC<RecycleBinProps> = ({
             width={600}
             height={500}
             windowTitle="Recycle Bin"
-            windowBarIcon="recycleBinIcon"
+            windowBarIcon={contents.length > 0 ? 'recycleBinFullIcon' : 'recycleBinIcon'}
             windowBarColor="#757579"
             closeWindow={onClose}
             onInteract={onInteract}
@@ -213,6 +217,9 @@ const RecycleBin: React.FC<RecycleBinProps> = ({
                         </div>
                         <div style={styles.contextMenuItem} onClick={() => handleDelete(contextMenu.targetId!)}>
                             Delete
+                        </div>
+                        <div style={styles.contextMenuItem} onClick={emptyRecycleBin}>
+                            Empty Recycle Bin
                         </div>
                     </div>
                 )}

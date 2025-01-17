@@ -774,6 +774,11 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             return prevShortcuts;
         });
 
+        setFolders(prev => ({
+            ...prev,
+            "Recycle Bin": []
+        }));
+
         const totalItems = shortcuts.length + Object.keys(folders).length;
         const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
         const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
@@ -813,8 +818,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 minimized: false,
                 component: recycleBinWindow,
                 name: "Recycle Bin",
-                icon: 'recycleBinIcon'
+                icon: folders["Recycle Bin"] && folders["Recycle Bin"].length > 0 ? 'recycleBinFullIcon' : 'recycleBinIcon'
             }
+        }));
+    };
+
+    const emptyRecycleBin = () => {
+        setFolders(prev => ({
+            ...prev,
+            "Recycle Bin": []
         }));
     };
 
@@ -911,6 +923,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     );
                 })}
                 {Object.keys(folders).map((folderId) => {
+                    if (folderId === "Recycle Bin") return null;
                     const folder = folders[folderId];
                     const folderName = folderNames[folderId] || `New Folder ${folderId.split('-')[1]}`;
                     const position = positions[folderId] || {
@@ -941,6 +954,21 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         </div>
                     );
                 })}
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, positions["Recycle Bin"])}
+                    key="Recycle Bin"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, "Recycle Bin")}
+                    onContextMenu={(e) => handleFileContextMenu(e, "Recycle Bin")}
+                >
+                    <DesktopShortcut
+                        icon={folders["Recycle Bin"] && folders["Recycle Bin"].length > 0 ? 'recycleBinFullIcon' : 'recycleBinIcon'}
+                        shortcutName="Recycle Bin"
+                        onOpen={openRecycleBin}
+                        isRenaming={renamingFolder === "Recycle Bin"}
+                        onRename={(newName) => handleTextFileRename("Recycle Bin", newName)}
+                    />
+                </div>
             </div>
             <Toolbar
                 windows={windows}
@@ -971,6 +999,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 Delete
                             </div>
                         </>
+                    ) : contextMenu.type === 'file' ? (
+                        <>
+                            <div style={styles.contextMenuItem} onClick={handleRename}>
+                                Rename
+                            </div>
+                            <div style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
+                                Delete
+                            </div>
+                        </>
                     ) : (
                         <>
                             <div style={styles.contextMenuItem} onClick={handleRename}>
@@ -978,6 +1015,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             </div>
                             <div style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
                                 Delete
+                            </div>
+                            <div style={styles.contextMenuItem} onClick={emptyRecycleBin}>
+                                Empty Recycle Bin
                             </div>
                         </>
                     )}
