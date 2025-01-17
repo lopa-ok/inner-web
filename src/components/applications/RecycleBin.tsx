@@ -2,26 +2,21 @@ import React, { useRef, useState, useEffect } from 'react';
 import Window from '../os/Window';
 import DesktopShortcut, { DesktopShortcutProps } from '../os/DesktopShortcut';
 
-interface FolderProps {
-    folderId: string;
-    folderName: string;
+interface RecycleBinProps {
     contents: DesktopShortcutProps[];
     onClose: () => void;
     onInteract: () => void;
     onMinimize: () => void;
-    onAddItem: (folderId: string, item: DesktopShortcutProps) => void;
-    onRemoveItem: (folderId: string, itemName: string) => void;
-    onRename: (folderId: string, newName: string) => void;
+    onAddItem: (item: DesktopShortcutProps) => void;
+    onRemoveItem: (itemName: string) => void;
+    onRename: (itemName: string, newName: string) => void;
     addWindow: (key: string, element: JSX.Element, zIndex?: number) => void;
     getHighestZIndex: () => number;
-    bringToFront: () => void;
 }
 
 const GRID_SIZE = 100;
 
-const Folder: React.FC<FolderProps> = ({
-    folderId,
-    folderName,
+const RecycleBin: React.FC<RecycleBinProps> = ({
     contents = [],
     onClose,
     onInteract,
@@ -31,15 +26,13 @@ const Folder: React.FC<FolderProps> = ({
     onRename,
     addWindow,
     getHighestZIndex,
-    bringToFront,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
     const [isRenaming, setIsRenaming] = useState(false);
-    const [newName, setNewName] = useState(folderName);
+    const [newName, setNewName] = useState('');
     const renameInputRef = useRef<HTMLInputElement>(null);
     const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
-    const [recycleBin, setRecycleBin] = useState<DesktopShortcutProps[]>([]);
 
     useEffect(() => {
         if (isRenaming && renameInputRef.current) {
@@ -49,12 +42,8 @@ const Folder: React.FC<FolderProps> = ({
     }, [isRenaming]);
 
     useEffect(() => {
-        console.log(`Folder ${folderId} mounted with contents:`, contents);
-    }, []); // Log when folder mounts
-
-    useEffect(() => {
-        console.log(`Folder ${folderId} contents:`, contents);
-    }, [folderId, contents]);
+        console.log(`Recycle Bin contents:`, contents);
+    }, [contents]);
 
     const handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -79,7 +68,7 @@ const Folder: React.FC<FolderProps> = ({
 
     const handleRenameSubmit = () => {
         if (newName.trim()) {
-            onRename(folderId, newName.trim());
+            onRename(contextMenu.targetId, newName.trim());
             setIsRenaming(false);
         }
     };
@@ -93,7 +82,7 @@ const Folder: React.FC<FolderProps> = ({
             handleRenameSubmit();
         } else if (e.key === 'Escape') {
             setIsRenaming(false);
-            setNewName(folderName);
+            setNewName('');
         }
     };
 
@@ -103,7 +92,7 @@ const Folder: React.FC<FolderProps> = ({
         const key = e.dataTransfer.getData('text/plain');
         const item = JSON.parse(sessionStorage.getItem(key) || '{}');
         if (item.shortcutName) {
-            onAddItem(folderId, item);
+            onAddItem(item);
             sessionStorage.removeItem(key);
 
             const totalItems = contents.length;
@@ -163,11 +152,7 @@ const Folder: React.FC<FolderProps> = ({
     };
 
     const handleDelete = (itemName: string) => {
-        const item = contents.find((item) => item.shortcutName === itemName);
-        if (item) {
-            onRemoveItem(folderId, itemName);
-            onAddItem("Recycle Bin", item);
-        }
+        onRemoveItem(itemName);
     };
 
     return (
@@ -176,23 +161,11 @@ const Folder: React.FC<FolderProps> = ({
             left={10}
             width={600}
             height={500}
-            windowTitle={isRenaming ? (
-                <input
-                    ref={renameInputRef}
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    onBlur={handleRenameBlur}
-                    onKeyDown={handleRenameKeyDown}
-                    style={styles.renameInput}
-                />
-            ) : folderName}
-            windowBarIcon="folderIcon"
+            windowTitle="Recycle Bin"
+            windowBarIcon="recycleBinIcon"
             windowBarColor="#757579"
             closeWindow={onClose}
-            onInteract={() => {
-                onInteract();
-                bringToFront(); // Bring folder to front when interacting
-            }}
+            onInteract={onInteract}
             minimizeWindow={onMinimize}
             resizable={true}
         >
@@ -281,4 +254,4 @@ const styles: { [key: string]: React.CSSProperties } = {
     },
 };
 
-export default Folder;
+export default RecycleBin;

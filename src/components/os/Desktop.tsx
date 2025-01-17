@@ -13,12 +13,14 @@ import Chess from '../applications/Chess';
 import Credits from '../applications/Credits';
 import InternetExplorer from '../applications/InternetExplorer';
 import Folder from '../applications/folder';
+import RecycleBin from '../applications/RecycleBin';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
 import bg0 from '../../assets/bg/bg0.png';
 import TextEditor from '../applications/TextEditor';
 import MSN from '../applications/MSN';
 import Run from '../applications/Run';
+import Documents from '../applications/Documents';
 
 export interface DesktopProps {}
 
@@ -57,7 +59,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [theme, setTheme] = useState<string | null>(null);
     const [folderNames, setFolderNames] = useState<{[key: string]: string}>({});
     const [renamingFolder, setRenamingFolder] = useState<string | null>(null);
-    const [deletedItems, setDeletedItems] = useState<DesktopShortcutProps[]>([]);
 
     // Initialize background from localStorage on component mount
     useEffect(() => {
@@ -240,6 +241,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         });
 
         initializeDocumentsFolder();
+        initializeRecycleBin();
 
         newShortcuts.forEach((shortcut) => {
             if (shortcut.shortcutName === 'Showcase') {
@@ -422,11 +424,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const item = shortcuts.find(shortcut => shortcut.shortcutName === key);
         if (item) {
             setShortcuts(prev => prev.filter(shortcut => shortcut.shortcutName !== key));
-            if (folderId === 'recycleBin') {
-                setDeletedItems(prev => [...prev, item]);
-            } else {
-                addItemToFolder(folderId, item);
-            }
+            addItemToFolder(folderId, item);
         }
     };
 
@@ -484,6 +482,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 onRename={handleFolderRename}
                 addWindow={addWindow}
                 getHighestZIndex={getHighestZIndex}
+                bringToFront={() => bringToFront(folderId)}
             />
         );
 
@@ -497,6 +496,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 icon: 'folderIcon'
             }
         }));
+    };
+
+    const bringToFront = (key: string) => {
+        setWindows(prevWindows => {
+            const newWindows = { ...prevWindows };
+            const highestZIndex = getHighestZIndex();
+            newWindows[key].zIndex = highestZIndex + 1;
+            return newWindows;
+        });
     };
 
     const addItemToFolder = (folderId: string, item: DesktopShortcutProps) => {
@@ -637,10 +645,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const deleteFolder = (folderId: string) => {
-        const folderItems = folders[folderId];
-        if (folderItems) {
-            setDeletedItems(prev => [...prev, ...folderItems]);
+        const folderContents = folders[folderId];
+        if (folderContents) {
+            folderContents.forEach(item => addItemToFolder("Recycle Bin", item));
         }
+        addItemToFolder("Recycle Bin", {
+            shortcutName: folderNames[folderId] || `New Folder ${folderId.split('-')[1]}`,
+            icon: "folderIcon",
+            onOpen: openRecycleBin
+        });
         setFolders(prev => {
             const newFolders = { ...prev };
             delete newFolders[folderId];
@@ -660,9 +673,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const deleteFile = (fileName: string) => {
-        const item = shortcuts.find(shortcut => shortcut.shortcutName === fileName);
-        if (item) {
-            setDeletedItems(prev => [...prev, item]);
+        const file = shortcuts.find(shortcut => shortcut.shortcutName === fileName);
+        if (file) {
+            addItemToFolder("Recycle Bin", file);
         }
         setShortcuts(prev => prev.filter(shortcut => shortcut.shortcutName !== fileName));
         setWindows(prev => {
@@ -673,70 +686,59 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         sessionStorage.removeItem(fileName); // Remove from session storage
     };
 
-    const restoreItem = (item: DesktopShortcutProps) => {
-        setDeletedItems(prev => prev.filter(deletedItem => deletedItem.shortcutName !== item.shortcutName));
-        setShortcuts(prev => [...prev, item]);
-    };
-
-    const emptyRecycleBin = () => {
-        setDeletedItems([]);
-    };
-
     const initializeDocumentsFolder = () => {
-        const documentsFolder = `folder-0`;
-        if (!folders[documentsFolder]) {
-            setFolders(prev => ({
-                ...prev,
-                [documentsFolder]: [{
-                    shortcutName: "Credits",
-                    icon: "credits",
-                    onOpen: () => {
-                        addWindow(
-                            'credits',
-                            <Credits
-                                onInteract={() => onWindowInteract('credits')}
-                                onMinimize={() => minimizeWindow('credits')}
-                                onClose={() => removeWindow('credits')}
-                                key="credits"
-                            />
-                        );
-                    }
-                }]
-            }));
-            setFolderNames(prev => ({
-                ...prev,
-                [documentsFolder]: "Documents"
-            }));
-            setNextFolderId(1);
+        const documentsShortcut: DesktopShortcutProps = {
+            shortcutName: "Documents",
+            icon: "documentsIcon",
+            onOpen: openDocuments
+        };
 
-            const documentsShortcut: DesktopShortcutProps = {
-                shortcutName: "Documents",
-                icon: "folderIcon",
-                onOpen: () => openFolder(documentsFolder, "Documents")
-            };
+        setShortcuts(prevShortcuts => {
+            const existingDocumentsShortcut = prevShortcuts.find(shortcut => shortcut.shortcutName === "Documents");
+            if (!existingDocumentsShortcut) {
+                return [...prevShortcuts, documentsShortcut];
+            }
+            return prevShortcuts;
+        });
 
-            setShortcuts(prevShortcuts => {
-                const existingDocumentsShortcut = prevShortcuts.find(shortcut => shortcut.shortcutName === "Documents");
-                if (!existingDocumentsShortcut) {
-                    return [...prevShortcuts, documentsShortcut];
-                }
-                return prevShortcuts;
-            });
-            
-            const totalItems = shortcuts.length + Object.keys(folders).length;
-            const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
-            const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+        const totalItems = shortcuts.length + Object.keys(folders).length;
+        const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+        const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
 
-            const position = {
-                top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
-                left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
-            };
+        const position = {
+            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+        };
 
-            setPositions(prev => ({
-                ...prev,
-                [documentsFolder]: position
-            }));
-        }
+        setPositions(prev => ({
+            ...prev,
+            "Documents": position
+        }));
+    };
+
+    const openDocuments = () => {
+        const highestZIndex = getHighestZIndex();
+
+        const docWindow = (
+            <Documents
+                onInteract={() => onWindowInteract("Documents")}
+                onMinimize={() => minimizeWindow("Documents")}
+                onClose={() => removeWindow("Documents")}
+                addWindow={addWindow}
+                getHighestZIndex={getHighestZIndex}
+            />
+        );
+
+        setWindows(prev => ({
+            ...prev,
+            "Documents": {
+                zIndex: highestZIndex + 1,
+                minimized: false,
+                component: docWindow,
+                name: "Documents",
+                icon: 'documentsIcon'
+            }
+        }));
     };
 
     const openAppByName = (appName: string) => {
@@ -757,62 +759,108 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         }
     };
 
-    const getRecycleBinIcon = () => {
-        if (deletedItems.length > 0) {
-            const hasTextFiles = deletedItems.some(item => item.icon === 'textFileIcon');
-            const hasFolders = deletedItems.some(item => item.icon === 'folderIcon');
-            if (hasTextFiles && hasFolders) {
-                return 'recycleBinFullIcon';
-            } else if (hasTextFiles) {
-                return 'recycleBinTextIcon';
-            } else if (hasFolders) {
-                return 'recycleBinDocIcon';
-            } else {
-                return 'recycleBinIcon';
-            }
-        } else {
-            return 'recycleBinIcon';
-        }
-    };
+    const initializeRecycleBin = () => {
+        const recycleBinShortcut: DesktopShortcutProps = {
+            shortcutName: "Recycle Bin",
+            icon: "recycleBinIcon",
+            onOpen: openRecycleBin
+        };
 
-    const handleRecycleBinClick = () => {
-        alert("Recycle Bin is still a work in progress.");
+        setShortcuts(prevShortcuts => {
+            const existingRecycleBinShortcut = prevShortcuts.find(shortcut => shortcut.shortcutName === "Recycle Bin");
+            if (!existingRecycleBinShortcut) {
+                return [...prevShortcuts, recycleBinShortcut];
+            }
+            return prevShortcuts;
+        });
+
+        const totalItems = shortcuts.length + Object.keys(folders).length;
+        const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+        const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+
+        const position = {
+            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+        };
+
+        setPositions(prev => ({
+            ...prev,
+            "Recycle Bin": position
+        }));
     };
 
     const openRecycleBin = () => {
         const highestZIndex = getHighestZIndex();
-        addWindow(
-            'recycleBin',
-            <Folder
-                folderId="recycleBin"
-                folderName="Recycle Bin"
-                contents={deletedItems}
-                onInteract={() => onWindowInteract('recycleBin')}
-                onMinimize={() => minimizeWindow('recycleBin')}
-                onClose={() => removeWindow('recycleBin')}
-                onAddItem={addItemToFolder}
-                onRemoveItem={removeItemFromFolder}
-                onRename={handleFolderRename}
+
+        const recycleBinWindow = (
+            <RecycleBin
+                contents={folders["Recycle Bin"] || []}
+                onInteract={() => onWindowInteract("Recycle Bin")}
+                onMinimize={() => minimizeWindow("Recycle Bin")}
+                onClose={() => removeWindow("Recycle Bin")}
+                onAddItem={(item) => addItemToFolder("Recycle Bin", item)}
+                onRemoveItem={(itemName) => removeItemFromFolder("Recycle Bin", itemName)}
+                onRename={(itemName, newName) => handleTextFileRename(itemName, newName)}
                 addWindow={addWindow}
                 getHighestZIndex={getHighestZIndex}
-                isRecycleBin={true}
-                restoreItem={restoreItem}
-                emptyRecycleBin={emptyRecycleBin}
-                deleteFile={deleteFile}
-                key="recycleBin"
-            />,
-            highestZIndex + 1
+            />
         );
+
+        setWindows(prev => ({
+            ...prev,
+            "Recycle Bin": {
+                zIndex: highestZIndex + 1,
+                minimized: false,
+                component: recycleBinWindow,
+                name: "Recycle Bin",
+                icon: 'recycleBinIcon'
+            }
+        }));
     };
 
-    const calculatePosition = (index: number) => {
-        const column = Math.floor(index / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
-        const row = index % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
-        return {
-            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
-            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+    const arrangeIcons = () => {
+        const newPositions: { [key: string]: { top: number; left: number } } = {};
+        const totalItems = shortcuts.length + Object.keys(folders).length;
+        let index = 0;
+
+        shortcuts.forEach((shortcut) => {
+            if (shortcut.shortcutName !== "Documents" && shortcut.shortcutName !== "Recycle Bin") {
+                const column = Math.floor(index / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+                const row = index % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+                newPositions[shortcut.shortcutName] = {
+                    top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+                    left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+                };
+                index++;
+            }
+        });
+
+        Object.keys(folders).forEach((folderId) => {
+            const column = Math.floor(index / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+            const row = index % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+            newPositions[folderId] = {
+                top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+                left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+            };
+            index++;
+        });
+
+        newPositions["Documents"] = {
+            top: window.innerHeight - VERTICAL_SPACING - 50,
+            left: INITIAL_OFFSET.left
         };
+
+        newPositions["Recycle Bin"] = {
+            top: window.innerHeight - VERTICAL_SPACING - 50,
+            left: INITIAL_OFFSET.left + HORIZONTAL_SPACING
+        };
+
+        setPositions(newPositions);
     };
+
+    useEffect(() => {
+        arrangeIcons();
+    }, [shortcuts, folders]);
 
     return !shutdown ? (
         <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver} onContextMenu={handleContextMenu} onClick={handleClick}>
@@ -839,7 +887,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             })}
             <div style={styles.shortcuts}>
                 {shortcuts.map((shortcut, i) => {
-                    const position = positions[shortcut.shortcutName] || calculatePosition(i);
+                    const position = positions[shortcut.shortcutName] || {
+                        top: INITIAL_OFFSET.top + (i % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
+                        left: INITIAL_OFFSET.left + Math.floor(i / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
+                    };
                     
                     return (
                         <div
@@ -859,10 +910,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         </div>
                     );
                 })}
-                {Object.keys(folders).map((folderId, i) => {
+                {Object.keys(folders).map((folderId) => {
                     const folder = folders[folderId];
                     const folderName = folderNames[folderId] || `New Folder ${folderId.split('-')[1]}`;
-                    const position = positions[folderId] || calculatePosition(shortcuts.length + i);
+                    const position = positions[folderId] || {
+                        top: INITIAL_OFFSET.top + ((shortcuts.length + parseInt(folderId.split('-')[1]) - 1) % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
+                        left: INITIAL_OFFSET.left + Math.floor((shortcuts.length + parseInt(folderId.split('-')[1]) - 1) / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
+                    };
                     
                     return (
                         <div
@@ -887,21 +941,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         </div>
                     );
                 })}
-                <div
-                    style={Object.assign({}, styles.shortcutContainer, positions['recycleBin'] || calculatePosition(shortcuts.length + Object.keys(folders).length - 1))}
-                    key="recycleBin"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, 'recycleBin')}
-                    onContextMenu={(e) => handleFileContextMenu(e, 'recycleBin')}
-                    onDrop={(e) => handleDropOnFolder(e, 'recycleBin')}
-                    onDragOver={handleDragOver}
-                >
-                    <DesktopShortcut
-                        icon={getRecycleBinIcon()}
-                        shortcutName="Recycle Bin"
-                        onOpen={handleRecycleBinClick}
-                    />
-                </div>
             </div>
             <Toolbar
                 windows={windows}

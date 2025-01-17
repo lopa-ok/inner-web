@@ -29,6 +29,7 @@ import msnIcon from './msnIcon.png';
 import recycleBinFullIcon from './recycleBinFullIcon.png';
 import recycleBinDocIcon from './recycleBinDocIcon.png';
 import recycleBinTextIcon from './recycleBinTextIcon.png';
+import documentsIcon from './documentsIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -60,6 +61,7 @@ const icons = {
     recycleBinFullIcon: recycleBinFullIcon,
     recycleBinDocIcon: recycleBinDocIcon,
     recycleBinTextIcon: recycleBinTextIcon,
+    documentsIcon: documentsIcon,
 };
 
 export type IconName = keyof typeof icons;
