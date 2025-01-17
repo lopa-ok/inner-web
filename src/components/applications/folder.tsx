@@ -14,6 +14,10 @@ interface FolderProps {
     onRename: (folderId: string, newName: string) => void;
     addWindow: (key: string, element: JSX.Element, zIndex?: number) => void;
     getHighestZIndex: () => number;
+    isRecycleBin?: boolean;
+    restoreItem?: (item: DesktopShortcutProps) => void;
+    emptyRecycleBin?: () => void;
+    deleteFile?: (fileName: string) => void;
 }
 
 const GRID_SIZE = 100;
@@ -29,7 +33,11 @@ const Folder: React.FC<FolderProps> = ({
     onRemoveItem,
     onRename,
     addWindow,
-    getHighestZIndex
+    getHighestZIndex,
+    isRecycleBin = false,
+    restoreItem,
+    emptyRecycleBin,
+    deleteFile,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
@@ -96,11 +104,26 @@ const Folder: React.FC<FolderProps> = ({
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
+        e.stopPropagation();
         const key = e.dataTransfer.getData('text/plain');
         const item = JSON.parse(sessionStorage.getItem(key) || '{}');
         if (item.shortcutName) {
             onAddItem(folderId, item);
             sessionStorage.removeItem(key);
+
+            const totalItems = contents.length;
+            const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / GRID_SIZE));
+            const row = totalItems % Math.floor((window.innerHeight - 100) / GRID_SIZE);
+
+            const position = {
+                top: 20 + (row * GRID_SIZE),
+                left: 20 + (column * GRID_SIZE)
+            };
+
+            setPositions(prev => ({
+                ...prev,
+                [item.shortcutName]: position
+            }));
         }
     };
 
@@ -113,14 +136,17 @@ const Folder: React.FC<FolderProps> = ({
     };
 
     const handleDropInsideFolder = (e: React.DragEvent<HTMLDivElement>, key: string) => {
+        e.preventDefault();
+        e.stopPropagation();
         const rect = e.currentTarget.getBoundingClientRect();
         let top = e.clientY - rect.top;
         let left = e.clientX - rect.left;
 
+        // Snap to grid
         top = Math.round(top / GRID_SIZE) * GRID_SIZE;
         left = Math.round(left / GRID_SIZE) * GRID_SIZE;
 
-        
+        // Check for collisions and adjust position if necessary
         const newPosition = { top, left };
         const collision = Object.values(positions).some(
             (pos) => pos.top === newPosition.top && pos.left === newPosition.left
@@ -157,7 +183,7 @@ const Folder: React.FC<FolderProps> = ({
                     style={styles.renameInput}
                 />
             ) : folderName}
-            windowBarIcon="folderIcon"
+            windowBarIcon={isRecycleBin ? "recycleBinIcon" : "folderIcon"}
             windowBarColor="#757579"
             closeWindow={onClose}
             onInteract={onInteract}
@@ -191,9 +217,12 @@ const Folder: React.FC<FolderProps> = ({
                             <DesktopShortcut
                                 icon={item.icon}
                                 shortcutName={item.shortcutName}
-                                onOpen={() => item.onOpen()}
+                                onOpen={() => isRecycleBin ? restoreItem?.(item) : item.onOpen()}
                                 textColor="black"
                             />
+                            {isRecycleBin && (
+                                <button onClick={() => restoreItem?.(item)} style={styles.button}>Restore</button>
+                            )}
                         </div>
                     );
                 })}
@@ -206,17 +235,20 @@ const Folder: React.FC<FolderProps> = ({
                         <div style={styles.contextMenuItem} onClick={handleRename}>
                             Rename
                         </div>
-                        <div style={styles.contextMenuItem} onClick={() => onRemoveItem(folderId, contextMenu.targetId!)}>
+                        <div style={styles.contextMenuItem} onClick={() => isRecycleBin ? deleteFile?.(contextMenu.targetId) : onRemoveItem(folderId, contextMenu.targetId!)}>
                             Delete
                         </div>
                     </div>
+                )}
+                {isRecycleBin && contents.length > 0 && (
+                    <button onClick={emptyRecycleBin} style={styles.emptyButton}>Empty Recycle Bin</button>
                 )}
             </div>
         </Window>
     );
 };
 
-const styles: StyleSheetCSS = {
+const styles: { [key: string]: React.CSSProperties } = {
     container: {
         padding: '10px',
         position: 'relative',
@@ -246,6 +278,18 @@ const styles: StyleSheetCSS = {
         fontFamily: 'MSSerif',
         fontSize: '14px',
         width: '150px',
+    },
+    button: {
+        padding: '5px 10px',
+        fontSize: '14px',
+        cursor: 'pointer',
+    },
+    emptyButton: {
+        marginTop: '20px',
+        padding: '10px 20px',
+        fontSize: '14px',
+        cursor: 'pointer',
+        alignSelf: 'center',
     },
 };
 

@@ -23,6 +23,12 @@ import setting from './setting.png';
 import folderIcon from './folder.png';
 import InternetExplorerIcon from './InternetExplorerIcon.png';
 import textFileIcon from './textFileIcon.png';
+import runIcon from './runIcon.png';
+import recycleBinIcon from './recycleBinIcon.png';
+import msnIcon from './msnIcon.png';
+import recycleBinFullIcon from './recycleBinFullIcon.png';
+import recycleBinDocIcon from './recycleBinDocIcon.png';
+import recycleBinTextIcon from './recycleBinTextIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -48,6 +54,12 @@ const icons = {
     folderIcon: folderIcon,
     InternetExplorerIcon: InternetExplorerIcon,
     textFileIcon: textFileIcon,
+    runIcon: runIcon,
+    recycleBinIcon: recycleBinIcon,
+    msnIcon: msnIcon,
+    recycleBinFullIcon: recycleBinFullIcon,
+    recycleBinDocIcon: recycleBinDocIcon,
+    recycleBinTextIcon: recycleBinTextIcon,
 };
 
 export type IconName = keyof typeof icons;

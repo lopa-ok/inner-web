@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
 import Settings from '../applications/Settings'; 
+import Run from '../applications/Run';
 import textFileIcon from '../../assets/icons/textFileIcon.png';
 
 export interface ToolbarProps {
@@ -11,6 +12,7 @@ export interface ToolbarProps {
     updateBackground: (background: string, theme: string) => void;
     removeWindow: (key: string) => void;
     shutdown: () => void;
+    openAppByName: (appName: string) => void; // Add this prop
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -20,6 +22,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
     addWindow,
     updateBackground,
     removeWindow,
+    openAppByName, // Destructure the prop
 }) => {
     const getTime = () => {
         const date = new Date();
@@ -107,6 +110,21 @@ const Toolbar: React.FC<ToolbarProps> = ({
         setStartWindowOpen(false);
     };
 
+    const openRunApp = () => {
+        const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
+        addWindow(
+            'run',
+            <Run
+                onInteract={() => toggleMinimize('run')}
+                onMinimize={() => toggleMinimize('run')}
+                onClose={() => removeWindow('run')}
+                openApp={openAppByName} // Pass the method to Run component
+            />,
+            highestZIndex + 1
+        );
+        setStartWindowOpen(false);
+    };
+
     const handleShutdown = () => {
         shutdown();
         setStartWindowOpen(false);
@@ -136,6 +154,19 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                 />
                                 <p style={styles.startMenuText}>
                                     Se<u>t</u>tings
+                                </p>
+                            </div>
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={openRunApp}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="runIcon"
+                                />
+                                <p style={styles.startMenuText}>
+                                    <u>R</u>un...
                                 </p>
                             </div>
                             <div style={styles.startMenuLine} />

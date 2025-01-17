@@ -70,22 +70,17 @@ const ShutdownSequence: React.FC<ShutdownSequenceProps> = ({
     `;
 
     const SHUTDOWN_3 = `
-    Damn${_S}.${_S}.${_S}. ${_M} You really wanna shutdown this computer huh?${_L}
-    Well, I hate to break it to you,${_S} but its impossible to shutdown...${_S} It will always reboot.
-    ${_L}
+    Oh, come on! You really want to shut down this awesome computer?${_S} Fine, let's pretend we're shutting down...${_L}
+    Just kidding!${_S} You can't get rid of me that easily!${_L}
     |Goodbye!|
     ${_M}
-
 
     Rebooting${_S}.${_S}.${_S}.
     `;
 
     const SHUTDOWN_4 = `
-    Did you not read the last message?${_S} This computer will A${_F}L${_F}W${_F}A${_F}Y${_F}S${_F} reboot, the shutdown sequence is just here for show. It's not actually doing anything.
-    ${_M}
-    I literally spent months on this website to give you other things to do.
-    You can play DOOM, Oregon Trail, Scrabble... but all you wanna do is shut the computer down.
-    ${_L}
+    Seriously?${_S} You still want to shut down?${_M} Don't you have anything better to do?${_L}
+    How about a game of DOOM or Scrabble instead?${_S} No?${_S} Fine...${_L}
     |Goodbye Again!|
     ${_M}
 
@@ -93,8 +88,7 @@ const ShutdownSequence: React.FC<ShutdownSequenceProps> = ({
     `;
 
     const SHUTDOWN_5 = `
-    Really${_X}?${_X}?${_X}?
-    ${_M}
+    Really?${_X}?${_X}?${_X}?${_M}
     What did I do to deserve this? ${_M}What do you want from me????
     ${_L}
     

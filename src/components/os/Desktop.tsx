@@ -17,6 +17,8 @@ import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
 import bg0 from '../../assets/bg/bg0.png';
 import TextEditor from '../applications/TextEditor';
+import MSN from '../applications/MSN';
+import Run from '../applications/Run';
 
 export interface DesktopProps {}
 
@@ -55,6 +57,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [theme, setTheme] = useState<string | null>(null);
     const [folderNames, setFolderNames] = useState<{[key: string]: string}>({});
     const [renamingFolder, setRenamingFolder] = useState<string | null>(null);
+    const [deletedItems, setDeletedItems] = useState<DesktopShortcutProps[]>([]);
 
     // Initialize background from localStorage on component mount
     useEffect(() => {
@@ -122,6 +125,19 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         );
     };
 
+    const openMSNApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'msn',
+            <MSN
+                onInteract={() => onWindowInteract('msn')}
+                onMinimize={() => minimizeWindow('msn')}
+                onClose={() => removeWindow('msn')}
+                key="msn"
+            />
+        );
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -185,6 +201,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'setting',
             component: Settings,
         },
+        //msn: {
+            //key: 'msn',
+           // name: 'MSN',
+            //shortcutIcon: 'msnIcon',
+           // component: MSN,
+       // },
     };
 
     useEffect(() => {
@@ -198,7 +220,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
@@ -400,7 +422,11 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const item = shortcuts.find(shortcut => shortcut.shortcutName === key);
         if (item) {
             setShortcuts(prev => prev.filter(shortcut => shortcut.shortcutName !== key));
-            addItemToFolder(folderId, item);
+            if (folderId === 'recycleBin') {
+                setDeletedItems(prev => [...prev, item]);
+            } else {
+                addItemToFolder(folderId, item);
+            }
         }
     };
 
@@ -611,6 +637,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const deleteFolder = (folderId: string) => {
+        const folderItems = folders[folderId];
+        if (folderItems) {
+            setDeletedItems(prev => [...prev, ...folderItems]);
+        }
         setFolders(prev => {
             const newFolders = { ...prev };
             delete newFolders[folderId];
@@ -630,6 +660,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const deleteFile = (fileName: string) => {
+        const item = shortcuts.find(shortcut => shortcut.shortcutName === fileName);
+        if (item) {
+            setDeletedItems(prev => [...prev, item]);
+        }
         setShortcuts(prev => prev.filter(shortcut => shortcut.shortcutName !== fileName));
         setWindows(prev => {
             const newWindows = { ...prev };
@@ -637,6 +671,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             return newWindows;
         });
         sessionStorage.removeItem(fileName); // Remove from session storage
+    };
+
+    const restoreItem = (item: DesktopShortcutProps) => {
+        setDeletedItems(prev => prev.filter(deletedItem => deletedItem.shortcutName !== item.shortcutName));
+        setShortcuts(prev => [...prev, item]);
+    };
+
+    const emptyRecycleBin = () => {
+        setDeletedItems([]);
     };
 
     const initializeDocumentsFolder = () => {
@@ -696,6 +739,81 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         }
     };
 
+    const openAppByName = (appName: string) => {
+        const appKey = appName.toLowerCase();
+        const app = APPLICATIONS[appKey];
+        if (app) {
+            addWindow(
+                app.key,
+                <app.component
+                    onInteract={() => onWindowInteract(app.key)}
+                    onMinimize={() => minimizeWindow(app.key)}
+                    onClose={() => removeWindow(app.key)}
+                    key={app.key}
+                />
+            );
+        } else {
+            alert(`Application "${appName}" not found.`);
+        }
+    };
+
+    const getRecycleBinIcon = () => {
+        if (deletedItems.length > 0) {
+            const hasTextFiles = deletedItems.some(item => item.icon === 'textFileIcon');
+            const hasFolders = deletedItems.some(item => item.icon === 'folderIcon');
+            if (hasTextFiles && hasFolders) {
+                return 'recycleBinFullIcon';
+            } else if (hasTextFiles) {
+                return 'recycleBinTextIcon';
+            } else if (hasFolders) {
+                return 'recycleBinDocIcon';
+            } else {
+                return 'recycleBinIcon';
+            }
+        } else {
+            return 'recycleBinIcon';
+        }
+    };
+
+    const handleRecycleBinClick = () => {
+        alert("Recycle Bin is still a work in progress.");
+    };
+
+    const openRecycleBin = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'recycleBin',
+            <Folder
+                folderId="recycleBin"
+                folderName="Recycle Bin"
+                contents={deletedItems}
+                onInteract={() => onWindowInteract('recycleBin')}
+                onMinimize={() => minimizeWindow('recycleBin')}
+                onClose={() => removeWindow('recycleBin')}
+                onAddItem={addItemToFolder}
+                onRemoveItem={removeItemFromFolder}
+                onRename={handleFolderRename}
+                addWindow={addWindow}
+                getHighestZIndex={getHighestZIndex}
+                isRecycleBin={true}
+                restoreItem={restoreItem}
+                emptyRecycleBin={emptyRecycleBin}
+                deleteFile={deleteFile}
+                key="recycleBin"
+            />,
+            highestZIndex + 1
+        );
+    };
+
+    const calculatePosition = (index: number) => {
+        const column = Math.floor(index / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
+        const row = index % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+        return {
+            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
+            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+        };
+    };
+
     return !shutdown ? (
         <div style={styles.desktop} onDrop={handleDrop} onDragOver={handleDragOver} onContextMenu={handleContextMenu} onClick={handleClick}>
             {/* For each window in windows, loop over and render  */}
@@ -721,10 +839,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             })}
             <div style={styles.shortcuts}>
                 {shortcuts.map((shortcut, i) => {
-                    const position = positions[shortcut.shortcutName] || {
-                        top: INITIAL_OFFSET.top + (i % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
-                        left: INITIAL_OFFSET.left + Math.floor(i / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
-                    };
+                    const position = positions[shortcut.shortcutName] || calculatePosition(i);
                     
                     return (
                         <div
@@ -744,13 +859,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         </div>
                     );
                 })}
-                {Object.keys(folders).map((folderId) => {
+                {Object.keys(folders).map((folderId, i) => {
                     const folder = folders[folderId];
                     const folderName = folderNames[folderId] || `New Folder ${folderId.split('-')[1]}`;
-                    const position = positions[folderId] || {
-                        top: INITIAL_OFFSET.top + ((shortcuts.length + parseInt(folderId.split('-')[1]) - 1) % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
-                        left: INITIAL_OFFSET.left + Math.floor((shortcuts.length + parseInt(folderId.split('-')[1]) - 1) / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
-                    };
+                    const position = positions[folderId] || calculatePosition(shortcuts.length + i);
                     
                     return (
                         <div
@@ -775,6 +887,21 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         </div>
                     );
                 })}
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, positions['recycleBin'] || calculatePosition(shortcuts.length + Object.keys(folders).length - 1))}
+                    key="recycleBin"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'recycleBin')}
+                    onContextMenu={(e) => handleFileContextMenu(e, 'recycleBin')}
+                    onDrop={(e) => handleDropOnFolder(e, 'recycleBin')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon={getRecycleBinIcon()}
+                        shortcutName="Recycle Bin"
+                        onOpen={handleRecycleBinClick}
+                    />
+                </div>
             </div>
             <Toolbar
                 windows={windows}
@@ -783,6 +910,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 addWindow={addWindow}
                 updateBackground={updateBackground}
                 removeWindow={removeWindow}
+                openAppByName={openAppByName} // Pass the method to Toolbar
             />
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
