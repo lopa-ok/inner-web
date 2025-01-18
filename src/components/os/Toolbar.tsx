@@ -3,6 +3,8 @@ import Colors from '../../constants/colors';
 import { Icon } from '../general';
 import Settings from '../applications/Settings'; 
 import Run from '../applications/Run';
+// import Minesweeper from '../applications/MinesweeperGame/Minesweeper';
+import Window from './Window';
 import textFileIcon from '../../assets/icons/textFileIcon.png';
 
 export interface ToolbarProps {
@@ -111,18 +113,30 @@ const Toolbar: React.FC<ToolbarProps> = ({
     };
 
     const openRunApp = () => {
+        alert("Still a WIP");
+        setStartWindowOpen(false);
+    };
+
+    const openMinesweeperApp = () => {
         const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
         addWindow(
-            'run',
-            <Run
-                onInteract={() => toggleMinimize('run')}
-                onMinimize={() => toggleMinimize('run')}
-                onClose={() => removeWindow('run')}
-                openApp={openAppByName} // Pass the method to Run component
-            />,
-            highestZIndex + 1
-        );
-        setStartWindowOpen(false);
+            'minesweeper',
+        <Window
+            closeWindow={() => removeWindow('minesweeper')}
+            minimizeWindow={() => toggleMinimize('minesweeper')}
+            onInteract={() => toggleMinimize('minesweeper')}
+            width={400}
+            height={400}
+            top={100}
+            left={100}
+            windowTitle="Minesweeper"
+            windowBarIcon="setting"
+        >
+            {/* <Minesweeper /> */}
+        </Window>,
+        highestZIndex + 1
+    );
+    setStartWindowOpen(false);
     };
 
     const handleShutdown = () => {
@@ -167,6 +181,19 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                 />
                                 <p style={styles.startMenuText}>
                                     <u>R</u>un...
+                                </p>
+                            </div>
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={openMinesweeperApp}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="setting"
+                                />
+                                <p style={styles.startMenuText}>
+                                    <u>M</u>inesweeper
                                 </p>
                             </div>
                             <div style={styles.startMenuLine} />

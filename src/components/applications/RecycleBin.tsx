@@ -212,15 +212,20 @@ const RecycleBin: React.FC<RecycleBinProps> = ({
                         top: contextMenu.y,
                         left: contextMenu.x
                     }}>
-                        <div style={styles.contextMenuItem} onClick={handleRename}>
-                            Rename
-                        </div>
-                        <div style={styles.contextMenuItem} onClick={() => handleDelete(contextMenu.targetId!)}>
-                            Delete
-                        </div>
-                        <div style={styles.contextMenuItem} onClick={emptyRecycleBin}>
-                            Empty Recycle Bin
-                        </div>
+                        {contextMenu.targetId ? (
+                            <>
+                                <div style={styles.contextMenuItem} onClick={handleRename}>
+                                    Rename
+                                </div>
+                                <div style={styles.contextMenuItem} onClick={() => handleDelete(contextMenu.targetId!)}>
+                                    Delete
+                                </div>
+                            </>
+                        ) : (
+                            <div style={styles.contextMenuItem} onClick={emptyRecycleBin}>
+                                Empty Recycle Bin
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

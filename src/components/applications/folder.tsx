@@ -235,12 +235,20 @@ const Folder: React.FC<FolderProps> = ({
                         top: contextMenu.y,
                         left: contextMenu.x
                     }}>
-                        <div style={styles.contextMenuItem} onClick={handleRename}>
-                            Rename
-                        </div>
-                        <div style={styles.contextMenuItem} onClick={() => handleDelete(contextMenu.targetId!)}>
-                            Delete
-                        </div>
+                        {contextMenu.targetId ? (
+                            <>
+                                <div style={styles.contextMenuItem} onClick={handleRename}>
+                                    Rename
+                                </div>
+                                <div style={styles.contextMenuItem} onClick={() => handleDelete(contextMenu.targetId!)}>
+                                    Delete
+                                </div>
+                            </>
+                        ) : (
+                            <div style={styles.contextMenuItem} onClick={handleRename}>
+                                Rename
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

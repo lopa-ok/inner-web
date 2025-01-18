@@ -9,13 +9,14 @@ import wordle from '../applications/wordle';
 import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
-import Chess from '../applications/Chess'; 
+// import Minesweeper from '../applications/MinesweeperGame/Minesweeper';
 import Credits from '../applications/Credits';
 import InternetExplorer from '../applications/InternetExplorer';
 import Folder from '../applications/folder';
 import RecycleBin from '../applications/RecycleBin';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
+import Window from './Window';
 import bg0 from '../../assets/bg/bg0.png';
 import TextEditor from '../applications/TextEditor';
 import MSN from '../applications/MSN';
@@ -208,6 +209,30 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             //shortcutIcon: 'msnIcon',
            // component: MSN,
        // },
+        // minesweeper: {
+        //     key: 'minesweeper',
+        //     name: 'Minesweeper',
+        //     shortcutIcon: 'setting',
+        //     component: (props: ExtendedWindowAppProps<any>) => (
+        //         <Window
+        //             closeWindow={props.onClose}
+        //             minimizeWindow={props.onMinimize}
+        //             onInteract={props.onInteract}
+        //             width={400}
+        //             height={400}
+        //             top={100}
+        //             left={100}
+        //             windowTitle="Minesweeper"
+        //             windowBarIcon="setting"
+        //         >
+        //             <Minesweeper
+        //                 onInteract={props.onInteract}
+        //                 onMinimize={props.onMinimize}
+        //                 onClose={props.onClose}
+        //             />
+        //         </Window>
+        //     ),
+        // },
     };
 
     useEffect(() => {
@@ -742,9 +767,11 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     };
 
     const openAppByName = (appName: string) => {
-        const appKey = appName.toLowerCase();
-        const app = APPLICATIONS[appKey];
-        if (app) {
+        const appKey = Object.keys(APPLICATIONS).find(
+            (key) => APPLICATIONS[key].name.toLowerCase() === appName.toLowerCase()
+        );
+        if (appKey) {
+            const app = APPLICATIONS[appKey];
             addWindow(
                 app.key,
                 <app.component
