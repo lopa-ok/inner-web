@@ -16,7 +16,6 @@ import Folder from '../applications/folder';
 import RecycleBin from '../applications/RecycleBin';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
-import Window from './Window';
 import bg0 from '../../assets/bg/bg0.png';
 import TextEditor from '../applications/TextEditor';
 import MSN from '../applications/MSN';

@@ -251,6 +251,8 @@ const styles: { [key: string]: React.CSSProperties } = {
         border: '1px solid #ccc',
         boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
         zIndex: 1000,
+        display: 'flex',
+        flexDirection: 'column',
     },
     contextMenuItem: {
         padding: '8px 12px',

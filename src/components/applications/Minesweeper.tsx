@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Colors from '../../constants/colors';
+import Window from '../os/Window';
 
 interface Cell {
     isMine: boolean;
@@ -61,7 +62,7 @@ const generateBoard = (rows: number, cols: number, mines: number): Cell[][] => {
     return board;
 };
 
-const Minesweeper: React.FC<MinesweeperProps> = ({ onInteract, onMinimize, onClose }) => {
+const MinesweeperGame: React.FC<MinesweeperProps> = ({ onInteract, onMinimize, onClose }) => {
     const [board, setBoard] = useState<Cell[][]>([]);
     const [gameOver, setGameOver] = useState(false);
     const [gameWon, setGameWon] = useState(false);
@@ -71,10 +72,20 @@ const Minesweeper: React.FC<MinesweeperProps> = ({ onInteract, onMinimize, onClo
         setBoard(newBoard);
     }, []);
 
+    const deepCopyBoard = (src: Cell[][]): Cell[][] => {
+        return src.map(row => row.map(cell => ({ ...cell })));
+    };
+
+    const handleNewGame = () => {
+        setGameOver(false);
+        setGameWon(false);
+        setBoard(generateBoard(10, 10, 10));
+    };
+
     const revealCell = (row: number, col: number) => {
         if (gameOver || gameWon) return;
 
-        const newBoard = [...board];
+        const newBoard = deepCopyBoard(board);
         const cell = newBoard[row][col];
 
         if (cell.isRevealed || cell.isFlagged) return;
@@ -114,7 +125,7 @@ const Minesweeper: React.FC<MinesweeperProps> = ({ onInteract, onMinimize, onClo
         e.preventDefault();
         if (gameOver || gameWon) return;
 
-        const newBoard = [...board];
+        const newBoard = deepCopyBoard(board);
         const cell = newBoard[row][col];
 
         if (cell.isRevealed) return;
@@ -125,6 +136,9 @@ const Minesweeper: React.FC<MinesweeperProps> = ({ onInteract, onMinimize, onClo
 
     return (
         <div style={styles.container}>
+            <button onClick={handleNewGame} style={{ marginBottom: 8 }}>
+                New Game
+            </button>
             {gameOver && <div style={styles.message}>Game Over</div>}
             {gameWon && <div style={styles.message}>You Win!</div>}
             <div style={styles.board}>
@@ -154,7 +168,29 @@ const Minesweeper: React.FC<MinesweeperProps> = ({ onInteract, onMinimize, onClo
     );
 };
 
-const styles: StyleSheetCSS = {
+const Minesweeper: React.FC<MinesweeperProps> = (props) => {
+    return (
+        <Window
+            top={100}
+            left={100}
+            width={400}
+            height={400}
+            windowTitle="Minesweeper"
+            windowBarIcon="setting"
+            closeWindow={props.onClose}
+            minimizeWindow={props.onMinimize}
+            onInteract={props.onInteract}
+        >
+            <MinesweeperGame
+                onInteract={props.onInteract}
+                onMinimize={props.onMinimize}
+                onClose={props.onClose}
+            />
+        </Window>
+    );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -194,4 +230,4 @@ const styles: StyleSheetCSS = {
     },
 };
 
-// export default Minesweeper;
+export default Minesweeper;

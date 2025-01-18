@@ -3,8 +3,6 @@ import Colors from '../../constants/colors';
 import { Icon } from '../general';
 import Settings from '../applications/Settings'; 
 import Run from '../applications/Run';
-// import Minesweeper from '../applications/MinesweeperGame/Minesweeper';
-import Window from './Window';
 import textFileIcon from '../../assets/icons/textFileIcon.png';
 
 export interface ToolbarProps {
@@ -117,28 +115,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
         setStartWindowOpen(false);
     };
 
-    const openMinesweeperApp = () => {
-        const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
-        addWindow(
-            'minesweeper',
-        <Window
-            closeWindow={() => removeWindow('minesweeper')}
-            minimizeWindow={() => toggleMinimize('minesweeper')}
-            onInteract={() => toggleMinimize('minesweeper')}
-            width={400}
-            height={400}
-            top={100}
-            left={100}
-            windowTitle="Minesweeper"
-            windowBarIcon="setting"
-        >
-            {/* <Minesweeper /> */}
-        </Window>,
-        highestZIndex + 1
-    );
-    setStartWindowOpen(false);
-    };
-
     const handleShutdown = () => {
         shutdown();
         setStartWindowOpen(false);
@@ -181,19 +157,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                 />
                                 <p style={styles.startMenuText}>
                                     <u>R</u>un...
-                                </p>
-                            </div>
-                            <div
-                                className="start-menu-option"
-                                style={styles.startMenuOption}
-                                onMouseDown={openMinesweeperApp}
-                            >
-                                <Icon
-                                    style={styles.startMenuIcon}
-                                    icon="setting"
-                                />
-                                <p style={styles.startMenuText}>
-                                    <u>M</u>inesweeper
                                 </p>
                             </div>
                             <div style={styles.startMenuLine} />
