@@ -24,6 +24,7 @@ import Run from '../applications/Run';
 import Documents from '../applications/Documents';
 import GamesFolder from '../applications/GamesFolder';
 import GamesText from '../applications/GamesText';
+import Sudoku from '../applications/Sudoku';
 
 export interface DesktopProps {}
 
@@ -33,6 +34,7 @@ const GRID_SIZE = 100;
 const VERTICAL_SPACING = 104;
 const HORIZONTAL_SPACING = 100;
 const INITIAL_OFFSET = { top: 16, left: 6 };
+const WINDOW_OFFSET = 30;
 
 interface ContextMenuState {
     visible: boolean;
@@ -155,6 +157,20 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         );
     };
 
+    const openGamesText = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'gamesText',
+            <GamesText
+                fileName="Games Info"
+                onInteract={() => onWindowInteract('gamesText')}
+                onMinimize={() => minimizeWindow('gamesText')}
+                onClose={() => removeWindow('gamesText')}
+                key="gamesText"
+            />
+        );
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -228,6 +244,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     onMinimize={props.onMinimize}
                     onClose={props.onClose}
                     openWordleApp={openWordleApp}
+                    openGamesText={openGamesText}
                 />
             ),
         },
@@ -236,6 +253,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'Games Info',
             shortcutIcon: 'textFileIcon',
             component: GamesText,
+        },
+        sudoku: {
+            key: 'sudoku',
+            name: 'Sudoku',
+            shortcutIcon: 'folderIcon',
+            component: Sudoku,
         },
         //msn: {
             //key: 'msn',
@@ -280,7 +303,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
@@ -297,40 +320,6 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     },
                 });
             }
-        });
-
-        newShortcuts.push({
-            shortcutName: 'Games Folder',
-            icon: 'folderIcon',
-            onOpen: () => {
-                addWindow(
-                    'gamesFolder',
-                    <GamesFolder
-                        onInteract={() => onWindowInteract('gamesFolder')}
-                        onMinimize={() => minimizeWindow('gamesFolder')}
-                        onClose={() => removeWindow('gamesFolder')}
-                        openWordleApp={openWordleApp}
-                        key="gamesFolder"
-                    />
-                );
-            },
-        });
-
-        newShortcuts.push({
-            shortcutName: 'Games Info',
-            icon: 'textFileIcon',
-            onOpen: () => {
-                addWindow(
-                    'gamesText',
-                    <GamesText
-                        fileName="Games Info"
-                        onInteract={() => onWindowInteract('gamesText')}
-                        onMinimize={() => minimizeWindow('gamesText')}
-                        onClose={() => removeWindow('gamesText')}
-                        key="gamesText"
-                    />
-                );
-            },
         });
 
         initializeDocumentsFolder();
@@ -468,18 +457,25 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
     const addWindow = useCallback(
         (key: string, element: JSX.Element, zIndex?: number) => {
+            const highestZIndex = getHighestZIndex();
+            const existingWindows = Object.keys(windows).length;
+            const top = INITIAL_OFFSET.top + (existingWindows * WINDOW_OFFSET);
+            const left = INITIAL_OFFSET.left + (existingWindows * WINDOW_OFFSET);
+
             setWindows((prevState) => ({
                 ...prevState,
                 [key]: {
-                    zIndex: zIndex || getHighestZIndex() + 1,
+                    zIndex: zIndex || highestZIndex + 1,
                     minimized: false,
                     component: React.cloneElement(element, { updateBackground }), // Pass updateBackground to Settings
                     name: APPLICATIONS[key].name,
                     icon: APPLICATIONS[key].shortcutIcon,
+                    top: top % window.innerHeight,
+                    left: left % window.innerWidth,
                 },
             }));
         },
-        [getHighestZIndex, updateBackground]
+        [getHighestZIndex, updateBackground, windows]
     );
 
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>, key: string) => {

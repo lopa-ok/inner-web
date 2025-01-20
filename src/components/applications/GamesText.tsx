@@ -9,7 +9,7 @@ interface GamesTextProps {
 }
 
 const GamesText: React.FC<GamesTextProps> = ({ fileName, onClose, onInteract, onMinimize }) => {
-    const [content] = useState('This folder contains games that aren\'t as retro but I still liked to add.');
+    const [content] = useState('This folder contains games that are not as retro but were still worth including.');
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleClose = () => {

@@ -9,9 +9,10 @@ interface GamesFolderProps {
     onMinimize: () => void;
     onClose: () => void;
     openWordleApp: () => void;
+    openGamesText: () => void;
 }
 
-const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp }) => {
+const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp, openGamesText }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
     const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
@@ -100,6 +101,20 @@ const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClo
                         icon="wordleIcon"
                         shortcutName="Wordle"
                         onOpen={openWordleApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 120 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'gamesText')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'gamesText')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="textFileIcon"
+                        shortcutName="Games Info"
+                        onOpen={openGamesText}
                         textColor="black"
                     />
                 </div>

@@ -3,7 +3,8 @@ import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
 import Credits from '../applications/Credits';
 import GamesFolder from '../applications/GamesFolder';
-import Wordle from '../applications/wordle'
+import Wordle from '../applications/wordle';
+import GamesText from '../applications/GamesText';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -45,6 +46,7 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('gamesFolder')}
                 onClose={() => removeWindow('gamesFolder')}
                 openWordleApp={openWordleApp}
+                openGamesText={openGamesText}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -72,6 +74,20 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('wordle')}
                 onClose={() => removeWindow('wordle')}
                 key="wordle"
+            />
+        );
+    };
+
+    const openGamesText = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'gamesText',
+            <GamesText
+                fileName="Games Info"
+                onInteract={() => onWindowInteract('gamesText')}
+                onMinimize={() => minimizeWindow('gamesText')}
+                onClose={() => removeWindow('gamesText')}
+                key="gamesText"
             />
         );
     };
