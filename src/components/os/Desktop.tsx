@@ -5,7 +5,7 @@ import Doom from '../applications/Doom';
 import OregonTrail from '../applications/OregonTrail';
 import ShutdownSequence from './ShutdownSequence';
 import ThisComputer from '../applications/ThisComputer';
-import wordle from '../applications/wordle';
+import Wordle from '../applications/wordle';
 import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
@@ -16,11 +16,14 @@ import Folder from '../applications/folder';
 import RecycleBin from '../applications/RecycleBin';
 import { IconName } from '../../assets/icons';
 import Settings from '../applications/Settings';
+import Window from './Window';
 import bg0 from '../../assets/bg/bg0.png';
 import TextEditor from '../applications/TextEditor';
 import MSN from '../applications/MSN';
 import Run from '../applications/Run';
 import Documents from '../applications/Documents';
+import GamesFolder from '../applications/GamesFolder';
+import GamesText from '../applications/GamesText';
 
 export interface DesktopProps {}
 
@@ -139,6 +142,19 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         );
     };
 
+    const openWordleApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'wordle',
+            <Wordle
+                onInteract={() => onWindowInteract('wordle')}
+                onMinimize={() => minimizeWindow('wordle')}
+                onClose={() => removeWindow('wordle')}
+                key="wordle"
+            />
+        );
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -158,7 +174,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             key: 'wordle',
             name: 'Wordle',
             shortcutIcon: 'wordleIcon',
-            component: wordle,
+            component: Wordle,
         },
         trail: {
             key: 'trail',
@@ -201,6 +217,25 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'Settings',
             shortcutIcon: 'setting',
             component: Settings,
+        },
+        gamesFolder: {
+            key: 'gamesFolder',
+            name: 'Games Folder',
+            shortcutIcon: 'folderIcon',
+            component: (props: ExtendedWindowAppProps<any>) => (
+                <GamesFolder
+                    onInteract={props.onInteract}
+                    onMinimize={props.onMinimize}
+                    onClose={props.onClose}
+                    openWordleApp={openWordleApp}
+                />
+            ),
+        },
+        gamesText: {
+            key: 'gamesText',
+            name: 'Games Info',
+            shortcutIcon: 'textFileIcon',
+            component: GamesText,
         },
         //msn: {
             //key: 'msn',
@@ -262,6 +297,40 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     },
                 });
             }
+        });
+
+        newShortcuts.push({
+            shortcutName: 'Games Folder',
+            icon: 'folderIcon',
+            onOpen: () => {
+                addWindow(
+                    'gamesFolder',
+                    <GamesFolder
+                        onInteract={() => onWindowInteract('gamesFolder')}
+                        onMinimize={() => minimizeWindow('gamesFolder')}
+                        onClose={() => removeWindow('gamesFolder')}
+                        openWordleApp={openWordleApp}
+                        key="gamesFolder"
+                    />
+                );
+            },
+        });
+
+        newShortcuts.push({
+            shortcutName: 'Games Info',
+            icon: 'textFileIcon',
+            onOpen: () => {
+                addWindow(
+                    'gamesText',
+                    <GamesText
+                        fileName="Games Info"
+                        onInteract={() => onWindowInteract('gamesText')}
+                        onMinimize={() => minimizeWindow('gamesText')}
+                        onClose={() => removeWindow('gamesText')}
+                        key="gamesText"
+                    />
+                );
+            },
         });
 
         initializeDocumentsFolder();

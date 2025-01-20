@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
 import Credits from '../applications/Credits';
+import GamesFolder from '../applications/GamesFolder';
+import Wordle from '../applications/wordle'
 
 interface DocumentsProps {
     onClose: () => void;
@@ -34,6 +36,21 @@ const Documents: React.FC<DocumentsProps> = ({
         );
     };
 
+    const openGamesFolder = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'gamesFolder',
+            <GamesFolder
+                onInteract={() => onWindowInteract('gamesFolder')}
+                onMinimize={() => minimizeWindow('gamesFolder')}
+                onClose={() => removeWindow('gamesFolder')}
+                openWordleApp={openWordleApp}
+                key="gamesFolder"
+            />,
+            highestZIndex + 1
+        );
+    };
+
     const onWindowInteract = (key: string) => {
         // Implement the logic for window interaction
     };
@@ -44,6 +61,19 @@ const Documents: React.FC<DocumentsProps> = ({
 
     const removeWindow = (key: string) => {
         // Implement the logic for removing the window
+    };
+
+    const openWordleApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'wordle',
+            <Wordle
+                onInteract={() => onWindowInteract('wordle')}
+                onMinimize={() => minimizeWindow('wordle')}
+                onClose={() => removeWindow('wordle')}
+                key="wordle"
+            />
+        );
     };
 
     return (
@@ -69,6 +99,17 @@ const Documents: React.FC<DocumentsProps> = ({
                         icon="credits"
                         shortcutName="Credits"
                         onOpen={openCreditsApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={{ ...styles.shortcutContainer, top: 20, left: 120 }}
+                    onDoubleClick={openGamesFolder}
+                >
+                    <DesktopShortcut
+                        icon="folderIcon"
+                        shortcutName="Games Folder"
+                        onOpen={openGamesFolder}
                         textColor="black"
                     />
                 </div>
