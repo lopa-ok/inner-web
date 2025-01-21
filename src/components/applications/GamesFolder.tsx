@@ -10,9 +10,11 @@ interface GamesFolderProps {
     onClose: () => void;
     openWordleApp: () => void;
     openGamesText: () => void;
+    openSudokuApp: () => void;
+    openHangmanApp: () => void;
 }
 
-const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp, openGamesText }) => {
+const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp, openGamesText, openSudokuApp, openHangmanApp }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
     const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
@@ -91,7 +93,7 @@ const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClo
                 onDragOver={handleDragOver}
             >
                 <div
-                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 20 })}
+                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 120 })}
                     draggable
                     onDragStart={(e) => handleDragStart(e, 'wordle')}
                     onDrop={(e) => handleDropInsideFolder(e, 'wordle')}
@@ -105,7 +107,7 @@ const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClo
                     />
                 </div>
                 <div
-                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 120 })}
+                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 20 })}
                     draggable
                     onDragStart={(e) => handleDragStart(e, 'gamesText')}
                     onDrop={(e) => handleDropInsideFolder(e, 'gamesText')}
@@ -115,6 +117,34 @@ const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClo
                         icon="textFileIcon"
                         shortcutName="Games Info"
                         onOpen={openGamesText}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 220 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'Sudoku')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'Sudoku')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="sudokuIcon"
+                        shortcutName="Sudoku"
+                        onOpen={openSudokuApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 320 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'Hangman')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'Hangman')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="folderIcon"
+                        shortcutName="Hangman"
+                        onOpen={openHangmanApp}
                         textColor="black"
                     />
                 </div>

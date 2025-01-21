@@ -10,8 +10,8 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
             left={50}
             width={800}
             height={600}
-            windowBarIcon="windowExplorerIcon"
-            windowTitle="Internet Explorer"
+            windowBarIcon="InternetExplorerIcon"
+            windowTitle="Google Chrome"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
@@ -19,7 +19,7 @@ const InternetExplorer: React.FC<InternetExplorerProps> = (props) => {
             <iframe
                 src="https://oldgoogle.neocities.org/2009/"
                 style={styles.iframe}
-                title="Internet Explorer"
+                title="Google Chrome"
             ></iframe>
         </Window>
     );

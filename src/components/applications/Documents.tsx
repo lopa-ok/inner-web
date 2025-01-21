@@ -5,6 +5,8 @@ import Credits from '../applications/Credits';
 import GamesFolder from '../applications/GamesFolder';
 import Wordle from '../applications/wordle';
 import GamesText from '../applications/GamesText';
+import Sudoku from '../applications/Sudoku';
+import Hangman from '../applications/Hangman';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -37,6 +39,19 @@ const Documents: React.FC<DocumentsProps> = ({
         );
     };
 
+    const openHangmanApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'hangman',
+            <Hangman
+                onInteract={() => onWindowInteract('hangman')}
+                onMinimize={() => minimizeWindow('hangman')}
+                onClose={() => removeWindow('hangman')}
+                key="hangman"
+            />
+        );
+    };
+
     const openGamesFolder = () => {
         const highestZIndex = getHighestZIndex();
         addWindow(
@@ -47,6 +62,8 @@ const Documents: React.FC<DocumentsProps> = ({
                 onClose={() => removeWindow('gamesFolder')}
                 openWordleApp={openWordleApp}
                 openGamesText={openGamesText}
+                openSudokuApp={openSudokuApp}
+                openHangmanApp={openHangmanApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -91,11 +108,23 @@ const Documents: React.FC<DocumentsProps> = ({
             />
         );
     };
+    const openSudokuApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'sudoku',
+            <Sudoku
+                onInteract={() => onWindowInteract('sudoku')}
+                onMinimize={() => minimizeWindow('sudoku')}
+                onClose={() => removeWindow('sudoku')}
+                key="sudoku"
+            />
+        );
+    };
 
     return (
         <Window
-            top={10}
-            left={10}
+            top={50}
+            left={100}
             width={600}
             height={500}
             windowTitle="Documents"

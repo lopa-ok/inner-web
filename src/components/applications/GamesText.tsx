@@ -18,8 +18,8 @@ const GamesText: React.FC<GamesTextProps> = ({ fileName, onClose, onInteract, on
 
     return (
         <Window
-            top={10}
-            left={10}
+            top={70}
+            left={150}
             width={600}
             height={500}
             windowTitle={fileName}

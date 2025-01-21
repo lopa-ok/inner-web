@@ -25,6 +25,7 @@ import Documents from '../applications/Documents';
 import GamesFolder from '../applications/GamesFolder';
 import GamesText from '../applications/GamesText';
 import Sudoku from '../applications/Sudoku';
+import Hangman from '../applications/Hangman';
 
 export interface DesktopProps {}
 
@@ -218,7 +219,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         // },
         internetExplorer: {
             key: 'internetExplorer',
-            name: 'Internet Explorer',
+            name: 'Google Chrome',
             shortcutIcon: 'InternetExplorerIcon',
             component: InternetExplorer,
         },
@@ -245,6 +246,30 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     onClose={props.onClose}
                     openWordleApp={openWordleApp}
                     openGamesText={openGamesText}
+                    openSudokuApp={() => {
+                        const highestZIndex = getHighestZIndex();
+                        addWindow(
+                            'sudoku',
+                            <Sudoku
+                                onInteract={() => onWindowInteract('sudoku')}
+                                onMinimize={() => minimizeWindow('sudoku')}
+                                onClose={() => removeWindow('sudoku')}
+                                key="sudoku"
+                            />
+                        );
+                    }}
+                    openHangmanApp={() => {
+                        const highestZIndex = getHighestZIndex();
+                        addWindow(
+                            'hangman',
+                            <Hangman
+                                onInteract={() => onWindowInteract('hangman')}
+                                onMinimize={() => minimizeWindow('hangman')}
+                                onClose={() => removeWindow('hangman')}
+                                key="hangman"
+                            />
+                        );
+                    }}
                 />
             ),
         },
@@ -259,6 +284,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'Sudoku',
             shortcutIcon: 'folderIcon',
             component: Sudoku,
+        },
+        hangman: {
+            key: 'hangman',
+            name: 'Hangman',
+            shortcutIcon: 'folderIcon',
+            component: Hangman,
         },
         //msn: {
             //key: 'msn',
@@ -303,7 +334,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
@@ -462,12 +493,15 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             const top = INITIAL_OFFSET.top + (existingWindows * WINDOW_OFFSET);
             const left = INITIAL_OFFSET.left + (existingWindows * WINDOW_OFFSET);
 
+            // Always set new windows to highest z-index + 1
+            const newZIndex = Math.max(zIndex || 0, highestZIndex + 1);
+
             setWindows((prevState) => ({
                 ...prevState,
                 [key]: {
-                    zIndex: zIndex || highestZIndex + 1,
+                    zIndex: newZIndex,
                     minimized: false,
-                    component: React.cloneElement(element, { updateBackground }), // Pass updateBackground to Settings
+                    component: React.cloneElement(element, { updateBackground }),
                     name: APPLICATIONS[key].name,
                     icon: APPLICATIONS[key].shortcutIcon,
                     top: top % window.innerHeight,

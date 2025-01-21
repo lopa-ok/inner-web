@@ -30,6 +30,7 @@ import recycleBinFullIcon from './recycleBinFullIcon.png';
 import recycleBinDocIcon from './recycleBinDocIcon.png';
 import recycleBinTextIcon from './recycleBinTextIcon.png';
 import documentsIcon from './documentsIcon.png';
+import sudokuIcon from './sudokuIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -62,6 +63,7 @@ const icons = {
     recycleBinDocIcon: recycleBinDocIcon,
     recycleBinTextIcon: recycleBinTextIcon,
     documentsIcon: documentsIcon,
+    sudokuIcon: sudokuIcon,
 };
 
 export type IconName = keyof typeof icons;

@@ -51,8 +51,8 @@ const TextEditor: React.FC<TextEditorProps> = ({ fileName, onClose, onInteract, 
 
     return (
         <Window
-            top={10}
-            left={10}
+            top={50} 
+            left={150}
             width={600}
             height={500}
             windowTitle={isRenaming ? (

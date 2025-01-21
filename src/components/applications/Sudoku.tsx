@@ -131,7 +131,7 @@ const Sudoku: React.FC<SudokuProps> = ({ onClose, onInteract, onMinimize }) => {
             width={460}
             height={700}
             windowTitle="Sudoku"
-            windowBarIcon="folderIcon"
+            windowBarIcon="sudokuIcon"
             windowBarColor="#757579"
             closeWindow={onClose}
             onInteract={onInteract}
