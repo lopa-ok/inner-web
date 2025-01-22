@@ -11,3 +11,7 @@ The Inner Web is built primarily using **TypeScript**, with a focus on performan
 You can explore the complete portfolio, including the "Outer Web," at **[philopater.me](https://philopater.me)**.
 
 Feel free to reach out with any feedback or ideas to improve the portfolio further. Contributions and suggestions are always welcome!
+
+
+
+disclaimer AI was used in this project
