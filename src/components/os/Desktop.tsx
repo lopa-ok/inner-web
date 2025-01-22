@@ -26,6 +26,7 @@ import GamesFolder from '../applications/GamesFolder';
 import GamesText from '../applications/GamesText';
 import Sudoku from '../applications/Sudoku';
 import Hangman from '../applications/Hangman';
+import Game2048 from '../applications/Game2048';
 
 export interface DesktopProps {}
 
@@ -291,6 +292,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'folderIcon',
             component: Hangman,
         },
+        game2048: {
+            key: 'game2048',
+            name: '2048',
+            shortcutIcon: 'folderIcon',
+            component: Game2048,
+        },
         //msn: {
             //key: 'msn',
            // name: 'MSN',
@@ -334,7 +341,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
