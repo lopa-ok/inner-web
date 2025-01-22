@@ -7,6 +7,7 @@ import Wordle from '../applications/wordle';
 import GamesText from '../applications/GamesText';
 import Sudoku from '../applications/Sudoku';
 import Hangman from '../applications/Hangman';
+import TicTacToe from '../applications/TicTacToe';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -64,6 +65,7 @@ const Documents: React.FC<DocumentsProps> = ({
                 openGamesText={openGamesText}
                 openSudokuApp={openSudokuApp}
                 openHangmanApp={openHangmanApp}
+                openTicTacToeApp={openTicTacToeApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -117,6 +119,19 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('sudoku')}
                 onClose={() => removeWindow('sudoku')}
                 key="sudoku"
+            />
+        );
+    };
+
+    const openTicTacToeApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'ticTacToe',
+            <TicTacToe
+                onInteract={() => onWindowInteract('ticTacToe')}
+                onMinimize={() => minimizeWindow('ticTacToe')}
+                onClose={() => removeWindow('ticTacToe')}
+                key="ticTacToe"
             />
         );
     };

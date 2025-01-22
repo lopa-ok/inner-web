@@ -27,6 +27,7 @@ import GamesText from '../applications/GamesText';
 import Sudoku from '../applications/Sudoku';
 import Hangman from '../applications/Hangman';
 import Game2048 from '../applications/Game2048';
+import TicTacToe from '../applications/TicTacToe';
 
 export interface DesktopProps {}
 
@@ -173,6 +174,19 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         );
     };
 
+    const openTicTacToeApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'ticTacToe',
+            <TicTacToe
+                onInteract={() => onWindowInteract('ticTacToe')}
+                onMinimize={() => minimizeWindow('ticTacToe')}
+                onClose={() => removeWindow('ticTacToe')}
+                key="ticTacToe"
+            />
+        );
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -271,6 +285,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             />
                         );
                     }}
+                    openTicTacToeApp={openTicTacToeApp}
                 />
             ),
         },
@@ -297,6 +312,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: '2048',
             shortcutIcon: 'folderIcon',
             component: Game2048,
+        },
+        ticTacToe: {
+            key: 'ticTacToe',
+            name: 'Tic Tac Toe',
+            shortcutIcon: 'folderIcon',
+            component: TicTacToe,
         },
         //msn: {
             //key: 'msn',
@@ -341,7 +362,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman' && key !== 'game2048' && key !== 'ticTacToe') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,

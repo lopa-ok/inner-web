@@ -12,9 +12,10 @@ interface GamesFolderProps {
     openGamesText: () => void;
     openSudokuApp: () => void;
     openHangmanApp: () => void;
+    openTicTacToeApp: () => void;
 }
 
-const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp, openGamesText, openSudokuApp, openHangmanApp }) => {
+const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp, openGamesText, openSudokuApp, openHangmanApp, openTicTacToeApp }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
     const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
@@ -142,9 +143,23 @@ const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClo
                     onDragOver={handleDragOver}
                 >
                     <DesktopShortcut
-                        icon="folderIcon"
+                        icon="hangmanIcon"
                         shortcutName="Hangman"
                         onOpen={openHangmanApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 20, left: 420 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'ticTacToe')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'ticTacToe')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="tictactoeIcon"
+                        shortcutName="Tic Tac Toe"
+                        onOpen={openTicTacToeApp}
                         textColor="black"
                     />
                 </div>

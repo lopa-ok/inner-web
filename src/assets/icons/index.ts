@@ -31,6 +31,8 @@ import recycleBinDocIcon from './recycleBinDocIcon.png';
 import recycleBinTextIcon from './recycleBinTextIcon.png';
 import documentsIcon from './documentsIcon.png';
 import sudokuIcon from './sudokuIcon.png';
+import hangmanIcon from './hangmanIcon.png'
+import tictactoeIcon from './tictactoeIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -64,6 +66,8 @@ const icons = {
     recycleBinTextIcon: recycleBinTextIcon,
     documentsIcon: documentsIcon,
     sudokuIcon: sudokuIcon,
+    hangmanIcon: hangmanIcon,
+    tictactoeIcon: tictactoeIcon,
 };
 
 export type IconName = keyof typeof icons;
