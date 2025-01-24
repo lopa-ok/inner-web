@@ -33,6 +33,9 @@ import documentsIcon from './documentsIcon.png';
 import sudokuIcon from './sudokuIcon.png';
 import hangmanIcon from './hangmanIcon.png'
 import tictactoeIcon from './tictactoeIcon.png';
+import whackIcon from './whackIcon.png';
+import tetrisIcon from './tetrisIcon.png';
+import twentyIcon from './twentyIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -68,6 +71,9 @@ const icons = {
     sudokuIcon: sudokuIcon,
     hangmanIcon: hangmanIcon,
     tictactoeIcon: tictactoeIcon,
+    whackIcon: whackIcon,
+    twentyIcon: twentyIcon,
+    tetrisIcon: tetrisIcon,
 };
 
 export type IconName = keyof typeof icons;

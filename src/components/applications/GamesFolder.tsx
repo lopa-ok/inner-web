@@ -13,9 +13,26 @@ interface GamesFolderProps {
     openSudokuApp: () => void;
     openHangmanApp: () => void;
     openTicTacToeApp: () => void;
+    open2048App: () => void;
+    openWhackAMoleApp: () => void;
+    openTetrisApp: () => void;
+    // openMazeApp: () => void;
 }
 
-const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClose, openWordleApp, openGamesText, openSudokuApp, openHangmanApp, openTicTacToeApp }) => {
+const GamesFolder: React.FC<GamesFolderProps> = ({
+    onInteract,
+    onMinimize,
+    onClose,
+    openWordleApp,
+    openGamesText,
+    openSudokuApp,
+    openHangmanApp,
+    openTicTacToeApp,
+    open2048App,
+    openWhackAMoleApp,
+    openTetrisApp,
+    // openMazeApp, // Comment out this line
+}) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
     const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
@@ -163,6 +180,62 @@ const GamesFolder: React.FC<GamesFolderProps> = ({ onInteract, onMinimize, onClo
                         textColor="black"
                     />
                 </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 20 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, '2048')}
+                    onDrop={(e) => handleDropInsideFolder(e, '2048')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="twentyIcon"
+                        shortcutName="2048"
+                        onOpen={open2048App}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 120 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'whackAMole')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'whackAMole')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="whackIcon"
+                        shortcutName="Whack-A-Mole"
+                        onOpen={openWhackAMoleApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 220 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'tetris')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'tetris')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="tetrisIcon"
+                        shortcutName="Tetris"
+                        onOpen={openTetrisApp}
+                        textColor="black"
+                    />
+                </div>
+                {/* <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 320 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'maze')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'maze')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="folderIcon"
+                        shortcutName="Maze"
+                        onOpen={openMazeApp}
+                        textColor="black"
+                    />
+                </div> */}
                 {contextMenu.visible && (
                     <div style={{
                         ...styles.contextMenu,

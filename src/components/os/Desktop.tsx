@@ -28,6 +28,9 @@ import Sudoku from '../applications/Sudoku';
 import Hangman from '../applications/Hangman';
 import Game2048 from '../applications/Game2048';
 import TicTacToe from '../applications/TicTacToe';
+import WhackAMole from '../applications/WhackAMole';
+import Tetris from '../applications/Tetris';
+import Maze from '../applications/Maze';
 
 export interface DesktopProps {}
 
@@ -187,6 +190,58 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         );
     };
 
+    const openWhackAMoleApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'whackAMole',
+            <WhackAMole
+                onInteract={() => onWindowInteract('whackAMole')}
+                onMinimize={() => minimizeWindow('whackAMole')}
+                onClose={() => removeWindow('whackAMole')}
+                key="whackAMole"
+            />
+        );
+    };
+
+    const open2048App = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            '2048',
+            <Game2048
+                onInteract={() => onWindowInteract('2048')}
+                onMinimize={() => minimizeWindow('2048')}
+                onClose={() => removeWindow('2048')}
+                key="2048"
+            />
+        );
+    };
+
+    const openTetrisApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'tetris',
+            <Tetris
+                onInteract={() => onWindowInteract('tetris')}
+                onMinimize={() => minimizeWindow('tetris')}
+                onClose={() => removeWindow('tetris')}
+                key="tetris"
+            />
+        );
+    };
+
+    const openMazeApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'maze',
+            <Maze
+                onInteract={() => onWindowInteract('maze')}
+                onMinimize={() => minimizeWindow('maze')}
+                onClose={() => removeWindow('maze')}
+                key="maze"
+            />
+        );
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -286,6 +341,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         );
                     }}
                     openTicTacToeApp={openTicTacToeApp}
+                    open2048App={open2048App}
+                    openWhackAMoleApp={openWhackAMoleApp}
+                    openTetrisApp={openTetrisApp}
+                    //openMazeApp={openMazeApp}
                 />
             ),
         },
@@ -310,14 +369,32 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         game2048: {
             key: 'game2048',
             name: '2048',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'twentyIcon',
             component: Game2048,
         },
         ticTacToe: {
             key: 'ticTacToe',
             name: 'Tic Tac Toe',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'tictactoeIcon',
             component: TicTacToe,
+        },
+        whackAMole: {
+            key: 'whackAMole',
+            name: 'Whack-A-Mole',
+            shortcutIcon: 'whackIcon',
+            component: WhackAMole,
+        },
+        tetris: {
+            key: 'tetris',
+            name: 'Tetris',
+            shortcutIcon: 'folderIcon',
+            component: Tetris,
+        },
+        maze: {
+            key: 'maze',
+            name: 'Maze',
+            shortcutIcon: 'folderIcon',
+            component: Maze,
         },
         //msn: {
             //key: 'msn',
@@ -362,7 +439,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman' && key !== 'game2048' && key !== 'ticTacToe') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman' && key !== 'game2048' && key !== 'ticTacToe' && key !== 'tetris' && key !== 'whackAMole' && key !== 'maze') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,

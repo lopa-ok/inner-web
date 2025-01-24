@@ -33,6 +33,11 @@ const Home: React.FC<HomeProps> = (props) => {
                 />
                 <Link
                     containerStyle={styles.link}
+                    to="random-stuff"
+                    text="RANDOM STUFF"
+                />
+                <Link
+                    containerStyle={styles.link}
                     to="Hack"
                     text="TECH CLUB"
                 />

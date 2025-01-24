@@ -8,6 +8,10 @@ import GamesText from '../applications/GamesText';
 import Sudoku from '../applications/Sudoku';
 import Hangman from '../applications/Hangman';
 import TicTacToe from '../applications/TicTacToe';
+import Game2048 from '../applications/Game2048';
+import WhackAMole from '../applications/WhackAMole';
+import Tetris from '../applications/Tetris';
+import Maze from '../applications/Maze';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -66,6 +70,10 @@ const Documents: React.FC<DocumentsProps> = ({
                 openSudokuApp={openSudokuApp}
                 openHangmanApp={openHangmanApp}
                 openTicTacToeApp={openTicTacToeApp}
+                open2048App={open2048App}
+                openWhackAMoleApp={openWhackAMoleApp}
+                openTetrisApp={openTetrisApp}
+                //openMazeApp={openMazeApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -132,6 +140,58 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('ticTacToe')}
                 onClose={() => removeWindow('ticTacToe')}
                 key="ticTacToe"
+            />
+        );
+    };
+
+    const open2048App = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            '2048',
+            <Game2048
+                onInteract={() => onWindowInteract('2048')}
+                onMinimize={() => minimizeWindow('2048')}
+                onClose={() => removeWindow('2048')}
+                key="2048"
+            />
+        );
+    };
+
+    const openWhackAMoleApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'whackAMole',
+            <WhackAMole
+                onInteract={() => onWindowInteract('whackAMole')}
+                onMinimize={() => minimizeWindow('whackAMole')}
+                onClose={() => removeWindow('whackAMole')}
+                key="whackAMole"
+            />
+        );
+    };
+
+    const openTetrisApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'tetris',
+            <Tetris
+                onInteract={() => onWindowInteract('tetris')}
+                onMinimize={() => minimizeWindow('tetris')}
+                onClose={() => removeWindow('tetris')}
+                key="tetris"
+            />
+        );
+    };
+
+    const openMazeApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'maze',
+            <Maze
+                onInteract={() => onWindowInteract('maze')}
+                onMinimize={() => minimizeWindow('maze')}
+                onClose={() => removeWindow('maze')}
+                key="maze"
             />
         );
     };
