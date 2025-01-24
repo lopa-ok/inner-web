@@ -1,7 +1,6 @@
 # Inner Web
 
-This repository contains the "Inner Web" section of my personal portfolio. My portfolio is split into two main parts this beinng the inner website and and outer website 
-
+This repository contains the "Inner Web" section of my personal portfolio. My portfolio is split into two main parts this being the inner website
 ## About Inner Web
 
 The Inner Web is built primarily using **TypeScript**, with a focus on performance, interactivity, and modern design principles. This part of the portfolio dives deeper into my technical expertise, highlighting specific projects and achievements.
