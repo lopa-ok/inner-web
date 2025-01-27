@@ -4,6 +4,7 @@ import { Icon } from '../general';
 import Settings from '../applications/Settings'; 
 import Run from '../applications/Run';
 import textFileIcon from '../../assets/icons/textFileIcon.png';
+import Help from '../applications/Help';
 
 export interface ToolbarProps {
     windows: DesktopWindows;
@@ -12,7 +13,8 @@ export interface ToolbarProps {
     updateBackground: (background: string, theme: string) => void;
     removeWindow: (key: string) => void;
     shutdown: () => void;
-    openAppByName: (appName: string) => void; // Add this prop
+    openAppByName: (appName: string) => void;
+    openDocuments: () => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -22,7 +24,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
     addWindow,
     updateBackground,
     removeWindow,
-    openAppByName, // Destructure the prop
+    openAppByName,
+    openDocuments,
 }) => {
     const getTime = () => {
         const date = new Date();
@@ -71,6 +74,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
             setStartWindowOpen(true);
         } else {
             setStartWindowOpen(false);
+            setSettingsSubMenuOpen(false);
+            setDocumentsSubMenuOpen(false);
+            setProgramsSubMenuOpen(false);
         }
         lastClickInside.current = false;
     };
@@ -95,6 +101,13 @@ const Toolbar: React.FC<ToolbarProps> = ({
         }
     };
 
+    const closeStartMenu = () => {
+        setStartWindowOpen(false);
+        setSettingsSubMenuOpen(false);
+        setDocumentsSubMenuOpen(false);
+        setProgramsSubMenuOpen(false);
+    };
+
     const openSettingsApp = () => {
         const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
         addWindow(
@@ -107,17 +120,116 @@ const Toolbar: React.FC<ToolbarProps> = ({
             />,
             highestZIndex + 1
         );
-        setStartWindowOpen(false);
+        closeStartMenu();
     };
 
     const openRunApp = () => {
-        alert("Still a WIP");
-        setStartWindowOpen(false);
+        const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
+        addWindow(
+            'run',
+            <Run
+                onInteract={() => toggleMinimize('run')}
+                onMinimize={() => toggleMinimize('run')}
+                onClose={() => removeWindow('run')}
+                openAppByName={openAppByName}
+            />,
+            highestZIndex + 1
+        );
+        closeStartMenu();
+    };
+
+    const openHelpApp = () => {
+        const highestZIndex = Math.max(...Object.values(windows).map(w => w.zIndex), 0);
+        addWindow(
+            'help',
+            <Help
+                onInteract={() => toggleMinimize('help')}
+                onMinimize={() => toggleMinimize('help')}
+                onClose={() => removeWindow('help')}
+            />,
+            highestZIndex + 1
+        );
+        closeStartMenu();
+    };
+
+    const openFindApp = () => {
+        alert("Find is not available yet.");
+        closeStartMenu();
+    };
+
+    const openDocumentsApp = () => {
+        openDocuments();
+        closeStartMenu();
+    };
+
+    const openMSDOSApp = () => {
+        openAppByName("MS-DOS");
+        closeStartMenu();
+    };
+
+    const openCalculatorApp = () => {
+        openAppByName("Calculator");
+        closeStartMenu();
     };
 
     const handleShutdown = () => {
         shutdown();
-        setStartWindowOpen(false);
+        closeStartMenu();
+    };
+
+    const [settingsSubMenuOpen, setSettingsSubMenuOpen] = useState(false);
+    const [documentsSubMenuOpen, setDocumentsSubMenuOpen] = useState(false);
+    const [programsSubMenuOpen, setProgramsSubMenuOpen] = useState(false);
+    const [isSettingsArrowHovered, setIsSettingsArrowHovered] = useState(false);
+    const [isDocumentsArrowHovered, setIsDocumentsArrowHovered] = useState(false);
+    const [isProgramsArrowHovered, setIsProgramsArrowHovered] = useState(false);
+
+    const handleMouseEnterDocuments = () => {
+        setDocumentsSubMenuOpen(true);
+        setIsDocumentsArrowHovered(true);
+    };
+
+    const handleMouseLeaveDocuments = () => {
+        setDocumentsSubMenuOpen(false);
+        setIsDocumentsArrowHovered(false);
+    };
+
+    const handleMouseEnterSettings = () => {
+        setSettingsSubMenuOpen(true);
+        setIsSettingsArrowHovered(true);
+    };
+
+    const handleMouseLeaveSettings = () => {
+        setSettingsSubMenuOpen(false);
+        setIsSettingsArrowHovered(false);
+    };
+
+    const handleMouseEnterPrograms = () => {
+        setProgramsSubMenuOpen(true);
+        setIsProgramsArrowHovered(true);
+    };
+
+    const handleMouseLeavePrograms = () => {
+        setProgramsSubMenuOpen(false);
+        setIsProgramsArrowHovered(false);
+    };
+
+    const toggleSettingsSubMenu = () => {
+        setSettingsSubMenuOpen(!settingsSubMenuOpen);
+    };
+
+    const toggleDocumentsSubMenu = () => {
+        setDocumentsSubMenuOpen(!documentsSubMenuOpen);
+    };
+
+    const openGamesFolder = () => {
+        openAppByName("Games Folder");
+        closeStartMenu();
+    };
+
+    const openGoogleChrome = () => {
+        openAppByName("Google Chrome");
+        closeStartMenu();
     };
 
     return (
@@ -135,15 +247,222 @@ const Toolbar: React.FC<ToolbarProps> = ({
                             <div style={styles.startMenuSpace} />
                             <div
                                 className="start-menu-option"
-                                style={styles.startMenuOption}
-                                onMouseDown={openSettingsApp} 
+                                style={Object.assign(
+                                    {},
+                                    styles.startMenuOption,
+                                    (programsSubMenuOpen || isProgramsArrowHovered) && styles.hoveredOption
+                                )}
+                                onMouseEnter={handleMouseEnterPrograms}
+                                onMouseLeave={handleMouseLeavePrograms}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="programIcon"
+                                />
+                                <p style={Object.assign(
+                                    {},
+                                    styles.startMenuText,
+                                    (programsSubMenuOpen || isProgramsArrowHovered) && styles.hoveredText
+                                )}>
+                                    <u>P</u>rograms
+                                </p>
+                                <Icon
+                                    style={styles.subMenuArrow}
+                                    icon={isProgramsArrowHovered || programsSubMenuOpen ? "arrowRightInvertedIcon" : "arrowRightIcon"}
+                                />
+                                {programsSubMenuOpen && (
+                                    <div style={Object.assign({}, styles.subMenu, { top: 'auto', left: '100%' })}>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={openGamesFolder}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="folderIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                Games
+                                            </p>
+                                        </div>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={openGoogleChrome}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="InternetExplorerIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                Google Chrome
+                                            </p>
+                                        </div>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={openMSDOSApp}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="dosIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                MS-DOS
+                                            </p>
+                                        </div>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={openCalculatorApp}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="calculatorIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                Calculator
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className="start-menu-option"
+                                style={Object.assign(
+                                    {},
+                                    styles.startMenuOption,
+                                    (documentsSubMenuOpen || isDocumentsArrowHovered) && styles.hoveredOption
+                                )}
+                                onMouseEnter={handleMouseEnterDocuments}
+                                onMouseLeave={handleMouseLeaveDocuments}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="documentsIcon"
+                                />
+                                <p style={Object.assign(
+                                    {},
+                                    styles.startMenuText,
+                                    (documentsSubMenuOpen || isDocumentsArrowHovered) && styles.hoveredText
+                                )}>
+                                    <u>D</u>ocuments
+                                </p>
+                                <Icon
+                                    style={styles.subMenuArrow}
+                                    icon={isDocumentsArrowHovered || documentsSubMenuOpen ? "arrowRightInvertedIcon" : "arrowRightIcon"}
+                                />
+                                {documentsSubMenuOpen && (
+                                    <div style={Object.assign({}, styles.subMenu, { top: 'auto', left: '100%' })}>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={openDocumentsApp}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="documentsIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                Open Documents
+                                            </p>
+                                        </div>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={() => alert("Recent Documents are not available yet.")}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="documentsIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                Recent Documents
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className="start-menu-option"
+                                style={Object.assign(
+                                    {},
+                                    styles.startMenuOption,
+                                    (settingsSubMenuOpen || isSettingsArrowHovered) && styles.hoveredOption
+                                )}
+                                onMouseEnter={handleMouseEnterSettings}
+                                onMouseLeave={handleMouseLeaveSettings}
                             >
                                 <Icon
                                     style={styles.startMenuIcon}
                                     icon="setting"
                                 />
-                                <p style={styles.startMenuText}>
+                                <p style={Object.assign(
+                                    {},
+                                    styles.startMenuText,
+                                    (settingsSubMenuOpen || isSettingsArrowHovered) && styles.hoveredText
+                                )}>
                                     Se<u>t</u>tings
+                                </p>
+                                <Icon
+                                    style={styles.subMenuArrow}
+                                    icon={isSettingsArrowHovered || settingsSubMenuOpen ? "arrowRightInvertedIcon" : "arrowRightIcon"}
+                                />
+                                {settingsSubMenuOpen && (
+                                    <div style={Object.assign({}, styles.subMenu, { top: 'auto', left: '100%' })}>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={openSettingsApp}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="genSettingsIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                General Settings
+                                            </p>
+                                        </div>
+                                        <div
+                                            className="start-menu-option"
+                                            style={styles.subMenuOption}
+                                            onMouseDown={() => alert("Network Settings are not available yet.")}
+                                        >
+                                            <Icon
+                                                style={styles.subMenuIcon}
+                                                icon="lanIcon"
+                                            />
+                                            <p style={styles.startMenuText}>
+                                                Network Settings
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={openFindApp}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="findIcon"
+                                />
+                                <p style={styles.startMenuText}>
+                                    <u>F</u>ind...
+                                </p>
+                            </div>
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={openHelpApp}
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="helpIcon"
+                                />
+                                <p style={styles.startMenuText}>
+                                    <u>H</u>elp
                                 </p>
                             </div>
                             <div
@@ -320,6 +639,7 @@ const styles: StyleSheetCSS = {
         fontSize: 14,
         fontFamily: 'MSSerif',
         marginLeft: 8,
+        color: Colors.black,
     },
     startMenuOption: {
         alignItems: 'center',
@@ -434,6 +754,41 @@ const styles: StyleSheetCSS = {
     timeText: {
         fontSize: 12,
         fontFamily: 'MSSerif',
+    },
+    subMenu: {
+        position: 'absolute',
+        left: '100%',
+        top: 'auto',
+        backgroundColor: Colors.lightGray,
+        border: `1px solid ${Colors.white}`,
+        borderBottomColor: Colors.black,
+        borderRightColor: Colors.black,
+        zIndex: 1000,
+        display: 'flex',
+        flexDirection: 'column',
+        width: 200,
+    },
+    subMenuOption: {
+        padding: 8,
+        cursor: 'pointer',
+        color: Colors.black,
+    },
+    subMenuArrow: {
+        marginLeft: 'auto',
+        width: 16,
+        height: 16,
+    },
+    hoveredOption: {
+        backgroundColor: Colors.blue,
+        color: Colors.white,
+    },
+    hoveredText: {
+        color: Colors.white,
+    },
+    subMenuIcon: {
+        width: 16,
+        height: 16,
+        marginRight: 8,
     },
 };
 

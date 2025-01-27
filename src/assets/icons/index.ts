@@ -36,6 +36,18 @@ import tictactoeIcon from './tictactoeIcon.png';
 import whackIcon from './whackIcon.png';
 import tetrisIcon from './tetrisIcon.png';
 import twentyIcon from './twentyIcon.png';
+import arrowRightIcon from './arrowRightIcon.png';
+import arrowRightInvertedIcon from './arrowRightInvertedIcon.png';
+import paintIcon from './paintIcon.png';
+import calculatorIcon from './calculatorIcon.png';
+import findIcon from './findIcon.png';
+import programIcon from './programIcon.png';
+import helpIcon from './helpIcon.png';
+import snakeIcon from './snakeIcon.png';
+import memoryIcon from './memoryIcon.png';
+import lanIcon from './lanIcon.png';
+import genSettingsIcon from './genSettingsIcon.png';
+import dosIcon from './dosIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -74,6 +86,18 @@ const icons = {
     whackIcon: whackIcon,
     twentyIcon: twentyIcon,
     tetrisIcon: tetrisIcon,
+    arrowRightIcon: arrowRightIcon,
+    arrowRightInvertedIcon: arrowRightInvertedIcon,
+    paintIcon: paintIcon,
+    calculatorIcon: calculatorIcon,
+    findIcon: findIcon,
+    programIcon: programIcon,
+    helpIcon: helpIcon,
+    snakeIcon: snakeIcon,
+    memoryIcon: memoryIcon,
+    lanIcon: lanIcon,
+    genSettingsIcon: genSettingsIcon,
+    dosIcon: dosIcon,
 };
 
 export type IconName = keyof typeof icons;

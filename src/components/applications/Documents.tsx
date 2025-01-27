@@ -12,6 +12,9 @@ import Game2048 from '../applications/Game2048';
 import WhackAMole from '../applications/WhackAMole';
 import Tetris from '../applications/Tetris';
 import Maze from '../applications/Maze';
+import PaintApp from '../applications/PaintApp';
+import SnakeGame from '../applications/SnakeGame';
+import MemoryGame from '../applications/MemoryGame';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -73,7 +76,10 @@ const Documents: React.FC<DocumentsProps> = ({
                 open2048App={open2048App}
                 openWhackAMoleApp={openWhackAMoleApp}
                 openTetrisApp={openTetrisApp}
-                //openMazeApp={openMazeApp}
+                openMazeApp={openMazeApp}
+                openPaintApp={openPaintApp}
+                openSnakeApp={openSnakeApp}
+                openMemoryGameApp={openMemoryGameApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -192,6 +198,45 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('maze')}
                 onClose={() => removeWindow('maze')}
                 key="maze"
+            />
+        );
+    };
+
+    const openPaintApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'paint',
+            <PaintApp
+                onInteract={() => onWindowInteract('paint')}
+                onMinimize={() => minimizeWindow('paint')}
+                onClose={() => removeWindow('paint')}
+                key="paint"
+            />
+        );
+    };
+
+    const openSnakeApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'snake',
+            <SnakeGame
+                onInteract={() => onWindowInteract('snake')}
+                onMinimize={() => minimizeWindow('snake')}
+                onClose={() => removeWindow('snake')}
+                key="snake"
+            />
+        );
+    };
+
+    const openMemoryGameApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'memoryGame',
+            <MemoryGame
+                onInteract={() => onWindowInteract('memoryGame')}
+                onMinimize={() => minimizeWindow('memoryGame')}
+                onClose={() => removeWindow('memoryGame')}
+                key="memoryGame"
             />
         );
     };

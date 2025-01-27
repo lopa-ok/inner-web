@@ -11,6 +11,7 @@ import SoftwareProjects from '../showcase/projects/software';
 import AIProjects from '../showcase/projects/ai';
 import GamesProjects from '../showcase/projects/games';
 import RandomStuff from '../showcase/RandomStuff';
+import Achievements from '../showcase/Achievements';
 import VerticalNavbar from '../showcase/VerticalNavbar';
 import useInitialWindowSize from '../../hooks/useInitialWindowSize';
 
@@ -43,6 +44,7 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/random-stuff" element={<RandomStuff />} />
                         <Route path="/Hack" element={<Hack/>} />
+                        {/* <Route path="/achievements" element={<Achievements />} /> */}
                         <Route
                             path="/projects/software"
                             element={<SoftwareProjects />}

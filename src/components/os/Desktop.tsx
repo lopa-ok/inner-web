@@ -31,6 +31,12 @@ import TicTacToe from '../applications/TicTacToe';
 import WhackAMole from '../applications/WhackAMole';
 import Tetris from '../applications/Tetris';
 import Maze from '../applications/Maze';
+import PaintApp from '../applications/PaintApp';
+import SnakeGame from '../applications/SnakeGame';
+import MemoryGame from '../applications/MemoryGame';
+import MSDOS from '../applications/MSDOS';
+import Calculator from '../applications/Calculator';
+import Help from '../applications/Help';
 
 export interface DesktopProps {}
 
@@ -41,6 +47,7 @@ const VERTICAL_SPACING = 104;
 const HORIZONTAL_SPACING = 100;
 const INITIAL_OFFSET = { top: 16, left: 6 };
 const WINDOW_OFFSET = 30;
+const TOOLBAR_HEIGHT = 32;
 
 interface ContextMenuState {
     visible: boolean;
@@ -242,6 +249,100 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         );
     };
 
+    const openGamesFolder = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'gamesFolder',
+            <GamesFolder
+                onInteract={() => onWindowInteract('gamesFolder')}
+                onMinimize={() => minimizeWindow('gamesFolder')}
+                onClose={() => removeWindow('gamesFolder')}
+                openWordleApp={openWordleApp}
+                openGamesText={openGamesText}
+                openSudokuApp={() => {
+                    const highestZIndex = getHighestZIndex();
+                    addWindow(
+                        'sudoku',
+                        <Sudoku
+                            onInteract={() => onWindowInteract('sudoku')}
+                            onMinimize={() => minimizeWindow('sudoku')}
+                            onClose={() => removeWindow('sudoku')}
+                            key="sudoku"
+                        />
+                    );
+                }}
+                openHangmanApp={() => {
+                    const highestZIndex = getHighestZIndex();
+                    addWindow(
+                        'hangman',
+                        <Hangman
+                            onInteract={() => onWindowInteract('hangman')}
+                            onMinimize={() => minimizeWindow('hangman')}
+                            onClose={() => removeWindow('hangman')}
+                            key="hangman"
+                        />
+                    );
+                }}
+                openTicTacToeApp={openTicTacToeApp}
+                open2048App={open2048App}
+                openWhackAMoleApp={openWhackAMoleApp}
+                openTetrisApp={openTetrisApp}
+                openMazeApp={openMazeApp}
+                openPaintApp={() => {
+                    const highestZIndex = getHighestZIndex();
+                    addWindow(
+                        'paint',
+                        <PaintApp
+                            onInteract={() => onWindowInteract('paint')}
+                            onMinimize={() => minimizeWindow('paint')}
+                            onClose={() => removeWindow('paint')}
+                            key="paint"
+                        />
+                    );
+                }}
+                openSnakeApp={() => {
+                    const highestZIndex = getHighestZIndex();
+                    addWindow(
+                        'snake',
+                        <SnakeGame
+                            onInteract={() => onWindowInteract('snake')}
+                            onMinimize={() => minimizeWindow('snake')}
+                            onClose={() => removeWindow('snake')}
+                            key="snake"
+                        />
+                    );
+                }}
+                openMemoryGameApp={() => {
+                    const highestZIndex = getHighestZIndex();
+                    addWindow(
+                        'memoryGame',
+                        <MemoryGame
+                            onInteract={() => onWindowInteract('memoryGame')}
+                            onMinimize={() => minimizeWindow('memoryGame')}
+                            onClose={() => removeWindow('memoryGame')}
+                            key="memoryGame"
+                        />
+                    );
+                }}
+                key="gamesFolder"
+            />,
+            highestZIndex + 1
+        );
+    };
+
+    const openMSDOSApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'msdos',
+            <MSDOS
+                onInteract={() => onWindowInteract('msdos')}
+                onMinimize={() => minimizeWindow('msdos')}
+                onClose={() => removeWindow('msdos')}
+                key="msdos"
+            />
+        );
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -344,7 +445,43 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     open2048App={open2048App}
                     openWhackAMoleApp={openWhackAMoleApp}
                     openTetrisApp={openTetrisApp}
-                    //openMazeApp={openMazeApp}
+                    openMazeApp={openMazeApp}
+                    openPaintApp={() => {
+                        const highestZIndex = getHighestZIndex();
+                        addWindow(
+                            'paint',
+                            <PaintApp
+                                onInteract={() => onWindowInteract('paint')}
+                                onMinimize={() => minimizeWindow('paint')}
+                                onClose={() => removeWindow('paint')}
+                                key="paint"
+                            />
+                        );
+                    }}
+                    openSnakeApp={() => {
+                        const highestZIndex = getHighestZIndex();
+                        addWindow(
+                            'snake',
+                            <SnakeGame
+                                onInteract={() => onWindowInteract('snake')}
+                                onMinimize={() => minimizeWindow('snake')}
+                                onClose={() => removeWindow('snake')}
+                                key="snake"
+                            />
+                        );
+                    }}
+                    openMemoryGameApp={() => {
+                        const highestZIndex = getHighestZIndex();
+                        addWindow(
+                            'memoryGame',
+                            <MemoryGame
+                                onInteract={() => onWindowInteract('memoryGame')}
+                                onMinimize={() => minimizeWindow('memoryGame')}
+                                onClose={() => removeWindow('memoryGame')}
+                                key="memoryGame"
+                            />
+                        );
+                    }}
                 />
             ),
         },
@@ -396,6 +533,49 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'folderIcon',
             component: Maze,
         },
+        paint: {
+            key: 'paint',
+            name: 'Paint',
+            shortcutIcon: 'paintIcon',
+            component: PaintApp,
+        },
+        snake: {
+            key: 'snake',
+            name: 'Snake',
+            shortcutIcon: 'folderIcon',
+            component: SnakeGame,
+        },
+        memoryGame: {
+            key: 'memoryGame',
+            name: 'Memory Game',
+            shortcutIcon: 'folderIcon',
+            component: MemoryGame,
+        },
+        msdos: {
+            key: 'msdos',
+            name: 'MS-DOS',
+            shortcutIcon: 'folderIcon',
+            component: MSDOS,
+        },
+        calculator: {
+            key: 'calculator',
+            name: 'Calculator',
+            shortcutIcon: 'calculatorIcon',
+            component: Calculator,
+        },
+        run: {
+            key: 'run',
+            name: 'Run',
+            shortcutIcon: 'runIcon',
+            component: (props: ExtendedWindowAppProps<any>) => (
+                <Run
+                    onInteract={props.onInteract}
+                    onMinimize={props.onMinimize}
+                    onClose={props.onClose}
+                    openAppByName={openAppByName}
+                />
+            ),
+        },
         //msn: {
             //key: 'msn',
            // name: 'MSN',
@@ -426,6 +606,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         //         </Window>
         //     ),
         // },
+        help: {
+            key: 'help',
+            name: 'Help',
+            shortcutIcon: 'helpIcon',
+            component: Help,
+        },
     };
 
     useEffect(() => {
@@ -439,7 +625,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman' && key !== 'game2048' && key !== 'ticTacToe' && key !== 'tetris' && key !== 'whackAMole' && key !== 'maze') {
+            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman' && key !== 'game2048' && key !== 'ticTacToe' && key !== 'tetris' && key !== 'whackAMole' && key !== 'maze' && key !== 'paint' && key !== 'snake' && key !== 'memoryGame' && key !== 'msdos' && key !== 'calculator' && key !== 'run' && key !== 'help') {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
@@ -461,7 +647,17 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         initializeDocumentsFolder();
         initializeRecycleBin();
 
-        newShortcuts.forEach((shortcut) => {
+        newShortcuts.forEach((shortcut, index) => {
+            const column = Math.floor(index / Math.floor((window.innerHeight - TOOLBAR_HEIGHT) / VERTICAL_SPACING));
+            const row = index % Math.floor((window.innerHeight - TOOLBAR_HEIGHT) / VERTICAL_SPACING);
+            const position = {
+                top: Math.round((INITIAL_OFFSET.top + (row * VERTICAL_SPACING)) / GRID_SIZE) * GRID_SIZE,
+                left: Math.round((INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)) / GRID_SIZE) * GRID_SIZE
+            };
+            setPositions(prev => ({
+                ...prev,
+                [shortcut.shortcutName]: position
+            }));
             if (shortcut.shortcutName === 'Showcase') {
                 shortcut.onOpen();
             }
@@ -469,6 +665,21 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
         setShortcuts(prevShortcuts => [...prevShortcuts, ...newShortcuts]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        const snapToGrid = () => {
+            setPositions((prevPositions) => {
+                const newPositions = { ...prevPositions };
+                Object.keys(newPositions).forEach((key) => {
+                    newPositions[key].top = Math.round(newPositions[key].top / GRID_SIZE) * GRID_SIZE;
+                    newPositions[key].left = Math.round(newPositions[key].left / GRID_SIZE) * GRID_SIZE;
+                });
+                return newPositions;
+            });
+        };
+
+        snapToGrid();
     }, []);
 
     useEffect(() => {
@@ -573,15 +784,14 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
     const onWindowInteract = useCallback(
         (key: string) => {
-            setWindows((prevWindows) => ({
-                ...prevWindows,
-                [key]: {
-                    ...prevWindows[key],
-                    zIndex: 1 + getHighestZIndex(),
-                },
-            }));
+            setWindows((prevWindows) => {
+                const newWindows = { ...prevWindows };
+                const highestZIndex = getHighestZIndex();
+                newWindows[key].zIndex = highestZIndex + 1;
+                return newWindows;
+            });
         },
-        [setWindows, getHighestZIndex]
+        [getHighestZIndex]
     );
 
     const startShutdown = useCallback(() => {
@@ -613,6 +823,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     left: left % window.innerWidth,
                 },
             }));
+            onWindowInteract(key);
         },
         [getHighestZIndex, updateBackground, windows]
     );
@@ -631,14 +842,25 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         top = Math.round(top / GRID_SIZE) * GRID_SIZE;
         left = Math.round(left / GRID_SIZE) * GRID_SIZE;
 
+        if (top > window.innerHeight - TOOLBAR_HEIGHT - GRID_SIZE) {
+            top = window.innerHeight - TOOLBAR_HEIGHT - GRID_SIZE;
+        }
+
         // Check for collisions and adjust position if necessary
         const newPosition = { top, left };
-        const collision = Object.values(positions).some(
+        let collision = Object.values(positions).some(
             (pos) => pos.top === newPosition.top && pos.left === newPosition.left
         );
 
-        if (collision) {
+        while (collision) {
             newPosition.top += GRID_SIZE;
+            if (newPosition.top > window.innerHeight - TOOLBAR_HEIGHT - GRID_SIZE) {
+                newPosition.top = INITIAL_OFFSET.top;
+                newPosition.left += GRID_SIZE;
+            }
+            collision = Object.values(positions).some(
+                (pos) => pos.top === newPosition.top && pos.left === newPosition.left
+            );
         }
 
         setPositions((prevPositions) => ({
@@ -1064,39 +1286,62 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newPositions: { [key: string]: { top: number; left: number } } = {};
         const totalItems = shortcuts.length + Object.keys(folders).length;
         let index = 0;
-
+    
+        const isPositionOccupied = (top: number, left: number) => {
+            return Object.values(newPositions).some(
+                (pos) => pos.top === top && pos.left === left
+            );
+        };
+    
+        const getNextAvailablePosition = (startTop: number, startLeft: number) => {
+            let top = startTop;
+            let left = startLeft;
+            while (isPositionOccupied(top, left)) {
+                top += VERTICAL_SPACING;
+                if (top >= window.innerHeight - VERTICAL_SPACING) {
+                    top = INITIAL_OFFSET.top;
+                    left += HORIZONTAL_SPACING;
+                }
+            }
+            return { top, left };
+        };
+    
         shortcuts.forEach((shortcut) => {
             if (shortcut.shortcutName !== "Documents" && shortcut.shortcutName !== "Recycle Bin") {
                 const column = Math.floor(index / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
                 const row = index % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
-                newPositions[shortcut.shortcutName] = {
+                const initialPosition = {
                     top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
                     left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
                 };
+                const position = getNextAvailablePosition(initialPosition.top, initialPosition.left);
+                newPositions[shortcut.shortcutName] = position;
                 index++;
             }
         });
-
+    
         Object.keys(folders).forEach((folderId) => {
             const column = Math.floor(index / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
             const row = index % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
-            newPositions[folderId] = {
+            const initialPosition = {
                 top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
                 left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
             };
+            const position = getNextAvailablePosition(initialPosition.top, initialPosition.left);
+            newPositions[folderId] = position;
             index++;
         });
-
-        newPositions["Documents"] = {
-            top: window.innerHeight - VERTICAL_SPACING - 50,
-            left: INITIAL_OFFSET.left
-        };
-
-        newPositions["Recycle Bin"] = {
-            top: window.innerHeight - VERTICAL_SPACING - 50,
-            left: INITIAL_OFFSET.left + HORIZONTAL_SPACING
-        };
-
+    
+        newPositions["Documents"] = getNextAvailablePosition(
+            window.innerHeight - VERTICAL_SPACING - 50,
+            INITIAL_OFFSET.left
+        );
+    
+        newPositions["Recycle Bin"] = getNextAvailablePosition(
+            window.innerHeight - VERTICAL_SPACING - 50,
+            INITIAL_OFFSET.left + HORIZONTAL_SPACING
+        );
+    
         setPositions(newPositions);
     };
 
@@ -1207,7 +1452,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 addWindow={addWindow}
                 updateBackground={updateBackground}
                 removeWindow={removeWindow}
-                openAppByName={openAppByName} // Pass the method to Toolbar
+                openAppByName={openAppByName}
+                openDocuments={openDocuments}
             />
             {contextMenu.visible && (
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>

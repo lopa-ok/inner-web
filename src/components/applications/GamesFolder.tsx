@@ -16,7 +16,10 @@ interface GamesFolderProps {
     open2048App: () => void;
     openWhackAMoleApp: () => void;
     openTetrisApp: () => void;
-    // openMazeApp: () => void;
+    openMazeApp: () => void;
+    openPaintApp: () => void;
+    openSnakeApp: () => void;
+    openMemoryGameApp: () => void;
 }
 
 const GamesFolder: React.FC<GamesFolderProps> = ({
@@ -31,7 +34,10 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
     open2048App,
     openWhackAMoleApp,
     openTetrisApp,
-    // openMazeApp, // Comment out this line
+    openMazeApp,
+    openPaintApp,
+    openSnakeApp,
+    openMemoryGameApp,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
@@ -222,7 +228,36 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
                         textColor="black"
                     />
                 </div>
-                {/* <div
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 320 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'paint')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'paint')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="paintIcon"
+                        shortcutName="Paint"
+                        onOpen={openPaintApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 420 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'snake')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'snake')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="snakeIcon"
+                        shortcutName="Snake"
+                        onOpen={openSnakeApp}
+                        textColor="black"
+                    /> 
+                </div>
+                {/*
+                <div
                     style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 320 })}
                     draggable
                     onDragStart={(e) => handleDragStart(e, 'maze')}
@@ -235,7 +270,22 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
                         onOpen={openMazeApp}
                         textColor="black"
                     />
-                </div> */}
+                </div>
+                */}
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 220, left: 20 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'memoryGame')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'memoryGame')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="memoryIcon"
+                        shortcutName="Memory Game"
+                        onOpen={openMemoryGameApp}
+                        textColor="black"
+                    />
+                </div>
                 {contextMenu.visible && (
                     <div style={{
                         ...styles.contextMenu,
