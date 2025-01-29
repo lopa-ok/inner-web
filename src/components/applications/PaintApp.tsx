@@ -128,7 +128,7 @@ const PaintApp: React.FC<PaintAppProps> = (props) => {
             width={800}
             height={650}
             windowTitle="Paint"
-            windowBarIcon="folderIcon"
+            windowBarIcon="paintIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}

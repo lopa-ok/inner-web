@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
 import Credits from '../applications/Credits';
@@ -15,6 +15,7 @@ import Maze from '../applications/Maze';
 import PaintApp from '../applications/PaintApp';
 import SnakeGame from '../applications/SnakeGame';
 import MemoryGame from '../applications/MemoryGame';
+import RockPaperScissors from '../applications/RockPaperScissors';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -24,6 +25,8 @@ interface DocumentsProps {
     getHighestZIndex: () => number;
 }
 
+const GRID_SIZE = 100;
+
 const Documents: React.FC<DocumentsProps> = ({
     onClose,
     onInteract,
@@ -32,6 +35,7 @@ const Documents: React.FC<DocumentsProps> = ({
     getHighestZIndex,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
+    const [positions, setPositions] = useState<{ [key: string]: { top: number; left: number } }>({});
 
     const openCreditsApp = () => {
         const highestZIndex = getHighestZIndex();
@@ -80,6 +84,7 @@ const Documents: React.FC<DocumentsProps> = ({
                 openPaintApp={openPaintApp}
                 openSnakeApp={openSnakeApp}
                 openMemoryGameApp={openMemoryGameApp}
+                openRockPaperScissorsApp={openRockPaperScissorsApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -237,6 +242,19 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('memoryGame')}
                 onClose={() => removeWindow('memoryGame')}
                 key="memoryGame"
+            />
+        );
+    };
+
+    const openRockPaperScissorsApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'rockPaperScissors',
+            <RockPaperScissors
+                onInteract={() => onWindowInteract('rockPaperScissors')}
+                onMinimize={() => minimizeWindow('rockPaperScissors')}
+                onClose={() => removeWindow('rockPaperScissors')}
+                key="rockPaperScissors"
             />
         );
     };

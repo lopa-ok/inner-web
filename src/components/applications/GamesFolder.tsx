@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
+import RockPaperScissors from '../applications/RockPaperScissors';
 
 const GRID_SIZE = 100;
 
@@ -20,6 +21,7 @@ interface GamesFolderProps {
     openPaintApp: () => void;
     openSnakeApp: () => void;
     openMemoryGameApp: () => void;
+    openRockPaperScissorsApp: () => void;
 }
 
 const GamesFolder: React.FC<GamesFolderProps> = ({
@@ -38,6 +40,7 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
     openPaintApp,
     openSnakeApp,
     openMemoryGameApp,
+    openRockPaperScissorsApp,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
@@ -286,6 +289,20 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
                         textColor="black"
                     />
                 </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 218, left: 120 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'rockPaperScissors')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'rockPaperScissors')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="rockPaperScissorsIcon"
+                        shortcutName="Rock Paper Scissors"
+                        onOpen={openRockPaperScissorsApp}
+                        textColor="black"
+                    />
+                </div>
                 {contextMenu.visible && (
                     <div style={{
                         ...styles.contextMenu,
@@ -313,7 +330,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     shortcutContainer: {
         position: 'absolute',
         cursor: 'move',
-    },
+     },
     contextMenu: {
         position: 'absolute',
         backgroundColor: 'white',

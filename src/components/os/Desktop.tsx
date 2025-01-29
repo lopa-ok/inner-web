@@ -37,6 +37,8 @@ import MemoryGame from '../applications/MemoryGame';
 import MSDOS from '../applications/MSDOS';
 import Calculator from '../applications/Calculator';
 import Help from '../applications/Help';
+import EasterEgg from '../applications/EasterEgg';
+import RockPaperScissors from '../applications/RockPaperScissors';
 
 export interface DesktopProps {}
 
@@ -56,6 +58,9 @@ interface ContextMenuState {
     type: 'desktop' | 'folder' | 'file';
     targetId?: string;
 }
+
+const EASTER_EGG_SEQUENCE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let easterEggIndex = 0;
 
 const Desktop: React.FC<DesktopProps> = (props) => {
     const [windows, setWindows] = useState<DesktopWindows>({});
@@ -77,6 +82,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
     const [theme, setTheme] = useState<string | null>(null);
     const [folderNames, setFolderNames] = useState<{[key: string]: string}>({});
     const [renamingFolder, setRenamingFolder] = useState<string | null>(null);
+    const [recentApps, setRecentApps] = useState<string[]>([]);
+
+    const EXCLUDED_RECENT_APPS = ['run', 'help', 'find', 'settings', 'documents'];
+
+    const addRecentApp = (appName: string) => {
+        if (!EXCLUDED_RECENT_APPS.includes(appName.toLowerCase())) {
+            setRecentApps((prev) => {
+                const updatedRecentApps = [appName, ...prev.filter((app) => app !== appName)];
+                return updatedRecentApps.slice(0, 3);
+            });
+        }
+    };
 
     // Initialize background from localStorage on component mount
     useEffect(() => {
@@ -142,6 +159,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="credits"
             />
         );
+        addRecentApp('Credits');
     };
 
     const openMSNApp = () => {
@@ -155,6 +173,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="msn"
             />
         );
+        addRecentApp('MSN');
     };
 
     const openWordleApp = () => {
@@ -168,6 +187,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="wordle"
             />
         );
+        addRecentApp('Wordle');
     };
 
     const openGamesText = () => {
@@ -182,6 +202,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="gamesText"
             />
         );
+        addRecentApp('Games Info');
     };
 
     const openTicTacToeApp = () => {
@@ -195,6 +216,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="ticTacToe"
             />
         );
+        addRecentApp('Tic Tac Toe');
     };
 
     const openWhackAMoleApp = () => {
@@ -208,6 +230,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="whackAMole"
             />
         );
+        addRecentApp('Whack-A-Mole');
     };
 
     const open2048App = () => {
@@ -221,6 +244,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="2048"
             />
         );
+        addRecentApp('2048');
     };
 
     const openTetrisApp = () => {
@@ -234,6 +258,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="tetris"
             />
         );
+        addRecentApp('Tetris');
     };
 
     const openMazeApp = () => {
@@ -247,6 +272,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="maze"
             />
         );
+        addRecentApp('Maze');
     };
 
     const openGamesFolder = () => {
@@ -270,6 +296,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             key="sudoku"
                         />
                     );
+                    addRecentApp('Sudoku');
                 }}
                 openHangmanApp={() => {
                     const highestZIndex = getHighestZIndex();
@@ -282,6 +309,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             key="hangman"
                         />
                     );
+                    addRecentApp('Hangman');
                 }}
                 openTicTacToeApp={openTicTacToeApp}
                 open2048App={open2048App}
@@ -299,6 +327,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             key="paint"
                         />
                     );
+                    addRecentApp('Paint');
                 }}
                 openSnakeApp={() => {
                     const highestZIndex = getHighestZIndex();
@@ -311,6 +340,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             key="snake"
                         />
                     );
+                    addRecentApp('Snake');
                 }}
                 openMemoryGameApp={() => {
                     const highestZIndex = getHighestZIndex();
@@ -323,11 +353,14 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             key="memoryGame"
                         />
                     );
+                    addRecentApp('Memory Game');
                 }}
+                openRockPaperScissorsApp={openRockPaperScissorsApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
         );
+        addRecentApp('Games Folder');
     };
 
     const openMSDOSApp = () => {
@@ -341,6 +374,21 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key="msdos"
             />
         );
+        addRecentApp('MS-DOS');
+    };
+
+    const openRockPaperScissorsApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'rockPaperScissors',
+            <RockPaperScissors
+                onInteract={() => onWindowInteract('rockPaperScissors')}
+                onMinimize={() => minimizeWindow('rockPaperScissors')}
+                onClose={() => removeWindow('rockPaperScissors')}
+                key="rockPaperScissors"
+            />
+        );
+        addRecentApp('Rock Paper Scissors');
     };
 
     const APPLICATIONS: {
@@ -428,6 +476,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 key="sudoku"
                             />
                         );
+                        addRecentApp('Sudoku');
                     }}
                     openHangmanApp={() => {
                         const highestZIndex = getHighestZIndex();
@@ -440,6 +489,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 key="hangman"
                             />
                         );
+                        addRecentApp('Hangman');
                     }}
                     openTicTacToeApp={openTicTacToeApp}
                     open2048App={open2048App}
@@ -457,6 +507,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 key="paint"
                             />
                         );
+                        addRecentApp('Paint');
                     }}
                     openSnakeApp={() => {
                         const highestZIndex = getHighestZIndex();
@@ -469,6 +520,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 key="snake"
                             />
                         );
+                        addRecentApp('Snake');
                     }}
                     openMemoryGameApp={() => {
                         const highestZIndex = getHighestZIndex();
@@ -481,7 +533,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                                 key="memoryGame"
                             />
                         );
+                        addRecentApp('Memory Game');
                     }}
+                    openRockPaperScissorsApp={openRockPaperScissorsApp}
                 />
             ),
         },
@@ -494,13 +548,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         sudoku: {
             key: 'sudoku',
             name: 'Sudoku',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'sudokuIcon',
             component: Sudoku,
         },
         hangman: {
             key: 'hangman',
             name: 'Hangman',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'hangmanIcon',
             component: Hangman,
         },
         game2048: {
@@ -524,7 +578,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         tetris: {
             key: 'tetris',
             name: 'Tetris',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'tetrisIcon',
             component: Tetris,
         },
         maze: {
@@ -542,19 +596,19 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         snake: {
             key: 'snake',
             name: 'Snake',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'snakeIcon',
             component: SnakeGame,
         },
         memoryGame: {
             key: 'memoryGame',
             name: 'Memory Game',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'memoryIcon',
             component: MemoryGame,
         },
         msdos: {
             key: 'msdos',
             name: 'MS-DOS',
-            shortcutIcon: 'folderIcon',
+            shortcutIcon: 'dosIcon',
             component: MSDOS,
         },
         calculator: {
@@ -576,12 +630,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 />
             ),
         },
-        //msn: {
-            //key: 'msn',
-           // name: 'MSN',
-            //shortcutIcon: 'msnIcon',
-           // component: MSN,
-       // },
+        msn: {
+            key: 'msn',
+            name: 'MSN',
+            shortcutIcon: 'msnIcon',
+            component: MSN,
+        },
         // minesweeper: {
         //     key: 'minesweeper',
         //     name: 'Minesweeper',
@@ -612,6 +666,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'helpIcon',
             component: Help,
         },
+        easterEgg: {
+            key: 'easterEgg',
+            name: 'Easter Egg',
+            shortcutIcon: 'folderIcon',
+            component: EasterEgg,
+        },
+        rockPaperScissors: {
+            key: 'rockPaperScissors',
+            name: 'Rock Paper Scissors',
+            shortcutIcon: 'rockPaperScissorsIcon',
+            component: RockPaperScissors,
+        },
     };
 
     useEffect(() => {
@@ -625,7 +691,34 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key) => {
             const app = APPLICATIONS[key];
-            if (key !== 'credits' && key !== 'settings' && key !== 'folder' && key !== 'msn' && key !== 'gamesFolder' && key !== 'gamesText' && key !== 'wordle' && key !== 'sudoku' && key !== 'hangman' && key !== 'game2048' && key !== 'ticTacToe' && key !== 'tetris' && key !== 'whackAMole' && key !== 'maze' && key !== 'paint' && key !== 'snake' && key !== 'memoryGame' && key !== 'msdos' && key !== 'calculator' && key !== 'run' && key !== 'help') {
+            
+            //Why didnt i do this from the start :P
+
+            if (
+                key !== 'credits' &&
+                key !== 'settings' &&
+                key !== 'folder' &&
+                key !== 'msn' &&
+                key !== 'gamesFolder' &&
+                key !== 'gamesText' &&
+                key !== 'wordle' &&
+                key !== 'sudoku' &&
+                key !== 'hangman' &&
+                key !== 'game2048' &&
+                key !== 'ticTacToe' &&
+                key !== 'tetris' &&
+                key !== 'whackAMole' &&
+                key !== 'maze' &&
+                key !== 'paint' &&
+                key !== 'snake' &&
+                key !== 'memoryGame' &&
+                key !== 'msdos' &&
+                key !== 'calculator' &&
+                key !== 'run' &&
+                key !== 'help' &&
+                key !== 'easterEgg' &&
+                key !== 'rockPaperScissors'
+            ) {
                 newShortcuts.push({
                     shortcutName: app.name,
                     icon: app.shortcutIcon,
@@ -742,6 +835,25 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         sessionStorage.setItem('nextFileId', JSON.stringify(nextFileId));
         sessionStorage.setItem('windows', JSON.stringify(windows));
     }, [shortcuts, folders, positions, folderNames, nextFolderId, nextFileId, windows]);
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === EASTER_EGG_SEQUENCE[easterEggIndex]) {
+            easterEggIndex++;
+            if (easterEggIndex === EASTER_EGG_SEQUENCE.length) {
+                alert('Easter Egg Activated!');
+                easterEggIndex = 0;
+            }
+        } else {
+            easterEggIndex = 0;
+        }
+    };
 
     const rebootDesktop = useCallback(() => {
         setWindows({});
@@ -867,6 +979,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             ...prevPositions,
             [key]: newPosition,
         }));
+
+        //moving items from folders to desktop
+        const item = Object.values(folders).flat().find(shortcut => shortcut.shortcutName === key);
+        if (item) {
+            setShortcuts(prev => [...prev, item]);
+            Object.keys(folders).forEach(folderId => {
+                setFolders(prev => ({
+                    ...prev,
+                    [folderId]: prev[folderId].filter(shortcut => shortcut.shortcutName !== key)
+                }));
+            });
+        }
     };
 
     const handleDropOnFolder = (e: React.DragEvent<HTMLDivElement>, folderId: string) => {
@@ -898,8 +1022,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
         // Set initial position for the new folder
         const totalItems = shortcuts.length + Object.keys(folders).length;
-        const column = Math.floor(totalItems / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING));
-        const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
+        const column = Math.floor(totalItems / Math.floor((window.innerHeight - TOOLBAR_HEIGHT) / VERTICAL_SPACING));
+        const row = totalItems % Math.floor((window.innerHeight - TOOLBAR_HEIGHT) / VERTICAL_SPACING);
 
         const position = {
             top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
@@ -1156,8 +1280,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
 
         const position = {
-            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
-            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+            top: Math.round((INITIAL_OFFSET.top + (row * VERTICAL_SPACING)) / GRID_SIZE) * GRID_SIZE,
+            left: Math.round((INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)) / GRID_SIZE) * GRID_SIZE
         };
 
         setPositions(prev => ({
@@ -1206,6 +1330,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     key={app.key}
                 />
             );
+            addRecentApp(app.name);
         } else {
             alert(`Application "${appName}" not found.`);
         }
@@ -1236,8 +1361,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         const row = totalItems % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING);
 
         const position = {
-            top: INITIAL_OFFSET.top + (row * VERTICAL_SPACING),
-            left: INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)
+            top: Math.round((INITIAL_OFFSET.top + (row * VERTICAL_SPACING)) / GRID_SIZE) * GRID_SIZE,
+            left: Math.round((INITIAL_OFFSET.left + (column * HORIZONTAL_SPACING)) / GRID_SIZE) * GRID_SIZE
         };
 
         setPositions(prev => ({
@@ -1376,7 +1501,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 {shortcuts.map((shortcut, i) => {
                     const position = positions[shortcut.shortcutName] || {
                         top: INITIAL_OFFSET.top + (i % Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * VERTICAL_SPACING,
-                        left: INITIAL_OFFSET.left + Math.floor(i / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING)) * HORIZONTAL_SPACING
+                        left: INITIAL_OFFSET.left + Math.floor((i / Math.floor((window.innerHeight - 100) / VERTICAL_SPACING))) * HORIZONTAL_SPACING
                     };
                     
                     return (
@@ -1459,40 +1584,40 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 <div style={{ ...styles.contextMenu, top: contextMenu.y, left: contextMenu.x }}>
                     {contextMenu.type === 'desktop' ? (
                         <>
-                            <div style={styles.contextMenuItem} onClick={createNewFolder}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={createNewFolder}>
                                 New Folder
                             </div>
-                            <div style={styles.contextMenuItem} onClick={createNewTextFile}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={createNewTextFile}>
                                 New Text File
                             </div>
                         </>
                     ) : contextMenu.type === 'folder' ? (
                         <>
-                            <div style={styles.contextMenuItem} onClick={handleRename}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={handleRename}>
                                 Rename
                             </div>
-                            <div style={styles.contextMenuItem} onClick={() => deleteFolder(contextMenu.targetId!)}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={() => deleteFolder(contextMenu.targetId!)}>
                                 Delete
                             </div>
                         </>
                     ) : contextMenu.type === 'file' ? (
                         <>
-                            <div style={styles.contextMenuItem} onClick={handleRename}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={handleRename}>
                                 Rename
                             </div>
-                            <div style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
                                 Delete
                             </div>
                         </>
                     ) : (
                         <>
-                            <div style={styles.contextMenuItem} onClick={handleRename}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={handleRename}>
                                 Rename
                             </div>
-                            <div style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={() => deleteFile(contextMenu.targetId!)}>
                                 Delete
                             </div>
-                            <div style={styles.contextMenuItem} onClick={emptyRecycleBin}>
+                            <div className="context-menu-item" style={styles.contextMenuItem} onClick={emptyRecycleBin}>
                                 Empty Recycle Bin
                             </div>
                         </>
@@ -1538,6 +1663,8 @@ const styles: StyleSheetCSS = {
         border: '1px solid #ccc',
         boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
         zIndex: 1000,
+        display: 'flex',
+        flexDirection: 'column',
     },
     contextMenuItem: {
         padding: '8px 12px',

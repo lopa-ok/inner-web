@@ -203,6 +203,7 @@ const Hangman: React.FC<WindowProps> = ({ onInteract, onMinimize, onClose }) => 
             minimizeWindow={onMinimize}
             closeWindow={onClose}        
             windowTitle="Hangman"
+            windowBarIcon="hangmanIcon"
             width={800}
             height={800}
             top={50}

@@ -183,8 +183,8 @@ const RecycleBin: React.FC<RecycleBinProps> = ({
             >
                 {Array.isArray(contents) && contents.map((item, index) => {
                     const position = positions[item.shortcutName] || {
-                        top: Math.floor(index / 3) * GRID_SIZE + 20,
-                        left: (index % 3) * GRID_SIZE + 20
+                        top: Math.floor(index / Math.floor((window.innerHeight - 100) / GRID_SIZE)) * GRID_SIZE + 20,
+                        left: (index % Math.floor((window.innerHeight - 100) / GRID_SIZE)) * GRID_SIZE + 20
                     };
 
                     return (

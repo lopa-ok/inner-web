@@ -183,7 +183,7 @@ const Tetris: React.FC<{ onInteract: () => void; onMinimize: () => void; onClose
             width={400}
             height={800}
             windowTitle="Tetris"
-            windowBarIcon="folderIcon"
+            windowBarIcon="tetrisIcon"
             windowBarColor="#757579"
             closeWindow={onClose}
             onInteract={onInteract}

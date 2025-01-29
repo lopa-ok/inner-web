@@ -15,6 +15,7 @@ interface FolderProps {
     addWindow: (key: string, element: JSX.Element, zIndex?: number) => void;
     getHighestZIndex: () => number;
     bringToFront: () => void;
+    onSelect?: (size: string) => void;
 }
 
 const GRID_SIZE = 100;
@@ -32,6 +33,7 @@ const Folder: React.FC<FolderProps> = ({
     addWindow,
     getHighestZIndex,
     bringToFront,
+    onSelect,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
@@ -128,6 +130,7 @@ const Folder: React.FC<FolderProps> = ({
 
     const handleDragStart = (e: React.DragEvent<HTMLDivElement>, key: string) => {
         e.dataTransfer.setData('text/plain', key);
+        sessionStorage.setItem(key, JSON.stringify(contents.find(item => item.shortcutName === key)));
     };
 
     const handleDropInsideFolder = (e: React.DragEvent<HTMLDivElement>, key: string) => {
@@ -167,6 +170,17 @@ const Folder: React.FC<FolderProps> = ({
         if (item) {
             onRemoveItem(folderId, itemName);
             onAddItem("Recycle Bin", item);
+        }
+    };
+
+    const getFileSize = (fileName: string) => {
+        // just for the time being
+        return '1.2 MB';
+    };
+
+    const handleItemSelect = (size: string) => {
+        if (onSelect) {
+            onSelect(size);
         }
     };
 
@@ -219,6 +233,7 @@ const Folder: React.FC<FolderProps> = ({
                             onDrop={(e) => handleDropInsideFolder(e, item.shortcutName)}
                             onDragOver={handleDragOver}
                             onContextMenu={(e) => handleItemContextMenu(e, item.shortcutName)}
+                            onClick={() => handleItemSelect(getFileSize(item.shortcutName))}
                         >
                             <DesktopShortcut
                                 icon={item.icon}
@@ -226,6 +241,9 @@ const Folder: React.FC<FolderProps> = ({
                                 onOpen={item.onOpen}
                                 textColor="black"
                             />
+                            <div style={styles.fileSize}>
+                                {getFileSize(item.shortcutName)}
+                            </div>
                         </div>
                     );
                 })}
@@ -288,6 +306,11 @@ const styles: { [key: string]: React.CSSProperties } = {
         fontFamily: 'MSSerif',
         fontSize: '14px',
         width: '150px',
+    },
+    fileSize: {
+        fontSize: '12px',
+        color: 'gray',
+        marginTop: '4px',
     },
 };
 

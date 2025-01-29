@@ -1,199 +1,130 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+// import { motion } from 'framer-motion';
 import Window from '../os/Window';
-import msnIcon from '../../assets/icons/msnIcon.png';
 
-interface ChatMessage {
-    id: number;
-    name: string;
-    chat: string;
-    timestamp: string;
+interface MSNProps {
+  onClose: () => void;
+  onInteract: () => void;
+  onMinimize: () => void;
 }
 
-const MSN: React.FC<WindowAppProps> = ({ onClose, onInteract, onMinimize }) => {
-    const [userName, setUserName] = useState('');
-    const [chatValue, setChatValue] = useState('');
-    const [chatData, setChatData] = useState<ChatMessage[]>(() => {
-        const savedMessages = localStorage.getItem('msnChatData');
-        return savedMessages ? JSON.parse(savedMessages) : [];
-    });
-    const endOfMessagesRef = useRef<HTMLDivElement>(null);
-    const ws = useRef<WebSocket | null>(null);
+const MSN: React.FC<MSNProps> = (props) => {
+  const [messages, setMessages] = useState<string[]>([]);
+  const [input, setInput] = useState('');
+  const ws = useRef<WebSocket | null>(null);
 
-    useEffect(() => {
-        ws.current = new WebSocket('ws://localhost:8080');
-
-        ws.current.onopen = () => {
-            console.log('Connected to WebSocket server');
-        };
-
-        ws.current.onmessage = (event) => {
-            const newMessage: ChatMessage = JSON.parse(event.data);
-            setChatData((prevChatData) => {
-                const updatedChatData = [...prevChatData, newMessage];
-                localStorage.setItem('msnChatData', JSON.stringify(updatedChatData));
-                return updatedChatData;
-            });
-        };
-
-        ws.current.onclose = () => {
-            console.log('Disconnected from WebSocket server');
-        };
-
-        return () => {
-            ws.current?.close();
-        };
-    }, []);
-
-    useEffect(() => {
-        endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [chatData]);
-
-    const handleSendMessage = () => {
-        if (chatValue.trim()) {
-            const newMessage: ChatMessage = {
-                id: Date.now(),
-                name: userName || 'Anonymous',
-                chat: chatValue,
-                timestamp: new Date().toLocaleString(),
-            };
-            ws.current?.send(JSON.stringify(newMessage));
-            setChatValue('');
-        }
+  useEffect(() => {
+    ws.current = new WebSocket('ws://localhost:8080');
+    ws.current.onmessage = (event) => {
+      setMessages((prevMessages) => [...prevMessages, event.data]);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') {
-            handleSendMessage();
-        }
+    return () => {
+      ws.current?.close();
     };
+  }, []);
 
-    return (
-        <Window
-            top={10}
-            left={10}
-            width={600}
-            height={500}
-            windowTitle="MSN"
-            windowBarIcon="msnIcon"
-            windowBarColor="#757579"
-            closeWindow={onClose}
-            onInteract={onInteract}
-            minimizeWindow={onMinimize}
-            resizable={true}
-        >
-            <div style={styles.msnContainer}>
-                <div style={styles.msnHeader}>
-                    <img src={msnIcon} alt="MSN Icon" style={styles.msnHeaderIcon} />
-                    <h2 style={styles.msnHeaderText}>MSN Messenger</h2>
-                </div>
-                <div style={styles.msnChatWindow}>
-                    {chatData.map((message) => (
-                        <div key={message.id} style={styles.msnMessage}>
-                            <strong>{message.name}:</strong> {message.chat}
-                            <div style={styles.timestamp}>{message.timestamp}</div>
-                        </div>
-                    ))}
-                    <div ref={endOfMessagesRef} />
-                </div>
-                <div style={styles.msnInputContainer}>
-                    <input
-                        type="text"
-                        placeholder="Enter your username..."
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                        style={styles.msnUsernameInput}
-                    />
-                    <textarea
-                        placeholder="Enter your message..."
-                        value={chatValue}
-                        onChange={(e) => setChatValue(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        style={styles.msnTextarea}
-                    />
-                    <button onClick={handleSendMessage} style={styles.msnSendButton}>Send</button>
-                </div>
-            </div>
-        </Window>
-    );
+  const sendMessage = () => {
+    if (ws.current && input) {
+      ws.current.send(input);
+      setInput('');
+    }
+  };
+
+  return (
+    <Window
+      top={50}
+      left={50}
+      width={600}
+      height={400}
+      windowBarIcon="msnIcon"
+      windowTitle="MSN Messenger"
+      closeWindow={props.onClose}
+      onInteract={props.onInteract}
+      minimizeWindow={props.onMinimize}
+    >
+      <div style={styles.container}>
+        <div style={styles.header}>
+          <h2>MSN Messenger</h2>
+        </div>
+        <div style={styles.chatContainer}>
+          <div style={styles.messages}>
+            {messages.map((msg, index) => (
+              <div key={index} style={styles.message}>
+                {msg}
+              </div>
+            ))}
+          </div>
+          <div style={styles.inputContainer}>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              style={styles.input}
+            />
+            <button onClick={sendMessage} style={styles.sendButton}>
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </Window>
+  );
 };
 
-const styles: { [key: string]: React.CSSProperties } = {
-    msnContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        padding: '10px',
-        backgroundColor: '#c3c3c3',
-        border: '2px solid #808080',
-        boxShadow: 'inset 1px 1px #ffffff, inset -1px -1px #000000',
-    },
-    msnHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '10px',
-        backgroundColor: '#000080',
-        color: 'white',
-        padding: '2px 5px',
-        border: '2px solid #808080',
-        boxShadow: 'inset 1px 1px #ffffff, inset -1px -1px #000000',
-    },
-    msnHeaderIcon: {
-        width: '32px',
-        height: '32px',
-        marginRight: '10px',
-    },
-    msnHeaderText: {
-        fontSize: '16px',
-        fontFamily: 'Tahoma, sans-serif',
-    },
-    msnChatWindow: {
-        flex: 1,
-        overflowY: 'auto',
-        padding: '10px',
-        backgroundColor: 'white',
-        border: '2px solid #808080',
-        boxShadow: 'inset 1px 1px #ffffff, inset -1px -1px #000000',
-        marginBottom: '10px',
-    },
-    msnMessage: {
-        marginBottom: '10px',
-        fontFamily: 'Tahoma, sans-serif',
-    },
-    timestamp: {
-        fontSize: '10px',
-        color: '#888',
-        marginTop: '5px',
-    },
-    msnInputContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    msnUsernameInput: {
-        marginBottom: '10px',
-        padding: '10px',
-        border: '2px solid #808080',
-        boxShadow: 'inset 1px 1px #ffffff, inset -1px -1px #000000',
-        fontFamily: 'Tahoma, sans-serif',
-    },
-    msnTextarea: {
-        marginBottom: '10px',
-        padding: '10px',
-        border: '2px solid #808080',
-        boxShadow: 'inset 1px 1px #ffffff, inset -1px -1px #000000',
-        fontFamily: 'Tahoma, sans-serif',
-    },
-    msnSendButton: {
-        padding: '10px',
-        backgroundColor: '#c3c3c3',
-        color: 'black',
-        border: '2px solid #808080',
-        boxShadow: '1px 1px #ffffff, -1px -1px #000000',
-        cursor: 'pointer',
-        fontFamily: 'Tahoma, sans-serif',
-    },
-    msnSendButtonHover: {
-        backgroundColor: '#a3a3a3',
-    },
+const styles: StyleSheetCSS = {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    overflowY: 'scroll',
+    padding: 16,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 8,
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+  },
+  header: {
+    flexShrink: 1,
+    paddingBottom: 16,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  chatContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  messages: {
+    flex: 1,
+    overflowY: 'auto',
+    marginBottom: 16,
+  },
+  message: {
+    padding: 8,
+    margin: 4,
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  input: {
+    flex: 1,
+    padding: 8,
+    marginRight: 8,
+    borderRadius: 4,
+    border: '1px solid #ccc',
+  },
+  sendButton: {
+    padding: 8,
+    borderRadius: 4,
+    backgroundColor: '#0078d4',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+  },
 };
 
 export default MSN;

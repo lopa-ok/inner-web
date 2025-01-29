@@ -56,7 +56,7 @@ const MemoryGame: React.FC<MemoryGameProps> = (props) => {
             width={500}
             height={800}
             windowTitle="Memory Game"
-            windowBarIcon="folderIcon"
+            windowBarIcon="memoryIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}

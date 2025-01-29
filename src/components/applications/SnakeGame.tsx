@@ -180,7 +180,7 @@ const SnakeGame: React.FC<SnakeGameProps> = (props) => {
             width={425}
             height={530}
             windowTitle="Snake Game"
-            windowBarIcon="folderIcon"
+            windowBarIcon="snakeIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}

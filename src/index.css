@@ -400,3 +400,7 @@ input:active {
     cursor: pointer;
     color: white;
 }
+
+.context-menu-item:hover {
+    background-color: #c0c0c0;
+}

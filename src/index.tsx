@@ -3,6 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import { WebSocketServer } from 'ws';
+// import http from 'http';
+
+// const server = http.createServer();
+// const wss = new WebSocketServer({ server });
+
+// wss.on('connection', (ws) => {
+//   ws.on('message', (message) => {
+//     // Broadcast message to all clients
+//     wss.clients.forEach((client) => {
+//       if (client.readyState === ws.OPEN) {
+//         client.send(message);
+//       }
+//     });
+//   });
+// });
+
+// server.listen(8080, () => {
+//   console.log('Server is listening on port 8080');
+// });
 
 ReactDOM.render(
     <React.StrictMode>

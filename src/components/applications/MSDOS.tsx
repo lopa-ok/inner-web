@@ -113,7 +113,7 @@ const MSDOS: React.FC<MSDOSProps> = (props) => {
             width={600}
             height={400}
             windowTitle="MS-DOS"
-            windowBarIcon="folderIcon"
+            windowBarIcon="dosIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
