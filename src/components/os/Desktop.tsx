@@ -39,6 +39,7 @@ import Calculator from '../applications/Calculator';
 import Help from '../applications/Help';
 import EasterEgg from '../applications/EasterEgg';
 import RockPaperScissors from '../applications/RockPaperScissors';
+import Diary from '../applications/Diary';
 
 export interface DesktopProps {}
 
@@ -391,6 +392,21 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         addRecentApp('Rock Paper Scissors');
     };
 
+    const openDiaryApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'diary',
+            <Diary
+                onInteract={() => onWindowInteract('diary')}
+                onMinimize={() => minimizeWindow('diary')}
+                onClose={() => removeWindow('diary')}
+                key="diary"
+            />,
+            highestZIndex + 1
+        );
+        addRecentApp('Diary');
+    };
+
     const APPLICATIONS: {
         [key in string]: {
             key: string;
@@ -405,6 +421,12 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             name: 'Showcase',
             shortcutIcon: 'showcaseIcon',
             component: ShowcaseExplorer,
+        },
+        diary: {
+            key: 'diary',
+            name: 'Diary',
+            shortcutIcon: 'diaryIcon',
+            component: Diary,
         },
         wordle: {
             key: 'wordle',

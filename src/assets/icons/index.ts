@@ -49,6 +49,7 @@ import lanIcon from './lanIcon.png';
 import genSettingsIcon from './genSettingsIcon.png';
 import dosIcon from './dosIcon.png';
 import rockPaperScissorsIcon from './rockPaperScissorsIcon.png';
+import diaryIcon from './diaryIcon.png'
 
 const icons = {
     windowResize: windowResize,
@@ -100,6 +101,7 @@ const icons = {
     genSettingsIcon: genSettingsIcon,
     dosIcon: dosIcon,
     rockPaperScissorsIcon: rockPaperScissorsIcon,
+    diaryIcon: diaryIcon
 };
 
 export type IconName = keyof typeof icons;

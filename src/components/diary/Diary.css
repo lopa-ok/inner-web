@@ -1,0 +1,104 @@
+@import url('https://fonts.cdnfonts.com/css/wimpy-kid-cured');
+
+.diary-content .text-block p {
+    font-family: 'Wimpy Kid Cured', sans-serif;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    letter-spacing: 0.5px;
+    margin: 4px 0;
+    padding-left: 50px;
+    min-height: 28px;
+    line-height: 28px;
+}
+
+.diary-content .text-block h3 {
+    font-family: 'Wimpy Kid Cured', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.diary-content h1 {
+    font-family: 'Wimpy Kid Cured', sans-serif;
+    font-weight: normal;
+    font-size: 42px;
+}
+
+.diary-content h3 {
+    font-family: 'Wimpy Kid Cured', sans-serif;
+    font-weight: normal;
+}
+
+.diary-content .date {
+    font-family: 'Wimpy Kid Cured', sans-serif;
+    font-style: normal;
+    color: #666;
+    font-size: 18px;
+}
+
+.diary-content .site-page-content {
+    background-color: rgba(255, 255, 255, 0);
+    background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+    background-size: 100% 28px;
+    background-position: 0 0;
+    background-attachment: local;
+    position: relative;
+    padding-top: 48px;
+    z-index: 2;
+}
+
+.diary-content .site-page-content::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 340px;
+    height: 100vh;
+    width: 1px;
+    background: #ff9e9e;
+    z-index: 3;
+    opacity: 0.8;
+}
+
+.diary-content h1,
+.diary-content h2,
+.diary-content h3,
+.diary-content .captioned-image,
+.diary-content .text-block h3 {
+    padding-left: 50px;
+}
+
+.diary-content {
+    background-color: transparent;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+}
+
+.diary-content .gif-wrapper {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    pointer-events: auto;
+    z-index: 0;
+    opacity: 1;
+}
+
+.diary-content .gif-wrapper:hover {
+    transform: scale(1.1) !important;
+}
+
+.diary-content h1,
+.diary-content h3,
+.diary-content p {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes draw {
+    from {
+        stroke-dashoffset: 600;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}

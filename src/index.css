@@ -7,6 +7,8 @@ body {
     /* -moz-osx-font-smoothing: grayscale; */
 }
 
+/* @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap'); */
+
 html, body {
     background-color: #fff;
 }
@@ -37,6 +39,11 @@ code {
     font-family: Terminal;
     src: url(./assets/fonts/Terminal.ttf);
 }
+
+/* @font-face {
+    font-family: 'Handwriting';
+    src: url(./assets/fonts/Caveat-Regular.ttf);
+} */
 
 
 * {
@@ -234,6 +241,20 @@ input:active {
 .captioned-image img {
     width: 100%;
 }
+
+/* .text-block p {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #2b2b2b;
+}
+
+.text-block h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    font-weight: bold;
+    color: #1a1a1a;
+} */
 
 .text-block {
     margin-top: 16px;

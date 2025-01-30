@@ -345,6 +345,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
         closeStartMenu();
     };
 
+
     const [gamesSubMenuOpen, setGamesSubMenuOpen] = useState(false);
     const [isGamesArrowHovered, setIsGamesArrowHovered] = useState(false);
 
@@ -385,7 +386,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
         "memory game": "memoryIcon",
         "doom": "doomIcon",
         "the oregon trail": "trailIcon",
-        "scrabble": "scrabbleIcon"
+        "scrabble": "scrabbleIcon",
+        "diary": "textFileIcon"
     };
 
     const [recentFolders, setRecentFolders] = useState<string[]>([]);
