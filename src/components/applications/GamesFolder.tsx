@@ -2,6 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import Window from '../os/Window';
 import DesktopShortcut from '../os/DesktopShortcut';
 import RockPaperScissors from '../applications/RockPaperScissors';
+import ConnectFour from '../applications/ConnectFour';
+import Pong from '../applications/Pong';
+import AirHockey from '../applications/AirHockey';
+import Checkers from './Checkers';
 
 const GRID_SIZE = 100;
 
@@ -22,6 +26,10 @@ interface GamesFolderProps {
     openSnakeApp: () => void;
     openMemoryGameApp: () => void;
     openRockPaperScissorsApp: () => void;
+    openConnectFourApp: () => void;
+    openPongApp: () => void;
+    openAirHockeyApp: () => void;
+    openCheckersApp: () => void;
 }
 
 const GamesFolder: React.FC<GamesFolderProps> = ({
@@ -41,6 +49,10 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
     openSnakeApp,
     openMemoryGameApp,
     openRockPaperScissorsApp,
+    openConnectFourApp,
+    openPongApp,
+    openAirHockeyApp,
+    openCheckersApp,
 }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, targetId: '' });
@@ -259,22 +271,6 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
                         textColor="black"
                     /> 
                 </div>
-                {/*
-                <div
-                    style={Object.assign({}, styles.shortcutContainer, { top: 120, left: 320 })}
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, 'maze')}
-                    onDrop={(e) => handleDropInsideFolder(e, 'maze')}
-                    onDragOver={handleDragOver}
-                >
-                    <DesktopShortcut
-                        icon="folderIcon"
-                        shortcutName="Maze"
-                        onOpen={openMazeApp}
-                        textColor="black"
-                    />
-                </div>
-                */}
                 <div
                     style={Object.assign({}, styles.shortcutContainer, { top: 220, left: 20 })}
                     draggable
@@ -300,6 +296,62 @@ const GamesFolder: React.FC<GamesFolderProps> = ({
                         icon="rockPaperScissorsIcon"
                         shortcutName="Rock Paper Scissors"
                         onOpen={openRockPaperScissorsApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 220, left: 220 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'connectFour')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'connectFour')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="fourIcon"
+                        shortcutName="Connect Four"
+                        onOpen={openConnectFourApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 220, left: 320 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'pong')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'pong')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="pongIcon"
+                        shortcutName="Pong"
+                        onOpen={openPongApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 220, left: 420 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'airHockey')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'airHockey')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="hockeyIcon"
+                        shortcutName="Air Hockey"
+                        onOpen={openAirHockeyApp}
+                        textColor="black"
+                    />
+                </div>
+                <div
+                    style={Object.assign({}, styles.shortcutContainer, { top: 320, left: 20 })}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, 'checkers')}
+                    onDrop={(e) => handleDropInsideFolder(e, 'checkers')}
+                    onDragOver={handleDragOver}
+                >
+                    <DesktopShortcut
+                        icon="checkersIcon"
+                        shortcutName="Checkers"
+                        onOpen={openCheckersApp}
                         textColor="black"
                     />
                 </div>

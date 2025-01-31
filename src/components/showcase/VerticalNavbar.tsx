@@ -75,11 +75,11 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
                         </div>
                     )
                 }
-                <Link
+                {/* <Link
                     containerStyle={styles.link}
                     to="random-stuff"
                     text="RANDOM STUFF"
-                />
+                /> */}
                 <Link
                     containerStyle={styles.link}
                     to="Hack"
@@ -158,7 +158,6 @@ const styles: StyleSheetCSS = {
     },
     forHireContainer: {
         cursor: 'pointer',
-
         width: '100%',
     },
 };

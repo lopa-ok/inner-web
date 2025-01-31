@@ -16,6 +16,10 @@ import PaintApp from '../applications/PaintApp';
 import SnakeGame from '../applications/SnakeGame';
 import MemoryGame from '../applications/MemoryGame';
 import RockPaperScissors from '../applications/RockPaperScissors';
+import ConnectFour from '../applications/ConnectFour';
+import Pong from '../applications/Pong';
+import AirHockey from '../applications/AirHockey';
+import Checkers from '../applications/Checkers';
 
 interface DocumentsProps {
     onClose: () => void;
@@ -64,6 +68,32 @@ const Documents: React.FC<DocumentsProps> = ({
         );
     };
 
+    const openConnectFourApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'connectFour',
+            <ConnectFour
+                onInteract={() => onWindowInteract('connectFour')}
+                onMinimize={() => minimizeWindow('connectFour')}
+                onClose={() => removeWindow('connectFour')}
+                key="connectFour"
+            />
+        );
+    };
+
+    const openCheckersApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'checkers',
+            <Checkers
+                onInteract={() => onWindowInteract('checkers')}
+                onMinimize={() => minimizeWindow('checkers')}
+                onClose={() => removeWindow('checkers')}
+                key="checkers"
+            />
+        );
+    };
+
     const openGamesFolder = () => {
         const highestZIndex = getHighestZIndex();
         addWindow(
@@ -85,6 +115,10 @@ const Documents: React.FC<DocumentsProps> = ({
                 openSnakeApp={openSnakeApp}
                 openMemoryGameApp={openMemoryGameApp}
                 openRockPaperScissorsApp={openRockPaperScissorsApp}
+                openConnectFourApp={openConnectFourApp}
+                openPongApp={openPongApp}
+                openAirHockeyApp={openAirHockeyApp}
+                openCheckersApp={openCheckersApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -255,6 +289,32 @@ const Documents: React.FC<DocumentsProps> = ({
                 onMinimize={() => minimizeWindow('rockPaperScissors')}
                 onClose={() => removeWindow('rockPaperScissors')}
                 key="rockPaperScissors"
+            />
+        );
+    };
+
+    const openPongApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'pong',
+            <Pong
+                onInteract={() => onWindowInteract('pong')}
+                onMinimize={() => minimizeWindow('pong')}
+                onClose={() => removeWindow('pong')}
+                key="pong"
+            />
+        );
+    };
+
+    const openAirHockeyApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'airHockey',
+            <AirHockey
+                onInteract={() => onWindowInteract('airHockey')}
+                onMinimize={() => minimizeWindow('airHockey')}
+                onClose={() => removeWindow('airHockey')}
+                key="airHockey"
             />
         );
     };

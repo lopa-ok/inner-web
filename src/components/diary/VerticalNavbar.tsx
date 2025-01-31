@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from '../general';
 import cheese from '../../assets/pictures/Scary.gif';
-import { useLocation, useNavigate } from 'react-router';
-
+import { useLocation } from 'react-router';
 
 export interface VerticalNavbarProps {}
 
 const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
     const location = useLocation();
-    const [projectsExpanded, setProjectsExpanded] = useState(false);
     const [isHome, setIsHome] = useState(false);
 
-    const navigate = useNavigate();
-    const goToContact = () => {
-        navigate('/contact');
-    };
-
     useEffect(() => {
-        if (location.pathname.includes('/projects')) {
-            setProjectsExpanded(true);
-        } else {
-            setProjectsExpanded(false);
-        }
         if (location.pathname === '/') {
             setIsHome(true);
         } else {
@@ -38,40 +26,16 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
                 <h3 style={styles.headerShowcase}>Diary</h3>
             </div>
             <div style={styles.links}>
-                <Link 
-                    containerStyle={styles.link} 
-                    to="" 
-                    text="HOME" 
-                />
-                <Link 
-                    containerStyle={styles.link} 
-                    to="about" 
-                    text="ABOUT" 
-                />
-                <Link 
-                    containerStyle={styles.link} 
-                    to="school-life" 
-                    text="SCHOOL LIFE" 
-                />
-                <Link 
-                    containerStyle={styles.link} 
-                    to="how-it-started" 
-                    text="HOW IT STARTED" 
-                />
-                <Link 
-                    containerStyle={styles.link} 
-                    to="my-thoughts" 
-                    text="MY THOUGHTS" 
-                />
-                <Link
-                    containerStyle={styles.link}
-                    to="random-stuff"
-                    text="RANDOM STUFF"
-                />
-                
+                {/* no idea why but it looks better this way */}
+                <Link containerStyle={styles.link} to="" text="HOME" />
+                <Link containerStyle={styles.link} to="about" text="ABOUT" />
+                <Link containerStyle={styles.link} to="school-life" text="SCHOOL LIFE" />
+                <Link containerStyle={styles.link} to="how-it-started" text="HOW IT STARTED" />
+                <Link containerStyle={styles.link} to="my-thoughts" text="MY THOUGHTS" />
+                <Link containerStyle={styles.link} to="random-stuff" text="RANDOM STUFF" />
             </div>
             <div style={styles.spacer} />
-            <div style={styles.cheeseContainer} onMouseDown={goToContact}>
+            <div style={styles.cheeseContainer}>
                 <img src={cheese} style={styles.image} alt="" /> 
             </div>
         </div>
@@ -143,7 +107,6 @@ const styles: StyleSheetCSS = {
         flex: 1,
     },
     cheeseContainer: {
-        cursor: 'pointer',
         width: '100%',
     },
 };

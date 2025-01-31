@@ -50,6 +50,10 @@ import genSettingsIcon from './genSettingsIcon.png';
 import dosIcon from './dosIcon.png';
 import rockPaperScissorsIcon from './rockPaperScissorsIcon.png';
 import diaryIcon from './diaryIcon.png'
+import fourIcon from './fourIcon.png';
+import hockeyIcon from './hockeyIcon.png';
+import pongIcon from './pongIcon.png';
+import checkersIcon from './checkersIcon.png';
 
 const icons = {
     windowResize: windowResize,
@@ -101,7 +105,12 @@ const icons = {
     genSettingsIcon: genSettingsIcon,
     dosIcon: dosIcon,
     rockPaperScissorsIcon: rockPaperScissorsIcon,
-    diaryIcon: diaryIcon
+    diaryIcon: diaryIcon,
+    fourIcon: fourIcon,
+    hockeyIcon: hockeyIcon,
+    pongIcon: pongIcon,
+    checkersIcon: checkersIcon,
+
 };
 
 export type IconName = keyof typeof icons;

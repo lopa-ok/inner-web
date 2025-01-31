@@ -40,6 +40,10 @@ import Help from '../applications/Help';
 import EasterEgg from '../applications/EasterEgg';
 import RockPaperScissors from '../applications/RockPaperScissors';
 import Diary from '../applications/Diary';
+import ConnectFour from '../applications/ConnectFour';
+import Pong from '../applications/Pong';
+import AirHockey from '../applications/AirHockey';
+import Checkers from '../applications/Checkers';
 
 export interface DesktopProps {}
 
@@ -276,6 +280,62 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         addRecentApp('Maze');
     };
 
+    const openConnectFourApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'connectFour',
+            <ConnectFour
+                onInteract={() => onWindowInteract('connectFour')}
+                onMinimize={() => minimizeWindow('connectFour')}
+                onClose={() => removeWindow('connectFour')}
+                key="connectFour"
+            />
+        );
+        addRecentApp('Connect Four');
+    };
+
+    const openPongApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'pong',
+            <Pong
+                onInteract={() => onWindowInteract('pong')}
+                onMinimize={() => minimizeWindow('pong')}
+                onClose={() => removeWindow('pong')}
+                key="pong"
+            />
+        );
+        addRecentApp('Pong');
+    };
+
+    const openAirHockeyApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'airHockey',
+            <AirHockey
+                onInteract={() => onWindowInteract('airHockey')}
+                onMinimize={() => minimizeWindow('airHockey')}
+                onClose={() => removeWindow('airHockey')}
+                key="airHockey"
+            />
+        );
+        addRecentApp('Air Hockey');
+    };
+
+    const openCheckersApp = () => {
+        const highestZIndex = getHighestZIndex();
+        addWindow(
+            'checkers',
+            <Checkers
+                onInteract={() => onWindowInteract('checkers')}
+                onMinimize={() => minimizeWindow('checkers')}
+                onClose={() => removeWindow('checkers')}
+                key="checkers"
+            />
+        );
+        addRecentApp('Checkers');
+    };
+
     const openGamesFolder = () => {
         const highestZIndex = getHighestZIndex();
         addWindow(
@@ -357,6 +417,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     addRecentApp('Memory Game');
                 }}
                 openRockPaperScissorsApp={openRockPaperScissorsApp}
+                openConnectFourApp={openConnectFourApp}
+                openPongApp={openPongApp}
+                openAirHockeyApp={openAirHockeyApp}
+                openCheckersApp={openCheckersApp}
                 key="gamesFolder"
             />,
             highestZIndex + 1
@@ -558,6 +622,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                         addRecentApp('Memory Game');
                     }}
                     openRockPaperScissorsApp={openRockPaperScissorsApp}
+                    openConnectFourApp={openConnectFourApp}
+                    openPongApp={openPongApp}
+                    openAirHockeyApp={openAirHockeyApp}
+                    openCheckersApp={openCheckersApp}
                 />
             ),
         },
@@ -700,6 +768,30 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             shortcutIcon: 'rockPaperScissorsIcon',
             component: RockPaperScissors,
         },
+        connectFour: {
+            key: 'connectFour',
+            name: 'Connect Four',
+            shortcutIcon: 'fourIcon',
+            component: ConnectFour,
+        },
+        pong: {
+            key: 'pong',
+            name: 'Pong',
+            shortcutIcon: 'pongIcon',
+            component: Pong,
+        },
+        airHockey: {
+            key: 'airHockey',
+            name: 'Air Hockey',
+            shortcutIcon: 'hockeyIcon',
+            component: AirHockey,
+        },
+        checkers: {
+            key: 'checkers',
+            name: 'Checkers',
+            shortcutIcon: 'checkersIcon',
+            component: Checkers,
+        },
     };
 
     useEffect(() => {
@@ -715,6 +807,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             const app = APPLICATIONS[key];
             
             //Why didnt i do this from the start :P
+            //whoever sees this i know im stupid and this code sucks 
 
             if (
                 key !== 'credits' &&
@@ -739,7 +832,10 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key !== 'run' &&
                 key !== 'help' &&
                 key !== 'easterEgg' &&
-                key !== 'rockPaperScissors'
+                key !== 'rockPaperScissors' &&
+                key !== 'connectFour' &&
+                key !== 'pong' &&
+                key !== 'airHockey'
             ) {
                 newShortcuts.push({
                     shortcutName: app.name,
