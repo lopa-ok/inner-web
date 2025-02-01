@@ -835,7 +835,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 key !== 'rockPaperScissors' &&
                 key !== 'connectFour' &&
                 key !== 'pong' &&
-                key !== 'airHockey'
+                key !== 'airHockey' &&
+                key !== 'checkers'
             ) {
                 newShortcuts.push({
                     shortcutName: app.name,
